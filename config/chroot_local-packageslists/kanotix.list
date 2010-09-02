@@ -15,7 +15,7 @@ devscripts
 pbuilder
 k3b
 k3b-i18n
-libk3b3-extracodecs
+libk3b6-extracodecs
 normalize-audio
 dvd+rw-tools
 pidgin
@@ -71,7 +71,6 @@ kwalletmanager
 kmix
 icedove-l10n-de
 acpid
-mozilla-mplayer
 kaffeine
 libarts1-xine
 libsdl1.2debian-alsa
@@ -94,7 +93,7 @@ openvpn
 cups-bsd
 cups-client
 foomatic-db-engine
-foomatic-db-hpijs
+foomatic-db
 foomatic-filters-ppds
 foomatic-db-gutenprint
 cups-driver-gutenprint
@@ -111,7 +110,6 @@ less
 rsync
 hdparm
 pciutils
-powersaved
 wireless-tools
 sux
 htop
@@ -142,13 +140,8 @@ xserver-xorg-video-openchrome
 xserver-xorg-video-geode
 mesa-utils
 libgl1-mesa-dri
-xdialog
-kpowersave
 ksnapshot
 gparted
-kpackage
-kpdf
-kghostview
 kcalc
 kuser
 screentube
