@@ -183,3 +183,5 @@ dvdauthor
 
 cryptsetup
 debconf-utils
+
+git-core
