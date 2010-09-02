@@ -1,39 +1,10 @@
 #!/bin/sh
 
-DEFAULT_CHROOT=http://ftp.de.debian.org/debian
-DEFAULT_CHROOT_SECURITY=http://security.debian.org/
-DEFAULT_BINARY=http://ftp.de.debian.org/debian
-DEFAULT_BINARY_SECURITY=http://security.debian.org/
-
-MIRROR_CHROOT="${1:-$DEFAULT_CHROOT}"
-MIRROR_CHROOT_SECURITY="${2:-$DEFAULT_CHROOT_SECURITY}"
-MIRROR_BINARY="${3:-${1:-$DEFAULT_BINARY}}"
-MIRROR_BINARY_SECURITY="${4:-${2:-$DEFAULT_BINARY_SECURITY}}"
-MIRROR_BOOTSTRAP="${5:-${1:-$DEFAULT_CHROOT}}"
-
-if test "$MIRROR_CHROOT" = -; then
-	MIRROR_CHROOT="$DEFAULT_CHROOT"
-fi
-if test "$MIRROR_CHROOT_SECURITY" = -; then
-	MIRROR_CHROOT_SECURITY="$DEFAULT_CHROOT_SECURITY"
-fi
-if test "$MIRROR_BINARY" = -; then
-	MIRROR_BINARY="$DEFAULT_BINARY"
-fi
-if test "$MIRROR_BINARY_SECURITY" = -; then
-	MIRROR_BINARY_SECURITY="$DEFAULT_BINARY_SECURITY"
-fi
-if test "$MIRROR_BOOTSTRAP" = -; then
-	MIRROR_BOOTSTRAP="$DEFAULT_CHROOT"
-fi
-
-# kernel
-#lh config noauto \
-#        --linux-flavours generic \
-#        --linux-packages "linux-image-2.6.32-21 linux-headers-2.6.32-21"
-lh config noauto \
-        --linux-flavours 686-bigmem \
-        --linux-packages "linux-headers-2.6-686-bigmem"
+MIRROR_CHROOT=http://ftp.de.debian.org/debian
+MIRROR_CHROOT_SECURITY=http://security.debian.org/
+MIRROR_BINARY=http://ftp.de.debian.org/debian
+MIRROR_BINARY_SECURITY=http://security.debian.org/
+MIRROR_BOOTSTRAP="$MIRROR_CHROOT"
 
 lh config noauto \
 	--iso-volume KANOTIX \
@@ -64,6 +35,22 @@ lh config noauto \
 	--binary-indices true \
 	--packages-lists "standard-x11" \
 	${@}
+
+. config/bootstrap
+
+# architecture depending stuff (e.g. kernel)
+case $LH_ARCHITECTURE in
+"amd64")
+  lh config noauto \
+        --linux-flavours amd64 \
+        --linux-packages "linux-headers-2.6-amd64"
+	;;
+"i368")
+  lh config noauto \
+        --linux-flavours 686-bigmem \
+        --linux-packages "linux-headers-2.6-686-bigmem"
+	;;
+esac
 
 # Fetch kanotix-scripts if necessary
 mkdir -p config/chroot_local-includes/usr/local/bin
