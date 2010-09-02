@@ -5,6 +5,9 @@ rm -f build.log
 # Remove generated files
 rm -f config/binary config/bootstrap config/chroot config/common config/source
 
+# remove kanotix-scripts
+grep -oe '^[^ #]*' scripts.urls | grep -oe '[^/]*$' | xargs -i rm -f config/chroot_local-includes/usr/local/bin/{}
+
 # Remove empty directories in config tree
 if ls config/*/ > /dev/null 2>&1
 then
@@ -15,3 +18,4 @@ if [ -d config ]
 then
 	rmdir --ignore-fail-on-non-empty config
 fi
+

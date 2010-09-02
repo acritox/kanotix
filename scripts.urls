@@ -1,0 +1,8 @@
+# list of scripts that will be fetched to config/chroot_local-includes/usr/local/bin/ when "lh config" is called
+# they will be removed on "lh clean"
+http://kanotix.com/files/fix/update-scripts-kanotix.sh
+http://kanotix.com/files/install-nvidia-debian.sh
+http://kanotix.com/files/install-fglrx-debian.sh
+http://kanotix.com/files/fix/force-vesa.sh
+http://kanotix.com/files/install-flash-local.sh
+
