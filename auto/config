@@ -28,9 +28,10 @@ if test "$MIRROR_BOOTSTRAP" = -; then
 fi
 
 # kernel
-lh config noauto \
+#lh config noauto \
 #        --linux-flavours generic \
 #        --linux-packages "linux-image-2.6.32-21 linux-headers-2.6.32-21"
+lh config noauto \
         --linux-flavours 686-bigmem \
         --linux-packages "linux-headers-2.6-686-bigmem"
 

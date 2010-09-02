@@ -1,4 +1,10 @@
 /cache
 /binary*
 /chroot
+/.stage
+/config/binary
+/config/bootstrap
+/config/chroot
+/config/common
+/config/source
 
