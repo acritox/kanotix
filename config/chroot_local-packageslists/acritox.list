@@ -4,6 +4,7 @@
 dput
 git
 cmake
+kompare
 kdevelop
 qt4-designer
 qt4-dev-tools
@@ -29,6 +30,11 @@ pdfjam
 psutils
 imagemagick
 cups-pdf
+
+# graphics
+inkscape
+exiftran
+jhead
 
 # network
 psi
