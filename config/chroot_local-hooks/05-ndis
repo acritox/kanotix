@@ -1,0 +1,3 @@
+#!/bin/sh
+wget -qO- http://kanotix.com/files/fix/ndiswrapper/ndiswrapper64-fwlan64.tar.gz|tar zxC /etc
+ndiswrapper -ma

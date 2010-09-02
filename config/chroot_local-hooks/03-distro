@@ -1,0 +1,17 @@
+#!/bin/sh
+sed -i 's/^\(FLL_DISTRO_MODE=\).*/\1"live"/' /etc/default/distro||true
+rsync -Ha --ignore-existing /usr/share/kanotix/profile/ /etc/skel/
+sed -i 's|^\(exclude=media/cdrom_unmounted\).*|\1,media/hdd_unmounted|' /etc/skel/.kde/share/config/kdesktoprc||true
+rm -f /etc/skel/.kde4/share/config/kxkbrc
+#rm -f /etc/skel/.kde/share/config/kdeglobals.tmp
+#mv /etc/skel/.kde/share/config/kdeglobals /etc/skel/.kde/share/config/kdeglobals.tmp
+#sed -ne '/\[Locale\]/ { n; :c; /^\[/! { n; b c; }; }; p;' /etc/skel/.kde/share/config/kdeglobals.tmp > /etc/skel/.kde/share/config/kdeglobals
+#rm -f /etc/skel/.kde/share/config/kdeglobals.tmp
+rm -f /etc/skel/Desktop/kanotix-irc.desktop.tmp
+if [ -f /etc/skel/Desktop/kanotix-irc.desktop ]; then
+ echo '#!/usr/bin/env xdg-open' > /etc/skel/Desktop/kanotix-irc.desktop.tmp
+ grep -v xdg-open /etc/skel/Desktop/kanotix-irc.desktop >> /etc/skel/Desktop/kanotix-irc.desktop.tmp
+ rm -f /etc/skel/Desktop/kanotix-irc.desktop
+ mv /etc/skel/Desktop/kanotix-irc.desktop.tmp /etc/skel/Desktop/kanotix-irc.desktop
+ chmod +x /etc/skel/Desktop/kanotix-irc.desktop
+fi

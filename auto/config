@@ -1,0 +1,61 @@
+#!/bin/sh
+
+DEFAULT_CHROOT=http://ftp.de.debian.org/debian
+DEFAULT_CHROOT_SECURITY=http://security.debian.org/
+DEFAULT_BINARY=http://ftp.de.debian.org/debian
+DEFAULT_BINARY_SECURITY=http://security.debian.org/
+
+MIRROR_CHROOT="${1:-$DEFAULT_CHROOT}"
+MIRROR_CHROOT_SECURITY="${2:-$DEFAULT_CHROOT_SECURITY}"
+MIRROR_BINARY="${3:-${1:-$DEFAULT_BINARY}}"
+MIRROR_BINARY_SECURITY="${4:-${2:-$DEFAULT_BINARY_SECURITY}}"
+MIRROR_BOOTSTRAP="${5:-${1:-$DEFAULT_CHROOT}}"
+
+if test "$MIRROR_CHROOT" = -; then
+	MIRROR_CHROOT="$DEFAULT_CHROOT"
+fi
+if test "$MIRROR_CHROOT_SECURITY" = -; then
+	MIRROR_CHROOT_SECURITY="$DEFAULT_CHROOT_SECURITY"
+fi
+if test "$MIRROR_BINARY" = -; then
+	MIRROR_BINARY="$DEFAULT_BINARY"
+fi
+if test "$MIRROR_BINARY_SECURITY" = -; then
+	MIRROR_BINARY_SECURITY="$DEFAULT_BINARY_SECURITY"
+fi
+if test "$MIRROR_BOOTSTRAP" = -; then
+	MIRROR_BOOTSTRAP="$DEFAULT_CHROOT"
+fi
+
+lh config noauto \
+	--iso-volume KANOTIX \
+	--iso-preparer kanotix.com \
+	--iso-publisher kanotix.com \
+	--hostname Kanotix \
+	--username kanotix \
+	--chroot-filesystem squashfs \
+	--debian-installer false \
+	--linux-flavours generic \
+	--linux-packages "linux-image-2.6.32-21 linux-headers-2.6.32-21" \
+	--apt aptitude \
+	--apt-recommends false \
+	--bootappend-live 'quiet vga=791 live-config.utc=no live-config.timezone=Europe/Berlin live-config.locales=de keyb=de-latin1-nodeadkeys klayout=de kvariant=nodeadkeys' \
+	--distribution squeeze \
+        --archive-areas "main contrib non-free" \
+	--repositories "live.debian.net acritox excalibur" \
+	--security false \
+	--checksums md5 \
+	--bootloader syslinux \
+	--syslinux-timeout 5 \
+	--syslinux-menu true \
+	--syslinux-splash config/binary_syslinux/splash.png \
+	--memtest false \
+	--mirror-bootstrap ${MIRROR_BOOTSTRAP} \
+	--mirror-chroot ${MIRROR_CHROOT} \
+	--mirror-chroot-security ${MIRROR_CHROOT_SECURITY} \
+	--mirror-binary ${MIRROR_BINARY} \
+	--mirror-binary-security ${MIRROR_BINARY_SECURITY} \
+	--binary-indices true \
+	--packages-lists "standard-x11" \
+	${@}
+

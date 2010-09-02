@@ -1,0 +1,3 @@
+# Acritox
+deb http://acritox.de/kanotix/hellfire ./
+deb-src http://acritox.de/kanotix/hellfire ./

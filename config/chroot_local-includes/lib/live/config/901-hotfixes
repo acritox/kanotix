@@ -1,0 +1,7 @@
+#!/bin/sh
+
+# fix timezone
+if [ -n "${LIVE_TIMEZONE}" ]; then
+	echo "${LIVE_TIMEZONE}" > /etc/timezone
+fi
+

@@ -1,0 +1,6 @@
+#!/bin/sh
+mkdir -p /etc/skel/.kde/Autostart
+cat >/etc/skel/.kde/Autostart/macbook.sh <<MAC
+grep -q "Apple.*Keyboard" /proc/bus/input/devices && setxkbmap -model macbook79
+MAC
+chmod +x /etc/skel/.kde/Autostart/macbook.sh

@@ -1,0 +1,42 @@
+#!/bin/sh
+
+# live-config(7) - System Configuration Scripts
+# Copyright (C) 2006-2010 Daniel Baumann <daniel@debian.org>
+#
+# live-config comes with ABSOLUTELY NO WARRANTY; for details see COPYING.
+# This is free software, and you are welcome to redistribute it
+# under certain conditions; see COPYING for details.
+
+
+Sudoalias ()
+{
+	# Checking if package is already configured
+	if [ -e /var/lib/live/config/sudo-su-alias ]
+	then
+		return
+	fi
+
+	echo -n " sudoalias"
+
+	Configure_sudoalias
+}
+
+Configure_sudoalias ()
+{
+	# Checking if if package is already configured differently
+	if grep -q "livecd password hook" /home/${LIVE_USERNAME}/.bashrc
+	then
+		return
+	fi
+	sudo -u "${LIVE_USERNAME}" sh -c "cat >> /home/${LIVE_USERNAME}/.bashrc" << EOF
+
+# livecd password hook
+alias su="sudo su"
+alias sux="sudo sux"
+EOF
+
+	# Creating state file
+	touch /var/lib/live/config/sudoalias
+}
+
+Sudoalias

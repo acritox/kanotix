@@ -1,0 +1,36 @@
+#!/bin/sh
+#apt-get remove --yes --purge aptitude dselect nano vim-tiny libdiscover1 resolvconf
+apt-get remove --yes --purge nano vim-tiny libdiscover1 resolvconf
+/usr/sbin/remove-orphans || true
+# Removing unused files
+find . -name *~ | xargs rm -f
+# Cleaning apt lists
+rm -rf /var/lib/apt/lists
+mkdir -p /var/lib/apt/lists/partial
+# Cleaning apt cache
+rm -rf /var/cache/apt
+mkdir -p /var/cache/apt/archives/partial
+# Truncating logs
+for FILE in $(find /var/log/ -type f)
+do
+        : > ${FILE}
+done
+# custom cleanup
+rm -f /var/lib/apt/lists/* || true
+rm -f /var/cache/apt/*.bin
+dpkg --clear-avail
+apt-cache gencaches
+update-pciids || true
+rm -f /usr/share/misc/pci.ids.*
+update-usbids || true
+rm -f /var/lib/usbutils/usb.ids.*
+# Force old autologin
+rm -rf /etc/default/kdm.d
+# Some application defaults
+update-alternatives --set pager /usr/bin/most || true
+update-alternatives --set x-window-manager /usr/bin/openbox || true
+update-alternatives --set x-window-manager /usr/bin/kwin || true
+update-alternatives --set x-www-browser /usr/bin/iceweasel || true
+update-alternatives --set x-session-manager /usr/bin/startlxde || true
+update-alternatives --set x-session-manager /usr/bin/startkde || true
+update-alternatives --set editor /usr/bin/vim.basic || true
