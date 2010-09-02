@@ -185,3 +185,4 @@ cryptsetup
 debconf-utils
 
 git-core
+autossh
