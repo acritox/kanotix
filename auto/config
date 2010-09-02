@@ -27,6 +27,13 @@ if test "$MIRROR_BOOTSTRAP" = -; then
 	MIRROR_BOOTSTRAP="$DEFAULT_CHROOT"
 fi
 
+# kernel
+lh config noauto \
+#        --linux-flavours generic \
+#        --linux-packages "linux-image-2.6.32-21 linux-headers-2.6.32-21"
+        --linux-flavours 686-bigmem \
+        --linux-packages "linux-headers-2.6-686-bigmem"
+
 lh config noauto \
 	--iso-volume KANOTIX \
 	--iso-preparer kanotix.com \
@@ -35,15 +42,13 @@ lh config noauto \
 	--username kanotix \
 	--chroot-filesystem squashfs \
 	--debian-installer false \
-	--linux-flavours generic \
-	--linux-packages "linux-image-2.6.32-21 linux-headers-2.6.32-21" \
 	--apt aptitude \
 	--apt-recommends false \
-	--bootappend-live 'quiet vga=791 live-config.utc=no live-config.timezone=Europe/Berlin live-config.locales=de keyb=de-latin1-nodeadkeys klayout=de kvariant=nodeadkeys' \
+	--bootappend-live 'quiet live-config.utc=no live-config.timezone=Europe/Berlin live-config.locales=de live-config.keyboard-layouts=de live-config.keyboard-variant=nodeadkeys keyb=de-latin1-nodeadkeys klayout=de kvariant=nodeadkeys' \
 	--distribution squeeze \
         --archive-areas "main contrib non-free" \
-	--repositories "live.debian.net acritox excalibur" \
-	--security false \
+	--repositories "live.debian.net acritox excalibur hellfire" \
+	--security true \
 	--checksums md5 \
 	--bootloader syslinux \
 	--syslinux-timeout 5 \
