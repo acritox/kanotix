@@ -1,0 +1,52 @@
+# acritox' packageslist
+
+# development
+dput
+git
+cmake
+kdevelop
+qt4-designer
+qt4-dev-tools
+
+# system
+curlftpfs
+smbfs
+beep
+
+# hardware
+bluetooth
+powertop
+
+# latex
+kile
+texlive
+latex-xcolor
+xournal
+
+# pdf tools
+pdftk
+pdfjam
+psutils
+imagemagick
+cups-pdf
+
+# network
+psi
+kopete
+lftp
+autossh
+
+# multimedia
+gecko-mediaplayer
+vlc
+
+# desktop eyecandy
+mplayerthumbs
+kdeplasma-addons
+google-gadgets-qt
+plasma-scriptengine-googlegadgets
+
+# 3rd party
+#nxclient
+#picasa
+
