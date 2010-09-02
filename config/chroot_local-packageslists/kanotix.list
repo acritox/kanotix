@@ -49,7 +49,7 @@ ndiswrapper-utils-1.9
 libv4l-0
 lib32v4l-0
 gimp
-gimp-print
+gimp-gutenprint
 xsane
 libsane-extras
 sane-utils
@@ -60,7 +60,7 @@ sysv-freeze
 kanotix-menu
 etcskel-kanotix
 user-profile-kanotix
-kanotix-graphics
+#kanotix-graphics
 grub2-splashimage-kanotix-penguins
 kanotix-scripts
 kanotix-toolkit
@@ -72,7 +72,6 @@ kmix
 icedove-l10n-de
 acpid
 kaffeine
-libarts1-xine
 libsdl1.2debian-alsa
 amarok
 kdemultimedia-kio-plugins
