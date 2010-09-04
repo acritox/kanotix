@@ -6,7 +6,6 @@
 # (note: chroot_local-preseed is executed before chroot_install-packages)
 
 cat <<eof >/root/debconf.tmp
-keyboard-configuration keyboard-configuration/ctrl_alt_bksp boolean true
 pbuilder pbuilder/mirrorsite string http://cdn.debian.net/debian
 eof
 
