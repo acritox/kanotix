@@ -1,0 +1,12 @@
+# See sources.list(5) for more information, especialy
+# Remember that you can only use http, ftp or file URIs
+# CDROMs are managed through the apt-cdrom tool.
+
+# Debian Squeeze
+deb http://ftp.de.debian.org/debian squeeze main contrib non-free
+deb-src http://ftp.de.debian.org/debian squeeze main contrib non-free
+
+# Debian Squeeze Updates
+deb http://security.debian.org squeeze/updates main contrib non-free
+deb-src http://security.debian.org squeeze/updates main contrib non-free
+

@@ -1,0 +1,19 @@
+#!/bin/bash
+# update sources.list
+
+if [ -d /etc/apt/sources.list.d ]; then
+	for repo in /etc/apt/sources.list.d/*
+	do
+		case "$(basename "$repo" .list)" in
+		live.debian.net)
+			# ignore and remove these repos
+			;;
+		*)
+			cat "$repo" >> /etc/apt/sources.list
+			echo >> /etc/apt/sources.list
+			;;
+		esac
+		rm "$repo"
+	done
+fi
+
