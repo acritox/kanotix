@@ -36,6 +36,7 @@ sed -i s/id:.:initdefault:/id:5:initdefault:/ /etc/inittab
 sed -i 's/\([1-6]:23\):/\145:/' /etc/inittab
 
 insserv live-config
+insserv -r console-setup # we don't want to run console-setup - console-setup is only installed because we need its setupcon-binary for keyboard-configuration
 
 # workarounds to fix old kanotix installs
 rm -f /etc/profile /etc/environment
