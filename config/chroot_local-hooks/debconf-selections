@@ -1,0 +1,19 @@
+#!/bin/bash
+# set various debconf values and "enable" them using dpkg-reconfigure
+#
+# this hook is necessary because the values of chroot_local-preseed get overwritten
+# with the templates (= default values) when dpkg installs the packages
+# (note: chroot_local-preseed is executed before chroot_install-packages)
+
+cat <<eof >/root/debconf.tmp
+keyboard-configuration keyboard-configuration/ctrl_alt_bksp boolean true
+pbuilder pbuilder/mirrorsite string http://cdn.debian.net/debian
+eof
+
+debconf-set-selections /root/debconf.tmp
+for package in $(awk '{print $1}' /root/debconf.tmp | sort -u | grep .)
+do
+        [ "$(dpkg-query -W --showformat='${Version}' "$package")" ] && dpkg-reconfigure -fnoninteractive --no-reload "$package"
+done
+rm -f /root/debconf.tmp
+
