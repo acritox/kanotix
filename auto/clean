@@ -19,3 +19,13 @@ then
 	rmdir --ignore-fail-on-non-empty config
 fi
 
+# umount tmpfs
+if [ -e tmpfs ]; then
+       case "$1" in
+       --tmpfs|--all)
+               [ "$(stat --printf "%d\n" . tmpfs | uniq -u)" ] && umount tmpfs;;
+       esac
+       [ "$1" = "--tmpfs" ] && exit 1
+fi
+
+exit 0
