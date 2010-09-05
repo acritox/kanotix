@@ -5,3 +5,17 @@ if [ -n "${LIVE_TIMEZONE}" ]; then
 	echo "${LIVE_TIMEZONE}" > /etc/timezone
 fi
 
+# dirty hack to prevent kdm's "abort active sessions" prompt on live system
+sudo -u "${LIVE_USERNAME}" sh -c "mkdir -p /home/${LIVE_USERNAME}/.kde/shutdown; cat > /home/${LIVE_USERNAME}/.kde/shutdown/kdm-force-shutdown-hack" << EOF
+#!/bin/sh
+# dirty hack to prevent kdm's "abort active sessions" prompt on live system
+
+. /etc/default/distro
+[ "$FLL_DISTRO_MODE" = "live ] || exit # are we live?
+
+# "destroy" utmp, so kdm won't recognize the running logins on the other TTYs
+sudo perl -pi -e 's/tty/xty/g' /var/run/utmp
+
+EOF
+chmod +x /home/${LIVE_USERNAME}/.kde/shutdown/kdm-force-shutdown-hack
+
