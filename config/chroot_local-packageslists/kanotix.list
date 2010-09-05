@@ -134,6 +134,8 @@ bluez-audio
 ethtool
 vpnc
 openvpn
+comgt
+wvdial
 
 # print
 cups-bsd
