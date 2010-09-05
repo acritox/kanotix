@@ -10,6 +10,8 @@ mkdir -p /var/lib/apt/lists/partial
 # Cleaning apt cache
 rm -rf /var/cache/apt
 mkdir -p /var/cache/apt/archives/partial
+# Cleaning /etc/hosts
+rm -f /etc/hosts
 # Truncating logs
 for FILE in $(find /var/log/ -type f)
 do
