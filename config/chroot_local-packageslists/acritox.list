@@ -47,6 +47,7 @@ autossh
 # multimedia
 gecko-mediaplayer
 vlc
+gtk-recordmydesktop
 
 # desktop eyecandy
 mplayerthumbs
