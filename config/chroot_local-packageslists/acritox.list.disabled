@@ -1,6 +1,5 @@
-# acritox' packageslist
-
-#if DISABLED 1
+# acritox' extra packages list
+# rename to acritox.list to enable
 
 # development
 dput
@@ -58,6 +57,4 @@ plasma-scriptengine-googlegadgets
 # 3rd party
 #nxclient
 #picasa
-
-#endif
 

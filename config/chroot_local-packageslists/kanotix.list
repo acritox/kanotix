@@ -1,76 +1,26 @@
-console-common
-unrar
-unzip
-zip
-unp
-iceweasel-l10n-de
-module-assistant
-build-essential
-fakeroot
-libstdc++5
-bzip2
-cdbs
-dkms
-devscripts
-pbuilder
-k3b
-k3b-i18n
-libk3b6-extracodecs
-normalize-audio
-dvd+rw-tools
-pidgin
-gstreamer0.10-plugins-base
-gstreamer0.10-plugins-good
-debconf-utils
-dd-rhelp
-testdisk
-gpart
-weechat
-konversation
-kanotix-irc
-acritoxinstaller-kanotix
+# Kanotix Packages List
+
+#if ARCHITECTURE i386
+#include <kanotix.i386>
+#endif
+
+#if ARCHITECTURE amd64
+#include <kanotix.amd64>
+#endif
+
+# Kanotix base packages list
+
+# office
+okular
+myspell-de-de
+
+# wine, java, plugins
+konqueror-nsplugins
 sun-java6-plugin
-ntfs-3g
-ntfsprogs
-reiserfsprogs
-dmraid
-kpartx
-dosfstools
-lvm2
-parted
-os-prober
-mbr
-mdadm
-hfsplus
-hfsutils
-jfsutils
-xfsprogs
-ndiswrapper-utils-1.9
-libv4l-0
-lib32v4l-0
-gimp
-gimp-gutenprint
-xsane
-libsane-extras
-sane-utils
-sane
-gwenview
-infobash
-sysv-freeze
-kanotix-menu
-etcskel-kanotix
-user-profile-kanotix
-#kanotix-graphics
-grub2-splashimage-kanotix-penguins
-kanotix-scripts
-kanotix-toolkit
-kdebase
-kdm
-kde-i18n-de
-kwalletmanager
-kmix
-icedove-l10n-de
-acpid
+wine
+wine-gecko
+
+# multimedia
 kaffeine
 libsdl1.2debian-alsa
 amarok
@@ -80,29 +30,53 @@ sox
 alsa-oss
 aumix
 smplayer
-pcmciautils
-openssh-client
-sshfs
-pppoeconf
-nfs-common
-bluez-audio
-ethtool
-vpnc
-openvpn
-cups-bsd
-cups-client
-foomatic-db-engine
-foomatic-db
-foomatic-filters-ppds
-foomatic-db-gutenprint
-cups-driver-gutenprint
-foo2zjs
-printconf
-hplip-gui
+dvdauthor
+
+# burn
+k3b
+k3b-i18n
+libk3b6-extracodecs
+normalize-audio
+dvd+rw-tools
+
+# browser, email
+iceweasel-l10n-de
+icedove-l10n-de
+
+# chat, irc
+pidgin
+gstreamer0.10-plugins-base
+gstreamer0.10-plugins-good
+weechat
+konversation
+kanotix-irc
+
+# skype
 skype
 pidgin-skype
-gtk2-engines
+debconf-utils
+
+# graphics
+gimp
+gimp-gutenprint
+xsane
+libsane-extras
+sane-utils
+sane
+gwenview
+
+# editors
 vim
+kate
+
+# archive
+unrar
+unzip
+zip
+unp
+ark
+
+# tools
 mc
 most
 less
@@ -112,6 +86,7 @@ pciutils
 wireless-tools
 sux
 htop
+time
 bash-completion
 grub-pc
 di
@@ -128,10 +103,79 @@ alsa-oss
 smartmontools
 user-setup
 whois
-wacom-tools
-wine
+infobash
+
+# tools (GUI)
+ksnapshot
+kcalc
+kuser
+synaptic
+screentube
+
+# kde
+kdebase
+kdm
+kde-i18n-de
+kwalletmanager
+kmix
+
+# themes
+gtk2-engines
+kde-config-gtk-style
+
+# network
+network-manager-kde
+pcmciautils
+openssh-client
+sshfs
+pppoeconf
+nfs-common
+bluez-audio
+ethtool
+vpnc
+openvpn
+
+# print
+cups-bsd
+cups-client
+foomatic-db-engine
+foomatic-db
+foomatic-filters-ppds
+foomatic-db-gutenprint
+cups-driver-gutenprint
+foo2zjs
+printconf
+hplip-gui
+
+# build
+module-assistant
+build-essential
+fakeroot
+libstdc++5
+bzip2
+cdbs
+dkms
+devscripts
+pbuilder
+
+# kanotix
+kanotix-menu
+etcskel-kanotix
+user-profile-kanotix
+#kanotix-graphics
+grub2-splashimage-kanotix-penguins
+kanotix-scripts
+kanotix-toolkit
+acritoxinstaller-kanotix
+
+# system
+acpid
+sysv-freeze
 xdg-utils
-ark
+console-common
+console-setup
+
+# xorg
 xserver-xorg-video-all
 xserver-xorg-input-all
 xserver-xorg-video-radeonhd
@@ -139,40 +183,48 @@ xserver-xorg-video-openchrome
 xserver-xorg-video-geode
 mesa-utils
 libgl1-mesa-dri
-ksnapshot
+
+# disktools
+dd-rhelp
+testdisk
+gpart
 gparted
-kcalc
-kuser
-screentube
-bluedevil
-kppp
-network-manager-kde
-openoffice.org-calc openoffice.org-common openoffice.org-core openoffice.org-draw openoffice.org-impress openoffice.org-java-common openoffice.org-kde openoffice.org-math openoffice.org-writer
-openoffice.org-l10n-de
-openoffice.org-thesaurus-de
-myspell-de-de
+
+# filesystems
+ntfs-3g
+ntfsprogs
+reiserfsprogs
+dmraid
+kpartx
+dosfstools
+lvm2
+
+# filesystem tools
+parted
+os-prober
+mbr
+mdadm
+cryptsetup
+hfsplus
+hfsutils
+jfsutils
+xfsprogs
+
+# firmware
+ndiswrapper-utils-1.9
+libv4l-0
+
+# other hardware
 bluez
 bluez-compat
+bluedevil
+kppp
 ndiswrapper-utils-1.9
 pm-utils
 vbetool
 radeontool
 modemmanager
 umtsmon
-okular
-synaptic
-konqueror-nsplugins
-kate
-wine-gecko
-time
+wacom-tools
 kde-config-touchpad
 
-#extra
-kde-config-gtk-style
-dvdauthor
-
-#installer
-
-cryptsetup
-debconf-utils
-console-setup
