@@ -45,7 +45,7 @@ case $LH_ARCHITECTURE in
         --linux-flavours amd64 \
         --linux-packages "linux-image-2.6 linux-headers-2.6"
 	;;
-"i368")
+"i386")
   lh config noauto \
         --linux-flavours 686-bigmem \
         --linux-packages "linux-image-2.6 linux-headers-2.6"
