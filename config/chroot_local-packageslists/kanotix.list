@@ -174,7 +174,6 @@ acritoxinstaller-kanotix
 acpid
 sysv-freeze
 xdg-utils
-console-common
 console-setup
 
 # xorg
