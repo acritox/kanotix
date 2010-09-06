@@ -27,8 +27,7 @@ prebuild()
 	fi
 
 	# make current build configuration available for hooks inside chroot
-	mkdir -p chroot/root
-	cat config/* 2>/dev/null | grep ^LH_ > chroot/root/build.conf
+	cat config/* 2>/dev/null | grep ^LH_ > config/chroot_local-includes/root/build.cfg
 }
 
 if [ "$LH_KANOTIX_TMPFS" = "true" ]; then
