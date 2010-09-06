@@ -28,6 +28,7 @@ prebuild()
 	fi
 
 	# make current build configuration available for hooks inside chroot
+	mkdir -p config/chroot_local-includes/root
 	cat config/* 2>/dev/null | grep ^LH_ > config/chroot_local-includes/root/build.cfg
 }
 
