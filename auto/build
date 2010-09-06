@@ -7,6 +7,7 @@ bit=32
 [ "$LH_ARCHITECTURE" = "amd64" ] && bit=64
 
 # Update kanotix-version (32/64-bit and timestamp)
+[ ! -f config/chroot_local-includes/etc/kanotix-version ] && echo "Kanotix Hellfire 0000-00:00" > config/chroot_local-includes/etc/kanotix-version
 perl -pi -e "s%(Kanotix|Excalibur|Hellfire)(32|64)%\${1}$bit%i; s%(32|64)(bit)%$bit\${2}%i; s|[0-9]+-[0-9]+:[0-9]+|$(date +%Y%m%d-%H:%M)|" config/chroot_local-includes/etc/kanotix-version
 
 prebuild()
