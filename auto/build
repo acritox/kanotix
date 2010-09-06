@@ -32,6 +32,11 @@ prebuild()
 	cat config/* 2>/dev/null | grep ^LH_ > config/chroot_local-includes/root/build.conf
 }
 
+postbuild()
+{
+	rm -f config/chroot_local-includes/root/build.conf
+}
+
 if [ "$LH_KANOTIX_TMPFS" = "true" ]; then
        mkdir -p tmpfs
        # build using tmpfs
@@ -44,10 +49,12 @@ if [ "$LH_KANOTIX_TMPFS" = "true" ]; then
        # build
        prebuild
        lh build noauto ${@} 2>&1 | tee binary.log
+       postbuild
        cd ..
 else
        prebuild
        lh build noauto ${@} 2>&1 | tee binary.log
+       postbuild
 fi
 
 exit 1

@@ -3,7 +3,7 @@
 rm -f build.log
 
 # Remove generated files
-rm -f config/binary config/bootstrap config/chroot config/common config/source config/kanotix
+rm -f config/binary config/bootstrap config/chroot config/common config/source config/kanotix config/chroot_local-includes/root/build.conf
 if [ -f config/all ]; then
 	sed -i '/^. config\/kanotix/d' config/all
 	[ ! -s config/all ] && rm -f config/all
