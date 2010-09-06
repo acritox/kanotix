@@ -57,3 +57,15 @@ mkdir -p config/chroot_local-includes/usr/local/bin
 grep -oe '^[^ #]*' scripts.urls | wget -i- -c -N -q -P config/chroot_local-includes/usr/local/bin
 chmod 755 config/chroot_local-includes/usr/local/bin/*.sh
 
+# Include nvidia-driver into chroot
+if [ -f config/chroot_local-includes/usr/local/bin/install-nvidia-debian.sh ]; then
+	mkdir -p config/chroot_local-includes/usr/src
+	VER="$(grep -o ^VER=.* config/chroot_local-includes/usr/local/bin/install-nvidia-debian.sh|sed s/VER=//)"
+	ARCH=; [ "$LH_ARCHITECTURE" = "amd64" ] && ARCH="_64"
+	URL="http://download.nvidia.com/XFree86/Linux-x86$ARCH/$VER/NVIDIA-Linux-x86$ARCH-$VER.run"
+	CACHEURL="cache/$(basename "$URL")"
+	[ "$LH_CACHE" = "false" ] && CACHEURL="config/chroot_local-includes/usr/src/$(basename "$URL")"
+	[ ! -e "$CACHEURL" ] && wget -O"$CACHEURL" "$URL"
+	cp "$CACHEURL" "config/chroot_local-includes/usr/src/$(basename "$URL")" 2>/dev/null
+fi
+
