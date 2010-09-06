@@ -15,11 +15,13 @@ prebuild()
 		VER="$(grep -o ^VER=.* config/chroot_local-includes/usr/local/bin/install-nvidia-debian.sh|sed s/VER=//)"
 		ARCH=; [ "$LH_ARCHITECTURE" = "amd64" ] && ARCH="_64"
 		URL="http://download.nvidia.com/XFree86/Linux-x86$ARCH/$VER/NVIDIA-Linux-x86$ARCH-$VER.run"
-		CACHEURL="cache/$(basename "$URL")"
-		[ "$LH_CACHE" = "false" ] && CACHEURL="config/chroot_local-includes/usr/src/$(basename "$URL")"
-		mkdir -p "$(dirname "$CACHEURL")"
-		[ ! -e "$CACHEURL" ] && wget -O"$CACHEURL" "$URL"
-		cp "$CACHEURL" "config/chroot_local-includes/usr/src/$(basename "$URL")" 2>/dev/null
+		if [ "$LH_CACHE" = "false" ]; then
+			wget -N -c -P config/chroot_local-includes/usr/src "$URL"
+		else
+			mkdir -p cache
+			wget -N -c -P cache "$URL"
+			cp "cache/$(basename "$URL")" "config/chroot_local-includes/usr/src/$(basename "$URL")"
+		fi
 	fi
 }
 
