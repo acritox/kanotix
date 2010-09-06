@@ -1,10 +1,12 @@
-#!/bin/sh
+#!/bin/bash
 
 MIRROR_CHROOT=http://ftp.de.debian.org/debian
 MIRROR_CHROOT_SECURITY=http://security.debian.org/
 MIRROR_BINARY=http://ftp.de.debian.org/debian
 MIRROR_BINARY_SECURITY=http://security.debian.org/
 MIRROR_BOOTSTRAP="$MIRROR_CHROOT"
+
+. auto/kanotix
 
 lh config noauto \
 	--iso-volume KANOTIX \
@@ -56,4 +58,6 @@ esac
 mkdir -p config/chroot_local-includes/usr/local/bin
 grep -oe '^[^ #]*' scripts.urls | wget -i- -c -N -q -P config/chroot_local-includes/usr/local/bin
 chmod 755 config/chroot_local-includes/usr/local/bin/*.sh
+
+exit 1
 

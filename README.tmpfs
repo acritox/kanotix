@@ -1,12 +1,15 @@
 Live-Helper: Build using tmpfs
 ==============================
 
-just rename this directory to "tmpfs" to enable.
+use "lh config --tmpfs true" to enable.
 
-you may specify mount-options in the "options"-file in this directory, e.g.
-"size=6G" to set the maximum size of the ramdisk to 6GB.
+you may specify mount-options with --tmpfs-options, e.g.
 
-"lh build" will then mount a tmpfs into this directory and the build process
+	lh config --tmpfs-options "size=6G"
+
+to set the maximum size of the ramdisk to 6GB.
+
+"lh build" will then mount a tmpfs into the "tmpfs" directory and the build process
 will take place there.
 
 after the build the result and the cache will reside on the tmpfs, so if you

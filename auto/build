@@ -1,6 +1,8 @@
 #!/bin/bash
 
 . config/bootstrap
+. config/common
+. config/kanotix
 bit=32
 [ "$LH_ARCHITECTURE" = "amd64" ] && bit=64
 
@@ -10,7 +12,7 @@ perl -pi -e "s%(Kanotix|Excalibur|Hellfire)(32|64)%\${1}$bit%i; s%(32|64)(bit)%$
 prebuild()
 {
 	# Include nvidia-driver into chroot
-	if [ -f config/chroot_local-includes/usr/local/bin/install-nvidia-debian.sh ]; then
+	if [ "$LH_KANOTIX_NVIDIA" = "true" -a -f config/chroot_local-includes/usr/local/bin/install-nvidia-debian.sh ]; then
 		mkdir -p config/chroot_local-includes/usr/src
 		VER="$(grep -o ^VER=.* config/chroot_local-includes/usr/local/bin/install-nvidia-debian.sh|sed s/VER=//)"
 		ARCH=; [ "$LH_ARCHITECTURE" = "amd64" ] && ARCH="_64"
@@ -23,16 +25,13 @@ prebuild()
 			cp "cache/$(basename "$URL")" "config/chroot_local-includes/usr/src/$(basename "$URL")"
 		fi
 	fi
+	exit 1 # DEBUG
 }
 
-if [ -d tmpfs ]; then
+if [ "$LH_KANOTIX_TMPFS" = "true" ]; then
+       mkdir -p tmpfs
        # build using tmpfs
-       if [ -z "$(stat --printf "%d\n" . tmpfs | uniq -u)" ]; then
-               # tmpfs not mounted yet
-               options=defaults
-               [ -f tmpfs/options ] && options="$(<tmpfs/options)"
-               mount -t tmpfs -o "$options" tmpfs tmpfs
-       fi
+       [ -z "$(stat --printf "%d\n" . tmpfs | uniq -u)" ] && mount -t tmpfs -o "$LH_KANOTIX_TMPFS_OPTIONS" tmpfs tmpfs
        cd tmpfs
        # delete everything except cache
        find . -maxdepth 1 ! -name cache -exec rm -r '{}' \; 2>/dev/null
@@ -42,9 +41,9 @@ if [ -d tmpfs ]; then
        prebuild
        lh build noauto ${@} 2>&1 | tee binary.log
        cd ..
-       # prevent parent lh build (the "auto" one) from building again
-       exit 1
 else
        prebuild
        lh build noauto ${@} 2>&1 | tee binary.log
 fi
+
+exit 1

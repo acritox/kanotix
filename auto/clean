@@ -3,7 +3,11 @@
 rm -f build.log
 
 # Remove generated files
-rm -f config/binary config/bootstrap config/chroot config/common config/source
+rm -f config/binary config/bootstrap config/chroot config/common config/source config/kanotix
+if [ -f config/all ]; then
+	sed -i '/^. config\/kanotix/d' config/all
+	[ ! -s config/all ] && rm -f config/all
+fi
 
 # remove kanotix-scripts
 grep -oe '^[^ #]*' scripts.urls | grep -oe '[^/]*$' | xargs -i rm -f config/chroot_local-includes/usr/local/bin/{}
@@ -19,13 +23,35 @@ then
 	rmdir --ignore-fail-on-non-empty config
 fi
 
-# umount tmpfs
-if [ -e tmpfs ]; then
-       case "$1" in
-       --tmpfs|--all)
-               [ "$(stat --printf "%d\n" . tmpfs | uniq -u)" ] && umount tmpfs;;
-       esac
-       [ "$1" = "--tmpfs" ] && exit 1
-fi
+# handle additional kanotix parameters
+while [ "$1" ]
+do
+	case "$1" in
+	--help)
+		lh clean noauto --help
+		echo -e "\nAdditional Options for Kanotix:\n\t[--tmpfs]\n"
+		exit 1
+		;;
+	--all)
+		if [ -d tmpfs ]; then
+			[ "$(stat --printf "%d\n" . tmpfs | uniq -u)" ] && umount tmpfs
+			rmdir tmpfs
+		fi
+		lh clean noauto --all
+		exit 1
+		;;
+	--tmpfs)
+		if [ -d tmpfs ]; then
+			[ "$(stat --printf "%d\n" . tmpfs | uniq -u)" ] && umount tmpfs
+			rmdir tmpfs
+		fi
+		;;
+	*)
+		lh clean noauto "$1"
+		;;
+	esac
+	shift
+done
 
-exit 0
+exit 1
+

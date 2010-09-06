@@ -1,0 +1,76 @@
+#!/bin/bash
+
+[ -f config/kanotix ] && . config/kanotix
+
+usage()
+{
+cat <<eof
+
+Additional Options for Kanotix:
+	    [--include-nvidia true|false]
+	    [--tmpfs true|false]
+	    [--tmpfs-options OPTIONS]
+
+eof
+}
+
+write_kanotix_config()
+{
+[ -z "${LH_KANOTIX_NVIDIA}" ] && LH_KANOTIX_NVIDIA="true"
+[ -z "${LH_KANOTIX_TMPFS}" ] && [ -d tmpfs ] && LH_KANOTIX_TMPFS="true"
+[ -z "${LH_KANOTIX_TMPFS}" ] && LH_KANOTIX_TMPFS="false"
+[ -z "${LH_KANOTIX_TMPFS_OPTIONS}" ] && [ -f tmpfs/options ] && LH_KANOTIX_TMPFS_OPTIONS="$(<tmpfs/options)"
+[ -z "${LH_KANOTIX_TMPFS_OPTIONS}" ] && LH_KANOTIX_TMPFS_OPTIONS="defaults"
+cat >config/kanotix << EOF
+# config/kanotix - additional options for Kanotix
+
+# \$LH_KANOTIX_NVIDIA: include NVidia-Drivers into chroot
+# (Default: ${LH_KANOTIX_NVIDIA})
+LH_KANOTIX_NVIDIA="${LH_KANOTIX_NVIDIA}"
+
+# \$LH_KANOTIX_TMPFS: use tmpfs to build
+# (Default: ${LH_KANOTIX_TMPFS})
+LH_KANOTIX_TMPFS="${LH_KANOTIX_TMPFS}"
+
+# \$LH_KANOTIX_TMPFS_OPTIONS: options for tmpfs
+# (Default: ${LH_KANOTIX_TMPFS_OPTIONS})
+LH_KANOTIX_TMPFS_OPTIONS="${LH_KANOTIX_TMPFS_OPTIONS}"
+
+EOF
+grep -q ". config/kanotix" config/all 2>/dev/null || echo ". config/kanotix" >> config/all
+}
+
+# process Kanotix config values
+unset args; i=1
+while [ "$1" ]
+do
+        case "$1" in
+	--include-nvidia)
+		LH_KANOTIX_NVIDIA="$2"
+		shift
+		;;
+	--tmpfs)
+		LH_KANOTIX_TMPFS="$2"
+		shift
+		;;
+	--tmpfs-options)
+		LH_KANOTIX_TMPFS_OPTIONS="$2"
+		shift
+		;;
+        --help|-h)
+		lh config noauto --help
+                usage
+		exit 1
+                ;;
+        *)
+                args[$i]="$1"
+		((i++))
+                ;;
+        esac
+        shift
+done
+
+set -- "${args[@]}"
+
+write_kanotix_config
+
