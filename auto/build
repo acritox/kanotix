@@ -25,7 +25,6 @@ prebuild()
 			cp "cache/$(basename "$URL")" "config/chroot_local-includes/usr/src/$(basename "$URL")"
 		fi
 	fi
-	exit 1 # DEBUG
 }
 
 if [ "$LH_KANOTIX_TMPFS" = "true" ]; then
