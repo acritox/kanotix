@@ -18,10 +18,10 @@ prebuild()
 		ARCH=; [ "$LH_ARCHITECTURE" = "amd64" ] && ARCH="_64"
 		URL="http://download.nvidia.com/XFree86/Linux-x86$ARCH/$VER/NVIDIA-Linux-x86$ARCH-$VER.run"
 		if [ "$LH_CACHE" = "false" ]; then
-			wget -N -c -P config/chroot_local-includes/usr/src "$URL"
+			wget -N -P config/chroot_local-includes/usr/src "$URL"
 		else
 			mkdir -p cache
-			wget -N -c -P cache "$URL"
+			wget -N -P cache "$URL"
 			cp "cache/$(basename "$URL")" "config/chroot_local-includes/usr/src/$(basename "$URL")"
 		fi
 	fi
