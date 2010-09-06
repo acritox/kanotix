@@ -7,6 +7,22 @@ bit=32
 # Update kanotix-version (32/64-bit and timestamp)
 perl -pi -e "s%(Kanotix|Excalibur|Hellfire)(32|64)%\${1}$bit%i; s%(32|64)(bit)%$bit\${2}%i; s|[0-9]+-[0-9]+:[0-9]+|$(date +%Y%m%d-%H:%M)|" config/chroot_local-includes/etc/kanotix-version
 
+prebuild()
+{
+	# Include nvidia-driver into chroot
+	if [ -f config/chroot_local-includes/usr/local/bin/install-nvidia-debian.sh ]; then
+		mkdir -p config/chroot_local-includes/usr/src
+		VER="$(grep -o ^VER=.* config/chroot_local-includes/usr/local/bin/install-nvidia-debian.sh|sed s/VER=//)"
+		ARCH=; [ "$LH_ARCHITECTURE" = "amd64" ] && ARCH="_64"
+		URL="http://download.nvidia.com/XFree86/Linux-x86$ARCH/$VER/NVIDIA-Linux-x86$ARCH-$VER.run"
+		CACHEURL="cache/$(basename "$URL")"
+		[ "$LH_CACHE" = "false" ] && CACHEURL="config/chroot_local-includes/usr/src/$(basename "$URL")"
+		mkdir -p "$(dirname "$CACHEURL")"
+		[ ! -e "$CACHEURL" ] && wget -O"$CACHEURL" "$URL"
+		cp "$CACHEURL" "config/chroot_local-includes/usr/src/$(basename "$URL")" 2>/dev/null
+	fi
+}
+
 if [ -d tmpfs ]; then
        # build using tmpfs
        if [ -z "$(stat --printf "%d\n" . tmpfs | uniq -u)" ]; then
@@ -21,10 +37,12 @@ if [ -d tmpfs ]; then
        # copy everything to tmpfs
        rsync -a .. . --exclude=tmpfs
        # build
+       prebuild
        lh build noauto ${@} 2>&1 | tee binary.log
        cd ..
        # prevent parent lh build (the "auto" one) from building again
        exit 1
 else
+       prebuild
        lh build noauto ${@} 2>&1 | tee binary.log
 fi
