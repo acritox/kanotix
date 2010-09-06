@@ -1,3 +1,9 @@
 #!/bin/sh
+[ -f /root/build.conf ] && . /root/build.conf
+if [ "$LH_ARCHITECTURE" = "amd64" ]; then
 wget -qO- http://kanotix.com/files/fix/ndiswrapper/ndiswrapper64-fwlan64.tar.gz|tar zxC /etc
+else
+wget -qO- http://kanotix.com/files/fix/ndiswrapper/ndiswrapper-fwlan.tar.gz|tar zxC /etc
+#wget -qO- http://kanotix.com/files/fix/ndiswrapper/ndiswrapper-netmw225.tar.gz|tar zxC /etc
+fi
 ndiswrapper -ma

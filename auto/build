@@ -25,6 +25,10 @@ prebuild()
 			cp "cache/$(basename "$URL")" "config/chroot_local-includes/usr/src/$(basename "$URL")"
 		fi
 	fi
+
+	# make current build configuration available for hooks inside chroot
+	mkdir -p chroot/root
+	cat config/* 2>/dev/null | grep ^LH_ > chroot/root/build.conf
 }
 
 if [ "$LH_KANOTIX_TMPFS" = "true" ]; then
