@@ -12,13 +12,11 @@ lh config noauto \
 	--iso-volume KANOTIX \
 	--iso-preparer kanotix.com \
 	--iso-publisher kanotix.com \
-	--hostname Kanotix \
-	--username kanotix \
 	--chroot-filesystem squashfs \
 	--debian-installer false \
 	--apt aptitude \
 	--apt-recommends false \
-	--bootappend-live 'quiet live-config.utc=no live-config.timezone=Europe/Berlin live-config.locales=de live-config.keyboard-layouts=de live-config.keyboard-variant=nodeadkeys' \
+	--bootappend-live 'quiet utc=no timezone=Europe/Berlin locales=de keyboard-layouts=de keyboard-variant=nodeadkeys' \
 	--distribution squeeze \
         --archive-areas "main contrib non-free" \
 	--repositories "live.debian.net acritox excalibur hellfire" \
@@ -37,6 +35,11 @@ lh config noauto \
 	--binary-indices true \
 	--packages-lists "standard-x11" \
 	${@}
+
+# hostname and username are configured in config/chroot_local-includes/etc/live/config.conf
+#lh config noauto \
+#	--hostname Kanotix \
+#	--username kanotix \
 
 . config/bootstrap
 
