@@ -23,6 +23,8 @@ then
 	rmdir --ignore-fail-on-non-empty config
 fi
 
+[ $# -eq 0 ] && exit 0
+
 # handle additional kanotix parameters
 while [ "$1" ]
 do
