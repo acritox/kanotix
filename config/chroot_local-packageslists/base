@@ -143,7 +143,6 @@ kanotix-toolkit
 cpufrequtils
 acpi
 acpid
-sysv-freeze
 xdg-utils
 console-setup
 
