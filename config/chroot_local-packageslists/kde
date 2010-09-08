@@ -1,0 +1,59 @@
+# Kanotix additional packages list for kde
+
+# office
+okular
+
+# plugins
+konqueror-nsplugins
+
+# multimedia
+kaffeine
+libsdl1.2debian-alsa
+amarok
+kdemultimedia-kio-plugins
+kamera
+
+# burn
+k3b
+k3b-i18n
+libk3b6-extracodecs
+
+# chat, irc
+konversation
+
+# graphics
+gwenview
+
+# editors
+kate
+
+# archive
+ark
+
+# tools
+ksnapshot
+kcalc
+kuser
+
+# kde
+kdebase
+kdm
+kde-i18n-de
+kwalletmanager
+kmix
+
+# themes
+kde-config-gtk-style
+
+# network
+network-manager-kde
+
+# kanotix
+kanotix-menu
+etcskel-kanotix
+#kanotix-graphics
+acritoxinstaller-kanotix
+
+# other hardware
+kde-config-touchpad
+

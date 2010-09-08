@@ -1,5 +1,4 @@
 # acritox' extra packages list
-# rename to acritox.list to enable
 
 # development
 dput
@@ -16,7 +15,6 @@ smbfs
 beep
 
 # hardware
-bluetooth
 powertop
 
 # latex
@@ -53,8 +51,4 @@ mplayerthumbs
 kdeplasma-addons
 google-gadgets-qt
 plasma-scriptengine-googlegadgets
-
-# 3rd party
-#nxclient
-#picasa
 

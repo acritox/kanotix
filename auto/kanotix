@@ -7,6 +7,7 @@ usage()
 cat <<eof
 
 Additional Options for Kanotix:
+            [--kanotix-flavours FLAVOUR|"FLAVOURS"]
 	    [--include-nvidia true|false]
 	    [--tmpfs true|false]
 	    [--tmpfs-options OPTIONS]
@@ -16,6 +17,7 @@ eof
 
 write_kanotix_config()
 {
+[ -z "${LH_KANOTIX_FLAVOURS}" ] && LH_KANOTIX_FLAVOURS="kanotix-master"
 [ -z "${LH_KANOTIX_NVIDIA}" ] && LH_KANOTIX_NVIDIA="true"
 [ -z "${LH_KANOTIX_TMPFS}" ] && [ -d tmpfs ] && LH_KANOTIX_TMPFS="true"
 [ -z "${LH_KANOTIX_TMPFS}" ] && LH_KANOTIX_TMPFS="false"
@@ -23,6 +25,10 @@ write_kanotix_config()
 [ -z "${LH_KANOTIX_TMPFS_OPTIONS}" ] && LH_KANOTIX_TMPFS_OPTIONS="defaults"
 cat >config/kanotix << EOF
 # config/kanotix - additional options for Kanotix
+
+# \$LH_KANOTIX_FLAVOURS: select Kanotix-packageslists
+# (Default: kanotix-master)
+LH_KANOTIX_FLAVOURS="${LH_KANOTIX_FLAVOURS}"
 
 # \$LH_KANOTIX_NVIDIA: include NVidia-Drivers into chroot
 # (Default: ${LH_KANOTIX_NVIDIA})
@@ -45,6 +51,15 @@ unset args; i=1
 while [ "$1" ]
 do
         case "$1" in
+        --kanotix-flavour*)
+                LH_KANOTIX_FLAVOURS="$2"
+                shift
+                while [ "$2" -a "${2:0:1}" != "-" ]
+                do
+                        LH_KANOTIX_FLAVOURS="$LH_KANOTIX_FLAVOURS $2"
+                        shift
+                done
+                ;;
 	--include-nvidia)
 		LH_KANOTIX_NVIDIA="$2"
 		shift

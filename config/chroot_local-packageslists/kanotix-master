@@ -1,0 +1,10 @@
+# Kanotix
+
+#include <base>
+#include <kde>
+#include <office>
+
+# wine
+wine
+wine-gecko
+

@@ -1,31 +1,22 @@
-# Kanotix Packages List
+# Kanotix base Packages List
 
 #if ARCHITECTURE i386
-#include <kanotix.i386>
+#include <base.i386>
 #endif
 
 #if ARCHITECTURE amd64
-#include <kanotix.amd64>
+#include <base.amd64>
 #endif
 
-# Kanotix base packages list
+#include <firmware>
 
 # office
-okular
 myspell-de-de
 
-# wine, java, plugins
-konqueror-nsplugins
+# java, plugins
 sun-java6-plugin
-wine
-wine-gecko
 
 # multimedia
-kaffeine
-libsdl1.2debian-alsa
-amarok
-kdemultimedia-kio-plugins
-kamera
 sox
 alsa-oss
 aumix
@@ -33,9 +24,6 @@ smplayer
 dvdauthor
 
 # burn
-k3b
-k3b-i18n
-libk3b6-extracodecs
 normalize-audio
 dvd+rw-tools
 
@@ -48,7 +36,6 @@ pidgin
 gstreamer0.10-plugins-base
 gstreamer0.10-plugins-good
 weechat
-konversation
 kanotix-irc
 
 # skype
@@ -63,18 +50,15 @@ xsane
 libsane-extras
 sane-utils
 sane
-gwenview
 
 # editors
 vim
-kate
 
 # archive
 unrar
 unzip
 zip
 unp
-ark
 
 # tools
 mc
@@ -106,25 +90,13 @@ whois
 infobash
 
 # tools (GUI)
-ksnapshot
-kcalc
-kuser
 synaptic
 screentube
 
-# kde
-kdebase
-kdm
-kde-i18n-de
-kwalletmanager
-kmix
-
 # themes
 gtk2-engines
-kde-config-gtk-style
 
 # network
-network-manager-kde
 pcmciautils
 openssh-client
 sshfs
@@ -161,16 +133,15 @@ devscripts
 pbuilder
 
 # kanotix
-kanotix-menu
-etcskel-kanotix
 user-profile-kanotix
 #kanotix-graphics
 grub2-splashimage-kanotix-penguins
 kanotix-scripts
 kanotix-toolkit
-acritoxinstaller-kanotix
 
 # system
+cpufrequtils
+acpi
 acpid
 sysv-freeze
 xdg-utils
@@ -227,5 +198,4 @@ radeontool
 modemmanager
 umtsmon
 wacom-tools
-kde-config-touchpad
 
