@@ -8,7 +8,7 @@ MIRROR_BOOTSTRAP="$MIRROR_CHROOT"
 
 . auto/kanotix
 
-lh config noauto \
+lb config noauto \
 	--iso-volume KANOTIX \
 	--iso-preparer kanotix.com \
 	--iso-publisher kanotix.com \
@@ -37,21 +37,21 @@ lh config noauto \
 	${@}
 
 # hostname and username are configured in config/chroot_local-includes/etc/live/config.conf
-#lh config noauto \
+#lb config noauto \
 #	--hostname Kanotix \
 #	--username kanotix \
 
 . config/bootstrap
 
 # architecture depending stuff (e.g. kernel)
-case $LH_ARCHITECTURE in
+case $LB_ARCHITECTURE in
 "amd64")
-  lh config noauto \
+  lb config noauto \
         --linux-flavours amd64 \
         --linux-packages "linux-image-2.6 linux-headers-2.6"
 	;;
 "i386")
-  lh config noauto \
+  lb config noauto \
         --linux-flavours 686-bigmem \
         --linux-packages "linux-image-2.6 linux-headers-2.6"
 	;;

@@ -1,15 +1,15 @@
-Live-Helper: Build using tmpfs
+Live-Build: Build using tmpfs
 ==============================
 
-use "lh config --tmpfs true" to enable.
+use "lb config --tmpfs true" to enable.
 
 you may specify mount-options with --tmpfs-options, e.g.
 
-	lh config --tmpfs-options "size=6G"
+	lb config --tmpfs-options "size=6G"
 
 to set the maximum size of the ramdisk to 6GB.
 
-"lh build" will then mount a tmpfs into the "tmpfs" directory and the build process
+"lb build" will then mount a tmpfs into the "tmpfs" directory and the build process
 will take place there.
 
 after the build the result and the cache will reside on the tmpfs, so if you
@@ -19,8 +19,8 @@ you want to save the cache for later builds you have to move (or copy) it:
 	
 	mv tmpfs/cache .
 
-live-helper will not umount the "tmpfs" unless you run "lh clean --tmpfs"
-or "lh clean --all", so if you are going to do multiple builds without
+live-helper will not umount the "tmpfs" unless you run "lb clean --tmpfs"
+or "lb clean --all", so if you are going to do multiple builds without
 umounting the "tmpfs" you do not need to backup the cache, it will stay there
 and will be used for the next build.
 

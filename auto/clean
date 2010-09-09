@@ -31,7 +31,7 @@ while [ "$1" ]
 do
 	case "$1" in
 	--help)
-		lh clean noauto --help
+		lb clean noauto --help
 		echo -e "\nAdditional Options for Kanotix:\n\t[--tmpfs]\n"
 		exit 1
 		;;
@@ -40,7 +40,7 @@ do
 			[ "$(stat --printf "%d\n" . tmpfs | uniq -u)" ] && umount tmpfs
 			rmdir tmpfs
 		fi
-		lh clean noauto --all
+		lb clean noauto --all
 		exit 1
 		;;
 	--tmpfs)
@@ -50,7 +50,7 @@ do
 		fi
 		;;
 	*)
-		lh clean noauto "$1"
+		lb clean noauto "$1"
 		;;
 	esac
 	shift
