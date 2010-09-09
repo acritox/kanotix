@@ -21,5 +21,6 @@ chmod +x /home/${LIVE_USERNAME}/.kde/shutdown/kdm-force-shutdown-hack
 
 # reconfigure console-setup
 rm -f /etc/default/console-setup
+. /etc/default/locale
 dpkg-reconfigure console-setup -fnoninteractive
 
