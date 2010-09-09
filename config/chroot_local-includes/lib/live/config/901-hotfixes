@@ -19,3 +19,7 @@ sudo perl -pi -e 's/tty/xty/g' /var/run/utmp
 EOF
 chmod +x /home/${LIVE_USERNAME}/.kde/shutdown/kdm-force-shutdown-hack
 
+# reconfigure console-setup
+rm -f /etc/default/console-setup
+dpkg-reconfigure console-setup -fnoninteractive
+
