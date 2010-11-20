@@ -33,6 +33,7 @@ ark
 ksnapshot
 kcalc
 kuser
+gdebi-kde
 
 # kde
 kdebase
