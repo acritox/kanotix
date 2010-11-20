@@ -4,6 +4,12 @@
 #include <kde>
 #include <office>
 
+# multimedia
+gecko-mediaplayer
+tunapie
+audacious
+streamripper
+
 # wine
 wine
 wine-gecko

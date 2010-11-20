@@ -20,8 +20,18 @@ powertop
 # latex
 kile
 texlive
+texlive-latex-extra
+texlive-lang-german
+texlive-science
+texlive-pstricks
+texlive-pictures
+pgf
+latexdraw
+latex-beamer
 latex-xcolor
 xournal
+aspell-en
+aspell-de
 
 # pdf tools
 pdftk
@@ -42,7 +52,6 @@ lftp
 autossh
 
 # multimedia
-gecko-mediaplayer
 vlc
 gtk-recordmydesktop
 

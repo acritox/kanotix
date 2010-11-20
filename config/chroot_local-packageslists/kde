@@ -9,7 +9,6 @@ konqueror-nsplugins
 # multimedia
 kaffeine
 libsdl1.2debian-alsa
-amarok
 kdemultimedia-kio-plugins
 kamera
 
@@ -56,4 +55,6 @@ acritoxinstaller-kanotix
 
 # other hardware
 kde-config-touchpad
+kde-config-tablet
+system-config-printer-kde
 

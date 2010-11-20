@@ -35,6 +35,7 @@ icedove-l10n-de
 pidgin
 gstreamer0.10-plugins-base
 gstreamer0.10-plugins-good
+gstreamer0.10-alsa
 weechat
 kanotix-irc
 
@@ -149,6 +150,7 @@ console-setup
 # xorg
 xserver-xorg-video-all
 xserver-xorg-input-all
+xserver-xorg-input-wacom
 xserver-xorg-video-radeonhd
 xserver-xorg-video-openchrome
 xserver-xorg-video-geode
