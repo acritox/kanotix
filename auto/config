@@ -16,7 +16,7 @@ lb config noauto \
 	--debian-installer false \
 	--apt aptitude \
 	--apt-recommends false \
-	--bootappend-live 'quiet utc=no timezone=Europe/Berlin locales=de keyboard-layouts=de keyboard-variant=nodeadkeys' \
+	--bootappend-live 'splash utc=no timezone=Europe/Berlin locales=de keyboard-layouts=de keyboard-variant=nodeadkeys' \
 	--distribution squeeze \
         --archive-areas "main contrib non-free" \
 	--repositories "live.debian.net acritox excalibur hellfire" \
