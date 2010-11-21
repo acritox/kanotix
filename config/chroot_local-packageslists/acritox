@@ -8,6 +8,11 @@ kompare
 kdevelop
 qt4-designer
 qt4-dev-tools
+r-base
+r-cran-mass
+r-cran-xml
+r-bioc-biobase
+r-bioc-biostrings
 
 # system
 curlftpfs
