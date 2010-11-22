@@ -36,7 +36,7 @@ lb config noauto \
 	--mirror-binary ${MIRROR_BINARY} \
 	--mirror-binary-security ${MIRROR_BINARY_SECURITY} \
 	--binary-indices true \
-	${@}
+	"${@}"
 
 # hostname and username are configured in config/chroot_local-includes/etc/live/config.conf
 #lb config noauto \

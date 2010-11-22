@@ -58,12 +58,12 @@ if [ "$LB_KANOTIX_TMPFS" = "true" ]; then
        rsync -a .. . --exclude=tmpfs
        # build
        prebuild
-       time lb build noauto ${@} 2>&1 | tee binary.log
+       time lb build noauto "${@}" 2>&1 | tee binary.log
        postbuild
        cd ..
 else
        prebuild
-       time lb build noauto ${@} 2>&1 | tee binary.log
+       time lb build noauto "${@}" 2>&1 | tee binary.log
        postbuild
 fi
 
