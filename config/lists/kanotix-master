@@ -11,10 +11,13 @@ audacious
 streamripper
 
 # wine
-wine
-wine-gecko
+wine1.3
+wine1.3-gecko
 
 # plymouth
 plymouth
 plymouth-themes-solar
+
+# plasma widgets addons
+plasma-widgets-addons
 
