@@ -161,7 +161,7 @@ libgl1-mesa-dri
 dd-rhelp
 testdisk
 gpart
-gparted
+partitionmanager
 
 # filesystems
 ntfs-3g
