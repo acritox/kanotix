@@ -24,7 +24,7 @@ then
 	rmdir --ignore-fail-on-non-empty config
 fi
 
-[ $# -eq 0 ] && exit 0
+[ $# -eq 0 ] && lb clean noauto
 
 # handle additional kanotix parameters
 while [ "$1" ]
