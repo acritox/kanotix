@@ -17,12 +17,12 @@ lb config noauto \
 	--iso-publisher kanotix.com \
 	--chroot-filesystem squashfs \
 	--debian-installer false \
-	--apt aptitude \
+	--apt apt \
 	--apt-recommends false \
-	--bootappend-live 'splash utc=no timezone=Europe/Berlin locales=de keyboard-layouts=de keyboard-variant=nodeadkeys' \
+	--bootappend-live 'utc=no timezone=Europe/Berlin locales=de keyboard-layouts=de keyboard-variant=nodeadkeys splash' \
 	--distribution squeeze \
         --archive-areas "main contrib non-free" \
-	--repositories "live.debian.net acritox excalibur hellfire" \
+	--repositories "live.debian.net acritox excalibur hellfire wine-ppa" \
 	--security true \
 	--checksums md5 \
 	--bootloader syslinux \
@@ -65,4 +65,3 @@ grep -oe '^[^ #]*' scripts.urls | wget -i- -N -q -P config/chroot_local-includes
 chmod 755 config/chroot_local-includes/usr/local/bin/*.sh
 
 exit 1
-

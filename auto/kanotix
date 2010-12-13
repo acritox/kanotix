@@ -73,4 +73,3 @@ done
 set -- "${args[@]}"
 
 write_kanotix_config
-

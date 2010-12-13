@@ -11,8 +11,8 @@
 #include <firmware>
 #include <standard-x11>
 
-# office
-myspell-de-de
+#include <kanotix-base>
+#include <kanotix-extra>
 
 # java, plugins
 sun-java6-plugin
@@ -27,17 +27,15 @@ dvdauthor
 normalize-audio
 dvd+rw-tools
 
-# browser, email
+# browser
 iceweasel-l10n-de
-icedove-l10n-de
 
 # chat, irc
 pidgin
 gstreamer0.10-plugins-base
 gstreamer0.10-plugins-good
 gstreamer0.10-alsa
-weechat
-kanotix-irc
+weechat 
 
 # skype
 skype
@@ -88,11 +86,6 @@ alsa-oss
 smartmontools
 user-setup
 whois
-infobash
-
-# tools (GUI)
-synaptic
-screentube
 
 # themes
 gtk2-engines
@@ -119,7 +112,7 @@ foomatic-filters-ppds
 foomatic-db-gutenprint
 cups-driver-gutenprint
 foo2zjs
-printconf
+#printconf
 hplip-gui
 
 # build
@@ -133,13 +126,6 @@ dkms
 devscripts
 pbuilder
 
-# kanotix
-user-profile-kanotix
-#kanotix-graphics
-grub2-splashimage-kanotix-penguins
-kanotix-scripts
-kanotix-toolkit
-
 # system
 cpufrequtils
 acpi
@@ -150,10 +136,6 @@ console-setup
 # xorg
 xserver-xorg-video-all
 xserver-xorg-input-all
-xserver-xorg-input-wacom
-xserver-xorg-video-radeonhd
-xserver-xorg-video-openchrome
-xserver-xorg-video-geode
 mesa-utils
 libgl1-mesa-dri
 
@@ -171,6 +153,7 @@ dmraid
 kpartx
 dosfstools
 lvm2
+hfsprogs
 
 # filesystem tools
 parted
@@ -191,12 +174,7 @@ libv4l-0
 bluez
 bluez-compat
 bluedevil
-kppp
-ndiswrapper-utils-1.9
 pm-utils
 vbetool
 radeontool
-modemmanager
-umtsmon
-wacom-tools
-
+modemmanager 

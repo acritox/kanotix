@@ -44,7 +44,7 @@ pdftk
 pdfjam
 psutils
 imagemagick
-cups-pdf
+cupspdf
 
 # graphics
 inkscape
@@ -65,5 +65,4 @@ gtk-recordmydesktop
 mplayerthumbs
 kdeplasma-addons
 google-gadgets-qt
-plasma-scriptengine-googlegadgets
-
+plasma-scriptengine-googlegadgets 

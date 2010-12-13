@@ -4,20 +4,19 @@
 #include <kde>
 #include <office>
 
+# email
+icedove-l10n-de
+
+# package tool
+synaptic
+
 # multimedia
+amarok
 gecko-mediaplayer
-tunapie
-audacious
-streamripper
+
+# kde
+khelpcenter4
 
 # wine
 wine1.3
 wine1.3-gecko
-
-# plymouth
-plymouth
-plymouth-themes-solar
-
-# plasma widgets addons
-plasma-widgets-addons
-

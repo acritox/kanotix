@@ -42,20 +42,16 @@ kde-i18n-de
 kwalletmanager
 kmix
 
+# kde plasma
+plasma-widgets-addons
+
 # themes
 kde-config-gtk-style
 
 # network
 network-manager-kde
 
-# kanotix
-kanotix-menu
-etcskel-kanotix
-#kanotix-graphics
-acritoxinstaller-kanotix
-
 # other hardware
 kde-config-touchpad
 kde-config-tablet
-system-config-printer-kde
-
+system-config-printer-kde 
