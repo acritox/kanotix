@@ -34,6 +34,8 @@ ksnapshot
 kcalc
 kuser
 gdebi-kde
+update-notifier-kde
+kvkbd
 
 # kde
 kdebase
@@ -50,6 +52,10 @@ kde-config-gtk-style
 
 # network
 network-manager-kde
+
+# updates
+update-manager-core
+update-notifier-kde
 
 # other hardware
 kde-config-touchpad

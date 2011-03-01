@@ -16,7 +16,6 @@ r-bioc-biostrings
 
 # system
 curlftpfs
-smbfs
 beep
 
 # hardware

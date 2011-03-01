@@ -60,6 +60,7 @@ zip
 unp
 
 # tools
+bc
 mc
 most
 less
@@ -86,6 +87,7 @@ alsa-oss
 smartmontools
 user-setup
 whois
+zsync
 
 # themes
 gtk2-engines
@@ -94,8 +96,10 @@ gtk2-engines
 pcmciautils
 openssh-client
 sshfs
+smbfs
 pppoeconf
 nfs-common
+ncpfs
 bluez-audio
 ethtool
 vpnc
@@ -128,6 +132,7 @@ pbuilder
 
 # system
 cpufrequtils
+hddtemp
 acpi
 acpid
 xdg-utils
@@ -143,7 +148,8 @@ libgl1-mesa-dri
 dd-rhelp
 testdisk
 gpart
-partitionmanager
+gparted
+gksu
 
 # filesystems
 ntfs-3g
@@ -165,6 +171,7 @@ hfsplus
 hfsutils
 jfsutils
 xfsprogs
+btrfs-tools
 
 # firmware
 ndiswrapper-utils-1.9
