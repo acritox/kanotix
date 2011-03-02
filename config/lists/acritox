@@ -43,7 +43,7 @@ pdftk
 pdfjam
 psutils
 imagemagick
-cupspdf
+cups-pdf
 
 # graphics
 inkscape
@@ -58,6 +58,7 @@ autossh
 
 # multimedia
 vlc
+smplayer
 gtk-recordmydesktop
 
 # desktop eyecandy
