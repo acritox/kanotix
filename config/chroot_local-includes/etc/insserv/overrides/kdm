@@ -1,0 +1,11 @@
+### BEGIN INIT INFO
+# Provides:          kdm
+# Required-Start:    $local_fs $remote_fs
+# Required-Stop:     $local_fs $remote_fs
+# Should-Start:      console-screen kbd acpid dbus hal krb5-kdc
+# Should-Stop:       console-screen kbd
+# Default-Start:     5
+# Default-Stop:      0 1 2 3 4 6
+# Short-Description: X display manager for KDE
+# Description:       KDM manages a collection of X servers, which may be on the local host or remote machines.
+### END INIT INFO
