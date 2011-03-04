@@ -16,7 +16,7 @@ eof
 
 write_kanotix_config()
 {
-[ -z "${LB_KANOTIX_NVIDIA}" ] && LB_KANOTIX_NVIDIA="true"
+[ -z "${LB_KANOTIX_NVIDIA}" ] && LB_KANOTIX_NVIDIA="false"
 [ -z "${LB_KANOTIX_TMPFS}" ] && [ -d tmpfs ] && LB_KANOTIX_TMPFS="true"
 [ -z "${LB_KANOTIX_TMPFS}" ] && LB_KANOTIX_TMPFS="false"
 [ -z "${LB_KANOTIX_TMPFS_OPTIONS}" ] && [ -f tmpfs/options ] && LB_KANOTIX_TMPFS_OPTIONS="$(<tmpfs/options)"
