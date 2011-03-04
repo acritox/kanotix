@@ -1,14 +1,25 @@
 #!/bin/sh
 
-if [ -e /etc/gfxoverlay ]; then
-  overlay="$(echo /root/live/image/gfxoverlay/$(cat /etc/gfxoverlay).*)"
-  if [ -f "$overlay" ]; then
-    #overlay_dev="$(losetup -f)"
-    #losetup "$overlay_dev" "$overlay"
-    mkdir -p /live/gfxoverlay /root/live/gfxoverlay
+[ ! -f /etc/gfxoverlay ] && exit 0
+
+gfx="$(cat /etc/gfxoverlay)"
+bit=32
+[ "$(uname -m)" = "x86_64" ] && bit=64
+
+mkdir -p /live/gfxoverlay /root/live/gfxoverlay
+for overlay in /root/live/image/gfxoverlay.* /root/live/image/gfxoverlay/$gfx.*
+do
+    [ ! -e "$overlay" ] && continue
     mount -o loop "$overlay" /live/gfxoverlay
-    mount -o remount,add:1:/live/gfxoverlay /root
-    mount -n -o move /live/gfxoverlay /root/live/gfxoverlay
-  fi
-fi
+    for dir in /live/gfxoverlay/overlay$bit-$gfx /live/gfxoverlay/$gfx /live/gfxoverlay
+    do
+        if [ -d $dir/lib ]; then
+            mount -o remount,add:1:$dir /root
+            mount -n -o move /live/gfxoverlay /root/live/gfxoverlay
+	    exit 0
+	fi
+    done
+    umount /live/gfxoverlay
+done
+rmdir /live/gfxoverlay /root/live/gfxoverlay
 
