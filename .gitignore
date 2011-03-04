@@ -7,4 +7,5 @@
 /config/chroot
 /config/common
 /config/source
+/overlay*
 

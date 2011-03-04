@@ -1,0 +1,14 @@
+#!/bin/sh
+
+if [ -e /etc/gfxoverlay ]; then
+  overlay="$(echo /root/live/image/gfxoverlay/$(cat /etc/gfxoverlay).*)"
+  if [ -f "$overlay" ]; then
+    #overlay_dev="$(losetup -f)"
+    #losetup "$overlay_dev" "$overlay"
+    mkdir -p /live/gfxoverlay /root/live/gfxoverlay
+    mount -o loop "$overlay" /live/gfxoverlay
+    mount -o remount,add:1:/live/gfxoverlay /root
+    mount -n -o move /live/gfxoverlay /root/live/gfxoverlay
+  fi
+fi
+
