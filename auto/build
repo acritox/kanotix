@@ -30,11 +30,17 @@ prebuild()
 	# make current build configuration available for hooks inside chroot
 	mkdir -p config/chroot_local-includes/root
 	cat config/* 2>/dev/null | grep ^LB_ > config/chroot_local-includes/root/build.conf
+
+	if [ -d cache/stages_bootstrap ]; then
+		bsbit=$(file cache/stages_bootstrap/bin/true | grep -q "ELF 64-bit" && echo 64 || echo 32)
+		mv cache/stages_bootstrap cache/stages_bootstrap$bsbit
+	fi
+	[ -d cache/stages_bootstrap$bit ] && mv cache/stages_bootstrap$bit cache/stages_bootstrap
 }
 
 postbuild()
 {
-	:
+	[ -d cache/stages_bootstrap ] && mv cache/stages_bootstrap cache/stages_bootstrap$bit
 }
 
 if [ "$LB_KANOTIX_TMPFS" = "true" ]; then
