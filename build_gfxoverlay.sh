@@ -76,6 +76,10 @@ if [ -d cache ]; then
   mv -f overlay/usr/src/NVIDIA-Linux* cache/ 2>/dev/null
   mv -f overlay/usr/src/ati-driver-installer* cache/ 2>/dev/null
 fi
+if [ -z "$(find overlay/ -name '*.ko')" ]; then
+  echo "Error: Something went wrong while building the overlay (no *.ko module has been built)"
+  exit 6
+fi
 cd overlay
 rm -rf usr/sbin/update-initramfs etc/resolv.conf usr/src/NVIDIA-Linux* usr/src/ati-driver-installer* overlay.sh tmp var/log .??*
 cd ..
