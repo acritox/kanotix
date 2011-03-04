@@ -8,8 +8,9 @@ MIRROR_BOOTSTRAP="$MIRROR_CHROOT"
 
 . auto/kanotix
 
-# preset default packages list
+# preset kanotix defaults
 export LB_PACKAGES_LISTS="kanotix-master"
+export LB_SYSLINUX_MENU_LIVE_ENTRY="Kanotix"
 
 lb config noauto \
 	--iso-volume KANOTIX \

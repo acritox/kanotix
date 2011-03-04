@@ -4,7 +4,8 @@
 . config/common
 . config/kanotix
 bit=32
-[ "$LB_ARCHITECTURE" = "amd64" ] && bit=64
+LABEL=Kanotix
+[ "$LB_ARCHITECTURE" = "amd64" ] && bit=64 && LABEL=${LABEL}64
 
 # Update kanotix-version (32/64-bit and timestamp)
 [ ! -f config/chroot_local-includes/etc/kanotix-version ] && echo "Kanotix Hellfire 0000-00:00" > config/chroot_local-includes/etc/kanotix-version
@@ -36,11 +37,14 @@ prebuild()
 		mv cache/stages_bootstrap cache/stages_bootstrap$bsbit
 	fi
 	[ -d cache/stages_bootstrap$bit ] && mv cache/stages_bootstrap$bit cache/stages_bootstrap
+	rm -f kanotix$bit.iso
+	echo "LB_SYSLINUX_MENU_LIVE_ENTRY=\"$LABEL\"" >> config/binary
 }
 
 postbuild()
 {
 	[ -d cache/stages_bootstrap ] && mv cache/stages_bootstrap cache/stages_bootstrap$bit
+	[ -f binary-hybrid.iso ] && mv -f binary-hybrid.iso kanotix$bit.iso
 }
 
 if [ "$LB_KANOTIX_TMPFS" = "true" ]; then
