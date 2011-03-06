@@ -4,7 +4,6 @@ user-profile-kanotix
 kanotix-plasma-script
 badge-icon-kanotix
 
-grub2-splashimage-kanotix-logo
 kdm-theme-kanotix-starrise
 kmenu-icon-kanotix
 ksplash-theme-kanotix-starrise
@@ -13,3 +12,11 @@ plymouth-theme-kanotix-logo
 kanotix-menu
 
 acritoxinstaller-kanotix
+
+#if BOOTLOADER burg
+burg-themes
+#endif
+#if BOOTLOADER grub grub2 syslinux
+grub2-splashimage-kanotix-logo
+#endif
+

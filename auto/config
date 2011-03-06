@@ -10,6 +10,7 @@ MIRROR_BOOTSTRAP="$MIRROR_CHROOT"
 
 # preset kanotix defaults
 export LB_PACKAGES_LISTS="kanotix-master"
+export LB_BOOTLOADER="syslinux"
 export LB_SYSLINUX_MENU_LIVE_ENTRY="Kanotix"
 
 lb config noauto \
@@ -23,10 +24,9 @@ lb config noauto \
 	--bootappend-live 'utc=no timezone=Europe/Berlin locales=de keyboard-layouts=de keyboard-variant=nodeadkeys splash' \
 	--distribution squeeze \
         --archive-areas "main contrib non-free" \
-	--repositories "live.debian.net acritox excalibur hellfire lo wine-ppa" \
+	--repositories "live.debian.net acritox excalibur hellfire lo wine-ppa burg" \
 	--security true \
 	--checksums md5 \
-	--bootloader syslinux \
 	--syslinux-timeout 5 \
 	--syslinux-menu true \
 	--syslinux-splash config/binary_syslinux/splash.png \

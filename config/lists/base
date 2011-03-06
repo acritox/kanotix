@@ -14,6 +14,14 @@
 #include <kanotix-base>
 #include <kanotix-extra>
 
+# bootloader
+#if BOOTLOADER burg
+burg-pc
+#endif
+#if BOOTLOADER grub grub2 syslinux
+grub-pc
+#endif
+
 # java, plugins
 sun-java6-plugin
 
@@ -72,7 +80,6 @@ sux
 htop
 time
 bash-completion
-grub-pc
 di
 cfv
 whois

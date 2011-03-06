@@ -1,0 +1,3 @@
+# PPA for Burg Bootloader
+deb http://ppa.launchpad.net/bean123ch/burg/ubuntu lucid main
+deb-src http://ppa.launchpad.net/bean123ch/burg/ubuntu lucid main
