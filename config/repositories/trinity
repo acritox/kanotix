@@ -1,0 +1,5 @@
+# Trinity Desktop
+deb http://ppa.quickbuild.pearsoncomputing.net/trinity/trinity/debian squeeze main
+deb-src http://ppa.quickbuild.pearsoncomputing.net/trinity/trinity/debian squeeze main
+deb http://ppa.quickbuild.pearsoncomputing.net/trinity/trinity-builddeps/debian squeeze main
+deb-src http://ppa.quickbuild.pearsoncomputing.net/trinity/trinity-builddeps/debian squeeze main
