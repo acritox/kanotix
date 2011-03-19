@@ -11,7 +11,7 @@
 Sudoalias ()
 {
 	# Checking if package is already configured
-	if [ -e /var/lib/live/config/sudo-su-alias ]
+	if [ -e /var/lib/live/config/sudoalias ]
 	then
 		return
 	fi
