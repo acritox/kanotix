@@ -2,6 +2,7 @@
 
 # trinity base
 desktop-base-trinity
+sudo-trinity
 
 # office
 kpdf-trinity

@@ -4,3 +4,6 @@ badge-icon-kanotix
 kdm-theme-kanotix-starrise
 kmenu-icon-kanotix
 ksplash-theme-kanotix-starrise
+
+# sudo must not be in a trinity-packageslist-set, therefore it's added here:
+sudo

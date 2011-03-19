@@ -1,4 +1,4 @@
-eject file user-setup sudo-trinity
+eject file user-setup
 
 #if MODE ubuntu
 gnupg
