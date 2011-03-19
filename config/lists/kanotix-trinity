@@ -1,9 +1,11 @@
-# Kanotix
+# Kanotix Trinity
 
 #include <base>
-#include <kde>
-#include <kde.kanotix>
+#include <trinity>
 #include <office>
+
+# base
+etcskel-kanotix-trinity
 
 # email
 icedove-l10n-de
@@ -12,11 +14,11 @@ icedove-l10n-de
 synaptic
 
 # multimedia
-amarok
+amarok-trinity
 gecko-mediaplayer
 
-# kde
-khelpcenter4
+# trinity
+khelpcenter-trinity
 
 # wine
 wine1.3

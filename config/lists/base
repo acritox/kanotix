@@ -11,8 +11,7 @@
 #include <firmware>
 #include <standard-x11>
 
-#include <kanotix-base>
-#include <kanotix-extra>
+#include <base.kanotix>
 
 # bootloader
 #if BOOTLOADER burg
@@ -187,7 +186,6 @@ libv4l-0
 # other hardware
 bluez
 bluez-compat
-bluedevil
 pm-utils
 vbetool
 radeontool

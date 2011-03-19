@@ -2,3 +2,5 @@
 
 #include <base>
 #include <kde> 
+#include <kde.kanotix>
+

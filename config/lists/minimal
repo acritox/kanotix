@@ -1,0 +1,9 @@
+eject file user-setup sudo-trinity
+
+#if MODE ubuntu
+gnupg
+#endif
+
+#if DISTRIBUTION wheezy
+live-config
+#endif

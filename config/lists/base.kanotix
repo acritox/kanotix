@@ -1,18 +1,18 @@
 # kanotix base
 etcskel-kanotix
 user-profile-kanotix
-kanotix-plasma-script
-badge-icon-kanotix
 
-kdm-theme-kanotix-starrise
-kmenu-icon-kanotix
-ksplash-theme-kanotix-starrise
+kanotix-starrise-base
 plymouth-theme-kanotix-logo
 
-kanotix-menu
-
 acritoxinstaller-kanotix
+kanotix-menu
+kanotix-scripts
+kanotix-toolkit
+kanotix-irc
+infobash
 
+# bootloader
 #if BOOTLOADER burg
 burg-themes
 #endif

@@ -1,0 +1,65 @@
+# Kanotix additional packages list for trinity
+
+# trinity base
+desktop-base-trinity
+
+# office
+kpdf-trinity
+
+# plugins
+konqueror-nsplugins-trinity
+
+# multimedia
+kaffeine-trinity
+libsdl1.2debian-alsa
+kdemultimedia-kio-plugins-trinity
+kamera-trinity
+
+# burn
+k3b-trinity
+#k3b-i18n
+libk3b3-extracodecs-trinity
+
+# chat, irc
+konversation-trinity
+
+# graphics
+gwenview-trinity
+
+# editors
+kate-trinity
+
+# archive
+ark-trinity
+
+# tools
+ksnapshot-trinity
+kcalc-trinity
+kuser-trinity
+#gdebi-kde
+kvkbd-trinity
+
+# kde
+kdebase-trinity
+kdm-trinity
+kde-i18n-de-trinity
+kwalletmanager-trinity
+kmix-trinity
+
+# kde plasma
+#plasma-widgets-addons
+
+# themes
+kde-config-gtk-style
+
+# network
+network-manager-kde-trinity
+
+# updates
+update-manager-core
+update-notifier-kde
+
+# other hardware
+#kde-config-touchpad
+#kde-config-tablet
+#system-config-printer-kde 
