@@ -46,6 +46,7 @@ kmix
 
 # kde plasma
 plasma-widgets-addons
+plasma-runners-addons
 
 # themes
 kde-config-gtk-style

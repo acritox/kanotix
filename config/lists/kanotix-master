@@ -10,6 +10,7 @@ icedove-l10n-de
 
 # package tool
 synaptic
+apt-xapian-index
 
 # multimedia
 amarok
