@@ -1,11 +1,17 @@
 /cache
 /binary*
+/kanotix*iso
 /chroot
 /.stage
+/config/all
 /config/binary
 /config/bootstrap
 /config/chroot
 /config/common
+/config/kanotix
 /config/source
+/config/chroot_local-includes/etc/kanotix-version
+/config/chroot_local-includes/root/build.conf
+/config/chroot_local-includes/usr/local/bin
 /overlay*
 
