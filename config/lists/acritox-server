@@ -1,0 +1,76 @@
+# acritox Server
+
+#include <base>
+
+# tools
+sudo
+convmv
+
+# development
+dput
+git
+cmake
+qt4-dev-tools
+
+# system
+curlftpfs
+beep
+
+# pdf tools
+pdftk
+pdfjam
+psutils
+imagemagick
+
+# graphics
+exiftran
+jhead
+
+# network
+lftp
+autossh
+fail2ban
+bridge-utils
+isc-dhcp-server
+dnsutils
+bind9
+aiccu
+radvd
+
+# webserver
+apache2
+libapache2-mod-php5
+php5
+php5-sqlite
+php5-curl
+mysql-server-5.1
+phpmyadmin
+apt-cacher-ng
+
+# fileserver
+samba
+samba-common-bin
+nfs-kernel-server
+openssh-server
+
+# email
+dovecot-imapd
+spamassassin
+spamc
+fetchmail
+procmail
+
+# phone
+asterisk
+
+# chat
+ejabberd
+pyicqt
+
+# sms
+kannel
+swatch
+
+# hardware
+apcupsd
+

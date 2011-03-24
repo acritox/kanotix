@@ -1,5 +1,7 @@
 # Kanotix additional packages list for trinity
 
+#include <desktop>
+
 # trinity base
 desktop-base-trinity
 sudo-trinity

@@ -1,0 +1,46 @@
+# Kanotix Desktop Packages List
+
+# java, plugins
+sun-java6-plugin
+
+# multimedia
+dvdauthor
+
+# burn
+normalize-audio
+dvd+rw-tools
+
+# browser
+iceweasel-l10n-de
+
+# chat, irc
+pidgin
+gstreamer0.10-plugins-base
+gstreamer0.10-plugins-good
+gstreamer0.10-alsa
+
+# skype
+skype
+pidgin-skype
+
+# graphics
+gimp
+gimp-gutenprint
+xsane
+libsane-extras
+sane-utils
+sane
+
+# tools
+joystick
+
+# themes
+gtk2-engines
+
+# print
+hplip-gui
+
+# tools
+gparted
+gksu
+

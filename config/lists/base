@@ -21,41 +21,13 @@ burg-pc
 grub-pc
 #endif
 
-# java, plugins
-sun-java6-plugin
-
 # multimedia
 sox
 alsa-oss
 aumix
-dvdauthor
-
-# burn
-normalize-audio
-dvd+rw-tools
-
-# browser
-iceweasel-l10n-de
 
 # chat, irc
-pidgin
-gstreamer0.10-plugins-base
-gstreamer0.10-plugins-good
-gstreamer0.10-alsa
 weechat 
-
-# skype
-skype
-pidgin-skype
-debconf-utils
-
-# graphics
-gimp
-gimp-gutenprint
-xsane
-libsane-extras
-sane-utils
-sane
 
 # editors
 vim
@@ -82,7 +54,6 @@ bash-completion
 di
 cfv
 whois
-joystick
 screen
 ntpdate
 usb-modeswitch
@@ -94,9 +65,7 @@ smartmontools
 user-setup
 whois
 zsync
-
-# themes
-gtk2-engines
+debconf-utils
 
 # network
 pcmciautils
@@ -123,7 +92,6 @@ foomatic-db-gutenprint
 cups-driver-gutenprint
 foo2zjs
 #printconf
-hplip-gui
 
 # build
 module-assistant
@@ -154,8 +122,6 @@ libgl1-mesa-dri
 dd-rhelp
 testdisk
 gpart
-gparted
-gksu
 
 # filesystems
 ntfs-3g
@@ -191,3 +157,4 @@ vbetool
 radeontool
 modemmanager 
 tp-trackpoint-scroll
+

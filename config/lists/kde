@@ -1,5 +1,7 @@
 # Kanotix additional packages list for kde
 
+#include <desktop>
+
 # office
 okular
 
