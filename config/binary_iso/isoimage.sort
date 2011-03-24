@@ -1,4 +1,5 @@
-boot.catalog +2
-boot.isohybrid +2
-boot +1
-live/filesystem.squashfs -1
+binary/boot.catalog +3
+binary/boot.isohybrid +2
+binary/boot +1
+binary/*/*.squashfs -1
+binary/*.squashfs -1
