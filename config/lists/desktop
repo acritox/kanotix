@@ -19,10 +19,6 @@ gstreamer0.10-plugins-base
 gstreamer0.10-plugins-good
 gstreamer0.10-alsa
 
-# skype
-skype
-pidgin-skype
-
 # graphics
 gimp
 gimp-gutenprint

@@ -18,6 +18,10 @@ aumix-gtk
 amarok
 gecko-mediaplayer
 
+# skype
+skype
+pidgin-skype
+
 # network
 openvpn
 
@@ -27,3 +31,6 @@ khelpcenter4
 # wine
 wine1.3
 wine1.3-gecko
+
+# other hardware
+modemmanager

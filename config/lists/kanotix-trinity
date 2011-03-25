@@ -17,9 +17,16 @@ synaptic
 amarok-trinity
 gecko-mediaplayer
 
+# skype
+skype
+pidgin-skype
+
 # trinity
 khelpcenter-trinity
 
 # wine
 wine1.3
 wine1.3-gecko
+
+# other hardware
+modemmanager
