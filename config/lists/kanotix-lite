@@ -1,6 +1,8 @@
 # Kanotix Lite
 
 #include <base>
-#include <kde> 
-#include <kde.kanotix>
+#include <trinity> 
+
+# base
+etcskel-kanotix-trinity
 

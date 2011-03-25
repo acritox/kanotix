@@ -13,8 +13,13 @@ synaptic
 apt-xapian-index
 
 # multimedia
+aumix
+aumix-gtk
 amarok
 gecko-mediaplayer
+
+# network
+openvpn
 
 # kde
 khelpcenter4

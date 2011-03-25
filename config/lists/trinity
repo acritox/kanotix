@@ -58,11 +58,8 @@ kde-config-gtk-style
 # network
 network-manager-kde-trinity
 
-# updates
-update-manager-core
-update-notifier-kde
-
 # other hardware
+kpowersave-trinity
 #kde-config-touchpad
 #kde-config-tablet
 #system-config-printer-kde 
