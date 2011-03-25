@@ -14,4 +14,5 @@
 /config/chroot_local-includes/root/build.conf
 /config/chroot_local-includes/usr/local/bin
 /overlay*
-
+/gfxoverlay
+/tmpfs
