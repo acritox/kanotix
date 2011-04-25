@@ -24,7 +24,6 @@ grub-pc
 # multimedia
 sox
 alsa-oss
-aumix
 
 # chat, irc
 weechat 
