@@ -32,3 +32,13 @@ wine1.3-gecko
 
 # other hardware
 modemmanager
+
+# games
+armagetronad
+foobillard
+neverball
+neverputt
+kmahjongg
+
+# benchmark
+gl2benchmark
