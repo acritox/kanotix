@@ -53,3 +53,13 @@ alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
 EOT
+
+# /etc/network/interfaces that works with network-manager
+cat <<EOT > /etc/network/interfaces
+# Used by ifup(8) and ifdown(8). See the interfaces(5) manpage or
+# /usr/share/doc/ifupdown/examples for more information.
+
+auto lo
+iface lo inet loopback
+EOT
+
