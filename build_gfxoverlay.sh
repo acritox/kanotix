@@ -82,6 +82,8 @@ if [ -z "$(find overlay/ -name '*.ko')" ]; then
 fi
 cd overlay
 rm -rf usr/sbin/update-initramfs etc/resolv.conf usr/src/NVIDIA-Linux* usr/src/ati-driver-installer* overlay.sh tmp var/log .??*
+rm -f etc/X11/xorg.conf.1st
+printf 'Section "Device"\n    Identifier     "Device0"\n    Driver         "'"$drv"'"\nEndSection\n' > etc/X11/xorg.conf
 cd ..
 mv overlay "overlay$bit-$drv-$ver"
 

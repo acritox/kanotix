@@ -1,2 +1,2 @@
-# Firefox 4
-deb http://mozilla.debian.net/ squeeze-backports iceweasel-4.0
+# Firefox
+deb http://mozilla.debian.net/ squeeze-backports iceweasel-release

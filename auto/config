@@ -53,14 +53,14 @@ case $LB_ARCHITECTURE in
 "amd64")
   lb config noauto \
         --linux-flavours generic \
-        --linux-packages "linux-image linux-headers"
+        --linux-packages "linux-image-3.0.0-11 linux-headers-3.0.0-11"
         #--linux-flavours amd64 \
         #--linux-packages "linux-image-2.6 linux-headers-2.6"
 	;;
 "i386")
   lb config noauto \
         --linux-flavours generic \
-        --linux-packages "linux-image linux-headers"
+        --linux-packages "linux-image-3.0.0-11 linux-headers-3.0.0-11"
         #--linux-flavours 686-bigmem \
         #--linux-packages "linux-image-2.6 linux-headers-2.6"
 	;;
