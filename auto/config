@@ -24,7 +24,7 @@ lb config noauto \
 	--bootappend-live 'utc=no timezone=Europe/Berlin locales=de keyboard-layouts=de keyboard-variant=nodeadkeys splash' \
 	--distribution squeeze \
         --archive-areas "main contrib non-free" \
-	--repositories "live.debian.net acritox excalibur hellfire lo wine-ppa firefox" \
+	--repositories "live.debian.net acritox excalibur hellfire lo wine-ppa firefox grub" \
 	--security true \
 	--checksums md5 \
 	--syslinux-timeout 5 \

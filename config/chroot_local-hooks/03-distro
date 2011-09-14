@@ -11,6 +11,7 @@ rsync -Ha --ignore-existing /usr/share/kanotix/profile/ /etc/skel/
 
 perl -pi -e 's/^(GRUB_DISTRIBUTOR)=.*/\1=`[ "\$\(uname -m\)" = "x86_64" ] && echo Kanotix64 || echo Kanotix`/' /etc/default/grub
 perl -pi -e 's/.*(GRUB_DISABLE_LINUX_RECOVERY)=.*/\1="true"/' /etc/default/grub
+perl -pi -e 's/.*(GRUB_DISABLE_RECOVERY)=.*/\1="true"/' /etc/default/grub
 perl -pi -e 's/^(GRUB_CMDLINE_LINUX_DEFAULT)=.*/\1="quiet splash"/' /etc/default/grub
 
 rm -f /etc/skel/Desktop/kanotix-irc.desktop.tmp
