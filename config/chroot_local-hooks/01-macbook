@@ -1,6 +1,13 @@
 #!/bin/sh
 mkdir -p /etc/skel/.kde/Autostart
 cat >/etc/skel/.kde/Autostart/macbook.sh <<MAC
-grep -q "Apple.*Keyboard" /proc/bus/input/devices && setxkbmap -model macbook79
+#!/bin/sh
+if grep -q "Apple.*Keyboard" /proc/bus/input/devices; then
+	setxkbmap -model macbook79
+	if [ -f ~/.kde/share/config/synaptiksrc-macbook ]; then
+		mv -f ~/.kde/share/config/synaptiksrc-macbook ~/.kde/share/config/synaptiksrc
+		qdbus org.kde.synaptiks /modules/synaptiks org.kde.Synaptiks.reparseConfiguration
+	fi
+fi
 MAC
 chmod +x /etc/skel/.kde/Autostart/macbook.sh
