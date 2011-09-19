@@ -19,6 +19,8 @@ burg-pc
 #endif
 #if BOOTLOADER grub grub2 syslinux
 grub-pc
+grub-efi-amd64-bin
+efibootmgr
 #endif
 
 # multimedia
