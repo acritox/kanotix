@@ -1,2 +1,3 @@
 # Firefox
 deb http://mozilla.debian.net/ squeeze-backports iceweasel-release
+deb-src http://mozilla.debian.net/ squeeze-backports iceweasel-release
