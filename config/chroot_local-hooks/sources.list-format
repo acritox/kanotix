@@ -1,6 +1,17 @@
 #!/bin/bash
 # update sources.list
 
+# Remove local package repository
+rm -f /etc/apt/sources.list.d/local-packages.list
+rm -rf /root/local-packages
+
+# Remove local packages key if it exists
+if apt-key list | grep -q "live-build-local-key@invalid"
+then
+	apt-key del "live-build-local-key@invalid"
+fi
+
+# Combine sources.list.d/*.list into a single sources.list file
 if [ -d /etc/apt/sources.list.d ]; then
 	for repo in /etc/apt/sources.list.d/*
 	do
