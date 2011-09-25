@@ -1,3 +1,0 @@
-# Grub2
-deb http://kanotix.com/files/fix/grub2.squeeze ./
-deb-src http://kanotix.com/files/fix/grub2.squeeze ./

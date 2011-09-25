@@ -12,6 +12,7 @@ MIRROR_BOOTSTRAP="$MIRROR_CHROOT"
 export LB_PACKAGES_LISTS="kanotix-master"
 export LB_BOOTLOADER="syslinux"
 export LB_SYSLINUX_MENU_LIVE_ENTRY="Kanotix"
+export LB_LINUX_PACKAGES="linux-image linux-headers"
 
 lb config noauto \
 	--iso-volume KANOTIX \
@@ -24,7 +25,7 @@ lb config noauto \
 	--bootappend-live 'utc=no timezone=Europe/Berlin locales=de keyboard-layouts=de keyboard-variant=nodeadkeys splash' \
 	--distribution squeeze \
         --archive-areas "main contrib non-free" \
-	--repositories "live.debian.net acritox excalibur hellfire lo wine-ppa firefox grub" \
+	--repositories "live.debian.net acritox excalibur hellfire lo wine-ppa firefox" \
 	--security true \
 	--checksums md5 \
 	--syslinux-timeout 5 \
@@ -52,15 +53,15 @@ lb config noauto \
 case $LB_ARCHITECTURE in
 "amd64")
   lb config noauto \
-        --linux-flavours generic \
-        --linux-packages "linux-image-3.0.0-11 linux-headers-3.0.0-11"
+        --linux-flavours generic
+        #--linux-packages "linux-image linux-headers"
         #--linux-flavours amd64 \
         #--linux-packages "linux-image-2.6 linux-headers-2.6"
 	;;
 "i386")
   lb config noauto \
-        --linux-flavours generic \
-        --linux-packages "linux-image-3.0.0-11 linux-headers-3.0.0-11"
+        --linux-flavours generic
+        #--linux-packages "linux-image linux-headers"
         #--linux-flavours 686-bigmem \
         #--linux-packages "linux-image-2.6 linux-headers-2.6"
 	;;
