@@ -68,7 +68,12 @@ eof
 cat usr/local/bin/install-$drv-debian.sh >> overlay.sh
 sed -i '/exit 3/d' overlay.sh
 chmod +x overlay.sh
-chroot . /overlay.sh -v $ver -z
+if [ "$(uname -m)" = "x86_64" ] && ! file bin/true | grep -q 'ELF 64-bit'; then
+	echo "Found 32bit chroot, using linux32..."
+	chroot . linux32 /overlay.sh -v $ver -z
+else
+	chroot . /overlay.sh -v $ver -z
+fi
 cd ..
 umount root/proc root/sys root/dev root &>/dev/null
 rm -rf root
