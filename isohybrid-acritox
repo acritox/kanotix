@@ -1,0 +1,150 @@
+#!/usr/bin/perl
+# isohybrid-acritox - written by Andreas Loibl <andreas@andreas-loibl.de>
+# 
+# Post-process a hybrid-ISO-image generated with isohybrid-bg2
+# by injecting an "Apple Partition Map" into the image and appending a HFS+-partiton
+# and a FAT-partition to allow "hybrid booting" as CD-ROM (EFI or El Torito) or as
+# a hard-drive on Intel-Macs (EFI) and PCs (EFI or MBR).
+
+$bs=0x0200; $block0='45520200eb5f90'; #  512  -  add    (%eax),%al
+$bs=0x0400; $block0='45520400eb5f90'; # 1024  -  add    $0x0,%al
+
+# Apple Partition Map entries:
+$pm1='504d000000000004000000010000000f4170706c650000000000000000000000000000000000000000000000000000004170706c655f706172746974696f6e5f6d617000000000000000000000000000000000000000000f00000003';
+$pm2='504d00000000000400000010000000014d6163696e746f736800000000000000000000000000000000000000000000004170706c655f4472697665725f41544150490000000000000000000000000000000000000000000100000303000000002674b000000000000000000000000000000000000000eaeb0000000000000000000000000000000049534f43';
+$pm3='504d00000000000400000400000005006469736b20696d616765000000000000000000000000000000000000000000004170706c655f4846530000000000000000000000000000000000000000000000000000000000040040000033';
+$pm4='504d000000000004000009000000001000000000000000000000000000000000000000000000000000000000000000004170706c655f4672656500000000000000000000000000000000000000000000000000000000001000000001';
+
+die "Usage: $0 <isohybrid-bg2.iso> <HFS+-image> <FAT-image>\n" if $#ARGV != 2;
+
+($file, $part, $fat) = @ARGV;
+open(FILE, "+< $file\0") or die "$0: cannot open $file: $!\n";
+binmode FILE;
+
+open(PART, "< $part\0") or die "$0: cannot open $part: $!\n";
+binmode PART;
+
+open(FAT, "< $fat\0") or die "$0: cannot open $fat: $!\n";
+binmode FAT;
+
+# Check if image has already been "patched" (i.e. it has the APM signature from $block0)
+seek(FILE, 0, SEEK_SET) or die "$0: $file: $!\n";
+read(FILE, $test, 2) == 2 or die "$0: $file: read error\n";
+die "$file seems to have an APM signature already...\n" if($test eq 'ER');
+
+# Check if image is a isohybrid-bg2 image (i.e. it has GRUB in its MBR)
+seek(FILE, 0x180, SEEK_SET) or die "$0: $file: $!\n";
+read(FILE, $test, 4) == 4 or die "$0: $file: read error\n";
+die "$file seems not to have GRUB in its MBR (is this a isohybrid-bg2 image?)\n" if($test ne 'GRUB');
+
+# Check if partition contains a HFS+ filesystem
+seek(PART, 0x400, SEEK_SET) or die "$0: $file: $!\n";
+read(PART, $test, 2) == 2 or die "$0: $file: read error\n";
+die "$part doesn't seem to contain a HFS+ filesystem\n" if($test ne 'H+');
+
+# Get the total size of the image
+(@imgstat = stat(FILE)) or die "$0: $file: $!\n";
+$imgsize = $imgstat[7];
+if (!$imgsize) {
+    die "$0: $file: cannot determine length of file\n";
+}
+# Target image size: round up to a multiple of $bs*512
+$cylsize = $bs*512;
+$frac = $imgsize % $cylsize;
+$padding = ($frac > 0) ? $cylsize - $frac : 0;
+$imgsize += $padding;
+
+# Get the total size of the partiton
+(@partstat = stat(PART)) or die "$0: $part: $!\n";
+$partsize = $partstat[7];
+if (!$partsize) {
+    die "$0: $part: cannot determine length of file\n";
+}
+
+# Get the total size of the partiton
+(@fatstat = stat(FAT)) or die "$0: $part: $!\n";
+$fatsize = $fatstat[7];
+if (!$fatsize) {
+    die "$0: $part: cannot determine length of file\n";
+}
+
+seek(FILE, 0, SEEK_SET) or die "$0: $file: $!\n";
+print FILE pack('H*',$block0);
+seek(FILE, $bs*1, SEEK_SET) or die "$0: $file: $!\n";
+print FILE pack('H*',$pm1);
+seek(FILE, $bs*2, SEEK_SET) or die "$0: $file: $!\n";
+print FILE pack('H*',$pm2);
+seek(FILE, $bs*3, SEEK_SET) or die "$0: $file: $!\n";
+print FILE pack('H*',$pm3);
+seek(FILE, $bs*4, SEEK_SET) or die "$0: $file: $!\n";
+print FILE pack('H*',$pm4);
+
+# Pad the image to a fake cylinder boundary
+seek(FILE, $imgstat[7], SEEK_SET) or die "$0: $file: $!\n";
+if ($padding) {
+    print FILE "\0" x $padding;
+}
+
+# Append partition to image
+seek(PART, 0, SEEK_SET) or die "$0: $file: $!\n";
+read PART, $partition, $partsize;
+print FILE $partition;
+
+# Pad the partition to a fake cylinder boundary
+$frac = $partsize % $cylsize;
+$padding = ($frac > 0) ? $cylsize - $frac : 0;
+if ($padding) {
+    print FILE "\0" x $padding;
+}
+$partsize += $padding;
+
+# Adjust $pm3 (Apple_HFS)
+# "physical block start" and "physical block count" of partition:
+seek(FILE, $bs*3+8, SEEK_SET) or die "$0: $file: $!\n";
+print FILE pack('NN', $imgsize/$bs, $partsize/$bs);
+# "logical block start" and "logical block count" of partition:
+seek(FILE, $bs*3+80, SEEK_SET) or die "$0: $file: $!\n";
+print FILE pack('NN', 0, $partsize/$bs);
+# Adjust $pm4 (Apple_Free)
+# "physical block start" of partition:
+seek(FILE, $bs*4+8, SEEK_SET) or die "$0: $file: $!\n";
+print FILE pack('N', $imgsize/$bs + $partsize/$bs);
+
+$imgsize += $partsize;
+seek(FILE, $imgsize, SEEK_SET) or die "$0: $file: $!\n";
+
+# Target image size: round up to a multiple of 1MB
+$cylsize = 64*32*512; # 1MB
+$frac = $imgsize % $cylsize;
+$padding = ($frac > 0) ? $cylsize - $frac : 0;
+$imgsize += $padding;
+if ($padding) {
+    print FILE "\0" x $padding;
+}
+
+# Append FAT partition to image
+read FAT, $partition, $fatsize;
+print FILE $partition;
+
+# Pad the partition to a fake cylinder boundary
+$frac = $fatsize % $cylsize;
+$padding = ($frac > 0) ? $cylsize - $frac : 0;
+if ($padding) {
+    print FILE "\0" x $padding;
+}
+$fatsize += $padding;
+
+# Adjust MBR partition table
+$fstype  = 0xEF;
+$pentry  = 2;
+
+seek(FILE, 430+16*$pentry, SEEK_SET) or die "$0: $file: $!\n";
+print FILE pack("CCCCCCCCVV", 0x80, 0xfe, 0xff, 0xff, $fstype, 0xfe, 0xff, 0xff, $imgsize/512, $fatsize/512);
+
+$imgsize += $fatsize;
+
+# Done...
+close(PART);
+close(FILE);
+
+exit 0;
