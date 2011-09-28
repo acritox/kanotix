@@ -70,7 +70,7 @@ sed -i '/exit 3/d' overlay.sh
 chmod +x overlay.sh
 if [ "$(uname -m)" = "x86_64" ] && ! file bin/true | grep -q 'ELF 64-bit'; then
 	echo "Found 32bit chroot, using linux32..."
-	chroot . linux32 /overlay.sh -v $ver -z
+	linux32 chroot . /overlay.sh -v $ver -z
 else
 	chroot . /overlay.sh -v $ver -z
 fi
