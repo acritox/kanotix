@@ -1,0 +1,26 @@
+#! /bin/sh
+# mkefipart-fat - written by Andreas Loibl <andreas@andreas-loibl.de>
+# 
+# Generate an image for a FAT-EFI-partition
+
+if [ ! -x /usr/bin/mmd ]; then
+	echo "Error: mtools are needed! Run: apt-get install mtools"
+	exit 1
+fi
+
+img=efi-fat.img
+[ "$1" ] && img="$1"
+
+# Stuff boot*.efi into a FAT filesystem, making it as small as possible.  24KiB
+# headroom seems to be enough; (x+31)/32*32 rounds up to multiple of 32.
+mkfs.msdos -n EFI -C "$img" \
+	$(( ($(stat -c %s binary/efi/boot/boot*.efi | awk '{s+=$1} END {print s}') / 1024 + 55) \
+	    / 32 * 32 ))
+mmd -i "$img" ::efi
+mmd -i "$img" ::efi/boot
+for file in binary/efi/boot/boot*.efi
+do
+	mcopy -i "$img" $file "::efi/boot/$(basename "$file")"
+done
+
+exit 0

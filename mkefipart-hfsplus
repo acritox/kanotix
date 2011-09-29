@@ -1,0 +1,55 @@
+#! /bin/sh
+# mkefipart-hfsplus - written by Andreas Loibl <andreas@andreas-loibl.de>
+# 
+# Generate an image for a HFS+-EFI-partition
+
+set -e
+
+img=efi-hfs.img
+[ "$1" ] && img="$1"
+
+label=efi-hfs.vollabel
+[ "$2" ] && label="$2"
+[ ! -f "$label" ] && wget -O$label http://kanotix.acritox.com/files/mac/label.vollabel
+
+workdir=
+
+cleanup () {
+        [ "$workdir" ] || exit
+	umount "$workdir" 2>/dev/null | :
+	rm -rf "$workdir"
+}
+trap cleanup EXIT HUP INT QUIT TERM
+
+workdir="$(mktemp -d efi-image.XXXXXX)"
+
+# Stuff boot*.efi into a HFS+ filesystem, making it as small as possible (in MB steps).
+# (x+1023)/1024*1024 rounds up to multiple of 1024.
+dd if=/dev/zero of="$img" bs=1k count=$(( ($(stat -c %s binary/efi/boot/boot*.efi | awk '{s+=$1} END {print s}') / 1024 + 1023) / 1024 * 1024 )) 2>/dev/null
+mkfs.hfsplus "$img"
+mount -o loop,creator=prhc,type=jxbt,uid=99,gid=99 "$img" "$workdir"
+cp "$label" "$workdir"/.disk_label
+mkdir -p "$workdir"/efi/boot
+
+for file in binary/efi/boot/boot*.efi
+do
+	cp "$file" "$workdir/efi/boot/$(basename "$file")"
+done
+
+set -- $(ls -i $workdir/efi/boot/boot*.efi)
+inode=$1
+
+umount "$workdir"
+
+echo "Blessing file with inode $inode ($(basename "$2"))..."
+perl <<EOF
+open(FILE, "+< $img\0") or die "\$!\n";
+binmode FILE;
+seek(FILE, 0x450, SEEK_SET) or die "\$!\n";
+print FILE pack('NN', 2, $inode);
+seek(FILE, 0x464, SEEK_SET) or die "\$!\n";
+print FILE pack('N', 2, $inode);
+close(FILE);
+EOF
+
+exit 0
