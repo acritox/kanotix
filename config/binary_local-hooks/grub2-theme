@@ -1,0 +1,6 @@
+#!/bin/bash
+# copy theme related files to binary
+mkdir -p binary/boot/grub
+cp chroot/usr/share/grub/unicode.pf2 binary/boot/grub/
+cp chroot/usr/share/images/grub/kanotix-logo.png binary/boot/grub/
+

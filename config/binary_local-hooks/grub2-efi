@@ -1,0 +1,67 @@
+#!/bin/bash
+
+platform=x86_64
+efi_name=x64
+modules="search iso9660 configfile normal memdisk tar part_msdos fat"
+
+memdisk_img=
+workdir=
+
+cleanup () {
+        [ -z "$memdisk_img" ] || rm -f "$memdisk_img"
+        [ -z "$workdir" ] || rm -rf "$workdir"
+}
+trap cleanup EXIT HUP INT QUIT TERM
+
+memdisk_img="$(mktemp efi-image.XXXXXX)"
+workdir="$(mktemp -d efi-image.XXXXXX)"
+
+# Skeleton configuration file which finds the real boot disk.
+mkdir -p "$workdir/boot/grub"
+cat >"$workdir/boot/grub/grub.cfg" <<EOF
+search --file --set=root /.disk/info
+set prefix=(\$root)/boot/grub/$platform
+source \$prefix/grub.cfg
+EOF
+
+mkdir -p "binary/boot/grub/$platform"
+mkdir -p "binary/efi/boot"
+
+(for i in $(cat chroot/usr/lib/grub/$platform/partmap.lst); do
+        echo "insmod $i"
+ done; \
+ echo "source /boot/grub/grub-efi.cfg") >"binary/boot/grub/$platform/grub.cfg"
+
+# fix module order ("gzio" should be loaded before "normal", otherwise a "prefix not set" error message will pop up on boot)
+sed -i.orig -e '/^normal:/{/gzio/!{s/$/ gzio/}}' chroot/usr/lib/grub/x86_64-efi/moddep.lst
+
+# Build the core image.
+(cd "$workdir"; tar -cf - boot) >"$memdisk_img"
+grub-mkimage -v -O "$platform" -m "$memdisk_img" \
+        -o "binary/efi/boot/boot$efi_name.efi" -p '(memdisk)/boot/grub' $modules
+
+# restore original module order
+mv chroot/usr/lib/grub/x86_64-efi/moddep.lst{.orig,}
+
+# Copy over GRUB modules, except for those already built in.
+cp -a "chroot/usr/lib/grub/$platform"/*.lst "binary/boot/grub/$platform/"
+builtin_modules="$(m="$modules"; while [ "$m" ] && echo $m
+	do m=$(sed -ne "s/^\($(echo -n $m | sed 's/ /\\|/g')\):\(.*\)$/\2/p" "chroot/usr/lib/grub/$platform"/moddep.lst)
+	done | fmt -w1 | sort -u)"
+for x in "chroot/usr/lib/grub/$platform"/*.mod; do
+	case $(basename "$x" .mod) in
+	    affs|afs|afs_be|befs|befs_be|minix|nilfs2|sfs|zfs|zfsinfo)
+		# unnecessary filesystem modules
+		;;
+	    example_functional_test|functional_test|hello)
+		# other cruft
+		;;
+	    *)
+		grep -wq $(basename "$x" .mod) <<<"$builtin_modules" || cp -a "$x" "binary/boot/grub/$platform/"
+		;;
+	esac
+done
+
+# include EFI shell
+wget -O efi/boot/shellx64.efi 'http://tianocore.git.sourceforge.net/git/gitweb.cgi?p=tianocore/edk2;a=blob_plain;f=EdkShellBinPkg/FullShell/X64/Shell_Full.efi;hb=HEAD'
+
