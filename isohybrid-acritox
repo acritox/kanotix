@@ -141,6 +141,10 @@ $pentry  = 2;
 seek(FILE, 430+16*$pentry, SEEK_SET) or die "$0: $file: $!\n";
 print FILE pack("CCCCCCCCVV", 0x80, 0xfe, 0xff, 0xff, $fstype, 0xfe, 0xff, 0xff, $imgsize/512, $fatsize/512);
 
+# Delete ISO9660 partition entry from MBR-partition-table
+seek(FILE, 430+16*1, SEEK_SET) or die "$0: $file: $!\n";
+print FILE "\0" x 16;
+
 $imgsize += $fatsize;
 
 # Done...
