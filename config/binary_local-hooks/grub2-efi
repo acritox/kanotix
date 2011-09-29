@@ -1,19 +1,16 @@
 #!/bin/bash
 
-platform=x86_64
+platform=x86_64-efi
 efi_name=x64
 modules="search iso9660 configfile normal memdisk tar part_msdos fat"
 
-memdisk_img=
 workdir=
 
 cleanup () {
-        [ -z "$memdisk_img" ] || rm -f "$memdisk_img"
         [ -z "$workdir" ] || rm -rf "$workdir"
 }
 trap cleanup EXIT HUP INT QUIT TERM
 
-memdisk_img="$(mktemp efi-image.XXXXXX)"
 workdir="$(mktemp -d efi-image.XXXXXX)"
 
 # Skeleton configuration file which finds the real boot disk.
@@ -36,9 +33,11 @@ mkdir -p "binary/efi/boot"
 sed -i.orig -e '/^normal:/{/gzio/!{s/$/ gzio/}}' chroot/usr/lib/grub/x86_64-efi/moddep.lst
 
 # Build the core image.
-(cd "$workdir"; tar -cf - boot) >"$memdisk_img"
-grub-mkimage -v -O "$platform" -m "$memdisk_img" \
-        -o "binary/efi/boot/boot$efi_name.efi" -p '(memdisk)/boot/grub' $modules
+(cd "$workdir"; tar -cf - boot) > chroot/memdisk.$$.img
+chroot chroot grub-mkimage -O "$platform" -m "/memdisk.$$.img" \
+        -o "/boot$efi_name.efi" -p '(memdisk)/boot/grub' $modules
+rm chroot/memdisk.$$.img
+mv "chroot/boot$efi_name.efi" "binary/efi/boot/boot$efi_name.efi"
 
 # restore original module order
 mv chroot/usr/lib/grub/x86_64-efi/moddep.lst{.orig,}
@@ -63,5 +62,6 @@ for x in "chroot/usr/lib/grub/$platform"/*.mod; do
 done
 
 # include EFI shell
-wget -O efi/boot/shellx64.efi 'http://tianocore.git.sourceforge.net/git/gitweb.cgi?p=tianocore/edk2;a=blob_plain;f=EdkShellBinPkg/FullShell/X64/Shell_Full.efi;hb=HEAD'
+[ -f binary/efi/boot/shellx64.efi ] || \
+wget -O binary/efi/boot/shellx64.efi 'http://tianocore.git.sourceforge.net/git/gitweb.cgi?p=tianocore/edk2;a=blob_plain;f=EdkShellBinPkg/FullShell/X64/Shell_Full.efi;hb=HEAD'
 
