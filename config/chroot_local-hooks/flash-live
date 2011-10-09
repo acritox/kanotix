@@ -1,0 +1,5 @@
+#!/bin/sh
+mkdir -p /etc/adobe
+echo EnableLinuxHWVideoDecode=1 > /etc/adobe/mms.cfg
+ln -s /usr/local/bin/install-flash-local.sh /etc/skel/.kde/Autostart/
+
