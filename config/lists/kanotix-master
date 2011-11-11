@@ -29,6 +29,7 @@ khelpcenter4
 # wine
 wine1.3
 wine1.3-gecko
+winetricks
 
 # other hardware
 modemmanager
