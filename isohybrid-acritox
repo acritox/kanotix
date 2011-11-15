@@ -112,6 +112,9 @@ if ($padding) {
     print FILE "\0" x $padding;
 }
 
+# TODO: merge isohybrid-embeddedfat into here
+exit 0;
+
 # Append FAT partition to image
 read FAT, $partition, $fatsize;
 print FILE $partition;
