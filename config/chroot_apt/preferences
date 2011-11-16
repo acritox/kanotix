@@ -5,3 +5,8 @@ Pin-Priority: 500
 Package: mdadm
 Pin: release n=squeeze
 Pin-Priority: 500
+
+Package: plasma-widget-networkmanagement
+Pin: release n=squeeze
+Pin-Priority: 500
+
