@@ -8,12 +8,12 @@ if [ ! -x /usr/bin/mmd ]; then
 	exit 1
 fi
 
-img=efi-fat.img
+img=binary/boot.efi.img
 [ "$1" ] && img="$1"
 rm -f "$img"
 
-# Stuff boot*.efi into a FAT filesystem, making it as small as possible.  24KiB
-# headroom seems to be enough; (x+31)/32*32 rounds up to multiple of 32.
+# Stuff boot*.efi into a FAT filesystem, 
+# (x+1023)/1024*1024 rounds up to multiple of MB.
 mkfs.msdos -n KANOTIX_EFI -C "$img" \
 	$(( ($(stat -c %s binary/efi/boot/boot*.efi | awk '{s+=$1} END {print s}') / 1024 + 1023) \
 	    / 1024 * 1024 ))

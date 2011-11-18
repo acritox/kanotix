@@ -3,27 +3,26 @@
 # 
 # Post-process a hybrid-ISO-image generated with isohybrid-bg2
 # by injecting an "Apple Partition Map" into the image and appending a HFS+-partiton
-# and a FAT-partition to allow "hybrid booting" as CD-ROM (EFI or El Torito) or as
-# a hard-drive on Intel-Macs (EFI) and PCs (EFI or MBR).
+# and using a FAT-partition embedded as file into the ISO9660 to allow "hybrid booting"
+# as CD-ROM (EFI or El Torito) or as a hard-drive on Intel-Macs (EFI) and PCs (EFI or MBR).
 
 $bs=0x0200; $block0='45520200eb5f90'; #  512  -  add    (%eax),%al
 $bs=0x0400; $block0='45520400eb5f90'; # 1024  -  add    $0x0,%al
+$bs=0x0800; $block0='45520800eb5f90'; # 2048  -  or     %al,(%bx,%si)
 
 # Apple Partition Map entries:
-$pm1='504d000000000002000000010000000f4170706c650000000000000000000000000000000000000000000000000000004170706c655f706172746974696f6e5f6d617000000000000000000000000000000000000000000f00000003';
-$pm2='504d00000000000200000400000005006469736b20696d616765000000000000000000000000000000000000000000004170706c655f4846530000000000000000000000000000000000000000000000000000000000040040000033';
+$pm1='504d000000000003000000010000000f4170706c650000000000000000000000000000000000000000000000000000004170706c655f706172746974696f6e5f6d617000000000000000000000000000000000000000000f00000003'; # Apple_partition_map
+$pm2='504d00000000000300000400000005006469736b20696d616765000000000000000000000000000000000000000000004170706c655f4846530000000000000000000000000000000000000000000000000000000000040040000033'; # Apple_HFS
+$pm3='504d00000000000300000001000004004b414e4f5449585f454649000000000000000000000000000000000000000000444f535f4641545f313200000000000000000000000000000000000000000000000000000000040040000033'; # DOS_FAT_12
 
-die "Usage: $0 <isohybrid-bg2.iso> <HFS+-image> <FAT-image>\n" if $#ARGV != 2;
+die "Usage: $0 <isohybrid-bg2.iso> <HFS+-image> <FAT-image-filename>\n" if $#ARGV != 2;
 
-($file, $part, $fat) = @ARGV;
+($file, $part, $filename) = @ARGV;
 open(FILE, "+< $file\0") or die "$0: cannot open $file: $!\n";
 binmode FILE;
 
 open(PART, "< $part\0") or die "$0: cannot open $part: $!\n";
 binmode PART;
-
-open(FAT, "< $fat\0") or die "$0: cannot open $fat: $!\n";
-binmode FAT;
 
 # Check if image has already been "patched" (i.e. it has the APM signature from $block0)
 seek(FILE, 0, SEEK_SET) or die "$0: $file: $!\n";
@@ -39,6 +38,11 @@ die "$file seems not to have GRUB in its MBR (is this a isohybrid-bg2 image?)\n"
 seek(PART, 0x400, SEEK_SET) or die "$0: $file: $!\n";
 read(PART, $test, 2) == 2 or die "$0: $file: read error\n";
 die "$part doesn't seem to contain a HFS+ filesystem\n" if($test ne 'H+');
+
+$start = `isoinfo -J -s -l -i "$file" | awk '/$filename/{print \$10}'`;
+if (!$start) {
+    die "$0: $filename: cannot determine position of file\n";
+}
 
 # Get the total size of the image
 (@imgstat = stat(FILE)) or die "$0: $file: $!\n";
@@ -59,19 +63,14 @@ if (!$partsize) {
     die "$0: $part: cannot determine length of file\n";
 }
 
-# Get the total size of the partiton
-(@fatstat = stat(FAT)) or die "$0: $part: $!\n";
-$fatsize = $fatstat[7];
-if (!$fatsize) {
-    die "$0: $part: cannot determine length of file\n";
-}
-
 seek(FILE, 0, SEEK_SET) or die "$0: $file: $!\n";
 print FILE pack('H*',$block0);
 seek(FILE, $bs*1, SEEK_SET) or die "$0: $file: $!\n";
 print FILE pack('H*',$pm1);
 seek(FILE, $bs*2, SEEK_SET) or die "$0: $file: $!\n";
 print FILE pack('H*',$pm2);
+seek(FILE, $bs*3, SEEK_SET) or die "$0: $file: $!\n";
+print FILE pack('H*',$pm3);
 
 # Pad the image to a fake cylinder boundary
 seek(FILE, $imgstat[7], SEEK_SET) or die "$0: $file: $!\n";
@@ -92,6 +91,10 @@ if ($padding) {
 }
 $partsize += $padding;
 
+use integer;
+$lba = $start*4;
+$psize = $imgsize/512 - $lba;
+
 # Adjust $pm2 (Apple_HFS)
 # "physical block start" and "physical block count" of partition:
 seek(FILE, $bs*2+8, SEEK_SET) or die "$0: $file: $!\n";
@@ -99,6 +102,14 @@ print FILE pack('NN', $imgsize/$bs, $partsize/$bs);
 # "logical block start" and "logical block count" of partition:
 seek(FILE, $bs*2+80, SEEK_SET) or die "$0: $file: $!\n";
 print FILE pack('NN', 0, $partsize/$bs);
+
+# Adjust $pm3 (DOS_FAT_12)
+# "physical block start" and "physical block count" of partition:
+seek(FILE, $bs*3+8, SEEK_SET) or die "$0: $file: $!\n";
+print FILE pack('NN', $lba*512/$bs, $psize*512/$bs);
+# "logical block start" and "logical block count" of partition:
+seek(FILE, $bs*3+80, SEEK_SET) or die "$0: $file: $!\n";
+print FILE pack('NN', 0, $psize*512/$bs);
 
 $imgsize += $partsize;
 seek(FILE, $imgsize, SEEK_SET) or die "$0: $file: $!\n";
@@ -112,36 +123,35 @@ if ($padding) {
     print FILE "\0" x $padding;
 }
 
-# TODO: merge isohybrid-embeddedfat into here
-exit 0;
+# Done...
+close(PART);
 
-# Append FAT partition to image
-read FAT, $partition, $fatsize;
-print FILE $partition;
-
-# Pad the partition to a fake cylinder boundary
-$frac = $fatsize % $cylsize;
-$padding = ($frac > 0) ? $cylsize - $frac : 0;
-if ($padding) {
-    print FILE "\0" x $padding;
+# Calculate partiton table (MBR)
+$psize = $imgsize/512 - $lba;
+$h = 64; $s = 32;
+$hpc = 32; $spt = 63;
+$bcyl = $lba / ($spt * $hpc);
+$bhead = ($lba / $spt) % $hpc;
+$bsect = ($lba % $spt) + 1;
+$cylsize = $h*$s*512;
+$c = $imgsize/$cylsize;
+if ($c > 1024) {
+    $cc = 1024;
+} else {
+    $cc = $c;
 }
-$fatsize += $padding;
+$ehead   = $h-1;
+$esect   = $s + ((($cc-1) & 0x300) >> 2);
+$ecyl    = ($cc-1) & 0xff;
 
 # Adjust MBR partition table
 $fstype  = 0xEF;
-$pentry  = 2;
+$pentry  = 1;
 
 seek(FILE, 430+16*$pentry, SEEK_SET) or die "$0: $file: $!\n";
-print FILE pack("CCCCCCCCVV", 0x80, 0xfe, 0xff, 0xff, $fstype, 0xfe, 0xff, 0xff, $imgsize/512, $fatsize/512);
-
-# Delete ISO9660 partition entry from MBR-partition-table
-seek(FILE, 430+16*1, SEEK_SET) or die "$0: $file: $!\n";
-print FILE "\0" x 16;
-
-$imgsize += $fatsize;
+print FILE pack("CCCCCCCCVV", 0x80, $bhead, $bsect, $bcyl, $fstype, $ehead, $esect, $ecyl, $lba, $psize);
 
 # Done...
-close(PART);
 close(FILE);
 
 exit 0;
