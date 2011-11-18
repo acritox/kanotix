@@ -67,6 +67,7 @@ user-setup
 whois
 zsync
 debconf-utils
+rpm2cpio
 
 # network
 pcmciautils
