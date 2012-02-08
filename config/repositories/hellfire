@@ -1,3 +1,7 @@
 # Kanotix Hellfire
 deb http://kanotix.com/files/hellfire ./
 deb-src http://kanotix.com/files/hellfire ./
+
+# Kanotix Hellfire Extra
+deb http://kanotix.com/files/hellfire.extra ./
+deb-src http://kanotix.com/files/hellfire.extra ./

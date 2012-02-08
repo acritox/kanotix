@@ -1,7 +1,8 @@
 # Kanotix Desktop Packages List
 
 # java, plugins
-sun-java6-plugin
+#sun-java6-plugin
+icedtea6-plugin
 
 # multimedia
 dvdauthor
