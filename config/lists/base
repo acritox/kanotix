@@ -21,6 +21,7 @@ burg-pc
 grub-pc
 grub-efi-amd64-bin
 efibootmgr
+syslinux
 #endif
 
 # multimedia
