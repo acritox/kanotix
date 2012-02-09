@@ -3,6 +3,15 @@
 # 
 # Generate an image for a FAT-EFI-partition
 
+case "$LB_BOOTLOADER" in
+grub2|burg)
+	;;
+*)
+	exit 0
+	;;
+esac
+
+
 if [ ! -x /usr/bin/mmd ]; then
 	echo "Error: mtools are needed! Run: apt-get install mtools"
 	exit 1

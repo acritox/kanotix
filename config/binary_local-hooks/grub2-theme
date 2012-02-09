@@ -1,5 +1,13 @@
 #!/bin/bash
 # copy theme related files to binary
+case "$LB_BOOTLOADER" in
+grub2|burg)
+	;;
+*)
+	exit 0
+	;;
+esac
+
 mkdir -p binary/boot/grub
 cp chroot/usr/share/grub/unicode.pf2 binary/boot/grub/
 cp chroot/usr/share/images/grub/kanotix-logo.png binary/boot/grub/

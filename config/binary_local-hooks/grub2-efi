@@ -1,5 +1,13 @@
 #!/bin/bash
 
+case "$LB_BOOTLOADER" in
+grub2|burg)
+	;;
+*)
+	exit 0
+	;;
+esac
+
 platform=x86_64-efi
 efi_name=x64
 modules="search iso9660 configfile normal memdisk tar part_msdos fat"
