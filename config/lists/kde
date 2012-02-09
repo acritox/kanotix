@@ -49,6 +49,7 @@ kmix
 # kde plasma
 plasma-widgets-addons
 plasma-runners-addons
+plasma-scriptengine-python
 
 # themes
 kde-config-gtk-style
