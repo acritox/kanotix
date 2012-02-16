@@ -10,6 +10,7 @@ Additional Options for Kanotix:
 	    [--include-nvidia true|false]
 	    [--tmpfs true|false]
 	    [--tmpfs-options OPTIONS]
+	    [--gfxoverlays true|false]
 
 eof
 }
@@ -21,6 +22,7 @@ write_kanotix_config()
 [ -z "${LB_KANOTIX_TMPFS}" ] && LB_KANOTIX_TMPFS="false"
 [ -z "${LB_KANOTIX_TMPFS_OPTIONS}" ] && [ -f tmpfs/options ] && LB_KANOTIX_TMPFS_OPTIONS="$(<tmpfs/options)"
 [ -z "${LB_KANOTIX_TMPFS_OPTIONS}" ] && LB_KANOTIX_TMPFS_OPTIONS="defaults"
+[ -z "${LB_KANOTIX_GFXOVERLAYS}" ] && LB_KANOTIX_GFXOVERLAYS="false"
 cat >config/kanotix << EOF
 # config/kanotix - additional options for Kanotix
 
@@ -35,6 +37,10 @@ LB_KANOTIX_TMPFS="${LB_KANOTIX_TMPFS}"
 # \$LB_KANOTIX_TMPFS_OPTIONS: options for tmpfs
 # (Default: ${LB_KANOTIX_TMPFS_OPTIONS})
 LB_KANOTIX_TMPFS_OPTIONS="${LB_KANOTIX_TMPFS_OPTIONS}"
+
+# \$LB_KANOTIX_GFXOVERLAYS: automatically build gfxoverlays and include them into binary
+# (Default: ${LB_KANOTIX_GFXOVERLAYS})
+LB_KANOTIX_GFXOVERLAYS="${LB_KANOTIX_GFXOVERLAYS}"
 
 EOF
 grep -q ". config/kanotix" config/all 2>/dev/null || echo ". config/kanotix" >> config/all
@@ -55,6 +61,10 @@ do
 		;;
 	--tmpfs-options)
 		LB_KANOTIX_TMPFS_OPTIONS="$2"
+		shift
+		;;
+	--gfxoverlays)
+		LB_KANOTIX_GFXOVERLAYS="$2"
 		shift
 		;;
         --help|-h)

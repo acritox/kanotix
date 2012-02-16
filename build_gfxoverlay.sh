@@ -22,8 +22,8 @@ if [ ! -x chroot/bin/bash ]; then
   exit 4
 fi
 bit="$(file chroot/bin/true | grep -q 'ELF 64-bit' && echo 64 || echo 32)"
-if [ -d "overlay$bit-$drv-$ver" -a -z "$OVERWRITE" ]; then
-  echo "Error: overlay \"overlay$bit-$drv-$ver\" already exists."
+if [ -d "${CACHE}overlay$bit-$drv-$ver" -a -z "$OVERWRITE" ]; then
+  echo "Error: overlay \"${CACHE}overlay$bit-$drv-$ver\" already exists."
   exit 5
 fi
 mkdir -p overlay root
@@ -90,5 +90,5 @@ rm -rf usr/sbin/update-initramfs etc/resolv.conf usr/src/NVIDIA-Linux* usr/src/a
 rm -f etc/X11/xorg.conf.1st
 printf 'Section "Device"\n    Identifier     "Device0"\n    Driver         "'"$drv"'"\nEndSection\n' > etc/X11/xorg.conf
 cd ..
-mv overlay "overlay$bit-$drv-$ver"
+mv overlay "${CACHE}overlay$bit-$drv-$ver"
 

@@ -1,0 +1,20 @@
+#!/bin/bash
+[ -e config/gfxoverlays/versions ] || exit 0
+. config/kanotix
+[ "$LB_KANOTIX_GFXOVERLAYS" = "true" ] || exit 0
+export CACHE=cache/gfxoverlays/
+mkdir -p $CACHE
+bit="$(file chroot/bin/true | grep -q 'ELF 64-bit' && echo 64 || echo 32)"
+UPDATE=
+DIRS=
+while read drv ver
+do
+./build_gfxoverlay.sh $drv $ver && UPDATE=1
+DIRS+="${CACHE}overlay$bit-$drv-$ver "
+done < <(cut -d'#' -f1 config/gfxoverlays/versions | grep .)
+if [ ! -e "$CACHE/overlay.$bit.squashfs" -o "$UPDATE" ]; then
+        rm -f "$CACHE/overlay.$bit.squashfs"
+        mksquashfs $DIRS "$CACHE/overlay.$bit.squashfs"
+fi
+mkdir -p binary/gfxoverlay
+cp "$CACHE/overlay.$bit.squashfs" binary/gfxoverlay/
