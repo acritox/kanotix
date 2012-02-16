@@ -15,9 +15,18 @@ $pm1='504d000000000003000000010000000f4170706c6500000000000000000000000000000000
 $pm2='504d00000000000300000400000005006469736b20696d616765000000000000000000000000000000000000000000004170706c655f4846530000000000000000000000000000000000000000000000000000000000040040000033'; # Apple_HFS
 $pm3='504d00000000000300000001000004004b414e4f5449585f454649000000000000000000000000000000000000000000444f535f4641545f313200000000000000000000000000000000000000000000000000000000040040000033'; # DOS_FAT_12
 
-die "Usage: $0 <isohybrid-bg2.iso> <HFS+-image> <FAT-image-filename>\n" if $#ARGV != 2;
+die "Usage: $0 <isohybrid-bg2.iso> <HFS+-image>\n" if $#ARGV != 1;
 
-($file, $part, $filename) = @ARGV;
+# name of the first file in the ISO
+$first_filename="boot.catalog"; 
+
+# name of the file containing the EFI-FAT-image
+$filename="boot.efi.img";
+
+# name of the file to be used as ISO-offset-destination
+$embiso_filename="boot.iso.img";
+
+($file, $part) = @ARGV;
 open(FILE, "+< $file\0") or die "$0: cannot open $file: $!\n";
 binmode FILE;
 
@@ -39,9 +48,19 @@ seek(PART, 0x400, SEEK_SET) or die "$0: $file: $!\n";
 read(PART, $test, 2) == 2 or die "$0: $file: read error\n";
 die "$part doesn't seem to contain a HFS+ filesystem\n" if($test ne 'H+');
 
-$start = `isoinfo -J -s -l -i "$file" | awk '/$filename/{print \$10}'`;
+$start = int(`isoinfo -R -s -l -i "$file" | awk '/$filename/{print \$10}'`);
 if (!$start) {
     die "$0: $filename: cannot determine position of file\n";
+}
+
+$embiso_start = int(`isoinfo -R -s -l -i "$file" | awk '/$embiso_filename/{print \$10}'`);
+if (!$embiso_start) {
+    die "$0: $embiso_filename: cannot determine position of file\n";
+}
+
+$start_of_files = int(`isoinfo -R -s -l -i "$file" | awk '/$first_filename/{print \$10}'`);
+if (!$start_of_files) {
+    die "$0: $first_filename: cannot determine position of file\n";
 }
 
 # Get the total size of the image
@@ -93,6 +112,7 @@ $partsize += $padding;
 
 use integer;
 $lba = $start*4;
+$embiso_lba = $embiso_start*4;
 $psize = $imgsize/512 - $lba;
 
 # Adjust $pm2 (Apple_HFS)
@@ -127,7 +147,7 @@ if ($padding) {
 close(PART);
 
 # Calculate partiton table (MBR)
-$psize = $imgsize/512 - $lba;
+$psize = $embiso_lba - $lba;
 $h = 64; $s = 32;
 $hpc = 32; $spt = 63;
 $bcyl = $lba / ($spt * $hpc);
@@ -151,7 +171,108 @@ $pentry  = 1;
 seek(FILE, 430+16*$pentry, SEEK_SET) or die "$0: $file: $!\n";
 print FILE pack("CCCCCCCCVV", 0x80, $bhead, $bsect, $bcyl, $fstype, $ehead, $esect, $ecyl, $lba, $psize);
 
+$psize = $imgsize/512 - $embiso_lba;
+$bcyl = $embiso_lba / ($spt * $hpc);
+$bhead = ($embiso_lba / $spt) % $hpc;
+$bsect = ($embiso_lba % $spt) + 1;
+$ehead   = $h-1;
+$esect   = $s + ((($cc-1) & 0x300) >> 2);
+$ecyl    = ($cc-1) & 0xff;
+
+$fstype  = 0x83;
+$pentry  = 2;
+
+seek(FILE, 430+16*$pentry, SEEK_SET) or die "$0: $file: $!\n";
+print FILE pack("CCCCCCCCVV", 0x80, $bhead, $bsect, $bcyl, $fstype, $ehead, $esect, $ecyl, $embiso_lba, $psize);
+
+# Done...
+close(FILE);
+
+# Embed a copy of the ISO filesystem into the ISO at the second partition (= start_of_block1)
+print("dd if=$file bs=2048 count=$start_of_files of=$file seek=$embiso_start conv=notrunc\n");
+system("dd if=$file bs=2048 count=$start_of_files of=$file seek=$embiso_start conv=notrunc");
+
+$off = $bs*$embiso_start;
+$diff = $embiso_start;
+
+open(FILE, "+< $file\0") or die "$0: cannot open $file: $!\n";
+binmode FILE;
+
+sub write_val
+{
+	my($offset, $value) = @_;
+	$cur = tell(FILE);
+	$offset += $cur if $offset < 0;
+	printf("byte-offset: 0x%X -> 0x%X\n", $offset, $offset-$diff*$bs);
+	seek(FILE, $offset, SEEK_SET);
+	print FILE $value;
+	seek(FILE, $cur, SEEK_SET);
+}
+
+$off_pvd = $off+0x8000;
+do
+{
+	seek(FILE, $off_pvd, SEEK_SET) or die "$0: $file: $!\n";
+	read(FILE, $voldesc_head, 7) > 0 or die "$0: $file: read error\n";
+	($type, $magic, $version) = unpack("Ca[5]C", $voldesc_head);
+	if($type == 1)
+	{
+		seek(FILE, 0x97, 1);
+		read(FILE, $voldesc, 8) > 0 or die "$0: $file: read error\n";
+		($first_sector, $first_sector_be) = unpack("VN", $voldesc);
+		seek(FILE, $off+$first_sector*$bs, SEEK_SET) or die "$0: $file: $!\n";
+		printf("root-directory entry at 0x%X:\n", tell(FILE));
+		read(FILE, $bytes, 1) > 0 or die "$0: $file: read error\n";
+		$bytes = unpack("C", $bytes) - 1; $sector = 0;
+		do {
+			printf("SUSP entry - %u bytes (0x%X)\n", $bytes+1, $bytes+1);
+			do {
+				$wp = tell(FILE);
+				$bytes -= read(FILE, $voldesc, 32);
+				($ext_sectors, $lba, $lba_be, $size, $size_be, $uu, $namelen)
+					= unpack("CVNVNa[14]C", $voldesc);
+				if($lba > $diff)
+				{
+					printf("LBA 0x%x -> LBA 0x%x\n", $lba, $lba - $diff);
+					write_val($wp+1, pack("VN", $lba - $diff, $lba - $diff));
+				}
+				$namelen++ if $namelen % 2 == 0;
+				$bytes -= read(FILE, $name, $namelen);
+				$filename = unpack("Z*", $name);
+				print("file: $filename\n");
+
+				$bytes -= read(FILE, $sua_head, 4);
+				($sig, $len, $version) = unpack("a[2]CC", $sua_head);
+				$len -= 4;
+				$bytes -= read(FILE, $data, $len);
+				do {
+					$bytes -= read(FILE, $sua_head, 4);
+					($sig, $len, $version) = unpack("a[2]CCa", $sua_head);
+					$len -= 4;
+					$bytes -= read(FILE, $data, $len);
+					if($sig eq "CE")
+					{
+						($sua_block, $uu1, $sua_pos, $uu2, $sua_size, $uu3) = unpack("VNVNVN", $data);
+						printf("CE is at LBA 0x%X -> 0x%x\n", $sua_block);
+					}
+				} while($bytes > 4);
+				$bytes -= read(FILE, $uu, $bytes) if $bytes > 0; # skip bytes (if unaligned)
+				read(FILE, $bytes, 1) > 0 or die "$0: $file: read error\n";
+				$bytes = unpack("C", $bytes) - 1;
+				printf("SUSP Entry - %u bytes (0x%X)\n", $bytes+1, $bytes+1);
+			} while $bytes > 0;
+			$sector++;
+			seek(FILE, $off+$first_sector*$bs+$sector*$bs, SEEK_SET) or die "$0: $file: $!\n";
+			printf("\ndirectory entry at 0x%X:\n", tell(FILE));
+			read(FILE, $bytes, 1) > 0 or break;
+			$bytes = unpack("C", $bytes) - 1;
+		} while $bytes != 0x21 && $bytes != 0;
+	}
+	$off_pvd+=$bs;
+} while $type != 255;
+
 # Done...
 close(FILE);
 
 exit 0;
+

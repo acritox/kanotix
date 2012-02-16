@@ -1,0 +1,21 @@
+#! /bin/sh
+# mkembeddediso - written by Andreas Loibl <andreas@andreas-loibl.de>
+# 
+# Generate space on the ISO for an offset copy of the ISO file table
+
+case "$LB_BOOTLOADER" in
+grub2|burg)
+	;;
+*)
+	exit 0
+	;;
+esac
+
+
+img=binary/boot.iso.img
+[ "$1" ] && img="$1"
+rm -f "$img"
+
+dd if=/dev/zero bs=512k count=1 of="$img" >/dev/null 2>/dev/null
+
+exit 0
