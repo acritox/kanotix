@@ -13,6 +13,11 @@
 /config/chroot_local-includes/etc/kanotix-version
 /config/chroot_local-includes/root/build.conf
 /config/chroot_local-includes/usr/local/bin
+/config/chroot_local-packages/
+/config/chroot_debpool/live-media-keyring.pub
+/config/chroot_debpool/live-media-keyring.sec
+/config/chroot_debpool/keep
+/debpool
 /overlay*
 /efi-*
 /gfxoverlay

@@ -1,0 +1,107 @@
+#!/bin/bash
+[ ! -e /live/packages ] && exit 0
+
+[ -f /root/build.conf ] && . /root/build.conf
+[ -z "$LB_ARCHITECTURE" ] && LB_ARCHITECTURE=amd64
+[ -z "$LB_DISTRIBUTION" ] && LB_DISTRIBUTION=squeeze
+
+binary=/live/image/debian
+packages="$(cut -d'#' -f1 /live/packages | grep .)"
+[ -z "$packages" ] && exit 0
+
+rm -rf "$binary"
+mkdir -p "$binary"
+mkdir -p /binary.deb/archives/partial
+apt-get update
+apt-get --yes -o Dir::Cache=/binary.deb --download-only install $packages
+
+for FILE in /binary.deb/archives/*.deb
+do
+	SOURCE="$(dpkg -f ${FILE} Source | awk '{ print $1 }')"
+	SECTION="$(dpkg -f ${FILE} Section | awk '{ print $1 }')"
+
+	if [ -z "${SOURCE}" ]
+	then
+		SOURCE="$(basename ${FILE} | awk -F_ '{ print $1 }')"
+	fi
+
+	case "${SOURCE}" in
+		lib?*)
+			LETTER="$(echo ${SOURCE} | sed 's|\(....\).*|\1|')"
+			;;
+
+		*)
+			LETTER="$(echo ${SOURCE} | sed 's|\(.\).*|\1|')"
+			;;
+	esac
+
+	if echo "${SECTION}" | grep -qs contrib
+	then
+		SECTION="contrib"
+	elif echo "${SECTION}" | grep -qs non-free
+	then
+		SECTION="non-free"
+	else
+		SECTION="main"
+	fi
+
+	# Install directory
+	mkdir -p "$binary"/pool/${SECTION}/"${LETTER}"/"${SOURCE}"
+
+	# Move files
+	mv "${FILE}" "$binary"/pool/${SECTION}/"${LETTER}"/"${SOURCE}"
+done
+
+if [ ! -e /live/live-media-keyring.sec -o ! -e /live/live-media-keyring.pub ]; then
+	# Generate signing key for live-media repo
+	echo "Key-Type: RSA
+	      Key-Length: 1024
+	      Subkey-Type: ELG-E
+	      Subkey-Length: 1024
+	      Name-Real: live-media packages key
+	      Name-Email: live-media-key@invalid
+	      Expire-Date: 0
+	      %secring /live/live-media-keyring.sec
+	      %pubring /live/live-media-keyring.pub
+	      %commit" | gpg --batch --gen-key
+fi
+
+cd "$binary"
+
+SECTIONS=
+for SECTION in pool/*
+do
+	SECTION="$(basename ${SECTION})"
+	SECTIONS+="$SECTION "
+	mkdir -p dists/${LB_DISTRIBUTION}/${SECTION}/binary-${LB_ARCHITECTURE}
+	apt-ftparchive packages pool/${SECTION} > dists/${LB_DISTRIBUTION}/${SECTION}/binary-${LB_ARCHITECTURE}/Packages
+	apt-ftparchive -o APT::FTPArchive::Release::Origin=live-media \
+			-o APT::FTPArchive::Release::Suite=stable \
+			-o APT::FTPArchive::Release::Codename=${LB_DISTRIBUTION} \
+			release dists/${LB_DISTRIBUTION} > dists/${LB_DISTRIBUTION}/Release
+	gzip -9 -c dists/${LB_DISTRIBUTION}/${SECTION}/binary-${LB_ARCHITECTURE}/Packages > dists/${LB_DISTRIBUTION}/${SECTION}/binary-${LB_ARCHITECTURE}/Packages.gz
+	# Sign release
+	gpg --no-default-keyring --secret-keyring /live/live-media-keyring.sec --keyring /live/live-media-keyring.pub -abs -o \
+		dists/${LB_DISTRIBUTION}/Release.gpg dists/${LB_DISTRIBUTION}/Release
+done
+
+cd -
+
+rm -rf /binary.deb
+
+# Add sources.list entry to the beginning of the file (above the first entry)
+if ! grep -q "^deb file:$binary" /etc/apt/sources.list; then
+line="$(grep -nm1 -B5 '^[[:space:]]*deb' /etc/apt/sources.list | tac | grep -vm1 ... | tr -d -)"
+((line++))
+sed -i "$line{i # Live Media
+i deb file:$binary $LB_DISTRIBUTION $SECTIONS
+x;p;x}" /etc/apt/sources.list
+fi
+
+# Import key
+gpg --no-default-keyring --secret-keyring /live/live-media-keyring.sec \
+--keyring /live/live-media-keyring.pub --armor \
+--export "live-media-key@invalid" | apt-key add -
+
+apt-get update
+

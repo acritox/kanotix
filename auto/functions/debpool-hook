@@ -1,0 +1,25 @@
+#!/bin/bash
+
+if [ "$(basename "$0")" = "lb_chroot_local-hooks" ]; then
+	echo "HOOK: debpool@chroot_local-hooks"
+	if [ -e config/chroot_debpool ]; then
+		mkdir -p chroot/live
+		cp config/chroot_debpool/* chroot/live/
+	fi
+fi
+
+if [ "$(basename "$0")" = "lb_binary_rootfs" ]; then
+	echo "HOOK: debpool@binary-rootfs"
+	for dir in chroot/chroot/live chroot/live
+	do
+		[ -d $dir ] || continue
+		rm -rf debpool
+		mv $dir debpool
+		mkdir -p binary
+		mv debpool/image/debian binary/
+		rmdir debpool/image
+		[ -e debpool/keep ] || rm -r debpool
+		break
+	done
+fi
+
