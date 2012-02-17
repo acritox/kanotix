@@ -4,6 +4,8 @@
 
 # office
 okular
+okular-extra-backends
+okularplugin
 
 # plugins
 konqueror-nsplugins
