@@ -55,7 +55,7 @@ case $LB_ARCHITECTURE in
 "amd64")
   lb config noauto \
         --linux-flavours generic \
-	--linux-packages "linux-image-3.2.0-15 linux-headers-3.2.0-15"
+	--linux-packages "linux-image-3.2.0-17 linux-headers-3.2.0-17"
         #--linux-packages "linux-image linux-headers"
         #--linux-flavours amd64 \
         #--linux-packages "linux-image-2.6 linux-headers-2.6"
