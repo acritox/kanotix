@@ -18,7 +18,4 @@ esac
 
 . /usr/share/initramfs-tools/hook-functions
 
-copy_exec /lib/libresolv* /lib
-copy_exec /usr/lib/libpci.so.* /lib
-copy_exec /usr/bin/lspci /bin
-
+copy_exec /usr/bin/lspci /bin 
