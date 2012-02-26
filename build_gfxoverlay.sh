@@ -42,6 +42,42 @@ mount --bind /proc proc/
 mount --bind /sys sys/
 mount --bind /dev dev/
 cp /etc/resolv.conf etc/resolv.conf 
+mv bin/uname bin/uname.real
+cat <<"eof" > bin/uname
+#!/bin/sh
+[ -z "$1" ] && uname.real && exit
+m=$(file /bin/true | grep -q 'ELF 64-bit' && echo x86_64 || echo x86)
+r=$(basename "$(ls /lib/modules|head -n1)")
+( while [ "$1" ]; do
+case $1 in
+-m) echo $m;;
+-r) echo $r;;
+-a)
+   echo $(uname.real -s -n) $r $(uname.real -v) $m
+   p=$(uname.real -p)
+   i=$(uname.real -i)
+   [ "$p" = "unknown" ] || echo $p
+   [ "$i" = "unknown" ] || echo $n
+   uname.real -o
+   ;;
+*)
+   uname.real $1
+   ;;
+esac; shift; done ) | tr '\n' ' ' | sed 's/ $/\n/'
+eof
+chmod +x bin/uname
+mv sbin/modinfo sbin/modinfo.real
+cat <<"eof" > sbin/modinfo
+#!/bin/sh
+if echo "$@" | grep -qw -- -k; then
+modinfo.real "$@"
+exit $?
+else
+modinfo.real -k $(uname -r) "$@"
+exit $?
+fi
+eof
+chmod +x sbin/modinfo
 cat <<"eof" > usr/sbin/update-initramfs
 #!/bin/sh
 echo "update-initramfs is disabled for overlay-build"
@@ -51,18 +87,6 @@ cat <<"eof" > overlay.sh
 #!/bin/sh
 
 export LC_ALL=C LANG= DISPLAY=
-
-uname()
-{
-case $1 in
--m)
-   file /bin/true | grep -q 'ELF 64-bit' && echo x86_64 || echo x86
-   ;;
--r)
-   basename /lib/modules/*
-   ;;
-esac
-}
 
 eof
 cat usr/local/bin/install-$drv-debian.sh >> overlay.sh
@@ -87,6 +111,9 @@ if [ -z "$(find overlay/ -name '*.ko')" ]; then
 fi
 cd overlay
 rm -rf usr/sbin/update-initramfs etc/resolv.conf usr/src/NVIDIA-Linux* usr/src/ati-driver-installer* overlay.sh tmp var/log .??*
+rm bin/uname sbin/modinfo
+mv bin/uname.real bin/uname
+mv sbin/modinfo.real sbin/modinfo
 rm -f etc/X11/xorg.conf.1st
 printf 'Section "Device"\n    Identifier     "Device0"\n    Driver         "'"$drv"'"\nEndSection\n' > etc/X11/xorg.conf
 cd ..
