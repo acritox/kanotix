@@ -1,0 +1,3 @@
+# Kanotix Dragonfire
+deb http://kanotix.com/files/dragonfire ./
+deb-src http://kanotix.com/files/dragonfire ./
