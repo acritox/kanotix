@@ -1,4 +1,5 @@
 #!/bin/sh
+export http_proxy=
 #apt-get remove --yes --purge aptitude dselect nano vim-tiny libdiscover1 resolvconf
 apt-get remove --yes --purge nano vim-tiny libdiscover1 resolvconf
 /usr/sbin/remove-orphans || true

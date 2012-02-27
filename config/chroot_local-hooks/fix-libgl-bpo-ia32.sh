@@ -1,5 +1,6 @@
 #!/bin/sh
 [ $(id -u) != 0 ] && exit
+export http_proxy=
 dpkg -l libgl1-mesa-glx|grep -q bpo || exit 0
 if [ -f /usr/lib32/libGL.so.1.2 ]; then
  TMP=$(mktemp -d /tmp/libgl.XXXXXX)
