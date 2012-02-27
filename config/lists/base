@@ -70,6 +70,8 @@ whois
 zsync
 debconf-utils
 rpm2cpio
+usbutils
+exif
 
 # network
 pcmciautils
@@ -90,7 +92,6 @@ cups-bsd
 cups-client
 foomatic-db-engine
 foomatic-db
-foomatic-filters-ppds
 foomatic-db-gutenprint
 cups-driver-gutenprint
 foo2zjs

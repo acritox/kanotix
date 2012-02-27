@@ -12,7 +12,7 @@ konqueror-nsplugins
 
 # multimedia
 kaffeine
-libsdl1.2debian-alsa
+libsdl1.2debian
 kdemultimedia-kio-plugins
 kamera
 
@@ -42,9 +42,9 @@ update-notifier-kde
 kvkbd
 
 # kde
-kdebase
+kde-plasma-desktop
 kdm
-kde-i18n-de
+kde-l10n-de
 kwalletmanager
 kmix
 
