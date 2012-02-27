@@ -81,5 +81,6 @@ lb config noauto --repositories "$LB_REPOSITORIES"
 mkdir -p config/chroot_local-includes/usr/local/bin
 grep -oe '^[^ #]*' scripts.urls | wget -i- -N -q -P config/chroot_local-includes/usr/local/bin
 chmod 755 config/chroot_local-includes/usr/local/bin/*.sh
+chmod 755 config/chroot_local-includes/usr/local/bin/*.bash
 
 exit 1
