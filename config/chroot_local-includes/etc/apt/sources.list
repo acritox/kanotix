@@ -2,11 +2,11 @@
 # Remember that you can only use http, ftp or file URIs
 # CDROMs are managed through the apt-cdrom tool.
 
-# Debian Squeeze
+# Debian @DISTRIBUTION@
 deb http://ftp.de.debian.org/debian @DISTRIBUTION@ main contrib non-free
 deb-src http://ftp.de.debian.org/debian @DISTRIBUTION@ main contrib non-free
 
-# Debian Squeeze Updates
+# Debian @DISTRIBUTION@ Updates
 deb http://security.debian.org @DISTRIBUTION@/updates main contrib non-free
 deb-src http://security.debian.org @DISTRIBUTION@/updates main contrib non-free
 
