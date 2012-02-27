@@ -1,0 +1,5 @@
+#!/bin/sh
+[ -f /root/build.conf ] && . /root/build.conf
+
+sed -e "s|@DISTRIBUTION@|${LB_DISTRIBUTION}|g" /etc/apt/sources.list
+
