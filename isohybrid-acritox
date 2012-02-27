@@ -240,6 +240,8 @@ do
 				$bytes -= read(FILE, $name, $namelen);
 				$filename = unpack("Z*", $name);
 				print("file: $filename\n");
+				# hide the second ISOFS-EFI-partition from the Mac Bootloader by f***ing up the "EFI" directory entry
+				write_val(-$namelen, pack("Z*", ".PC")) if($filename eq "EFI");
 
 				$bytes -= read(FILE, $sua_head, 4);
 				($sig, $len, $version) = unpack("a[2]CC", $sua_head);

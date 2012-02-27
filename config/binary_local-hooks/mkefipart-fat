@@ -33,4 +33,7 @@ do
 	mcopy -i "$img" $file "::efi/boot/$(basename "$file")"
 done
 
+# hide the FAT-EFI-partition from the Mac Bootloader by f***ing up the "EFI" directory entry
+sed -i -e '0,/EFI        /s/EFI        /EFI     \x0\x0\x0/' "$img"
+
 exit 0
