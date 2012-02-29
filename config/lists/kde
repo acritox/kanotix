@@ -55,6 +55,7 @@ plasma-scriptengine-python
 
 # themes
 kde-config-gtk-style
+gnome-icon-theme
 
 # network
 network-manager-kde

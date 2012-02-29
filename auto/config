@@ -60,6 +60,7 @@ squeeze)
 	esac
 	;;
 wheezy)
+	LB_PACKAGES_LISTS+=" dragonfire"
 	LB_REPOSITORIES+=" dragonfire wine-ppa-oneiric"
 	case $LB_ARCHITECTURE in
 	amd64) LB_LINUX_PACKAGES="linux-image linux-headers"; LB_LINUX_FLAVOURS="amd64";;
@@ -73,7 +74,7 @@ grep -wq trinity <<<"$LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" trinity"
 grep -wq -e virtualbox -e vbox <<<"$LB_PACKAGES $LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" vbox"
 grep -wq -e opera <<<"$LB_PACKAGES $LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" opera"
 grep -wq chrome <<<"$LB_PACKAGES $LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" chrome"
-lb config noauto --linux-packages "$LB_LINUX_PACKAGES" --linux-flavours "$LB_LINUX_FLAVOURS" --repositories "$LB_REPOSITORIES"
+lb config noauto --linux-packages "$LB_LINUX_PACKAGES" --linux-flavours "$LB_LINUX_FLAVOURS" --repositories "$LB_REPOSITORIES" -p "$LB_PACKAGES_LISTS"
 
 # Fetch kanotix-scripts if necessary
 mkdir -p config/chroot_local-includes/usr/local/bin
