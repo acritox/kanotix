@@ -183,7 +183,7 @@ $fstype  = 0x83;
 $pentry  = 2;
 
 seek(FILE, 430+16*$pentry, SEEK_SET) or die "$0: $file: $!\n";
-print FILE pack("CCCCCCCCVV", 0x80, $bhead, $bsect, $bcyl, $fstype, $ehead, $esect, $ecyl, $embiso_lba, $psize);
+print FILE pack("CCCCCCCCVV", 0x00, $bhead, $bsect, $bcyl, $fstype, $ehead, $esect, $ecyl, $embiso_lba, $psize);
 
 # Done...
 close(FILE);
