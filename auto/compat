@@ -1,0 +1,9 @@
+#!/bin/sh
+
+Expand_packagelist ()
+{
+	. "${LB_BASE}"/functions/packagelists.sh
+	Expand_packagelist "$@" config/lists
+	. auto/compat
+}
+

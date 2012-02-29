@@ -35,6 +35,44 @@ LB_ARCHITECTURE="$LB_ARCHITECTURES"
 eof
 }
 
+Compat_dir ()
+{
+	dir2="$1"
+	dir3="$2"
+	ext2="$3"
+	ext3="$4"
+	if [ -z "$ext2$ext3" ]; then
+		rm -r "config/$dir3"
+		ln -s "$(basename "$dir2")" "config/$dir3"
+	else
+		mkdir -p config/$dir3
+		for i in config/$dir2/*
+		do
+			[ ! -e "$i" ] && return
+			target="$(basename "$i" $ext2)$ext3"
+			rm -f config/$dir3/"$target"
+			if [ -d "$i" ]; then
+				ln -s "../../../$i" /config/$dir3/"$target"
+			else
+				cp -l "$i" config/$dir3/"$target"
+			fi
+		done
+	fi
+	touch config/$dir3.compat
+}
+
+Compat_clean()
+{
+	for i in config/*.compat
+	do
+		[ -e "$i" ] || return
+		target="$(basename "$i" .compat)"
+		[ -e config/$target ] || continue
+		rm -r config/$target
+		rm "$i"
+	done
+}
+
 case "$LB_VERSION" in
 3*)
 	case "$(basename "$0")" in
@@ -52,17 +90,39 @@ case "$LB_VERSION" in
 		;;
 	lb_chroot_archives)
 		mkdir -p config/archives
-		for i in config/repositories/*
+		touch config/archives.compat
+		. config/bootstrap
+		for REPO in $LB_ARCHIVES
 		do
-			[ ! -e "$i" ] && break
-			case "$i" in
-			*.gpg) target="$(basename "$i" .gpg).key";;
-			*) target="$(basename "$i" .list).list";;
-			esac
-			cp "$i" config/archives/"$target"
+			for i in config/repositories/$REPO config/repositories/$REPO.gpg
+			do
+				[ ! -e "$i" ] && continue
+				case "$i" in
+				*.gpg) target="$(basename "$i" .gpg).key";;
+				*) target="$(basename "$i" .list).list";;
+				esac
+				rm -f config/archives/"$target"
+				cp -l "$i" config/archives/"$target"
+			done
 		done
 		;;
+	lb_chroot_preseed)
+		Compat_dir chroot_local-preseed preseed .cfg .preseed
+		;;
+	lb_chroot_includes)
+		Compat_dir chroot_local-includes includes.chroot
+		;;
+	lb_chroot_hooks)
+		Compat_dir chroot_local-hooks hooks - .chroot
+		;;
+	lb_binary_hooks)
+		Compat_dir chroot_binary-hooks hooks - .binary
+		;;
+	lb_build|lb_clean)
+		trap Compat_clean EXIT
+		;;
 	esac
+	[ -d config/lists ] && . auto/compat
 	;;
 esac
 
