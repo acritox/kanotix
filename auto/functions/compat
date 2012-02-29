@@ -1,0 +1,68 @@
+#!/bin/bash
+export LB_VERSION=$VERSION
+
+Compat_arguments ()
+{
+	while [ "$#" -gt 0 ]
+	do
+		arg="$1"
+		shift
+		case "$arg" in
+		-r|--repositories) arg="--archives";;
+		--architecture) arg="--architectures";;
+		--packages-lists) arg="--package-lists";;
+		--syslinux-theme) ;;
+		# ignore other unsupported arguments
+		--syslinux-*|--bootstrap-config|-e|--encryption|-l|--language) shift; continue;;
+		--binary-indices|--packages|--symlinks|--sysvinit|--tasks|--virtual-root-size) shift; continue;;
+		esac
+		echo -n "$arg$IFS"
+	done
+}
+
+Compat_config ()
+{
+[ -e config/chroot ] && cat <<eof >> config/chroot
+
+# Compat (Live-build 2 -> 3)
+LB_REPOSITORIES="$LB_ARCHIVES"
+LB_PACKAGES_LISTS="$LB_PACKAGE_LISTS"
+eof
+[ -e config/bootstrap ] && cat <<eof >> config/bootstrap
+
+# Compat (Live-build 2 -> 3)
+LB_ARCHITECTURE="$LB_ARCHITECTURES"
+eof
+}
+
+case "$LB_VERSION" in
+3*)
+	case "$(basename "$0")" in
+	lb_config)
+		OIFS="$IFS"; IFS="$(printf \\a)"
+		set -- $(Compat_arguments "$@")
+		IFS="$OIFS"
+		[ -z "$LB_ARCHIVES" ] && LB_ARCHIVES="$LB_REPOSITORIES"
+		LB_REPOSITORIES="$LB_ARCHIVES" 
+		[ -z "$LB_PACKAGE_LISTS" ] && LB_PACKAGE_LISTS="$LB_PACKAGES_LISTS"
+		LB_PACKAGES_LISTS="$LB_PACKAGE_LISTS"
+		[ -z "$LB_ARCHITECTURES" ] && LB_ARCHITECTURES="$LB_ARCHITECTURE"
+		LB_ARCHITECTURE="$LB_ARCHITECTURES"
+		trap Compat_config EXIT
+		;;
+	lb_chroot_archives)
+		mkdir -p config/archives
+		for i in config/repositories/*
+		do
+			[ ! -e "$i" ] && break
+			case "$i" in
+			*.gpg) target="$(basename "$i" .gpg).key";;
+			*) target="$(basename "$i" .list).list";;
+			esac
+			cp "$i" config/archives/"$target"
+		done
+		;;
+	esac
+	;;
+esac
+
