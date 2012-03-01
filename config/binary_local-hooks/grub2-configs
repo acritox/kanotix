@@ -1,0 +1,17 @@
+#!/bin/sh
+# Copying local grub2 configuration files
+
+case "$LB_BOOTLOADER" in
+grub2|burg)
+	;;
+*)
+	exit 0
+	;;
+esac
+
+if [ -f config/binary_grub/grub.cfg ]
+then
+	mkdir -p binary/boot/grub
+        cp config/binary_grub/grub*.cfg binary/boot/grub/
+fi
+

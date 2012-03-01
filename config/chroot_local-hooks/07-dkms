@@ -1,2 +1,2 @@
-#!/bin/sh
-for x in $(ls /boot/vmlinuz-*|sed s@/boot/vmlinuz-@@);do /usr/lib/dkms/dkms_autoinstaller start $x; done
+#!/bin/bash
+for x in /boot/vmlinuz-*;do KVERS=$x /usr/lib/dkms/dkms_autoinstaller start ${x#/boot/vmlinuz-}; done

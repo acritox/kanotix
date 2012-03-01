@@ -1,0 +1,76 @@
+#!/bin/sh
+# Hacks to inject code into various live-build functions
+
+# ISO sorting
+if [ "$(basename "$0")" = "lb_binary_iso" ]; then
+	echo "HOOK: livebuild-hacks@binary_iso"
+	In_list ()
+	{
+		. "${LB_BASE}"/functions/aliases.sh
+		In_list "$@"
+		RC=$?
+		if [ -f config/binary_iso/isoimage.sort ]
+		then
+			GENISOIMAGE_OPTIONS="${GENISOIMAGE_OPTIONS} -sort isoimage.sort"
+
+			case "${LB_BUILD_WITH_CHROOT}" in
+				true)
+					cp config/binary_iso/isoimage.sort chroot
+					;;
+
+				false)
+					cp config/binary_iso/isoimage.sort .
+					;;
+			esac
+		fi
+		case "$LB_BOOTLOADER" in
+		grub2|burg)
+			LB_BINARY_IMAGES=iso
+			;;
+		esac
+		return $rc
+	}
+fi
+
+# Grub2: Do not number the default kernel / initrd files.
+if [ "$(basename "$0")" = "lb_binary_grub2" ]; then
+	echo "HOOK: livebuild-hacks@binary_grub2"
+	Grub_live_entry ()
+	{
+		LABEL="${1}"
+		KERNEL="${2}"
+		INITRD="${3}"
+		APPEND="${4}"
+
+		case "${LB_BINARY_IMAGES}" in
+			iso*|usb*)
+				if [ "${LABEL}" = "live" ]
+				then
+					# Do not number the default kernel / initrd files.
+					_NUMBER=""
+				else
+					# Use order of flavours in LB_LINUX_FLAVOURS for numbering.
+					_NUMBER="$(echo ${LB_LINUX_FLAVOURS} | awk -v FLAVOUR="${FLAVOUR}" 'BEGIN{RS=" "} {if($1 == FLAVOUR) print NR}')"
+				fi
+
+				if [ -e binary/${KERNEL} ]
+				then
+					mv binary/${KERNEL} "binary/$(dirname ${KERNEL})/vmlinuz${_NUMBER}" | :
+					KERNEL="$(dirname ${KERNEL})/vmlinuz${_NUMBER}"
+				fi
+
+				if [ -e binary/${INITRD} ]
+				then
+					mv binary/${INITRD} "binary/$(dirname ${INITRD})/initrd${_NUMBER}.img" | :
+					INITRD="$(dirname ${INITRD})/initrd${_NUMBER}.img"
+				fi
+			;;
+		esac
+
+		LINUX_LIVE="${LINUX_LIVE}\nmenuentry \"Debian GNU/Linux - ${LABEL}\" {"
+		LINUX_LIVE="${LINUX_LIVE}\nlinux\t\t/${KERNEL} boot=${INITFS} config LB_BOOTAPPEND_LIVE ${APPEND}"
+		LINUX_LIVE="${LINUX_LIVE}\ninitrd\t\t/${INITRD}"
+		LINUX_LIVE="${LINUX_LIVE}\n}"
+	}
+fi
+

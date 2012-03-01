@@ -22,13 +22,13 @@ Compat_arguments ()
 
 Compat_config ()
 {
-[ -e config/chroot ] && cat <<eof >> config/chroot
+[ -e config/chroot ] && [ "$LB_ARCHIVES" ] && cat <<eof >> config/chroot
 
 # Compat (Live-build 2 -> 3)
 LB_REPOSITORIES="$LB_ARCHIVES"
 LB_PACKAGES_LISTS="$LB_PACKAGE_LISTS"
 eof
-[ -e config/bootstrap ] && cat <<eof >> config/bootstrap
+[ -e config/bootstrap ] && [ "$LB_ARCHITECTURES" ] && cat <<eof >> config/bootstrap
 
 # Compat (Live-build 2 -> 3)
 LB_ARCHITECTURE="$LB_ARCHITECTURES"
@@ -116,7 +116,7 @@ case "$LB_VERSION" in
 		Compat_dir chroot_local-hooks hooks - .chroot
 		;;
 	lb_binary_hooks)
-		Compat_dir chroot_binary-hooks hooks - .binary
+		Compat_dir binary_local-hooks hooks - .binary
 		;;
 	lb_build|lb_clean)
 		trap Compat_clean EXIT
