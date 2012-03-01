@@ -86,7 +86,7 @@ if [ "$(basename "$0")" = "lb_binary_grub2" ]; then
 	}
 	Check_multiarchitecture ()
 	{
-		. "${LB_BASE}"/functions/architectures.sh
+		. "${LB_BASE}"/functions/architecture.sh
 		Check_multiarchitecture "$@"
 		Overload_Grub_live_entry
 		RC=$?
