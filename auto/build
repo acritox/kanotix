@@ -7,7 +7,7 @@
 bit=32
 LABEL=Kanotix
 [ "$LB_ARCHITECTURE" = "amd64" ] && bit=64 && LABEL=${LABEL}64
-export LB_BOOTLOADER
+export LB_BOOTLOADER LB_BINARY_IMAGES
 
 # Update kanotix-version (32/64-bit and timestamp)
 declare -A KANOTIX_CODENAME
