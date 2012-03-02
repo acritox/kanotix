@@ -9,9 +9,9 @@ The purpose of this live-build tree is to build "KANOTIX" (http://kanotix.com) l
 Full Example:
 	lb config -a amd64 -p kanotix-master --bootloader grub2 --gfxoverlays true
 	lb build
-	isohybrid-bg2 kanotix32.iso
+	./isohybrid-bg2 kanotix64.iso
 	./mkefipart-hfsplus
-	./isohybrid-acritox kanotix32.iso 
+	./isohybrid-acritox kanotix64.iso 
 will create a 64bit multi-hybrid-ISO with GRUB2 and embedded gfxoverlays.
 
 Compat
@@ -116,9 +116,9 @@ use "lb config --tmpfs true" to enable.
 
 you may specify mount-options with --tmpfs-options, e.g.
 
-	lb config --tmpfs-options "size=6G"
+	lb config --tmpfs-options "size=9G"
 
-to set the maximum size of the ramdisk to 6GB.
+to set the maximum size of the ramdisk to 9GB.
 
 "lb build" will then mount a tmpfs into the "tmpfs" directory and the build process
 will take place there.
