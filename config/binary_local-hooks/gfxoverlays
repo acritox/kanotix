@@ -14,7 +14,7 @@ DIRS+="${CACHE}overlay$bit-$drv-$ver "
 done < <(cut -d'#' -f1 config/gfxoverlays/versions | grep .)
 if [ ! -e "$CACHE/overlay.$bit.squashfs" -o "$UPDATE" ]; then
         rm -f "$CACHE/overlay.$bit.squashfs"
-        mksquashfs $DIRS "$CACHE/overlay.$bit.squashfs"
+        mksquashfs $(ls -d $DIRS) "$CACHE/overlay.$bit.squashfs" || exit 0
 fi
 mkdir -p binary/gfxoverlay
 cp "$CACHE/overlay.$bit.squashfs" binary/gfxoverlay/
