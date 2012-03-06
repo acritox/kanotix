@@ -1,0 +1,3 @@
+# KDE4.8 (backported by acritox)
+deb http://kanotix.acritox.com/debian dragonfire main
+deb-src http://kanotix.acritox.com/debian dragonfire main

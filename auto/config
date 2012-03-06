@@ -70,6 +70,7 @@ wheezy)
 esac
 
 [ "$LB_BOOTLOADER" = "burg" ] && LB_REPOSITORIES+=" burg"
+grep -wq kde48 <<<"$LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" acritox-kde48"
 grep -wq trinity <<<"$LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" trinity"
 grep -wq -e virtualbox -e vbox <<<"$LB_PACKAGES $LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" vbox"
 grep -wq -e opera <<<"$LB_PACKAGES $LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" opera"
