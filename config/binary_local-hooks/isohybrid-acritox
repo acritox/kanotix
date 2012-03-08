@@ -1,5 +1,5 @@
 #!/bin/bash
-# generate binary/boot.isohybrid for isohybrid-acritox
+# generate space-file (binary/boot.isohybrid) for isohybrid-acritox
 
 [ "${LB_BINARY_IMAGES}" = "iso-hybrid" ] || exit 0
 
@@ -11,8 +11,9 @@ grub2|burg)
 	;;
 esac
 
+size=$((3*1024)) # 3MB
 chroot chroot grub-mkimage -d /usr/lib/grub/i386-pc -o "/boot.isohybrid" -O i386-pc biosdisk iso9660
-for i in $(seq 64); do echo -n "ACRITOX!"; done > binary/boot.isohybrid
-cat chroot/boot.isohybrid >> binary/boot.isohybrid
+perl -e "print '<ACRITOX-HYBRID>'x(64*$size);" > binary/boot.isohybrid
+dd if=chroot/boot.isohybrid of=binary/boot.isohybrid bs=1M conv=notrunc
 rm -f chroot/boot.isohybrid
 

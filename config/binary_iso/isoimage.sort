@@ -1,7 +1,6 @@
-binary/boot.catalog +9
-binary/boot.isohybrid +7
-binary/boot.efi.img +5
-binary/boot.iso.img +3
+binary/boot.isohybrid +9
+binary/boot.catalog +7
+binary/efi/boot/*.efi +5
 binary/boot +1
 binary/*/*.squashfs -1
 binary/*.squashfs -1

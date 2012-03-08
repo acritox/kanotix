@@ -9,8 +9,6 @@ The purpose of this live-build tree is to build "KANOTIX" (http://kanotix.com) l
 Full Example:
 	lb config -a amd64 -p kanotix-master --bootloader grub2 --gfxoverlays true
 	lb build
-	./isohybrid-bg2 kanotix64.iso
-	./mkefipart-hfsplus
 	./isohybrid-acritox kanotix64.iso 
 will create a 64bit multi-hybrid-ISO with GRUB2 and embedded gfxoverlays.
 
@@ -73,34 +71,21 @@ image to become a multi-hybrid-ISO (if you are using GRUB2 as bootloader):
  2. Kanotix-GRUB2-theme will be copied to the ISO:
 	binary/boot/grub/
 
- 3. A GRUB2 x86 image will be built in the chroot and placed on the ISO - there it
-    will be used by isohybrid-bg2 to make the MBR of the Hybrid-ISO boot into GRUB2.
-	config/binary_local-hooks/isohybrid-acritox
-    it will be stored in
-	binary/boot.isohybrid
-
- 4. EFI for x64:
+ 3. EFI for x64:
     - an image with GRUB2 will be built (including modules)
     - an EFI-Shell will be downloaded
 	config/binary_local-hooks/grub2-efi
     they will be stored in
 	binary/efi/boot/
 
- 5. FAT-filesystem that contains GRUB2EFI and will be used as a fake-partition
-    in the MBR-partition-table by isohybrid-acritox
-	config/binary_local-hooks/mkefipart-fat
+ 4. An isohybrid-acritox space-file necessary for isohybrid-acritox will be created by
+	config/binary_local-hooks/isohybrid-acritox
     it will be stored in
-	binary/boot.efi.img
-
- 6. HFS+-filesystem that contains GRUB2EFI and will be used as a fake-partition
-    in the Apple-Partition-Map by isohybrid-acritox
-	mkefipart-hfsplus
-
- 7. An empty space for the fake-ISO9660-partition that will be filled and added
-    to the MBR-partition-table by isohybrid-acritox
-	config/binary_local-hooks/mkembeddediso
-    it will be stored in:
-	binary/boot.iso.img
+	binary/boot.isohybrid
+    it has the highest ISO-sorting weight in
+	config/binary_iso/isoimage.sort
+    because it is important for isohybrid-acritox that this file is the first file
+    on the ISO
 
 Numbering of kernels on the binary
 ==================================

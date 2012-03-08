@@ -1,272 +1,447 @@
 #!/usr/bin/perl
 # isohybrid-acritox - written by Andreas Loibl <andreas@andreas-loibl.de>
 # 
-# Post-process a hybrid-ISO-image generated with isohybrid-bg2
-# by injecting an "Apple Partition Map" into the image and appending a HFS+-partiton
-# and using a FAT-partition embedded as file into the ISO9660 to allow "hybrid booting"
-# as CD-ROM (EFI or El Torito) or as a hard-drive on Intel-Macs (EFI) and PCs (EFI or MBR).
+# Post-process an ISO 9660 image generated with mkisofs/genisoimage and equipped with
+# an embedded isohybrid-acritox space-file (default filename: /boot.isohybrid)
+# to allow "multi-hybrid booting" as CD-ROM (EFI or El Torito) or as a hard-drive 
+# (e.g. a USB pendrive) on Intel-Macs (EFI) and PCs (EFI or MBR). By adding a fake
+# ISO9660-structure of the original image as partition inside the image it is possible
+# to repartition such a multi-hybrid-image even when it is currently being used live.
+# 
+# This is accomplished by:
+# * embedding a FAT-filesystem containing GRUB2EFI into the space-file
+# * embedding a modified copy of the ISO9660-structure into the space-file
+# * appending a HFS+-partiton containing GRUB2EFI at the end of the image
+# * injecting an "Apple Partition Map" into the image referencing the HFS+-partition
+# * adding a MBR partition table with two partitions:
+#   1. EFI-FAT-partition representing the FAT-filesystem in the space-file
+#   2. ISO-partition referencing the fake-ISO9660-header in the space-file,
+#      spanning until the end of the image
 
-$bs=0x0200; $block0='45520200eb5f90'; #  512  -  add    (%eax),%al
-$bs=0x0400; $block0='45520400eb5f90'; # 1024  -  add    $0x0,%al
-$bs=0x0800; $block0='45520800eb5f90'; # 2048  -  or     %al,(%bx,%si)
+# name of the isohybrid-acritox space-file embedded in the ISO
+# NOTE: it is important that this file is the first file on the ISO, so make sure 
+# you use the "-sort" option for mkisofs/genisofs and give it the highest weight
+$space_filename="boot.isohybrid";
+
+# EFI-FAT-image options
+$fat_filename="efi-fat.img";
+$fat_label="KANOTIX_EFI";
+
+# EFI-HFS+-image options
+$hfs_filename="efi-hfs.img";
+$hfs_label="KANOTIX Mac";
+$hfs_vollabel="http://kanotix.acritox.com/files/mac/label.vollabel";
+$hfs_extras="http://kanotix.acritox.com/files/mac/imagewriter.tar.gz";
+
+# Enable verbose debug ouput if $debug=1;
+$debug=1;
+
+# blocksize 
+$bs=0x0800; # 2048 bytes
+
+# 512byte boot.img
+$mbr='45520800eb5f90000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000800100000000000000fffaeb07f6c2807502b280ea747c000031c08ed88ed0bc0020fba0647c3cff740288c252be807de81c01be057cf6c2807448b441bbaa55cd135a52723d81fb55aa753783e101743231c0894404408844ff894402c7041000668b1e5c7c66895c08668b1e607c66895c0cc744060070b442cd137205bb0070eb76b408cd13730df6c2800f84d800be8b7de98200660fb6c68864ff40668944040fb6d1c1e20288e888f4408944080fb6c2c0e80266890466a1607c6609c0754e66a15c7c6631d266f73488d131d266f774043b44087d37fec188c530c0c1e80208c188d05a88c6bb00708ec331dbb80102cd13721e8cc3601eb900018edb31f6bf00808ec6fcf3a51f61ff265a7cbe867deb03be957de83400be9a7de82e00cd18ebfe47525542200047656f6d0048617264204469736b005265616400204572726f720d0a00bb0100b40ecd10ac3c0075f4c3000000000000000000000000000024120f0900bebd7d31c0cd13468a0c80f900750fbeda7de8d2ffeb9c466c6f70707900bb0070b80102b500b600cd1372d7b601b54fe9fbfe000000000000000055aa';
 
 # Apple Partition Map entries:
 $pm1='504d000000000003000000010000000f4170706c650000000000000000000000000000000000000000000000000000004170706c655f706172746974696f6e5f6d617000000000000000000000000000000000000000000f00000003'; # Apple_partition_map
 $pm2='504d00000000000300000400000005006469736b20696d616765000000000000000000000000000000000000000000004170706c655f4846530000000000000000000000000000000000000000000000000000000000040040000033'; # Apple_HFS
 $pm3='504d00000000000300000001000004004b414e4f5449585f454649000000000000000000000000000000000000000000444f535f4641545f313200000000000000000000000000000000000000000000000000000000040040000033'; # DOS_FAT_12
 
-die "Usage: $0 <isohybrid-bg2.iso> <HFS+-image>\n" if $#ARGV != 1;
+# Pad the image to a fake cylinder boundary
+$cylsize = 1024*1024; # 1MB
 
-# name of the first file in the ISO
-$first_filename="boot.catalog"; 
+die "Usage: $0 <binary-hybrid.iso>\n" if $#ARGV != 0;
 
-# name of the file containing the EFI-FAT-image
-$filename="boot.efi.img";
+use integer;
+sub max ($$) { $_[$_[0] < $_[1]] }
+sub min ($$) { $_[$_[0] > $_[1]] }
 
-# name of the file to be used as ISO-offset-destination
-$embiso_filename="boot.iso.img";
+($file) = @ARGV;
 
-($file, $part) = @ARGV;
-open(FILE, "+< $file\0") or die "$0: cannot open $file: $!\n";
-binmode FILE;
-
-open(PART, "< $part\0") or die "$0: cannot open $part: $!\n";
-binmode PART;
+open(FIMG, "+< $file\0") or die "$0: cannot open $file: $!\n";
+binmode FIMG;
 
 # Check if image has already been "patched" (i.e. it has the APM signature from $block0)
-seek(FILE, 0, SEEK_SET) or die "$0: $file: $!\n";
-read(FILE, $test, 2) == 2 or die "$0: $file: read error\n";
+seek(FIMG, 0, SEEK_SET) or die "$0: $file: $!\n";
+read(FIMG, $test, 2) == 2 or die "$0: $file: read error\n";
 die "$file seems to have an APM signature already...\n" if($test eq 'ER');
 
-# Check if image is a isohybrid-bg2 image (i.e. it has GRUB in its MBR)
-seek(FILE, 0x180, SEEK_SET) or die "$0: $file: $!\n";
-read(FILE, $test, 4) == 4 or die "$0: $file: read error\n";
-die "$file seems not to have GRUB in its MBR (is this a isohybrid-bg2 image?)\n" if($test ne 'GRUB');
+# Check if image is already a isohybrid-bg2 image (i.e. it has GRUB in its MBR)
+seek(FIMG, 0x180, SEEK_SET) or die "$0: $file: $!\n";
+read(FIMG, $test, 4) == 4 or die "$0: $file: read error\n";
+die "$file seems to have GRUB in its MBR already...\n" if($test eq 'GRUB');
 
-# Check if partition contains a HFS+ filesystem
-seek(PART, 0x400, SEEK_SET) or die "$0: $file: $!\n";
-read(PART, $test, 2) == 2 or die "$0: $file: read error\n";
-die "$part doesn't seem to contain a HFS+ filesystem\n" if($test ne 'H+');
+die "$0: /usr/bin/isoinfo missing!\n" unless (-e '/usr/bin/isoinfo');
 
-$start = int(`isoinfo -R -s -l -i "$file" | awk '/$filename/{print \$10}'`);
-if (!$start) {
-    die "$0: $filename: cannot determine position of file\n";
+# Get the position of the space-file
+$csf_pos_blk = int(`/usr/bin/isoinfo -R -s -l -i "$file" | awk '/$space_filename/{print \$10}'`);
+if (!$csf_pos_blk) {
+    die "$0: cannot determine position of space-file: $space_filename\n";
 }
+$csf_pos_lba = $csf_pos_blk*4;
+$csf_pos = $csf_pos_lba*512;
 
-$embiso_start = int(`isoinfo -R -s -l -i "$file" | awk '/$embiso_filename/{print \$10}'`);
-if (!$embiso_start) {
-    die "$0: $embiso_filename: cannot determine position of file\n";
+# Get the size of the space-file
+$csf_size_blk = int(`/usr/bin/isoinfo -R -s -l -i "$file" | awk '/$space_filename/{print \$5}'`);
+if (!$csf_size_blk) {
+    die "$0: cannot determine size of space-file: $space_filename\n";
 }
-
-$start_of_files = int(`isoinfo -R -s -l -i "$file" | awk '/$first_filename/{print \$10}'`);
-if (!$start_of_files) {
-    die "$0: $first_filename: cannot determine position of file\n";
-}
+$csf_size_lba = $csf_size_blk*4;
+$csf_size = $csf_size_lba*512;
 
 # Get the total size of the image
-(@imgstat = stat(FILE)) or die "$0: $file: $!\n";
+(@imgstat = stat(FIMG)) or die "$0: $file: $!\n";
 $imgsize = $imgstat[7];
 if (!$imgsize) {
     die "$0: $file: cannot determine length of file\n";
 }
-# Target image size: round up to a multiple of $bs*512
-$cylsize = $bs*512;
-$frac = $imgsize % $cylsize;
-$padding = ($frac > 0) ? $cylsize - $frac : 0;
-$imgsize += $padding;
 
-# Get the total size of the partiton
-(@partstat = stat(PART)) or die "$0: $part: $!\n";
-$partsize = $partstat[7];
-if (!$partsize) {
-    die "$0: $part: cannot determine length of file\n";
+print "imgsize: $imgsize\n" if($debug);
+
+# Fixed position of FAT partition at LBA 2048
+# TODO: add check if LBA 2048 is actually inside the space-file
+$fat_pos_lba = 2048;
+$fat_pos = $fat_pos_lba*512;
+$fat_pos_blk = $fat_pos_lba/4;
+
+# Set the maximum size of the FAT partiton
+$fat_maxsize_blk = $csf_pos_blk + $csf_size_blk - $fat_pos_blk;
+$fat_maxsize_blk -= $fat_maxsize_blk % 16;
+
+# Generate the FAT partition
+print <<`SHELL`;
+if [ ! -x /usr/bin/mmd ]; then
+        echo "Error: mtools are needed! Run: apt-get install mtools" >&2
+        exit 1
+fi
+
+rm -f "$fat_filename"
+
+# Stuff boot*.efi into a FAT filesystem 
+# mkfs.msdos has blocksize 1024 => multiply with 2
+mkfs.msdos -n "$fat_label" -C "$fat_filename" \$(($fat_maxsize_blk*2)) >&2
+mmd -i "$fat_filename" ::efi
+mmd -i "$fat_filename" ::efi/boot
+for file in binary/efi/boot/boot*.efi
+do
+        mcopy -i "$fat_filename" \$file "::efi/boot/\$(basename "\$file")"
+done
+
+# hide the FAT-EFI-partition from the Mac Bootloader by f***ing up the "EFI" directory entry
+mattrib -i "$fat_filename" +h ::efi
+sed -i -e '0,/EFI        /s/EFI        /efi        /' "$fat_filename"
+
+exit 0
+SHELL
+die "$0: EFI-FAT-image creation failed" if (${^CHILD_ERROR_NATIVE});
+
+open(FFAT, "< $fat_filename\0") or die "$0: cannot open $fat_filename: $!\n";
+binmode FFAT;
+
+# Get the total size of the FAT partiton
+(@fat_stat = stat(FFAT)) or die "$0: $fat_filename: $!\n";
+$fat_size = $fat_stat[7];
+$fat_size_lba = $fat_size/512;
+$fat_size_blk = $fat_size_lba/4;
+if (!$fat_size) {
+    die "$0: $fat_filename: cannot determine length of file\n";
 }
 
-seek(FILE, 0, SEEK_SET) or die "$0: $file: $!\n";
-print FILE pack('H*',$block0);
-seek(FILE, $bs*1, SEEK_SET) or die "$0: $file: $!\n";
-print FILE pack('H*',$pm1);
-seek(FILE, $bs*2, SEEK_SET) or die "$0: $file: $!\n";
-print FILE pack('H*',$pm2);
-seek(FILE, $bs*3, SEEK_SET) or die "$0: $file: $!\n";
-print FILE pack('H*',$pm3);
+print "fat_pos: $fat_pos fat_size: $fat_size\n" if($debug);
+
+# Write FAT partition to image
+seek(FFAT, 0, SEEK_SET) or die "$0: $fat_filename: $!\n";
+read FFAT, $partition, $fat_size;
+seek(FIMG, $fat_pos, SEEK_SET) or die "$0: $file: $!\n";
+print FIMG $partition;
+close(FFAT);
+
+# Generate the HFS partition
+$inode = int(<<`SHELL`);
+img="$hfs_filename"
+label="$hfs_label"
+vollabel="$hfs_vollabel"
+extras="$hfs_extras"
+workdir=
+
+cleanup () {
+        [ "\$workdir" ] || exit
+	umount "\$workdir" 2>/dev/null | :
+	rm -rf "\$workdir"
+}
+trap cleanup EXIT HUP INT QUIT TERM
+
+workdir="\$(mktemp -d efi-image.XXXXXX)"
+
+# Stuff boot*.efi into a HFS+ filesystem, making it as small as possible (in MB steps).
+# (x+1023)/1024*1024 rounds up to multiple of 1024.
+dd if=/dev/zero of="\$img" bs=1k count=\$(( (\$(stat -c %s binary/efi/boot/boot*.efi | awk '{s+=\$1} END {print s}') / 1024 + 1023) / 1024 * 1024 )) 2>/dev/null
+mkfs.hfsplus -v "\$label" "\$img" >&2
+mount -o loop,creator=prhc,type=jxbt,uid=99,gid=99 "\$img" "\$workdir"
+case "\$vollabel" in
+http*|ftp*)
+	wget -qO"\$workdir"/.disk_label "\$vollabel"
+	;;
+*)
+	[ -e "\$vollabel" ] && cp "\$vollabel" "\$workdir"/.disk_label
+	;;
+esac
+mkdir -p "\$workdir"/efi/boot
+
+for file in binary/efi/boot/boot*.efi
+do
+	cp "\$file" "\$workdir/efi/boot/\$(basename "\$file")"
+done
+
+for extra in \$extras
+do
+	extrabase="\$(basename "\$extra")"
+	case "\$extra" in
+	http*|ftp*)
+		wget -qO"\$workdir/\$extrabase" "\$extra"
+		;;
+	*)
+		[ -e "\$extra" ] && cp "\$extra" "\$workdir/\$extrabase"
+		;;
+	esac
+	case "\$extrabase" in
+	*.tar.gz)
+		if [ -e "\$workdir/\$extrabase" ]; then
+			tar xzf "\$workdir/\$extrabase" -C "\$workdir"
+			rm "\$workdir/\$extrabase"
+		fi
+		;;
+	esac
+done
+
+set -- \$(ls -i \$workdir/efi/boot/boot*.efi)
+inode=\$1
+
+umount "\$workdir"
+# return the inode that needs to be blessed
+echo "\$inode"
+exit 0
+SHELL
+die "$0: EFI-HFS-image creation failed" if (${^CHILD_ERROR_NATIVE} || $inode < 1);
+
+open(FHFS, "+< $hfs_filename\0") or die "$0: cannot open $hfs_filename: $!\n";
+binmode FHFS;
+
+# Check if partition contains a HFS+ filesystem
+seek(FHFS, 0x400, SEEK_SET) or die "$0: $file: $!\n";
+read(FHFS, $test, 2) == 2 or die "$0: $file: read error\n";
+die "$hfs_filename doesn't seem to contain a HFS+ filesystem\n" if($test ne 'H+');
+
+# Bless the HFS image
+print "HFS: blessing file with inode $inode\n" if($debug);
+seek(FHFS, 0x450, SEEK_SET) or die "$!\n";
+print FHFS pack('NN', 2, $inode);
+seek(FHFS, 0x464, SEEK_SET) or die "$!\n";
+print FHFS pack('N', 2, $inode);
+
+# Get the total size of the HFS partiton
+(@hfs_stat = stat(FHFS)) or die "$0: $hfs_filename: $!\n";
+$hfs_size = $hfs_stat[7];
+$hfs_size_lba = $hfs_size/512;
+$hfs_size_blk = $hfs_size_lba/4;
+if (!$hfs_size) {
+    die "$0: $hfs_filename: cannot determine length of file\n";
+}
+
+# Write MBR
+seek(FIMG, 0, SEEK_SET) or die "$0: $file: $!\n";
+print FIMG pack('H*',$mbr);
+# Update GRUB2 locations
+seek(FIMG, 0x5c, SEEK_SET) or die "$0: $file: $!\n";
+print FIMG pack("V", $csf_pos_lba);
+seek(FIMG, $csf_pos + 0x3f4, SEEK_SET) or die "$0: $file: $!\n";
+print FIMG pack("V", $csf_pos_lba+1);
+# Write ApplePartitionMap entries
+seek(FIMG, $bs*1, SEEK_SET) or die "$0: $file: $!\n";
+print FIMG pack('H*',$pm1);
+seek(FIMG, $bs*2, SEEK_SET) or die "$0: $file: $!\n";
+print FIMG pack('H*',$pm2);
+seek(FIMG, $bs*3, SEEK_SET) or die "$0: $file: $!\n";
+print FIMG pack('H*',$pm3);
 
 # Pad the image to a fake cylinder boundary
-seek(FILE, $imgstat[7], SEEK_SET) or die "$0: $file: $!\n";
-if ($padding) {
-    print FILE "\0" x $padding;
-}
-
-# Append partition to image
-seek(PART, 0, SEEK_SET) or die "$0: $file: $!\n";
-read PART, $partition, $partsize;
-print FILE $partition;
-
-# Pad the partition to a fake cylinder boundary
-$frac = $partsize % $cylsize;
+$frac = $imgsize % $cylsize;
 $padding = ($frac > 0) ? $cylsize - $frac : 0;
 if ($padding) {
-    print FILE "\0" x $padding;
+    seek(FIMG, $imgsize, SEEK_SET) or die "$0: $file: $!\n";
+    print FIMG "\0" x $padding;
+    $imgsize += $padding;
 }
-$partsize += $padding;
 
-use integer;
-$lba = $start*4;
-$embiso_lba = $embiso_start*4;
-$psize = $imgsize/512 - $lba;
+# Position of the HFS partition
+$hfs_pos = $imgsize;
+$hfs_pos_lba = $hfs_pos/512;
+$hfs_pos_blk = $hfs_pos_lba/4;
+
+# Append HFS partition to image
+seek(FHFS, 0, SEEK_SET) or die "$0: $file: $!\n";
+read FHFS, $partition, $hfs_size;
+seek(FIMG, $imgsize, SEEK_SET) or die "$0: $file: $!\n";
+print FIMG $partition;
+close(FHFS);
+
+# Pad the HFS partition to a fake cylinder boundary
+$frac = $hfs_size % $cylsize;
+$padding = ($frac > 0) ? $cylsize - $frac : 0;
+if ($padding) {
+    print FIMG "\0" x $padding;
+}
+$hfs_size += $padding;
+$hfs_size_lba = $hfs_size/512;
+$hfs_size_blk = $hfs_size_lba/4;
+
+print "hfs_pos: $hfs_pos hfs_size: $hfs_size\n" if($debug);
 
 # Adjust $pm2 (Apple_HFS)
 # "physical block start" and "physical block count" of partition:
-seek(FILE, $bs*2+8, SEEK_SET) or die "$0: $file: $!\n";
-print FILE pack('NN', $imgsize/$bs, $partsize/$bs);
+seek(FIMG, $bs*2+8, SEEK_SET) or die "$0: $file: $!\n";
+print FIMG pack('NN', $hfs_pos_blk, $hfs_size_blk);
 # "logical block start" and "logical block count" of partition:
-seek(FILE, $bs*2+80, SEEK_SET) or die "$0: $file: $!\n";
-print FILE pack('NN', 0, $partsize/$bs);
+seek(FIMG, $bs*2+80, SEEK_SET) or die "$0: $file: $!\n";
+print FIMG pack('NN', 0, $hfs_size_blk);
 
 # Adjust $pm3 (DOS_FAT_12)
 # "physical block start" and "physical block count" of partition:
-seek(FILE, $bs*3+8, SEEK_SET) or die "$0: $file: $!\n";
-print FILE pack('NN', $lba*512/$bs, $psize*512/$bs);
+seek(FIMG, $bs*3+8, SEEK_SET) or die "$0: $file: $!\n";
+print FIMG pack('NN', $fat_pos_blk, $fat_size_blk);
 # "logical block start" and "logical block count" of partition:
-seek(FILE, $bs*3+80, SEEK_SET) or die "$0: $file: $!\n";
-print FILE pack('NN', 0, $psize*512/$bs);
+seek(FIMG, $bs*3+80, SEEK_SET) or die "$0: $file: $!\n";
+print FIMG pack('NN', 0, $fat_size_blk);
 
-$imgsize += $partsize;
-seek(FILE, $imgsize, SEEK_SET) or die "$0: $file: $!\n";
+$imgsize += $hfs_size;
+seek(FIMG, $imgsize, SEEK_SET) or die "$0: $file: $!\n";
 
-# Target image size: round up to a multiple of 1MB
-$cylsize = 64*32*512; # 1MB
+# Pad the image to a fake cylinder boundary
 $frac = $imgsize % $cylsize;
 $padding = ($frac > 0) ? $cylsize - $frac : 0;
 $imgsize += $padding;
 if ($padding) {
-    print FILE "\0" x $padding;
+    print FIMG "\0" x $padding;
 }
 
-# Done...
-close(PART);
+# Position of the ISO partition: one block after the FAT partition
+$iso_pos_blk = $fat_pos_blk + $fat_size_blk;
+$iso_pos_lba = $iso_pos_blk*4;
+$iso_pos = $iso_pos_lba*512;
+# Size of the ISO partition: spanning until the end of the image (including HFS partition)
+$iso_size = $imgsize - $iso_pos;
+$iso_size_lba = $iso_size/512;
+$iso_size_blk = $iso_size_lba/4;
 
-# Calculate partiton table (MBR)
-$psize = $embiso_lba - $lba;
+print "iso_pos: $iso_pos iso_size: $iso_size\n" if($debug);
+print "final imgsize: $imgsize\n" if($debug);
+
+# Calculate and write partiton table (MBR)
 $h = 64; $s = 32;
 $hpc = 32; $spt = 63;
-$bcyl = $lba / ($spt * $hpc);
-$bhead = ($lba / $spt) % $hpc;
-$bsect = ($lba % $spt) + 1;
-$cylsize = $h*$s*512;
-$c = $imgsize/$cylsize;
-if ($c > 1024) {
-    $cc = 1024;
-} else {
-    $cc = $c;
-}
-$ehead   = $h-1;
-$esect   = $s + ((($cc-1) & 0x300) >> 2);
-$ecyl    = ($cc-1) & 0xff;
+$cc = min(1024, $imgsize/$cylsize);
 
-# Adjust MBR partition table
-$fstype  = 0xEF;
 $pentry  = 1;
-
-seek(FILE, 430+16*$pentry, SEEK_SET) or die "$0: $file: $!\n";
-print FILE pack("CCCCCCCCVV", 0x80, $bhead, $bsect, $bcyl, $fstype, $ehead, $esect, $ecyl, $lba, $psize);
-
-$psize = $imgsize/512 - $embiso_lba;
-$bcyl = $embiso_lba / ($spt * $hpc);
-$bhead = ($embiso_lba / $spt) % $hpc;
-$bsect = ($embiso_lba % $spt) + 1;
+$fstype  = 0xEF;
+$bcyl = $fat_pos_lba / ($spt * $hpc);
+$bhead = ($fat_pos_lba / $spt) % $hpc;
+$bsect = ($fat_pos_lba % $spt) + 1;
 $ehead   = $h-1;
 $esect   = $s + ((($cc-1) & 0x300) >> 2);
 $ecyl    = ($cc-1) & 0xff;
+seek(FIMG, 430+16*$pentry, SEEK_SET) or die "$0: $file: $!\n";
+print FIMG pack("CCCCCCCCVV", 0x80, $bhead, $bsect, $bcyl, $fstype, $ehead, $esect, $ecyl, $fat_pos_lba, $fat_size_lba);
 
-$fstype  = 0x83;
 $pentry  = 2;
+$fstype  = 0x83;
+$bcyl = $iso_pos_lba / ($spt * $hpc);
+$bhead = ($iso_pos_lba / $spt) % $hpc;
+$bsect = ($iso_pos_lba % $spt) + 1;
+$ehead   = $h-1;
+$esect   = $s + ((($cc-1) & 0x300) >> 2);
+$ecyl    = ($cc-1) & 0xff;
+seek(FIMG, 430+16*$pentry, SEEK_SET) or die "$0: $file: $!\n";
+print FIMG pack("CCCCCCCCVV", 0x00, $bhead, $bsect, $bcyl, $fstype, $ehead, $esect, $ecyl, $iso_pos_lba, $iso_size_lba);
 
-seek(FILE, 430+16*$pentry, SEEK_SET) or die "$0: $file: $!\n";
-print FILE pack("CCCCCCCCVV", 0x00, $bhead, $bsect, $bcyl, $fstype, $ehead, $esect, $ecyl, $embiso_lba, $psize);
+# Delete partition entries 3 and 4
+print FIMG "\0" x 32;
 
-# Done...
-close(FILE);
-
-# Embed a copy of the ISO filesystem into the ISO at the second partition (= start_of_block1)
-print("dd if=$file bs=2048 count=$start_of_files of=$file seek=$embiso_start conv=notrunc\n");
-system("dd if=$file bs=2048 count=$start_of_files of=$file seek=$embiso_start conv=notrunc");
-
-$off = $bs*$embiso_start;
-$diff = $embiso_start;
-
-open(FILE, "+< $file\0") or die "$0: cannot open $file: $!\n";
-binmode FILE;
+# Embed a copy of the ISO filesystem into the ISO at the second partition
+seek(FIMG, 0, SEEK_SET) or die "$0: $file: $!\n";
+read FIMG, $iso_copy, $csf_pos;
+seek(FIMG, $iso_pos, SEEK_SET) or die "$0: $file: $!\n";
+print FIMG $iso_copy;
 
 sub write_val
 {
 	my($offset, $value) = @_;
-	$cur = tell(FILE);
+	$cur = tell(FIMG);
 	$offset += $cur if $offset < 0;
-	printf("byte-offset: 0x%X -> 0x%X\n", $offset, $offset-$diff*$bs);
-	seek(FILE, $offset, SEEK_SET);
-	print FILE $value;
-	seek(FILE, $cur, SEEK_SET);
+	printf("byte-offset: 0x%X -> 0x%X\n", $offset, $offset-$iso_pos) if($debug);
+	seek(FIMG, $offset, SEEK_SET);
+	print FIMG $value;
+	seek(FIMG, $cur, SEEK_SET);
 }
 
-$off_pvd = $off+0x8000;
+# ISO9660 Primary Volume Descriptor
+$off_pvd = $iso_pos+0x8000;
 do
 {
-	seek(FILE, $off_pvd, SEEK_SET) or die "$0: $file: $!\n";
-	read(FILE, $voldesc_head, 7) > 0 or die "$0: $file: read error\n";
+	seek(FIMG, $off_pvd, SEEK_SET) or die "$0: $file: $!\n";
+	read(FIMG, $voldesc_head, 7) > 0 or die "$0: $file: read error\n";
 	($type, $magic, $version) = unpack("Ca[5]C", $voldesc_head);
 	if($type == 1)
 	{
-		seek(FILE, 0x97, 1);
-		read(FILE, $voldesc, 8) > 0 or die "$0: $file: read error\n";
-		($first_sector, $first_sector_be) = unpack("VN", $voldesc);
-		seek(FILE, $off+$first_sector*$bs, SEEK_SET) or die "$0: $file: $!\n";
-		printf("root-directory entry at 0x%X:\n", tell(FILE));
-		read(FILE, $bytes, 1) > 0 or die "$0: $file: read error\n";
-		$bytes = unpack("C", $bytes) - 1; $sector = 0;
+		seek(FIMG, 0x97, 1);
+		read(FIMG, $voldesc, 8) > 0 or die "$0: $file: read error\n";
+		($first_sector_blk, $first_sector_blk_be) = unpack("VN", $voldesc);
+		seek(FIMG, $iso_pos+$first_sector_blk*$bs, SEEK_SET) or die "$0: $file: $!\n";
+		printf("root-directory entry at 0x%X:\n", tell(FIMG)) if($debug);
+		read(FIMG, $bytes, 1) > 0 or die "$0: $file: read error\n";
+		$bytes = unpack("C", $bytes) - 1; $sector_blk = 0;
 		do {
-			printf("SUSP entry - %u bytes (0x%X)\n", $bytes+1, $bytes+1);
+			printf("SUSP entry - %u bytes (0x%X)\n", $bytes+1, $bytes+1) if($debug);
 			do {
-				$wp = tell(FILE);
-				$bytes -= read(FILE, $voldesc, 32);
-				($ext_sectors, $lba, $lba_be, $size, $size_be, $uu, $namelen)
+				$wp = tell(FIMG);
+				$bytes -= read(FIMG, $voldesc, 32);
+				($ext_sectors, $susp_pos_blk, $susp_pos_blk_be, $size, $size_be, $uu, $namelen)
 					= unpack("CVNVNa[14]C", $voldesc);
-				if($lba > $diff)
+				if($susp_pos_blk > $iso_pos_blk)
 				{
-					printf("LBA 0x%x -> LBA 0x%x\n", $lba, $lba - $diff);
-					write_val($wp+1, pack("VN", $lba - $diff, $lba - $diff));
+					printf("LBA 0x%x -> LBA 0x%x\n", $susp_pos_blk, $susp_pos_blk - $iso_pos_blk) if($debug);
+					write_val($wp+1, pack("VN", $susp_pos_blk - $iso_pos_blk, $susp_pos_blk - $iso_pos_blk));
 				}
 				$namelen++ if $namelen % 2 == 0;
-				$bytes -= read(FILE, $name, $namelen);
+				$bytes -= read(FIMG, $name, $namelen);
 				$filename = unpack("Z*", $name);
-				print("file: $filename\n");
+				print("file: $filename\n") if($debug);
 				# hide the second ISOFS-EFI-partition from the Mac Bootloader by f***ing up the "EFI" directory entry
 				write_val(-$namelen, pack("Z*", ".PC")) if($filename eq "EFI");
 
-				$bytes -= read(FILE, $sua_head, 4);
+				$bytes -= read(FIMG, $sua_head, 4);
 				($sig, $len, $version) = unpack("a[2]CC", $sua_head);
 				$len -= 4;
-				$bytes -= read(FILE, $data, $len);
+				$bytes -= read(FIMG, $data, $len);
 				do {
-					$bytes -= read(FILE, $sua_head, 4);
+					$bytes -= read(FIMG, $sua_head, 4);
 					($sig, $len, $version) = unpack("a[2]CCa", $sua_head);
 					$len -= 4;
-					$bytes -= read(FILE, $data, $len);
+					$bytes -= read(FIMG, $data, $len);
 					if($sig eq "CE")
 					{
 						($sua_block, $uu1, $sua_pos, $uu2, $sua_size, $uu3) = unpack("VNVNVN", $data);
-						printf("CE is at LBA 0x%X -> 0x%x\n", $sua_block);
+						printf("CE is at LBA 0x%X -> 0x%x\n", $sua_block) if($debug);
 					}
 				} while($bytes > 4);
-				$bytes -= read(FILE, $uu, $bytes) if $bytes > 0; # skip bytes (if unaligned)
-				read(FILE, $bytes, 1) > 0 or die "$0: $file: read error\n";
+				$bytes -= read(FIMG, $uu, $bytes) if $bytes > 0; # skip bytes (if unaligned)
+				read(FIMG, $bytes, 1) > 0 or die "$0: $file: read error\n";
 				$bytes = unpack("C", $bytes) - 1;
-				printf("SUSP Entry - %u bytes (0x%X)\n", $bytes+1, $bytes+1);
+				printf("SUSP Entry - %u bytes (0x%X)\n", $bytes+1, $bytes+1) if($debug);
 			} while $bytes > 0;
-			$sector++;
-			seek(FILE, $off+$first_sector*$bs+$sector*$bs, SEEK_SET) or die "$0: $file: $!\n";
-			printf("\ndirectory entry at 0x%X:\n", tell(FILE));
-			read(FILE, $bytes, 1) > 0 or break;
+			$sector_blk++;
+			seek(FIMG, $iso_pos+$first_sector_blk*$bs+$sector_blk*$bs, SEEK_SET) or die "$0: $file: $!\n";
+			printf("\ndirectory entry at 0x%X:\n", tell(FIMG)) if($debug);
+			read(FIMG, $bytes, 1) > 0 or break;
 			$bytes = unpack("C", $bytes) - 1;
 		} while $bytes != 0x21 && $bytes != 0;
 	}
@@ -274,7 +449,7 @@ do
 } while $type != 255;
 
 # Done...
-close(FILE);
+close(FIMG);
 
 exit 0;
 
