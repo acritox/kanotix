@@ -254,7 +254,7 @@ print FIMG pack('H*',$mbr);
 # Update GRUB2 locations
 seek(FIMG, 0x5c, SEEK_SET) or die "$0: $file: $!\n";
 print FIMG pack("V", $csf_pos_lba);
-seek(FIMG, $csf_pos + 0x3f4, SEEK_SET) or die "$0: $file: $!\n";
+seek(FIMG, $csf_pos + 0x1f4, SEEK_SET) or die "$0: $file: $!\n";
 print FIMG pack("V", $csf_pos_lba+1);
 # Write ApplePartitionMap entries
 seek(FIMG, $bs*1, SEEK_SET) or die "$0: $file: $!\n";
