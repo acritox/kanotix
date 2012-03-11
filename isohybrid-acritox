@@ -105,7 +105,7 @@ $fat_pos = $fat_pos_lba*512;
 $fat_pos_blk = $fat_pos_lba/4;
 
 # Set the maximum size of the FAT partiton
-$fat_maxsize_blk = $csf_pos_blk + $csf_size_blk - $fat_pos_blk;
+$fat_maxsize_blk = $csf_size_blk - $fat_pos_blk;
 $fat_maxsize_blk -= $fat_maxsize_blk % 16;
 
 # Generate the FAT partition
