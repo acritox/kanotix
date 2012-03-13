@@ -1,0 +1,10 @@
+--- /etc/skel/.kde/share/config/plasma-desktop-appletsrc	2012-03-13 20:08:41.098752001 +0100
++++ /etc/skel/.kde/share/config/plasma-desktop-appletsrc	2012-03-13 20:09:01.274752001 +0100
+@@ -20,6 +20,7 @@
+ activity=
+ desktop=-1
+ formfactor=0
++geometry=0,0,600,400
+ immutability=1
+ location=0
+ plugin=folderview

@@ -1,0 +1,5 @@
+--- /dev/null	2012-03-08 14:56:39.096000000 +0100
++++ /etc/skel/.kde/share/config/powerdevilrc	2012-03-13 20:11:22.410752001 +0100
+@@ -0,0 +1,2 @@
++[General]
++configLockScreen=false
