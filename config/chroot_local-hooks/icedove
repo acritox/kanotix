@@ -1,0 +1,8 @@
+#!/bin/sh
+if [ -x /usr/bin/icedove ]; then
+ :
+else
+ rm -vf /etc/skel/.kde/share/config/emaildefaults
+ perl -pi -e s@/usr/share/applications/icedove.desktop,@@ /etc/skel/.kde/share/config/kickoffrc || :
+ perl -pi -e 's/.*icedove.*\n//' /etc/skel/.mozilla/firefox/evc3to3e.default/prefs.js /etc/skel/.mozilla/firefox/evc3to3e.default/mimeTypes.rdf || :
+fi
