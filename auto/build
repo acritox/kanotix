@@ -65,7 +65,7 @@ if [ "$LB_KANOTIX_TMPFS" = "true" ]; then
        # delete everything except cache
        find . -maxdepth 1 ! -name cache -exec rm -r '{}' \; 2>/dev/null
        # copy everything to tmpfs
-       rsync -a .. . --exclude=tmpfs
+       rsync -a .. . --exclude=tmpfs --exclude '*.iso'
        # build
        prebuild
        time lb build noauto "${@}" 2>&1 | tee binary.log
