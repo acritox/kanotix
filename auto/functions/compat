@@ -88,6 +88,9 @@ case "$LB_VERSION" in
 		LB_ARCHITECTURE="$LB_ARCHITECTURES"
 		trap Compat_config EXIT
 		;;
+	lb_chroot_apt)
+		Compat_dir chroot_local-packages packages.chroot
+		;;
 	lb_chroot_archives)
 		mkdir -p config/archives
 		touch config/archives.compat
