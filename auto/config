@@ -46,6 +46,11 @@ lb config noauto \
 #	--hostname Kanotix \
 #	--username kanotix \
 
+# disable firmware packages (needed for newer lb versions)
+lb config noauto \
+	--firmware-binary false \
+	--firmware-chroot false
+
 . config/binary
 . config/bootstrap
 . config/chroot
