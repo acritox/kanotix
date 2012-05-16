@@ -1,5 +1,29 @@
 #!/bin/sh
 
+Hotfixes ()
+{
+if [ -e /var/lib/live/config/hotfixes ]
+then
+	return
+fi
+echo -n " hotfixes"
+Configure_hotfixes
+}
+
+Configure_hotfixes ()
+{
+# Reading kernel command line
+for _PARAMETER in ${_CMDLINE}; do
+ case "${_PARAMETER}" in
+  live-config.timezone=*|timezone=*)
+   LIVE_TIMEZONE="${_PARAMETER#*timezone=}"
+   ;;
+  live-config.username=*|username=*)
+   LIVE_USERNAME="${_PARAMETER#*username=}"
+   ;;
+ esac
+done
+
 # fix timezone
 if [ -n "${LIVE_TIMEZONE}" ]; then
 	echo "${LIVE_TIMEZONE}" > /etc/timezone
@@ -24,3 +48,7 @@ rm -f /etc/default/console-setup
 . /etc/default/locale
 dpkg-reconfigure console-setup -fnoninteractive
 
+touch /var/lib/live/config/hotfixes
+}
+
+Hotfixes
