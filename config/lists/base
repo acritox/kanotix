@@ -24,6 +24,10 @@ efibootmgr
 syslinux
 #endif
 
+#if KANOTIX_GFXOVERLAYS true
+gfxoverlay
+#endif
+
 # multimedia
 sox
 alsa-oss

@@ -1,6 +1,0 @@
-#!/bin/sh
-
-if [ -e /etc/modprobe.d/initramfs.conf ]; then
-  cp /etc/modprobe.d/initramfs.conf /root/etc/modprobe.d/initramfs.conf
-fi
-
