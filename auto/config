@@ -10,8 +10,8 @@ MIRROR_BOOTSTRAP="$MIRROR_CHROOT"
 
 # preset kanotix defaults
 export LB_PACKAGES_LISTS="kanotix-master"
-export LB_DISTRIBUTION="squeeze"
-export LB_BOOTLOADER="syslinux"
+export LB_DISTRIBUTION="wheezy"
+export LB_BOOTLOADER="grub2"
 export LB_SYSLINUX_MENU_LIVE_ENTRY="Kanotix"
 export LB_LINUX_PACKAGES="linux-image linux-headers"
 

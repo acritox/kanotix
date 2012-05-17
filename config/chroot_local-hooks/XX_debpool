@@ -3,7 +3,7 @@
 
 [ -f /root/build.conf ] && . /root/build.conf
 [ -z "$LB_ARCHITECTURE" ] && LB_ARCHITECTURE=amd64
-[ -z "$LB_DISTRIBUTION" ] && LB_DISTRIBUTION=squeeze
+[ -z "$LB_DISTRIBUTION" ] && LB_DISTRIBUTION=wheezy
 
 binary=/live/image/debian
 packages="$(cut -d'#' -f1 /live/packages | grep .)"
