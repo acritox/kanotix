@@ -1,5 +1,3 @@
 # list of scripts that will be fetched to config/chroot_local-includes/usr/local/bin/ when "lb config" is called
 # they will be removed on "lb clean"
-http://kanotix.com/files/fix/update-scripts-kanotix.sh
-http://kanotix.com/files/install-flash-local.sh
 http://kanotix.acritox.com/files/enable_persistent_live.bash
