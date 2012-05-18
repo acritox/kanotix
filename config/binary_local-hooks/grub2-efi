@@ -8,8 +8,19 @@ grub2|burg)
 	;;
 esac
 
-platform=x86_64-efi
-efi_name=x64
+bit="$(file chroot/bin/true | grep -q 'ELF 64-bit' && echo 64 || echo 32)"
+case "$bit" in
+64)
+	platform=x86_64-efi
+	efi_name=x64
+	shell_dir=X64
+	;;
+32)
+	platform=i386-efi
+	efi_name=x86
+	shell_dir=Ia32
+	;;
+esac
 modules="search iso9660 configfile normal memdisk tar part_msdos fat"
 
 workdir=
@@ -38,7 +49,7 @@ mkdir -p "binary/efi/boot"
  echo "source /boot/grub/grub-efi.cfg") >"binary/boot/grub/$platform/grub.cfg"
 
 # fix module order ("gzio" should be loaded before "normal", otherwise a "prefix not set" error message will pop up on boot)
-sed -i.orig -e '/^normal:/{/gzio/!{s/$/ gzio/}}' chroot/usr/lib/grub/x86_64-efi/moddep.lst
+sed -i.orig -e '/^normal:/{/gzio/!{s/$/ gzio/}}' chroot/usr/lib/grub/$platform/moddep.lst
 
 # Build the core image.
 (cd "$workdir"; tar -cf - boot) > chroot/memdisk.$$.img
@@ -48,7 +59,7 @@ rm chroot/memdisk.$$.img
 mv "chroot/boot$efi_name.efi" "binary/efi/boot/boot$efi_name.efi"
 
 # restore original module order
-mv chroot/usr/lib/grub/x86_64-efi/moddep.lst{.orig,}
+mv chroot/usr/lib/grub/$platform/moddep.lst{.orig,}
 
 # Copy over GRUB modules, except for those already built in.
 cp -a "chroot/usr/lib/grub/$platform"/*.lst "binary/boot/grub/$platform/"
@@ -70,6 +81,6 @@ for x in "chroot/usr/lib/grub/$platform"/*.mod; do
 done
 
 # include EFI shell
-[ -f binary/efi/boot/shellx64.efi ] || \
-wget -O binary/efi/boot/shellx64.efi 'http://tianocore.git.sourceforge.net/git/gitweb.cgi?p=tianocore/edk2;a=blob_plain;f=EdkShellBinPkg/FullShell/X64/Shell_Full.efi;hb=HEAD'
+[ -f binary/efi/boot/shell$efi_name.efi ] || \
+wget -O binary/efi/boot/shell$efi_name.efi "http://tianocore.git.sourceforge.net/git/gitweb.cgi?p=tianocore/edk2;a=blob_plain;f=EdkShellBinPkg/FullShell/$shell_dir/Shell_Full.efi;hb=HEAD"
 

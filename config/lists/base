@@ -20,6 +20,7 @@ burg-pc
 #if BOOTLOADER grub grub2 syslinux
 grub-pc
 grub-efi-amd64-bin
+grub-efi-ia32-bin
 efibootmgr
 syslinux
 #endif
