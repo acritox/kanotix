@@ -77,6 +77,7 @@ debconf-utils
 rpm2cpio
 usbutils
 exif
+fsarchiver
 
 # network
 pcmciautils
@@ -120,6 +121,7 @@ acpi
 acpid
 acpi-support
 xdg-utils
+menu-xdg
 console-setup
 
 # xorg
