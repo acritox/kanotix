@@ -47,6 +47,7 @@ kdm
 kde-l10n-de
 kwalletmanager
 kmix
+polkit-kde-1
 
 # kde plasma
 plasma-widgets-addons

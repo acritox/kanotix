@@ -127,6 +127,8 @@ xserver-xorg-video-all
 xserver-xorg-input-all
 mesa-utils
 libgl1-mesa-dri
+vainfo
+i965-va-driver
 
 # disktools
 dd-rhelp
@@ -166,4 +168,5 @@ pm-utils
 vbetool
 radeontool
 tp-trackpoint-scroll
+gobi-loader
 
