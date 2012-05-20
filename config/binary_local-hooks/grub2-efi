@@ -43,10 +43,11 @@ EOF
 mkdir -p "binary/boot/grub/$platform"
 mkdir -p "binary/efi/boot"
 
-(for i in $(cat chroot/usr/lib/grub/$platform/partmap.lst); do
-        echo "insmod $i"
- done; \
- echo "source /boot/grub/grub-efi.cfg") >"binary/boot/grub/$platform/grub.cfg"
+#(for i in $(cat chroot/usr/lib/grub/$platform/partmap.lst); do
+#        echo "insmod $i"
+# done; \
+echo "set efi_arch=$efi_name
+source /boot/grub/grub-efi.cfg" >"binary/boot/grub/$platform/grub.cfg"
 
 # fix module order ("gzio" should be loaded before "normal", otherwise a "prefix not set" error message will pop up on boot)
 sed -i.orig -e '/^normal:/{/gzio/!{s/$/ gzio/}}' chroot/usr/lib/grub/$platform/moddep.lst
