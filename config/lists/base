@@ -122,6 +122,8 @@ acpid
 acpi-support
 xdg-utils
 menu-xdg
+menu
+menu-l10n
 console-setup
 
 # xorg
