@@ -1,0 +1,43 @@
+#!/bin/sh
+mkdir -p /etc/skel/.kde/Autostart
+cat >/etc/skel/.kde/Autostart/audio-hack-silentinit.sh <<"EOF"
+#!/bin/sh
+# Workaround for kdeinit4-crash if phonon-vlc is used
+# (KDE-Bug #279308 or Alsa-Bug #5471)
+# 
+# kmix/kdeinit4 crashes when it tries to access the device for the first time
+# Workaround: play a short silent sound to "initialize" sounddevice before kde tries and fails
+# 
+# Source of WAV encoding: http://blog.mister-muffin.de/2011/06/04/generate-silent-wav/
+
+pack_int(){ printf "%08X\n" $1 | sed 's/\([0-9A-F]\{2\}\)\([0-9A-F]\{2\}\)\([0-9A-F]\{2\}\)\([0-9A-F]\{2\}\)/\\\\\\x\4\\\\\\x\3\\\\\\x\2\\\\\\x\1/I' | xargs printf; }
+
+pack_short(){ printf "%04X\n" $1 | sed 's/\([0-9A-F]\{2\}\)\([0-9A-F]\{2\}\)/\\\\\\x\2\\\\\\x\1/I' | xargs printf; }
+
+channels=1
+bps=16
+sample=44100
+Subchunk1Size=18
+Subchunk2Size=882
+ChunkSize=$((20 + $Subchunk1Size + $Subchunk2Size))
+
+(
+echo -n RIFF
+pack_int $ChunkSize
+echo -n "WAVEfmt "
+pack_int $Subchunk1Size
+pack_short 1
+pack_short $channels
+pack_int $sample
+pack_int $((bps/8 * channels * sample))
+pack_short $((bps/8 * channels))
+pack_short $bps
+pack_short 0
+echo -n data
+pack_int $Subchunk2Size
+
+dd if=/dev/zero bs=1 count=$Subchunk2Size 2>/dev/null
+) | aplay
+EOF
+chmod +x /etc/skel/.kde/Autostart/audio-hack-silentinit.sh
+
