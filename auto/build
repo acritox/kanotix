@@ -62,8 +62,8 @@ if [ "$LB_KANOTIX_TMPFS" = "true" ]; then
        # build using tmpfs
        [ -z "$(stat --printf "%d\n" . tmpfs | uniq -u)" ] && mount -t tmpfs -o "$LB_KANOTIX_TMPFS_OPTIONS" tmpfs tmpfs
        cd tmpfs
-       # delete everything except cache
-       find . -maxdepth 1 ! -name cache -exec rm -r '{}' \; 2>/dev/null
+       # delete everything except cache and *.iso
+       find . -maxdepth 1 ! -name cache ! -name '*.iso' -exec rm -r '{}' \; 2>/dev/null
        # copy everything to tmpfs
        rsync -a .. . --exclude=tmpfs --exclude '*.iso'
        # build
