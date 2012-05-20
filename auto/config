@@ -82,6 +82,9 @@ grep -wq -e opera <<<"$LB_PACKAGES $LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" ope
 grep -wq chrome <<<"$LB_PACKAGES $LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" chrome"
 lb config noauto --linux-packages "$LB_LINUX_PACKAGES" --linux-flavours "$LB_LINUX_FLAVOURS" --repositories "$LB_REPOSITORIES" -p "$LB_PACKAGES_LISTS"
 
+# Make sure config-arguments don't get overwritten by auto-configuration
+lb config noauto "${@}"
+
 # Fetch kanotix-scripts if necessary
 mkdir -p config/chroot_local-includes/usr/local/bin
 grep -oe '^[^ #]*' scripts.urls | wget -i- -N -q -P config/chroot_local-includes/usr/local/bin
