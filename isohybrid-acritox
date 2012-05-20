@@ -50,6 +50,8 @@ $pm3='504d00000000000300000001000004004b414e4f5449585f45464900000000000000000000
 # Pad the image to a fake cylinder boundary
 $cylsize = 1024*1024; # 1MB
 
+use File::Temp qw/ tempdir /;
+
 die "Usage: $0 <binary-hybrid.iso>\n" if $#ARGV != 0;
 
 use integer;
@@ -108,6 +110,9 @@ $fat_pos_blk = $fat_pos_lba/4;
 $fat_maxsize_blk = $csf_size_blk - $fat_pos_blk;
 $fat_maxsize_blk -= $fat_maxsize_blk % 16;
 
+# Create mountpoint for the ISO
+$mountpoint = tempdir( CLEANUP =>  1 );
+
 # Generate the FAT partition
 print <<`SHELL`;
 if [ ! -x /usr/bin/mmd ]; then
@@ -117,12 +122,15 @@ fi
 
 rm -f "$fat_filename"
 
+# Mount the ISO
+mount -o loop "$file" "$mountpoint"
+
 # Stuff boot*.efi into a FAT filesystem 
 # mkfs.msdos has blocksize 1024 => multiply with 2
 mkfs.msdos -n "$fat_label" -C "$fat_filename" \$(($fat_maxsize_blk*2)) >&2
 mmd -i "$fat_filename" ::efi
 mmd -i "$fat_filename" ::efi/boot
-for file in binary/efi/boot/boot*.efi
+for file in "$mountpoint"/efi/boot/boot*.efi
 do
         mcopy -i "$fat_filename" \$file "::efi/boot/\$(basename "\$file")"
 done
@@ -175,7 +183,7 @@ workdir="\$(mktemp -d efi-image.XXXXXX)"
 
 # Stuff boot*.efi into a HFS+ filesystem, making it as small as possible (in MB steps).
 # (x+1023)/1024*1024 rounds up to multiple of 1024.
-dd if=/dev/zero of="\$img" bs=1k count=\$(( (\$(stat -c %s binary/efi/boot/boot*.efi | awk '{s+=\$1} END {print s}') / 1024 + 1023) / 1024 * 1024 )) 2>/dev/null
+dd if=/dev/zero of="\$img" bs=1k count=\$(( (\$(stat -c %s "$mountpoint"/efi/boot/boot*.efi | awk '{s+=\$1} END {print s}') / 1024 + 1023) / 1024 * 1024 )) 2>/dev/null
 mkfs.hfsplus -v "\$label" "\$img" >&2
 mount -o loop,creator=prhc,type=jxbt,uid=99,gid=99 "\$img" "\$workdir"
 case "\$vollabel" in
@@ -188,7 +196,7 @@ http*|ftp*)
 esac
 mkdir -p "\$workdir"/efi/boot
 
-for file in binary/efi/boot/boot*.efi
+for file in "$mountpoint"/efi/boot/boot*.efi
 do
 	cp "\$file" "\$workdir/efi/boot/\$(basename "\$file")"
 done
@@ -217,6 +225,7 @@ done
 set -- \$(ls -i \$workdir/efi/boot/boot*.efi)
 inode=\$1
 
+umount "$mountpoint"
 umount "\$workdir"
 # return the inode that needs to be blessed
 echo "\$inode"
