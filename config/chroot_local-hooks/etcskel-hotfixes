@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # prevent KDE from warning about non-existent directories
 mkdir -p /etc/skel/.local/share/contacts
 mkdir -p /etc/skel/.local/share/local-mail
