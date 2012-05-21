@@ -2,5 +2,6 @@
 # prevent KDE from warning about non-existent directories
 mkdir -p /etc/skel/.local/share/contacts
 mkdir -p /etc/skel/.local/share/local-mail
+mkdir -p /etc/skel/.local/share/local-mail/{sent-mail,outbox}/{tmp,cur,new}
 ln -s local-mail /etc/skel/.local/share/.local-mail.directory
 
