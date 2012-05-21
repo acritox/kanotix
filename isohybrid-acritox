@@ -346,29 +346,39 @@ print "iso_pos: $iso_pos iso_size: $iso_size\n" if($debug);
 print "final imgsize: $imgsize\n" if($debug);
 
 # Calculate and write partiton table (MBR)
-$h = 64; $s = 32;
-$hpc = 32; $spt = 63;
-$cc = min(1024, $imgsize/$cylsize);
+sub lba2chs
+{
+    my $lba = @_;
+    my $hpc = 64, $spt = 32, $c, $h, $s;
+    $c = $lba / ($spt * $hpc);
+    $h = ($lba / $spt) % $hpc;
+    $s = ($lba % $spt) + 1;
+    if($c >= 1024)
+    {
+        $c = 1023;
+        $h = 254;
+        $s = 63;
+    }
+    #   Head     Sect     Cyl   
+    # <-Byte-> <-Byte-> <-Byte->
+    # 76543210 98543210 76543210
+    # HHHHHHHH CCSSSSSS CCCCCCCC
+    $s += ($c & 0x300) >> 2;
+    $c &= 0xff;
+    return ($c, $h, $s);
+}
 
 $pentry  = 1;
 $fstype  = 0xEF;
-$bcyl = $fat_pos_lba / ($spt * $hpc);
-$bhead = ($fat_pos_lba / $spt) % $hpc;
-$bsect = ($fat_pos_lba % $spt) + 1;
-$ehead   = $h-1;
-$esect   = $s + ((($cc-1) & 0x300) >> 2);
-$ecyl    = ($cc-1) & 0xff;
+($bcyl, $bhead, $bsect) = lba2chs($fat_pos_lba);
+($ecyl, $ehead, $esect) = lba2chs($fat_pos_lba+$fat_size_lba-1);
 seek(FIMG, 430+16*$pentry, SEEK_SET) or die "$0: $file: $!\n";
 print FIMG pack("CCCCCCCCVV", 0x80, $bhead, $bsect, $bcyl, $fstype, $ehead, $esect, $ecyl, $fat_pos_lba, $fat_size_lba);
 
 $pentry  = 2;
 $fstype  = 0x83;
-$bcyl = $iso_pos_lba / ($spt * $hpc);
-$bhead = ($iso_pos_lba / $spt) % $hpc;
-$bsect = ($iso_pos_lba % $spt) + 1;
-$ehead   = $h-1;
-$esect   = $s + ((($cc-1) & 0x300) >> 2);
-$ecyl    = ($cc-1) & 0xff;
+($bcyl, $bhead, $bsect) = lba2chs($iso_pos_lba);
+($ecyl, $ehead, $esect) = lba2chs($iso_pos_lba+$iso_size_lba-1);
 seek(FIMG, 430+16*$pentry, SEEK_SET) or die "$0: $file: $!\n";
 print FIMG pack("CCCCCCCCVV", 0x00, $bhead, $bsect, $bcyl, $fstype, $ehead, $esect, $ecyl, $iso_pos_lba, $iso_size_lba);
 
