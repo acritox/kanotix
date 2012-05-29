@@ -163,6 +163,7 @@ btrfs-tools
 
 # firmware
 ndiswrapper-utils-1.9
+ndiswrapper-dkms
 libv4l-0
 
 # other hardware

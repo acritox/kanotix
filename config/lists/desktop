@@ -20,14 +20,6 @@ gstreamer0.10-plugins-base
 gstreamer0.10-plugins-good
 gstreamer0.10-alsa
 
-# graphics
-gimp
-gimp-gutenprint
-xsane
-libsane-extras
-sane-utils
-sane
-
 # tools
 joystick
 

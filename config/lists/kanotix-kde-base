@@ -1,0 +1,20 @@
+# Kanotix with KDE (minimal)
+
+#include <base>
+#include <kde>
+#include <kde.kanotix>
+
+# package tool
+synaptic
+apt-xapian-index
+
+# multimedia
+gecko-mediaplayer
+
+# skype
+skype
+pidgin-skype
+
+# other hardware
+modemmanager
+

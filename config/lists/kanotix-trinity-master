@@ -1,11 +1,7 @@
-# Kanotix Trinity
+# Kanotix with Trinity (Master)
 
-#include <base>
-#include <trinity>
+#include <kanotix-trinity-base>
 #include <office>
-
-# base
-etcskel-kanotix-trinity
 
 # email
 icedove-l10n-de

@@ -11,7 +11,6 @@ okularplugin
 konqueror-nsplugins
 
 # multimedia
-kaffeine
 libsdl1.2debian
 kdemultimedia-kio-plugins
 kamera
@@ -24,9 +23,6 @@ libk3b6-extracodecs
 # chat, irc
 konversation
 
-# graphics
-gwenview
-
 # editors
 kate
 
@@ -36,9 +32,7 @@ ark
 # tools
 ksnapshot
 kcalc
-kuser
 gdebi-kde
-update-notifier-kde
 kvkbd
 
 # kde
@@ -60,10 +54,6 @@ gnome-icon-theme
 
 # network
 network-manager-kde
-
-# updates
-update-manager-core
-update-notifier-kde
 
 # other hardware
 kde-config-touchpad

@@ -1,0 +1,49 @@
+# Kanotix with KDE (Master)
+
+#include <kanotix-kde-base>
+#include <office>
+
+# email
+icedove-l10n-de
+
+# multimedia
+amarok
+kaffeine
+
+# graphics
+gimp
+gimp-gutenprint
+xsane
+libsane-extras
+sane-utils
+sane
+gwenview
+
+# network
+openvpn
+network-manager-openvpn
+
+# kde
+khelpcenter4
+
+# tools
+kuser
+
+# updates
+update-manager-core
+update-notifier-kde
+
+# wine
+wine1.3
+wine1.3-gecko
+winetricks
+
+# games
+armagetronad
+foobillard
+neverball
+neverputt
+kmahjongg
+
+# benchmark
+gl2benchmark
