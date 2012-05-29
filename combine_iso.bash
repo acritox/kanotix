@@ -29,12 +29,12 @@ do
 		while IFS=: read var val
 		do
 			case "$var" in
-			"System id") opt_sysid=$val;;
-			"Volume id") opt_volid=$val;;
-			"Volume set id") opt_setid=$val;;
-			"Publisher id") opt_pubid=$val;;
-			"Data preparer id") opt_preid=$val;;
-			"Application id") opt_appid=$val;;
+			"System id") opt_sysid=$(echo $val);;
+			"Volume id") opt_volid=$(echo $val);;
+			"Volume set id") opt_setid=$(echo $val);;
+			"Publisher id") opt_pubid=$(echo $val);;
+			"Data preparer id") opt_preid=$(echo $val);;
+			"Application id") opt_appid=$(echo $val);;
 			"    Key 55 AA") is_bootable=1;;
 			esac
 		done < <(isoinfo -d -i "$1")
