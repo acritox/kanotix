@@ -83,7 +83,7 @@ fsarchiver
 pcmciautils
 openssh-client
 sshfs
-smbfs
+cifs-utils
 pppoeconf
 #nfs-common
 ncpfs
@@ -135,7 +135,7 @@ vainfo
 i965-va-driver
 
 # disktools
-dd-rhelp
+gddrescue
 testdisk
 gpart
 
