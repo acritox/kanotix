@@ -1,6 +1,6 @@
---- /usr/share/initramfs-tools/scripts/live	2012-03-13 16:34:26.762752002 +0100
-+++ /usr/share/initramfs-tools/scripts/live	2012-03-13 16:43:57.482752002 +0100
-@@ -1973,6 +1973,16 @@
+--- /lib/live/boot/mountroot.sh.orig	2012-06-28 14:39:38.000000000 +0200
++++ /lib/live/boot/mountroot.sh	2012-08-30 06:15:17.559993109 +0200
+@@ -80,6 +80,16 @@
  					break
  				fi
  
