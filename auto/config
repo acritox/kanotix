@@ -60,22 +60,23 @@ case "$LB_DISTRIBUTION" in
 squeeze)
 	LB_REPOSITORIES+=" firefox wine-ppa squeeze-backports"
 	case $LB_ARCHITECTURE in
-	amd64) LB_LINUX_PACKAGES="linux-image-3.2.0-24 linux-headers-3.2.0-24"; LB_LINUX_FLAVOURS="generic";;
-	i386)  LB_LINUX_PACKAGES="linux-image-3.2.0-24 linux-headers-3.2.0-24"; LB_LINUX_FLAVOURS="generic";;
+	amd64) LB_LINUX_PACKAGES="linux-image-3.2.0-30 linux-headers-3.2.0-30"; LB_LINUX_FLAVOURS="generic";;
+	i386)  LB_LINUX_PACKAGES="linux-image-3.2.0-30 linux-headers-3.2.0-30"; LB_LINUX_FLAVOURS="generic";;
 	esac
 	;;
 wheezy)
 	LB_PACKAGES_LISTS+=" dragonfire"
 	LB_REPOSITORIES+=" dragonfire wine-ppa-oneiric"
 	case $LB_ARCHITECTURE in
-	amd64) LB_LINUX_PACKAGES="linux-image-3.2.0-24 linux-headers-3.2.0-24"; LB_LINUX_FLAVOURS="generic";;
-	i386)  LB_LINUX_PACKAGES="linux-image-3.2.0-24 linux-headers-3.2.0-24"; LB_LINUX_FLAVOURS="generic";;
+	amd64) LB_LINUX_PACKAGES="linux-image-3.2.0-30 linux-headers-3.2.0-30"; LB_LINUX_FLAVOURS="generic";;
+	i386)  LB_LINUX_PACKAGES="linux-image-3.2.0-30 linux-headers-3.2.0-30"; LB_LINUX_FLAVOURS="generic";;
 	esac
 	;;
 esac
 
 [ "$LB_BOOTLOADER" = "burg" ] && LB_REPOSITORIES+=" burg"
-grep -wq kde48 <<<"$LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" acritox-kde48"
+# kde4.8 is in wheezy now, no need for backport repository anymore
+# grep -wq kde48 <<<"$LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" acritox-kde48"
 grep -wq trinity <<<"$LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" trinity"
 grep -wq -e virtualbox -e vbox <<<"$LB_PACKAGES $LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" vbox"
 grep -wq -e opera <<<"$LB_PACKAGES $LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" opera"
