@@ -1,0 +1,62 @@
+# Kanotix Minimal
+
+#include <base>
+#include <kde.kanotix>
+
+# kde
+kde-plasma-desktop
+kdm
+kde-l10n-de
+kwalletmanager
+kmix
+polkit-kde-1
+
+# kde plasma
+plasma-widgets-addons
+plasma-runners-addons
+plasma-scriptengine-python
+
+# network
+network-manager-kde
+
+# other hardware
+kde-config-touchpad
+kde-config-tablet
+system-config-printer-kde 
+blueman
+
+# tools
+ksnapshot
+kcalc
+gdebi-kde
+gparted
+gksu
+
+# office
+okular
+okular-extra-backends
+okularplugin
+
+# plugins
+konqueror-nsplugins
+
+# burn
+k3b
+k3b-i18n
+libk3b6-extracodecs
+
+# chat, irc
+konversation
+
+# graphics
+gwenview
+
+# editors
+kate
+
+# archive
+ark
+
+# browser
+iceweasel-l10n-de
+
