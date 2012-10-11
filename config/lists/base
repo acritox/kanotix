@@ -125,6 +125,7 @@ menu-xdg
 menu
 menu-l10n
 console-setup
+locales
 
 # xorg
 xserver-xorg-video-all
