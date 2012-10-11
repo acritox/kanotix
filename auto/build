@@ -55,6 +55,7 @@ postbuild()
 {
 	[ -d cache/stages_bootstrap ] && mv cache/stages_bootstrap cache/stages_bootstrap$bit
 	[ -f binary-hybrid.iso ] && mv -f binary-hybrid.iso kanotix$bit.iso
+	[ -f binary.hybrid.iso ] && mv -f binary.hybrid.iso kanotix$bit.iso
 }
 
 if [ "$LB_KANOTIX_TMPFS" = "true" ]; then

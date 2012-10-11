@@ -3,6 +3,7 @@
 /kanotix*iso
 /chroot
 /.stage
+/.build
 /config/all
 /config/binary
 /config/bootstrap
@@ -17,6 +18,7 @@
 /config/chroot_debpool/live-media-keyring.pub
 /config/chroot_debpool/live-media-keyring.sec
 /config/chroot_debpool/keep
+/config/package-lists/compat.list.chroot
 /debpool
 /overlay*
 /efi-*

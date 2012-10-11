@@ -1,17 +1,16 @@
 #!/bin/sh
 # Hacks to inject code into various live-build functions
 
+current_script="$(basename "$0"|sed 's/^lb_//')"
+
 # ISO sorting
-if [ "$(basename "$0")" = "lb_binary_iso" ]; then
+if [ "$current_script" = "binary_iso" ]; then
 	echo "HOOK: livebuild-hacks@binary_iso"
-	In_list ()
+	Genisoimage_options_hack ()
 	{
-		. "${LB_BASE}"/functions/aliases.sh
-		In_list "$@"
-		RC=$?
 		if [ -f config/binary_iso/isoimage.sort ]
 		then
-			GENISOIMAGE_OPTIONS="${GENISOIMAGE_OPTIONS} -sort isoimage.sort"
+			echo " -sort isoimage.sort"
 
 			case "${LB_BUILD_WITH_CHROOT}" in
 				true)
@@ -23,17 +22,38 @@ if [ "$(basename "$0")" = "lb_binary_iso" ]; then
 					;;
 			esac
 		fi
+		Genisoimage_options_hack () { true; } # only once -> overload
+	}
+	In_list ()
+	{
+		. "${LB_BASE}"/functions/aliases.sh
+		In_list "$@"
+		RC=$?
+		GENISOIMAGE_OPTIONS="${GENISOIMAGE_OPTIONS}$(Genisoimage_options_hack)"
 		case "$LB_BOOTLOADER" in
 		grub2|burg)
 			LB_BINARY_IMAGES=iso
 			;;
 		esac
-		return $rc
+		return $RC
+	}
+	Install_package ()
+	{
+		. "${LB_BASE}"/functions/packages.sh
+		Install_package "$@"
+		RC=$?
+		LB_ISO_APPLICATION="${LB_ISO_APPLICATION}\"$(Genisoimage_options_hack)\""
+		case "$LB_BOOTLOADER" in
+		grub2|burg)
+			LB_BINARY_IMAGES=iso
+			;;
+		esac
+		return $RC
 	}
 fi
 
 # Grub2: Do not number the default kernel / initrd files.
-if [ "$(basename "$0")" = "lb_binary_grub2" ]; then
+if [ "$current_script" = "binary_grub2" ]; then
 	echo "HOOK: livebuild-hacks@binary_grub2"
 	Overload_Grub_live_entry ()
 	{

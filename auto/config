@@ -86,7 +86,5 @@ lb config noauto --linux-packages "$LB_LINUX_PACKAGES" --linux-flavours "$LB_LIN
 # Fetch kanotix-scripts if necessary
 mkdir -p config/chroot_local-includes/usr/local/bin
 grep -oe '^[^ #]*' scripts.urls | wget -i- -N -q -P config/chroot_local-includes/usr/local/bin
-chmod 755 config/chroot_local-includes/usr/local/bin/*.sh
-chmod 755 config/chroot_local-includes/usr/local/bin/*.bash
+chmod 755 config/chroot_local-includes/usr/local/bin/*sh || :
 
-exit 1

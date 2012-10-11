@@ -1,6 +1,8 @@
 #!/bin/bash
 
-if [ "$(basename "$0")" = "lb_chroot_local-hooks" ]; then
+current_script="$(basename "$0"|sed 's/^lb_//')"
+
+if [ "$current_script" = "chroot_local-hooks" ]; then
 	echo "HOOK: debpool@chroot_local-hooks"
 	if [ -e config/chroot_debpool ]; then
 		mkdir -p chroot/live
@@ -8,7 +10,7 @@ if [ "$(basename "$0")" = "lb_chroot_local-hooks" ]; then
 	fi
 fi
 
-if [ "$(basename "$0")" = "lb_binary_rootfs" ]; then
+if [ "$current_script" = "binary_rootfs" ]; then
 	echo "HOOK: debpool@binary-rootfs"
 	for dir in chroot/chroot/live chroot/live
 	do

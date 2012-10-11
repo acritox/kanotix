@@ -3,7 +3,7 @@
 Expand_packagelist ()
 {
 	. "${LB_BASE}"/functions/packagelists.sh
-	Expand_packagelist "$@" config/lists
+	Expand_packagelist "$@" config/lists config/package-lists
 	. auto/compat
 }
 
