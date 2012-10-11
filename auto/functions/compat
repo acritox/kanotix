@@ -17,7 +17,7 @@ Compat_arguments ()
 		# ignore other unsupported arguments
 		--syslinux-*|--bootstrap-config|-e|--encryption|-l|--language) shift; continue;;
 		--binary-indices|--packages|--symlinks|--sysvinit|--tasks|--virtual-root-size) shift; continue;;
-		--packages-lists|--package-list|-p) Compat_packagelists $1; shift; continue;;
+		--packages-lists|--package-lists|-p) Compat_packagelists $1; shift; continue;;
 		esac
 		echo -n "$arg$IFS"
 	done
