@@ -82,12 +82,13 @@ Compat_clean()
 {
 	for i in config/*.compat
 	do
-		[ -e "$i" ] || return
+		[ -e "$i" ] || return 0
 		target="$(basename "$i" .compat)"
 		[ -e config/$target ] || continue
 		rm -r config/$target
 		rm "$i"
 	done
+	return 0
 }
 
 case "$LB_VERSION" in
