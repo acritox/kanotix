@@ -9,7 +9,6 @@
 #endif
 
 #include <firmware>
-#include <standard-x11>
 
 #include <base.kanotix>
 

@@ -34,9 +34,14 @@ update-manager-core
 update-notifier-kde
 
 # wine
+#if DISTRIBUTION squeeze
 wine1.3
 wine1.3-gecko
 winetricks
+#endif
+#if DISTRIBUTION wheezy
+#include <wheezy-wine>
+#endif
 
 # games
 armagetronad

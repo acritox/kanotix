@@ -1,0 +1,17 @@
+#!/bin/sh
+# Hacks to execute after bootstrapping
+
+current_script="$(basename "$0"|sed 's/^lb_//')"
+
+if [ "$current_script" = "chroot" -a ! -e chroot/usr/local/sbin/update-initramfs ]; then
+	echo "HACK: Disabling update-initramfs to prevent calling it several times during build."
+	mkdir -p chroot/usr/local/sbin
+	ln -fs /bin/true chroot/usr/local/sbin/update-initramfs
+	
+	. config/bootstrap
+	if [ "$LB_ARCHITECTURE" = "amd64" -o "$LB_ARCHITECTURES" = "amd64" ] && [ "$LB_DISTRIBUTION" = "wheezy" ]; then
+		echo "HACK: Enabling multiarch: amd64 + i386"
+		chroot chroot dpkg --add-architecture i386
+	fi
+fi
+

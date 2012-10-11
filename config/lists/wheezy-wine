@@ -1,0 +1,17 @@
+# wine for wheezy (multiarch)
+
+wine-unstable
+winetricks
+
+#if ARCHITECTURE i386
+libwine-alsa-unstable
+libwine-gl-unstable
+libwine-print-unstable
+#endif
+
+#if ARCHITECTURE amd64
+libwine-alsa-unstable:i386
+libwine-gl-unstable:i386
+libwine-print-unstable:i386
+#endif
+

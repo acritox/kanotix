@@ -1,0 +1,10 @@
+# skype for wheezy (multiarch)
+
+#if ARCHITECTURE i386
+skype
+#endif
+
+#if ARCHITECTURE amd64
+skype:i386
+#endif
+

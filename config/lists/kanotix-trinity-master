@@ -21,8 +21,10 @@ pidgin-skype
 khelpcenter-trinity
 
 # wine
+#if DISTRIBUTION squeeze
 wine1.3
 wine1.3-gecko
+#endif
 
 # other hardware
 modemmanager

@@ -12,8 +12,13 @@ apt-xapian-index
 gecko-mediaplayer
 
 # skype
-skype
 pidgin-skype
+#if DISTRIBUTION squeeze
+skype
+#endif
+#if DISTRIBUTION wheezy
+#include <wheezy-skype>
+#endif
 
 # other hardware
 modemmanager
