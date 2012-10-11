@@ -119,6 +119,14 @@ if [ ! -x /usr/bin/mmd ]; then
         echo "Error: mtools are needed! Run: apt-get install mtools" >&2
         exit 1
 fi
+if [ ! -x /sbin/mkfs.msdos ]; then
+        echo "Error: mkfs.msdos is needed! Run: apt-get install dosfstools" >&2
+        exit 1
+fi
+if [ ! -x /sbin/mkfs.hfsplus ]; then
+        echo "Error: mkfs.hfsplus is needed! Run: apt-get install hfsprogs" >&2
+        exit 1
+fi
 
 rm -f "$fat_filename"
 
