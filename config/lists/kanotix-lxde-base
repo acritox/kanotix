@@ -1,0 +1,46 @@
+# Kanotix with LXDE (minimal)
+
+#include <base>
+
+# LXDE
+lxde
+gvfs-backends
+menu
+menu-xdg
+lxtask
+zenity
+lxpolkit
+network-manager-gnome
+desktop-base
+
+#if DISTRIBUTION squeeze
+gdm
+#endif
+#nif DISTRIBUTION squeeze
+gdm3
+#endif
+
+# power management
+xfce4-power-manager
+xfce4-power-manager-plugins
+
+# package tool
+synaptic
+apt-xapian-index
+
+# multimedia
+gecko-mediaplayer
+
+# skype
+pidgin-skype
+#if DISTRIBUTION squeeze
+skype
+#endif
+#if DISTRIBUTION wheezy
+#include <wheezy-skype>
+#endif
+
+# other hardware
+modemmanager
+blueman
+
