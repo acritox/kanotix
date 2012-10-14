@@ -1,0 +1,47 @@
+# Kanotix with LXDE (Master)
+
+#include <kanotix-lxde-base>
+#include <office>
+
+# email
+icedove-l10n-de
+
+# irc
+xchat
+
+# multimedia
+exaile
+xfburn
+
+# graphics
+gimp
+gimp-gutenprint
+xsane
+libsane-extras
+sane-utils
+sane
+
+# network
+openvpn
+network-manager-openvpn
+
+# wine
+#if DISTRIBUTION squeeze
+wine1.3
+wine1.3-gecko
+winetricks
+#endif
+#if DISTRIBUTION wheezy
+#include <wheezy-wine>
+#endif
+
+# games
+armagetronad
+foobillard
+neverball
+neverputt
+kmahjongg
+
+# benchmark
+gl2benchmark
+

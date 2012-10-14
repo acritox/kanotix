@@ -1,0 +1,7 @@
+#!/bin/sh
+# Switch desktop-background to kanotix-starrise-base wallpaper
+if [ ! -e /var/lib/dpkg/info/desktop-base.list ] || [ ! -e /var/lib/dpkg/info/kanotix-starrise-base.list ]
+then
+  return
+fi
+update-alternatives --install /usr/share/images/desktop-base/desktop-background desktop-background /usr/share/images/kanotix-starrise/kanotix-starrise.png 200 || true
