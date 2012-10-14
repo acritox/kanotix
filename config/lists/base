@@ -84,7 +84,7 @@ openssh-client
 sshfs
 cifs-utils
 pppoeconf
-#nfs-common
+nfs-common
 ncpfs
 bluez-audio
 ethtool
