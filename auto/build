@@ -42,18 +42,24 @@ prebuild()
 	mkdir -p config/chroot_local-includes/root
 	cat config/* 2>/dev/null | grep ^LB_ > config/chroot_local-includes/root/build.conf
 
-	if [ -d cache/stages_bootstrap ]; then
-		bsbit=$(file cache/stages_bootstrap/bin/true | grep -q "ELF 64-bit" && echo 64 || echo 32)
-		mv cache/stages_bootstrap cache/stages_bootstrap$bsbit
-	fi
-	[ -d cache/stages_bootstrap$bit ] && mv cache/stages_bootstrap$bit cache/stages_bootstrap
+	for bootstrap_dir in cache/stages_bootstrap cache/bootstrap
+	do
+		if [ -d ${bootstrap_dir} ]; then
+			bsbit=$(file ${bootstrap_dir}/bin/true | grep -q "ELF 64-bit" && echo 64 || echo 32)
+			mv ${bootstrap_dir} ${bootstrap_dir}$bsbit
+		fi
+		[ -d ${bootstrap_dir}$bit ] && mv ${bootstrap_dir}$bit ${bootstrap_dir}
+	done
 	rm -f kanotix$bit.iso
 	echo "LB_SYSLINUX_MENU_LIVE_ENTRY=\"$LABEL\"" >> config/binary
 }
 
 postbuild()
 {
-	[ -d cache/stages_bootstrap ] && mv cache/stages_bootstrap cache/stages_bootstrap$bit
+	for bootstrap_dir in cache/stages_bootstrap cache/bootstrap
+	do
+		[ -d ${bootstrap_dir} ] && mv ${bootstrap_dir} ${bootstrap_dir}$bit
+	done
 	[ -f binary-hybrid.iso ] && mv -f binary-hybrid.iso kanotix$bit.iso
 	[ -f binary.hybrid.iso ] && mv -f binary.hybrid.iso kanotix$bit.iso
 }
