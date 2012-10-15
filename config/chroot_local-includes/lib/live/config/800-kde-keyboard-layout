@@ -1,0 +1,60 @@
+#!/bin/sh
+
+KdeKeyboardLayout ()
+{
+	KXKBRC=/home/${LIVE_USERNAME}/.kde/share/config/kxkbrc
+
+	# Checking if package is already configured
+	if [ -e /var/lib/live/config/kdekeyboardlayout ] || \
+           [ ! -e ${KXKBRC} ]
+	then
+		return
+	fi
+
+	echo -n " kdekeyboardlayout"
+
+	for _PARAMETER in ${_CMDLINE}
+	do
+		case "${_PARAMETER}" in
+			live-config.keyboard-layouts=*|keyboard-layouts=*)
+				LIVE_KEYBOARD_LAYOUTS="${_PARAMETER#*keyboard-layouts=}"
+				;;
+
+			live-config.keyboard-model=*|keyboard-model=*)
+				LIVE_KEYBOARD_MODEL="${_PARAMETER#*keyboard-model=}"
+				;;
+
+			live-config.keyboard-options=*|keyboard-options=*)
+				LIVE_KEYBOARD_OPTIONS="${_PARAMETER#*keyboard-options=}"
+				;;
+
+			live-config.keyboard-variants=*|keyboard-variants=*)
+				LIVE_KEYBOARD_VARIANTS="${_PARAMETER#*keyboard-variants=}"
+				;;
+		esac
+	done
+
+	if [ -z "$LIVE_KEYBOARD_LAYOUTS" ]
+	then
+		LIVE_KEYBOARD_LAYOUTS=us
+	fi
+
+	Configure_kdekeyboardlayout
+}
+
+Configure_kdekeyboardlayout ()
+{
+	COL="$(awk -F'=' '{if($1=="DisplayNames"){gsub(",","\n",$2); print $2}}' "$KXKBRC" | grep -nw "$LIVE_KEYBOARD_LAYOUTS" | cut -d: -f1)"
+	if [ "$COL" = 1 ]; then
+		true # nothing to do, already first position
+	elif [ "$COL" ]; then
+		sed -i 's/^\(DisplayNames\|LayoutList\)=\(.*\),\('$LIVE_KEYBOARD_LAYOUTS'[^,]*\)/\1=\3,\2,/; s/^\(DisplayNames\|LayoutList\)=\([^,]*,.*\)'$LIVE_KEYBOARD_LAYOUTS'[^,]*/\1=\2,/; s/,,*/,/g; s/,$//' "$KXKBRC"
+	else
+		sed -i 's/^\(DisplayNames\|LayoutList\)=/\1='$LIVE_KEYBOARD_LAYOUTS',/; s/,$//' "$KXKBRC"
+	fi
+
+	# Creating state file
+	touch /var/lib/live/config/kdekeyboardlayout
+}
+
+KdeKeyboardLayout
