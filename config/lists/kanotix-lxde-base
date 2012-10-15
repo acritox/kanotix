@@ -1,6 +1,7 @@
 # Kanotix with LXDE (minimal)
 
 #include <base>
+#include <desktop>
 
 # LXDE
 lxde
