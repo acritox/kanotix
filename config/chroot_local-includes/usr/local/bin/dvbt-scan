@@ -1,0 +1,4 @@
+#!/bin/sh
+cd
+mkdir .mplayer
+w_scan -M >.mplayer/channels.conf
