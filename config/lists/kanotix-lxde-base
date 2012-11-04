@@ -3,6 +3,9 @@
 #include <base>
 #include <desktop>
 
+# Kanotix
+etcskel-kanotix-lxde
+
 # LXDE
 lxde
 gvfs-backends

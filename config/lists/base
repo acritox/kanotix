@@ -133,6 +133,7 @@ mesa-utils
 libgl1-mesa-dri
 vainfo
 i965-va-driver
+xinit
 
 # disktools
 gddrescue
