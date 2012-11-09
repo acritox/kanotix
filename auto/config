@@ -39,17 +39,9 @@ lb config noauto \
 	--mirror-binary ${MIRROR_BINARY} \
 	--mirror-binary-security ${MIRROR_BINARY_SECURITY} \
 	--binary-indices true \
-	"${@}" || exit $?
-
-# hostname and username are configured in config/chroot_local-includes/etc/live/config.conf
-#lb config noauto \
-#	--hostname Kanotix \
-#	--username kanotix \
-
-# disable firmware packages (needed for newer lb versions)
-lb config noauto \
 	--firmware-binary false \
-	--firmware-chroot false
+	--firmware-chroot false \
+	"${@}" || exit $?
 
 . config/binary
 . config/bootstrap
