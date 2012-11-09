@@ -28,3 +28,7 @@ wine1.3-gecko
 
 # other hardware
 modemmanager
+
+# fonts
+xfonts-100dpi
+fonts-liberation

@@ -21,12 +21,15 @@ desktop-base
 gdm
 #endif
 #nif DISTRIBUTION squeeze
-gdm3
+lightdm
 #endif
 
 # power management
 xfce4-power-manager
 xfce4-power-manager-plugins
+
+# office
+evince
 
 # package tool
 synaptic

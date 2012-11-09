@@ -45,3 +45,7 @@ kmahjongg
 # benchmark
 gl2benchmark
 
+# fonts
+xfonts-100dpi
+fonts-liberation
+

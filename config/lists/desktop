@@ -25,6 +25,9 @@ joystick
 
 # themes
 gtk2-engines
+#if DISTRIBUTION wheezy
+#include <wheezy-desktop>
+#endif
 
 # print
 hplip-gui

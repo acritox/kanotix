@@ -1,0 +1,6 @@
+# Kanotix desktop for wheezy
+
+#if ARCHITECTURE amd64
+gtk2-engines:i386
+#endif
+
