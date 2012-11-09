@@ -1,4 +1,5 @@
 #!/bin/sh
+[ -x /usr/sbin/ndiswrapper ] || exit 0
 [ -f /root/build.conf ] && . /root/build.conf
 if [ "$LB_ARCHITECTURE" = "amd64" ]; then
 wget -qO- http://kanotix.com/files/fix/ndiswrapper/ndiswrapper64-fwlan64.tar.gz|tar zxC /etc

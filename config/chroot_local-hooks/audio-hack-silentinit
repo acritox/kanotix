@@ -1,4 +1,5 @@
 #!/bin/sh
+[ -x /usr/bin/startkde ] || exit 0
 mkdir -p /etc/skel/.kde/Autostart
 cat >/etc/skel/.kde/Autostart/audio-hack-silentinit.sh <<"EOF"
 #!/bin/sh

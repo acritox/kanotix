@@ -1,3 +1,4 @@
 #!/bin/sh
-sed -i 's/^\(HIDD_ENABLED\)=.*/\1=1/' /etc/default/bluetooth
+[ -e /etc/default/bluetooth ] && sed -i 's/^\(HIDD_ENABLED\)=.*/\1=1/' /etc/default/bluetooth
 #sed -i 's/\(^HIDD_OPTIONS\)=.*/\1="--master --server --search"/' /etc/default/bluetooth
+exit 0
