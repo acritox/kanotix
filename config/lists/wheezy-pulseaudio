@@ -1,0 +1,10 @@
+# pulseaudio for wheezy (multiarch)
+
+pulseaudio-module-x11
+pulseaudio-module-bluetooth
+libasound2-plugins
+pavucontrol
+
+#if ARCHITECTURE amd64
+libasound2-plugins:i386
+#endif
