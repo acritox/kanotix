@@ -1,13 +1,32 @@
-# Kanotix with LXDE (minimal)
+# Kanotix with LXDE (CD-minimal)
 
 #include <base>
 #include <desktop>
 
 # Kanotix
 etcskel-kanotix-lxde
+kmenu-icon-kanotix
 
 # LXDE
+#if DISTRIBUTION squeeze
 lxde
+#endif
+# remove gpicview due to bug #637713 in wheezy
+#nif DISTRIBUTION squeeze
+leafpad
+lxappearance
+lxde-core
+lxde-icon-theme
+lxinput
+lxrandr
+lxsession-edit
+lxshortcut
+lxterminal
+obconf
+xarchiver
+
+geeqie
+#endif
 gvfs-backends
 menu
 menu-xdg
@@ -29,14 +48,36 @@ xfce4-power-manager
 xfce4-power-manager-plugins
 
 # office
-evince
+evince-gtk
+gnumeric
+abiword
 
 # package tool
 synaptic
 apt-xapian-index
 
+# audio
+# xterm is needed by lxpanel to use alsamixer
+#if DISTRIBUTION squeeze
+alsa-utils
+xterm
+#endif
+
+#nif DISTRIBUTION squeeze
+#include <wheezy-pulseaudio>
+#endif
+
 # multimedia
 gecko-mediaplayer
+me-tv
+exaile
+#gstreamer0.10-fluendo-mp3
+gstreamer0.10-plugins-ugly
+gstreamer0.10-ffmpeg
+vlc
+#nif DISTRIBUTION squeeze
+vlc-plugin-pulse
+#endif
 
 # skype
 pidgin-skype
@@ -49,5 +90,28 @@ skype
 
 # other hardware
 modemmanager
+mobile-broadband-provider-info
 blueman
+xfburn
+eject
 
+# dvb
+w-scan
+
+# irc
+xchat
+
+# email
+icedove-l10n-de
+
+# grafik
+qtqr
+simple-scan
+
+# other
+ncdu
+gnome-screenshot
+
+# games
+mahjongg
+gnome-sudoku
