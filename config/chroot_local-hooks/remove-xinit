@@ -3,4 +3,4 @@ _X11=false
 for x in gdm gdm3 kdm lightdm lxdm nodm slim; do
  [ -f /var/lib/dpkg/info/$x.list ] && _X11=true || :
 done
-[ "$_X11" = "true" ] && rm -vf /lib/live/config/014-xinit || :
+[ "$_X11" = "true" ] && rm -vf /lib/live/config/0*-xinit || :
