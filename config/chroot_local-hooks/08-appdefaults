@@ -7,4 +7,4 @@ update-alternatives --set x-www-browser /usr/bin/iceweasel || true
 update-alternatives --set x-session-manager /usr/bin/startlxde || true
 update-alternatives --set x-session-manager /usr/bin/startkde || true
 update-alternatives --set editor /usr/bin/vim.basic || true
-
+update-alternatives --set editor /usr/bin/mcedit || true
