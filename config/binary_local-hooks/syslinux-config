@@ -1,0 +1,14 @@
+#!/bin/sh
+# Copying local syslinux configuration files
+
+case "$LB_BOOTLOADER" in
+syslinux)
+	;;
+*)
+	exit 0
+	;;
+esac
+
+
+	mkdir -p binary/isolinux
+        cp config/binary_syslinux/* binary/isolinux/
