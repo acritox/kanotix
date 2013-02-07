@@ -13,16 +13,15 @@ fi
 # vim tuning
 if [ -d /etc/vim ]; then
  rm -f /etc/vim/vimrc.local
-cat <<EOT > /etc/vim/vimrc.local
-syntax on
-set background=dark
-set showmatch          " Show matching brackets.
+wget -O /etc/vim/vimrc.local https://raw.github.com/amix/vimrc/master/vimrcs/basic.vim
+cat <<EOT >> /etc/vim/vimrc.local
+
 set pastetoggle=<F10>
 EOT
 fi
 
 # fix kdm/gdm/xdm/wdm startup
-for x in kdm gdm xdm wdm; do
+for x in kdm gdm xdm wdm lightdm; do
  if [ -x /etc/init.d/$x ]; then
   update-rc.d -f $x remove
   update-rc.d $x start 99 5 . stop 01 0 1 2 3 4 6 .
