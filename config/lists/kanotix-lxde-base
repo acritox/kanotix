@@ -82,7 +82,7 @@ vlc-plugin-pulse
 # skype
 pidgin-skype
 #if DISTRIBUTION squeeze
-skype
+#include <squeeze-skype>
 #endif
 #if DISTRIBUTION wheezy
 #include <wheezy-skype>
@@ -93,7 +93,6 @@ modemmanager
 mobile-broadband-provider-info
 blueman
 xfburn
-eject
 
 # dvb
 w-scan

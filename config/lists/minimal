@@ -1,9 +1,0 @@
-eject file user-setup
-
-#if MODE ubuntu
-gnupg
-#endif
-
-#if DISTRIBUTION wheezy
-live-config
-#endif

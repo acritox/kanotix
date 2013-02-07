@@ -1,7 +1,8 @@
 #!/bin/sh
-exit
-
 if [ -f /usr/share/applications/skype.desktop ]; then
- sed -i 's|\(Exec\)=.*|\1=XLIB_SKIP_ARGB_VISUALS=1 LD_PRELOAD=/usr/lib/libv4l/v4l1compat.so skype|' /usr/share/applications/skype.desktop || true
- [ -r /usr/lib32/libv4l/v4l1compat.so ] && sed -i 's|\(Exec\)=.*|\1=XLIB_SKIP_ARGB_VISUALS=1 LD_PRELOAD=/usr/lib32/libv4l/v4l1compat.so skype|' /usr/share/applications/skype.desktop || true
+    for lib in /usr/lib/i386-linux-gnu/libv4l/v4l1compat.so /usr/lib32/libv4l/v4l1compat.so /usr/lib/libv4l/v4l1compat.so
+    do
+        [ ! -r "$lib" ] && continue
+        sed -i 's|\(Exec\)=.*|\1=XLIB_SKIP_ARGB_VISUALS=1 LD_PRELOAD='"$lib"' skype|' /usr/share/applications/skype.desktop || true
+    done
 fi

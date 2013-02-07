@@ -1,13 +1,5 @@
 # Kanotix base Packages List
 
-#if ARCHITECTURE i386
-#include <base.i386>
-#endif
-
-#if ARCHITECTURE amd64
-#include <base.amd64>
-#endif
-
 #include <firmware>
 
 #include <base.kanotix>
@@ -70,6 +62,8 @@ schedtool
 hwinfo
 alsa-oss
 smartmontools
+eject
+file
 user-setup
 whois
 zsync
@@ -166,7 +160,6 @@ btrfs-tools
 # firmware
 ndiswrapper-utils-1.9
 ndiswrapper-dkms
-libv4l-0
 
 # other hardware
 bluez

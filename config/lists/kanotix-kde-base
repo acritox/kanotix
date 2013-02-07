@@ -15,7 +15,7 @@ mplayerthumbs
 # skype
 pidgin-skype
 #if DISTRIBUTION squeeze
-skype
+#include <squeeze-skype>
 #endif
 #if DISTRIBUTION wheezy
 #include <wheezy-skype>
