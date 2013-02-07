@@ -1,0 +1,5 @@
+#!/bin/bash
+if [ -x /usr/sbin/lightdm ]; then
+    # dirty hack kanotix wallpaper on login-screen
+    echo "background=/usr/share/images/kanotix-starrise/kanotix-starrise.png" >>/etc/lightdm/lightdm-gtk-greeter.conf
+fi
