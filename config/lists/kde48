@@ -1,5 +1,0 @@
-# additional packages needed for KDE4.8 from acritox-kde48 backport repository
-phonon-backend-vlc
-vlc
-konsole
-libicu48

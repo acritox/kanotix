@@ -11,6 +11,12 @@ apt-xapian-index
 # multimedia
 gecko-mediaplayer
 mplayerthumbs
+vlc
+phonon-backend-vlc
+#nif DISTRIBUTION squeeze
+#include <wheezy-pulseaudio>
+vlc-plugin-pulse
+#endif
 
 # skype
 pidgin-skype

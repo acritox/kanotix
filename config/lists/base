@@ -23,6 +23,7 @@ gfxoverlay
 # multimedia
 sox
 alsa-oss
+alsa-utils
 
 # chat, irc
 weechat 

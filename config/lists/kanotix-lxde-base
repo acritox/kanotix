@@ -63,10 +63,6 @@ alsa-utils
 xterm
 #endif
 
-#nif DISTRIBUTION squeeze
-#include <wheezy-pulseaudio>
-#endif
-
 # multimedia
 gecko-mediaplayer
 me-tv
@@ -76,6 +72,7 @@ gstreamer0.10-plugins-ugly
 gstreamer0.10-ffmpeg
 vlc
 #nif DISTRIBUTION squeeze
+#include <wheezy-pulseaudio>
 vlc-plugin-pulse
 #endif
 
