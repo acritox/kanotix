@@ -37,7 +37,7 @@ mkdir -p "$workdir/boot/grub"
 cat >"$workdir/boot/grub/grub.cfg" <<EOF
 search --file --set=root /.disk/info
 set prefix=(\$root)/boot/grub
-source \$prefix/grub.cfg
+source \$prefix/$platform/grub.cfg
 EOF
 
 mkdir -p "binary/boot/grub/$platform"
