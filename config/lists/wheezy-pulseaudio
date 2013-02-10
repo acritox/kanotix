@@ -4,6 +4,7 @@ pulseaudio-module-x11
 pulseaudio-module-bluetooth
 libasound2-plugins
 pavucontrol
+vlc-plugin-pulse
 
 #if ARCHITECTURE amd64
 libasound2-plugins:i386

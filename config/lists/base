@@ -13,7 +13,6 @@ grub-pc
 grub-efi-amd64-bin
 grub-efi-ia32-bin
 efibootmgr
-syslinux
 syslinux-common
 #endif
 
@@ -86,6 +85,8 @@ ethtool
 vpnc
 comgt
 wvdial
+rfkill
+nmap
 
 # print
 cups-bsd
@@ -96,6 +97,7 @@ foomatic-db-gutenprint
 cups-driver-gutenprint
 foo2zjs
 #printconf
+printer-driver-splix
 
 # build
 module-assistant
@@ -144,6 +146,7 @@ kpartx
 dosfstools
 lvm2
 hfsprogs
+exfat-utils
 
 # filesystem tools
 parted

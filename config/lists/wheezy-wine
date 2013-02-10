@@ -7,11 +7,14 @@ winetricks
 libwine-alsa-unstable
 libwine-gl-unstable
 libwine-print-unstable
+libgl1-mesa-dri
 #endif
 
 #if ARCHITECTURE amd64
 libwine-alsa-unstable:i386
 libwine-gl-unstable:i386
 libwine-print-unstable:i386
+libgl1-mesa-dri:i386
+libxtst6:i386
 #endif
 
