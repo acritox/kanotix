@@ -1,0 +1,19 @@
+#!/bin/sh
+# hotfixes for grub2.00:
+# * move modules to binary/boot/grub/i386-pc
+
+case "$LB_BOOTLOADER" in
+grub2|burg)
+	;;
+*)
+	exit 0
+	;;
+esac
+
+if [ -d binary/boot/grub ]
+then
+	mkdir -p binary/boot/grub/i386-pc
+    mv binary/boot/grub/*.mod binary/boot/grub/*.lst binary/boot/grub/efiemu??.o binary/boot/grub/*.pf2 binary/boot/grub/i386-pc/
+fi
+
+exit 0

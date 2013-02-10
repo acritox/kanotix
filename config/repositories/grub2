@@ -1,0 +1,3 @@
+# Grub 2.00
+deb http://kanotix.com/files/fix/grub2.wheezy ./
+deb-src http://kanotix.com/files/fix/grub2.wheezy ./
