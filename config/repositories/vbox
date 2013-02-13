@@ -1,2 +1,2 @@
 # VirtualBox
-deb http://download.virtualbox.org/virtualbox/debian squeeze contrib
+deb http://download.virtualbox.org/virtualbox/debian @DISTRIBUTION@ contrib
