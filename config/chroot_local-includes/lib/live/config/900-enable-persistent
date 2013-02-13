@@ -4,8 +4,6 @@
 
 case "$(awk '{if($2=="/live/image"){print $1;}}' /proc/mounts)" in
 /dev/sd*) 
-	# TODO workaround with mountpoints use grub.cmdline as flag
-	# also in enable_persistent_live.bash needed
 	case "$( ls /grub.cmdline 2>/dev/null)" in
 	/grub.cmdline)
 		rm -f /home/${LIVE_USERNAME}/Desktop/enable_persistent.desktop
