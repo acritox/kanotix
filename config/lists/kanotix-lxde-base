@@ -6,6 +6,7 @@
 # Kanotix
 etcskel-kanotix-lxde
 kmenu-icon-kanotix
+kanotix-lxde-extra
 
 # LXDE
 #if DISTRIBUTION squeeze
