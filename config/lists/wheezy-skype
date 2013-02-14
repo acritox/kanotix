@@ -2,11 +2,9 @@
 
 #if ARCHITECTURE i386
 skype
-libv4l-0
 #endif
 
 #if ARCHITECTURE amd64
 skype:i386
-libv4l-0:i386
 #endif
 
