@@ -1,11 +1,4 @@
-# pulseaudio for wheezy (multiarch)
+# pulseaudio for wheezy with vlc (multiarch)
 
-pulseaudio-module-x11
-pulseaudio-module-bluetooth
-libasound2-plugins
-pavucontrol
+#include <wheezy-pulseaudio-base>
 vlc-plugin-pulse
-
-#if ARCHITECTURE amd64
-libasound2-plugins:i386
-#endif
