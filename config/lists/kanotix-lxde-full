@@ -1,17 +1,9 @@
-# Kanotix with LXDE (Master)
+# Kanotix with LXDE (full)
+# not used yet
 
-#include <kanotix-lxde-base>
+#include <kanotix-lxde-master>
+
 #include <office>
-
-# email
-#icedove-l10n-de
-
-# irc
-#xchat
-
-# multimedia
-#exaile
-#xfburn
 
 # graphics
 gimp
@@ -36,16 +28,8 @@ winetricks
 #endif
 
 # games
-armagetronad
-foobillard
-neverball
-neverputt
-kmahjongg
 
 # benchmark
 gl2benchmark
 
 # fonts
-xfonts-100dpi
-fonts-liberation
-fonts-droid

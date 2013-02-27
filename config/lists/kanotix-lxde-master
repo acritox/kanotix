@@ -1,6 +1,56 @@
-# Kanotix with LXDE (Master)
+# Kanotix with LXDE (Master CD-Version)
 
 #include <kanotix-lxde-base>
+
+# office
+abiword
+evince-gtk
+
+# package tool
+synaptic
+apt-xapian-index
+
+# multimedia
+me-tv
+gecko-mediaplayer
+exaile
+#gstreamer0.10-fluendo-mp3
+gstreamer0.10-plugins-ugly
+gstreamer0.10-ffmpeg
+vlc
+#nif DISTRIBUTION squeeze
+vlc-plugin-pulse
+#endif
+
+# other hardware
+blueman
+xfburn
+
+# dvb
+w-scan
+
+# email
+icedove-l10n-de
+
+# grafik
+qtqr
+simple-scan
+
+#other
+ncdu
+
+# skype
+pidgin-skype
+#if DISTRIBUTION squeeze
+#include <squeeze-skype>
+#endif
+#if DISTRIBUTION wheezy
+#include <wheezy-skype>
+#endif
+
+# games
+mahjongg
+gnome-sudoku
 
 # benchmark
 #gl2benchmark

@@ -1,7 +1,27 @@
-# Kanotix with LXDE (lxde-base)
+# Kanotix with LXDE (minimal)
 
 #include <base>
-#include <desktop>
+
+## in desktop
+# needed packages from desktop list
+# tools
+gparted
+gksu
+
+# themes
+gtk2-engines
+#if DISTRIBUTION wheezy
+#include <wheezy-desktop>
+#endif
+
+# tools
+joystick
+
+# some tools or fixes
+dillo
+epdfview
+ca-certificates
+#  desktop finish
 
 # Kanotix
 etcskel-kanotix-lxde
