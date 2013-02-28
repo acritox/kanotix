@@ -1,3 +1,5 @@
 #!/bin/sh
 # gparted hotfix for fat filesystems on raid devices
-sed -ri 's|(mkdosfs )-F(..) -v|\1-vIF\2 |g' /usr/sbin/gpartedbin
+if [ -x /usr/sbin/gpartedbin ]; then
+ sed -ri 's|(mkdosfs )-F(..) -v|\1-vIF\2 |g' /usr/sbin/gpartedbin
+fi
