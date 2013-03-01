@@ -1,7 +1,7 @@
 # Kanotix with LXDE (lxde-base)
 
 #include <base>
-#include <desktop>
+#include <desktop-base>
 
 # Kanotix
 etcskel-kanotix-lxde

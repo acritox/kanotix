@@ -1,6 +1,7 @@
 # Kanotix with LXDE (Master CD-Version)
 
 #include <kanotix-lxde-base>
+#include <compiz-gtk>
 
 # office
 abiword
@@ -38,9 +39,10 @@ simple-scan
 
 #other
 ncdu
+galculator
+xzdec
 
 # skype
-pidgin-skype
 #if DISTRIBUTION squeeze
 #include <squeeze-skype>
 #endif
