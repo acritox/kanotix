@@ -1,8 +1,26 @@
 #!/bin/sh
-# "enable persistent" desktop-icon
-[ -x /usr/local/bin/enable_persistent_live.bash ] || exit 0
 
-case "$(awk '{if($2=="/live/image"){print $1;}}' /proc/mounts)" in
+# "enable persistent" desktop-icon
+
+Persistent ()
+{
+if [ -e /var/lib/live/config/enable-persistent ]
+then
+	return
+fi
+echo -n " enable-persistent"
+Configure_Persistent
+}
+
+Configure_Persistent ()
+{
+if ! [ -x /usr/local/bin/enable_persistent_live.bash ]
+then
+	touch /var/lib/live/config/enable-persistent 
+	return
+fi
+
+case "$(awk '{if($2=="/live/image"||$2=="/lib/live/mount/medium"){print $1;}}' /proc/mounts)" in
 /dev/sd*) 
 	case "$( ls /grub.cmdline 2>/dev/null)" in
 	/grub.cmdline)
@@ -32,3 +50,7 @@ EOF
 	;;
 esac
 
+touch /var/lib/live/config/enable-persistent
+}
+
+Persistent
