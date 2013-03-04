@@ -24,6 +24,7 @@ gfxoverlay
 sox
 alsa-oss
 alsa-utils
+w-scan
 
 # chat, irc
 weechat 
@@ -72,6 +73,7 @@ rpm2cpio
 usbutils
 exif
 fsarchiver
+xterm
 
 # network
 pcmciautils
@@ -129,8 +131,10 @@ xserver-xorg-video-all
 xserver-xorg-input-all
 mesa-utils
 libgl1-mesa-dri
+libgl1-mesa-glx
 #if ARCHITECTURE amd64
 libgl1-mesa-dri:i386
+libgl1-mesa-glx:i386
 #endif
 vainfo
 i965-va-driver
