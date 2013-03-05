@@ -1,0 +1,17 @@
+#!/bin/sh
+if [ -d /usr/lib/mesa-diverted ]; then
+ update-alternatives --set glx /usr/lib/mesa-diverted
+fi
+
+if [ -f /etc/kde4/kdm/kdmrc ]; then
+ sed -i 's|\(ServerArgsLocal=-br -nolisten tcp\).*|\1 -dpi 96|' /etc/kde4/kdm/kdmrc
+fi
+
+if [ -f /usr/share/initramfs-tools/scripts/init-bottom/01gfxdetect ]; then
+ if [ -f /etc/alternatives/glx--fglrx-blacklists-radeon.conf ]; then
+  sed -i 's/.*\(blacklist\)/#\1/' /etc/alternatives/glx--fglrx-blacklists-radeon.conf
+ fi
+ if [ -f /etc/modprobe.d/nvidia-kernel-common.conf ]; then
+  sed -i 's/.*\(blacklist\)/#\1/' /etc/modprobe.d/nvidia-kernel-common.conf
+ fi
+fi

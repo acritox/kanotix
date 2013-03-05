@@ -1,0 +1,2 @@
+deb http://kanotix.com/files/fix/mesa.wheezy ./
+deb-src http://kanotix.com/files/fix/mesa.wheezy ./
