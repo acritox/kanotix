@@ -1,0 +1,17 @@
+# default packages
+
+icedove-l10n-it
+iceweasel-l10n-it
+kde-l10n-it
+
+# libre office packages
+
+libobasis4.0-it
+libobasis4.0-it-base
+libobasis4.0-it-calc
+libobasis4.0-it-help
+libobasis4.0-it-math
+libobasis4.0-it-res
+libobasis4.0-it-writer
+libreoffice4.0-dict-it
+libreoffice4.0-it
