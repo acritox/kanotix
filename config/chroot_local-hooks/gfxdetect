@@ -5,6 +5,7 @@ fi
 
 if [ -f /etc/kde4/kdm/kdmrc ]; then
  sed -i 's|\(ServerArgsLocal=-br -nolisten tcp\).*|\1 -dpi 96|' /etc/kde4/kdm/kdmrc
+ sed -i 's/.*\(TerminateServer=\).*/\1true/' /etc/kde4/kdm/kdmrc
 fi
 
 if [ -f /usr/share/initramfs-tools/scripts/init-bottom/01gfxdetect ]; then
