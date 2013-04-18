@@ -5,17 +5,27 @@
 #include <kde.kanotix>
 
 # package tool
+#if DISTRIBUTION squeeze
 synaptic
+#endif
+#nif DISTRIBUTION squeeze
+apper
+#endif
 apt-xapian-index
 
 # multimedia
 gecko-mediaplayer
 mplayerthumbs
 vlc
-phonon-backend-vlc
+#if DISTRIBUTION squeeze
+phonon-backend-xine
+#endif
+gstreamer0.10-plugins-ugly
 #nif DISTRIBUTION squeeze
 #include <wheezy-pulseaudio>
 vlc-plugin-pulse
+gstreamer0.10-pulseaudio
+phonon-backend-gstreamer
 #endif
 
 # skype
