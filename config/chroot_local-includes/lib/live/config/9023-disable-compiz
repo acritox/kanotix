@@ -18,7 +18,8 @@ Configure_nocompiz ()
 	then
 		return
 	fi
-	rm -f /home/${LIVE_USERNAME}/.config/autostart/compiz_start.desktop
+	#rm -f /home/${LIVE_USERNAME}/.config/autostart/compiz_start.desktop
+	touch /home/${LIVE_USERNAME}/.nocompiz
 	# Creating state file
 	touch /var/lib/live/config/nocompiz
 }
