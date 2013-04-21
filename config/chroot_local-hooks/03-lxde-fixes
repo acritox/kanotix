@@ -1,6 +1,12 @@
-#!/bin/bash
+#!/bin/sh
+
 if [ -x /usr/sbin/lightdm ]; then
     # dirty hack kanotix wallpaper on login-screen
     echo "background=/usr/share/images/kanotix-starrise/kanotix-starrise.png" >>/etc/lightdm/lightdm-gtk-greeter.conf
     sed -i s/Industrial/Clearlooks/ /etc/skel/.gtkrc-2.0
+
+    # on lxde delete packages to reduce image-size
+    apt-get purge --yes aptitude aptitude-common
+    apt-get purge --yes vim vim-common vim-runtime
+
 fi
