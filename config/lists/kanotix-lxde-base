@@ -12,7 +12,6 @@ kanotix-lxde-extra
 #if DISTRIBUTION squeeze
 lxde
 #endif
-# remove gpicview due to bug #637713 in wheezy
 #nif DISTRIBUTION squeeze
 leafpad
 lxappearance
@@ -26,8 +25,7 @@ lxterminal
 obconf
 lxappearance-obconf
 xarchiver
-
-geeqie
+gpicview
 #endif
 gvfs-backends
 menu
