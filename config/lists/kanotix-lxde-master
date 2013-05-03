@@ -25,6 +25,7 @@ vlc
 #nif DISTRIBUTION squeeze
 vlc-plugin-pulse
 #endif
+ffmpegthumbnailer
 
 # other hardware
 blueman
