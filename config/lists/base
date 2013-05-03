@@ -155,6 +155,7 @@ dosfstools
 lvm2
 hfsprogs
 exfat-utils
+zram
 
 # filesystem tools
 parted
