@@ -3,7 +3,6 @@
 #include <base>
 #include <desktop-base>
 
-live-zram
 # Kanotix
 etcskel-kanotix-lxde
 kmenu-icon-kanotix
@@ -27,8 +26,8 @@ lxterminal
 obconf
 lxappearance-obconf
 xarchiver
-gpicview
-#geeqie
+
+geeqie
 #endif
 gvfs-backends
 menu
