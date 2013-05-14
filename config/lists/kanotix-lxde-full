@@ -17,6 +17,9 @@ sane
 openvpn
 network-manager-openvpn
 
+# email
+icedove-l10n-de
+
 # wine
 #if DISTRIBUTION squeeze
 wine1.3

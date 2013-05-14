@@ -4,7 +4,6 @@
 #include <compiz-gtk>
 
 # office
-abiword
 evince-gtk
 simple-scan
 geany
@@ -35,7 +34,6 @@ xfburn
 w-scan
 
 # email
-icedove-l10n-de
 
 # grafik
 qtqr
@@ -43,7 +41,6 @@ simple-scan
 
 #other
 ncdu
-galculator
 xzdec
 
 # skype
@@ -59,9 +56,15 @@ mahjongg
 gnome-sudoku
 
 # benchmark
-#gl2benchmark
 
 # fonts
 xfonts-100dpi
 fonts-liberation
 fonts-droid
+
+
+# isofiller
+xpad
+guvcview
+sylpheed-i18n
+foobillard

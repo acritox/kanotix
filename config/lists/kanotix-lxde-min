@@ -29,26 +29,9 @@ kmenu-icon-kanotix
 kanotix-lxde-extra
 
 # LXDE
-#if DISTRIBUTION squeeze
 lxde
-#endif
-# remove gpicview due to bug #637713 in wheezy
-#nif DISTRIBUTION squeeze
-leafpad
-lxappearance
-lxde-core
-lxde-icon-theme
-lxinput
-lxrandr
-lxsession-edit
-lxshortcut
-lxterminal
-obconf
 lxappearance-obconf
-xarchiver
 
-geeqie
-#endif
 gvfs-backends
 menu
 menu-xdg
