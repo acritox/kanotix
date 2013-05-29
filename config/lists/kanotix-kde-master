@@ -57,6 +57,7 @@ kmahjongg
 gl2benchmark
 
 # fonts
+xfonts-base
 xfonts-100dpi
 fonts-liberation
 fonts-droid
