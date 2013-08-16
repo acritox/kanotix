@@ -11,6 +11,8 @@ kanotix-lxde-extra
 # LXDE
 lxde
 lxappearance-obconf
+console-data
+clearlooks-phenix-theme
 
 gvfs-backends
 menu
@@ -46,6 +48,7 @@ xterm
 # other hardware
 modemmanager
 mobile-broadband-provider-info
+gnome-keyring
 
 # irc
 xchat
