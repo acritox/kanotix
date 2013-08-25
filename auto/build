@@ -10,34 +10,16 @@ LABEL=Kanotix
 export LB_BOOTLOADER LB_BINARY_IMAGES
 
 # Update kanotix-version (32/64-bit and timestamp)
-declare -A KANOTIX_CODENAME
-KANOTIX_CODENAMES[lenny]=Excalibur;
-KANOTIX_CODENAMES[squeeze]=Hellfire;
-KANOTIX_CODENAMES[wheezy]=Dragonfire;
-KANOTIX_CODENAME=${KANOTIX_CODENAMES[$LB_DISTRIBUTION]}
+KANOTIX_CODENAMES="lenny=Excalibur squeeze=Hellfire wheezy=Dragonfire jessie=TBA"
+KANOTIX_CODENAME="$(echo $KANOTIX_CODENAMES | fmt -w1 | grep "^${LB_DISTRIBUTION}=" | cut -d= -f2)"
 
 mkdir -p config/chroot_local-includes/etc
 [ ! -f config/chroot_local-includes/etc/kanotix-version ] && echo Kanotix $KANOTIX_CODENAME 0000-00:00 > config/chroot_local-includes/etc/kanotix-version
-[ "$KANOTIX_CODENAME" ] && perl -pi -e "s%($(echo ${KANOTIX_CODENAMES[@]}|tr ' ' '|'))%$KANOTIX_CODENAME%i; s%(Kanotix|$KANOTIX_CODENAME)(32|64)%\${1}$bit%i" config/chroot_local-includes/etc/kanotix-version
+[ "$KANOTIX_CODENAME" ] && perl -pi -e "s%($(echo $(echo $KANOTIX_CODENAMES | fmt -w1 | cut -d= -f2) | tr ' ' '|'))%$KANOTIX_CODENAME%i; s%(Kanotix|$KANOTIX_CODENAME)(32|64)%\${1}$bit%i" config/chroot_local-includes/etc/kanotix-version
 perl -pi -e "s%(32|64)(bit)%$bit\${2}%i; s|[0-9]+-[0-9]+:[0-9]+|$(date +%Y%m%d-%H:%M)|" config/chroot_local-includes/etc/kanotix-version
 
 prebuild()
 {
-	# Include nvidia-driver into chroot
-	if [ "$LB_KANOTIX_NVIDIA" = "true" -a -f config/chroot_local-includes/usr/local/bin/install-nvidia-debian.sh ]; then
-		mkdir -p config/chroot_local-includes/usr/src
-		VER="$(grep -o ^VER=.* config/chroot_local-includes/usr/local/bin/install-nvidia-debian.sh|sed s/VER=//)"
-		ARCH=; [ "$LB_ARCHITECTURE" = "amd64" ] && ARCH="_64"
-		URL="http://download.nvidia.com/XFree86/Linux-x86$ARCH/$VER/NVIDIA-Linux-x86$ARCH-$VER.run"
-		if [ "$LB_CACHE" = "false" ]; then
-			wget -N -P config/chroot_local-includes/usr/src "$URL"
-		else
-			mkdir -p cache
-			wget -N -P cache "$URL"
-			cp "cache/$(basename "$URL")" "config/chroot_local-includes/usr/src/$(basename "$URL")"
-		fi
-	fi
-
 	# make current build configuration available for hooks inside chroot
 	mkdir -p config/chroot_local-includes/root
 	cat config/* 2>/dev/null | grep ^LB_ > config/chroot_local-includes/root/build.conf

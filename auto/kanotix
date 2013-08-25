@@ -7,7 +7,6 @@ usage()
 cat <<eof
 
 Additional Options for Kanotix:
-	    [--include-nvidia true|false]
 	    [--tmpfs true|false]
 	    [--tmpfs-options OPTIONS]
 	    [--gfxoverlays true|false]
@@ -17,7 +16,6 @@ eof
 
 write_kanotix_config()
 {
-[ -z "${LB_KANOTIX_NVIDIA}" ] && LB_KANOTIX_NVIDIA="false"
 [ -z "${LB_KANOTIX_TMPFS}" ] && [ -d tmpfs ] && LB_KANOTIX_TMPFS="true"
 [ -z "${LB_KANOTIX_TMPFS}" ] && LB_KANOTIX_TMPFS="false"
 [ -z "${LB_KANOTIX_TMPFS_OPTIONS}" ] && [ -f tmpfs/options ] && LB_KANOTIX_TMPFS_OPTIONS="$(<tmpfs/options)"
@@ -25,10 +23,6 @@ write_kanotix_config()
 [ -z "${LB_KANOTIX_GFXOVERLAYS}" ] && LB_KANOTIX_GFXOVERLAYS="false"
 cat >config/kanotix << EOF
 # config/kanotix - additional options for Kanotix
-
-# \$LB_KANOTIX_NVIDIA: include NVidia-Drivers into chroot
-# (Default: ${LB_KANOTIX_NVIDIA})
-LB_KANOTIX_NVIDIA="${LB_KANOTIX_NVIDIA}"
 
 # \$LB_KANOTIX_TMPFS: use tmpfs to build
 # (Default: ${LB_KANOTIX_TMPFS})
@@ -51,10 +45,6 @@ unset args; i=1
 while [ "$1" ]
 do
         case "$1" in
-	--include-nvidia)
-		LB_KANOTIX_NVIDIA="$2"
-		shift
-		;;
 	--tmpfs)
 		LB_KANOTIX_TMPFS="$2"
 		shift
