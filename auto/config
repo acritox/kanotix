@@ -74,6 +74,7 @@ grep -wq chrome <<<"$LB_PACKAGES $LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" chrom
 grep -wq mesa <<<"$LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" mesa"
 grep -wq steam <<<"$LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" steam steam-wheezy"
 grep -wq firefox <<<"$LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" firefox-wheezy"
+grep -wq silverlight <<<"$LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" silverlight"
 lb config noauto --linux-packages "$LB_LINUX_PACKAGES" --linux-flavours "$LB_LINUX_FLAVOURS" --repositories "$LB_REPOSITORIES"
 
 # Fetch kanotix-scripts if necessary

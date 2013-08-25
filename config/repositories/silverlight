@@ -1,0 +1,3 @@
+# patched wine for Silverlight
+deb http://ppa.launchpad.net/ehoover/compholio/ubuntu precise main 
+deb-src http://ppa.launchpad.net/ehoover/compholio/ubuntu precise main 
