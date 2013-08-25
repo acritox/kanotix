@@ -1,0 +1,3 @@
+#!/bin/bash
+# fixes mouse for Macbook Trackpad
+sed -i "s/\(hid-zydacron.ko\)$/\1 usbmouse.ko/" /usr/share/initramfs-tools/hook-functions

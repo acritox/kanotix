@@ -52,6 +52,8 @@ Configure_kdekeyboardlayout ()
 	else
 		sed -i 's/^\(DisplayNames\|LayoutList\)=/\1='$LIVE_KEYBOARD_LAYOUTS',/; s/,$//' "$KXKBRC"
 	fi
+    [ -r /etc/default/keyboard ] && . /etc/default/keyboard
+    [ "$XKBMODEL" ] && kwriteconfig --file "$KXKBRC" --group Layout --key Model --type string "$XKBMODEL"
 
 	# Creating state file
 	touch /var/lib/live/config/kdekeyboardlayout

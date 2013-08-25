@@ -1,13 +1,19 @@
 #!/bin/sh
+exit 0 # hook disabled
 mkdir -p /etc/skel/.kde/Autostart
-cat >/etc/skel/.kde/Autostart/macbook.sh <<MAC
+cat >/etc/skel/.kde/Autostart/macbook.sh <<"MAC"
 #!/bin/sh
 if grep -q "Apple.*Keyboard" /proc/bus/input/devices; then
 	setxkbmap -model macbook79
-	if [ -f ~/.kde/share/config/synaptiksrc-macbook ]; then
-		mv -f ~/.kde/share/config/synaptiksrc-macbook ~/.kde/share/config/synaptiksrc
-		qdbus org.kde.synaptiks /modules/synaptiks org.kde.Synaptiks.reparseConfiguration
-	fi
+    
+    # reverse scroll wheel
+    set -- $(xmodmap -pp | tail -n+5 | awk '{print $2}')
+    xmodmap -e "pointer = $(echo "$1 $2 $3 5 4"; shift 5; echo "$@")"
+    sed -i 's/\(ReverseScrollPolarity\)=.*$/\1=true/' ~/.kde/share/config/kcminputrc
+
+    # disable tap = click because Apple Trackpads have an own click button
+    sed -i 's/^\(.*"f1_tap_action":\) [01]\(.*\)$/\1 0\2/' ~/.config/synaptiks/touchpad-config.json
+    synaptikscfg load
 fi
 MAC
 chmod +x /etc/skel/.kde/Autostart/macbook.sh
