@@ -10,7 +10,22 @@ if [ "$current_script" = "binary_iso" ]; then
 	{
 		if [ -f config/binary_iso/isoimage.sort ]
 		then
-			echo " -sort isoimage.sort"
+            case "${LB_PARENT_DISTRIBUTION}" in
+                squeeze) echo " -sort isoimage.sort";; # genisoimage
+                *) # xorriso - emulate the "-sort" argument of genisoimage:
+                    set -x
+                    echo " --boot-catalog-hide" $( 
+                        while read pattern weight
+                        do
+                            for file in $pattern
+                            do
+                                [ -e "$file" ] && echo --sort-weight "$(echo "100+0$weight" | bc)" "$file"
+                            done
+                        done < config/binary_iso/isoimage.sort | sed 's/ binary/ /')
+                    set +x
+                    ;;
+                    # echo ' --boot-catalog-hide $(while read pattern weight; do for file in $pattern; do [ -e "$file" ] && echo --sort-weight "$(echo "100+0$weight" | bc)" "$(echo "$file"|sed 's/^binary//')"; done; done < isoimage.sort)';;
+            esac
 
 			case "${LB_BUILD_WITH_CHROOT}" in
 				true)

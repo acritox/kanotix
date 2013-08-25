@@ -465,8 +465,13 @@ do
 				$bytes = unpack("C", $bytes) - 1;
 				printf("SUSP Entry - %u bytes (0x%X)\n", $bytes+1, $bytes+1) if($debug);
 			} while $bytes > 0;
-			$sector_blk++;
-			seek(FIMG, $iso_pos+$first_sector_blk*$bs+$sector_blk*$bs, SEEK_SET) or die "$0: $file: $!\n";
+            do {
+                $sector_blk++;
+                seek(FIMG, $iso_pos+$first_sector_blk*$bs+$sector_blk*$bs, SEEK_SET) or die "$0: $file: $!\n";
+                read(FIMG, $sua_head, 4) > 0 or break;
+                seek(FIMG, tell(FIMG)-4, SEEK_SET) or die "$0: $file: $!\n";
+                ($sig, $len, $version) = unpack("a[2]CC", $sua_head);
+            } while($sig eq "ER"); # skip ER(Extensions Reference)-SUA, xorriso intersperses this somehow
 			printf("\ndirectory entry at 0x%X:\n", tell(FIMG)) if($debug);
 			read(FIMG, $bytes, 1) > 0 or break;
 			$bytes = unpack("C", $bytes) - 1;
