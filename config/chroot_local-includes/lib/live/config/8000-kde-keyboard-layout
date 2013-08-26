@@ -6,7 +6,7 @@ KdeKeyboardLayout ()
 
 	# Checking if package is already configured
 	if [ -e /var/lib/live/config/kdekeyboardlayout ] || \
-           [ ! -e ${KXKBRC} ]
+           [ ! -e ${KXKBRC} ] || [ ! -x /usr/bin/kwriteconfig ]
 	then
 		return
 	fi
