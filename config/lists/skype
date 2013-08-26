@@ -1,5 +1,7 @@
 # skype for wheezy (multiarch)
 
+pidgin-skype
+
 #if ARCHITECTURE i386
 skype
 #endif

@@ -4,7 +4,7 @@ rm -f build.log
 
 # Remove generated files
 rm -f config/binary config/bootstrap config/chroot config/common config/source \
-      config/kanotix config/chroot_local-includes/root/build.conf config/chroot_local-packageslists/kanotix-flavours.list
+      config/kanotix config/chroot_local-packageslists/kanotix-flavours.list
 rm -f config/package-lists/compat.list.chroot
 if [ -f config/all ]; then
 	sed -i '/^. config\/kanotix/d' config/all

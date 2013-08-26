@@ -42,12 +42,7 @@ ncdu
 xzdec
 
 # skype
-#if DISTRIBUTION squeeze
-#include <squeeze-skype>
-#endif
-#if DISTRIBUTION wheezy
-#include <wheezy-skype>
-#endif
+#include <skype>
 
 # games
 mahjongg

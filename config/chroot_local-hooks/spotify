@@ -1,0 +1,11 @@
+#!/bin/bash
+for file in /root/config/*; do [ -r $file ] && . $file; done
+echo "$LB_PACKAGE_LISTS" | grep -qw spotify || exit 0
+TMP=$(mktemp -d /tmp/spotify.XXXXXX)
+# install libssl0.9.8 from squeeze
+wget -qkO $TMP/index http://snapshot.debian.org/package/openssl098/0.9.8o-7/
+grep -oe 'http[^"]*libssl0.9.8_[^"]*_'"$LB_ARCHITECTURE.deb" $TMP/index | head -n1 | wget -i- -P $TMP
+dpkg -i $TMP/*.deb
+apt-get update
+DEBIAN_FRONTEND=noninteractive apt-get -f -y install spotify-client
+rm -rf $TMP

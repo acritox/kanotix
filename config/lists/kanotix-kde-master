@@ -23,6 +23,9 @@ gwenview
 openvpn
 network-manager-openvpn
 
+# skype
+#include <skype>
+
 # kde
 khelpcenter4
 

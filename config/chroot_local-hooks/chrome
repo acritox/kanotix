@@ -1,0 +1,10 @@
+#!/bin/bash
+[ -x /usr/bin/google-chrome ] || exit 0
+mkdir -p /etc/skel/.config/google-chrome/Default
+cat <<"EOF" >/etc/skel/.config/google-chrome/Default/Preferences
+{
+   "browser": {
+      "custom_chrome_frame": true
+   }
+}
+EOF

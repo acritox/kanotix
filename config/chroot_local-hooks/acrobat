@@ -1,0 +1,9 @@
+#!/bin/bash
+for file in /root/config/*; do [ -r $file ] && . $file; done
+echo "$LB_PACKAGE_LISTS" | grep -qw acrobat || exit 0
+TMP=$(mktemp -d /tmp/acrobat.XXXXXX)
+wget -P $TMP http://ardownload.adobe.com/pub/adobe/reader/unix/9.x/9.4.2/deu/AdbeRdr9.4.2-1_i386linux_deu.deb
+#wget -P $TMP http://ardownload.adobe.com/pub/adobe/reader/unix/9.x/9.4.2/enu/AdbeRdr9.4.2-1_i386linux_enu.deb
+http://ardownload.adobe.com/pub/adobe/reader/unix/9.x/9.4.2/enu/AdbeRdr9.4.2-1_i386linux_enu.deb
+dpkg --force-architecture -i $TMP/*.deb
+rm -rf $TMP

@@ -1,5 +1,5 @@
 #!/bin/sh
-[ -f /root/build.conf ] && . /root/build.conf
+for file in /root/config/*; do [ -r $file ] && . $file; done
 
 sed -i -e "s|@DISTRIBUTION@|${LB_DISTRIBUTION}|g" /etc/apt/sources.list
 

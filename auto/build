@@ -20,10 +20,6 @@ perl -pi -e "s%(32|64)(bit)%$bit\${2}%i; s|[0-9]+-[0-9]+:[0-9]+|$(date +%Y%m%d-%
 
 prebuild()
 {
-	# make current build configuration available for hooks inside chroot
-	mkdir -p config/chroot_local-includes/root
-	cat config/* 2>/dev/null | grep ^LB_ > config/chroot_local-includes/root/build.conf
-
 	for bootstrap_dir in cache/stages_bootstrap cache/bootstrap
 	do
 		if [ -d ${bootstrap_dir} ]; then

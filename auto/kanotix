@@ -37,7 +37,7 @@ LB_KANOTIX_TMPFS_OPTIONS="${LB_KANOTIX_TMPFS_OPTIONS}"
 LB_KANOTIX_GFXOVERLAYS="${LB_KANOTIX_GFXOVERLAYS}"
 
 EOF
-grep -q ". config/kanotix" config/all 2>/dev/null || echo ". config/kanotix" >> config/all
+grep -q ". config/kanotix" config/all 2>/dev/null || echo "[ -r config/kanotix ] && . config/kanotix" >> config/all
 }
 
 # process Kanotix config values
