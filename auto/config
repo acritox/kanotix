@@ -77,6 +77,7 @@ grep -wq firefox <<<"$LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" firefox-wheezy"
 grep -wq silverlight <<<"$LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" silverlight"
 grep -wq spotify <<<"$LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" spotify"
 grep -wq -e hangouts -e talkplugin <<<"$LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" hangouts"
+grep -wq dropbox <<<"$LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" dropbox"
 lb config noauto --linux-packages "$LB_LINUX_PACKAGES" --linux-flavours "$LB_LINUX_FLAVOURS" --repositories "$LB_REPOSITORIES"
 
 # Fetch kanotix-scripts if necessary
