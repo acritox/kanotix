@@ -8,6 +8,10 @@ if [ -f /etc/kde4/kdm/kdmrc ]; then
  sed -i 's/.*\(TerminateServer=\).*/\1true/' /etc/kde4/kdm/kdmrc
 fi
 
+if [ -f /etc/lightdm/lightdm.conf ]; then
+ sed -i 's|^#*\(xserver-command=X\).*|\1 -dpi 96|' /etc/lightdm/lightdm.conf
+fi
+
 if [ -f /usr/share/initramfs-tools/scripts/init-bottom/01gfxdetect ]; then
  if [ -f /etc/alternatives/glx--fglrx-blacklists-radeon.conf ]; then
   sed -i 's/.*\(blacklist\)/#\1/' /etc/alternatives/glx--fglrx-blacklists-radeon.conf
