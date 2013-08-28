@@ -1,2 +1,6 @@
 deb http://kanotix.com/files/fix/mesa.wheezy ./
 deb-src http://kanotix.com/files/fix/mesa.wheezy ./
+deb http://kanotix.com/files/fix/fglrx.wheezy ./
+deb-src http://kanotix.com/files/fix/fglrx.wheezy ./
+deb http://kanotix.com/files/fix/nvidia.wheezy ./
+deb-src http://kanotix.com/files/fix/nvidia.wheezy ./
