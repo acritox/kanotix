@@ -16,6 +16,6 @@ if [ -x /usr/sbin/lightdm ]; then
 
     # on lxde delete packages to reduce image-size
     apt-get purge --yes aptitude aptitude-common
-    #apt-get purge --yes vim vim-common vim-runtime
+    apt-get purge --yes vim vim-common vim-runtime
 
 fi

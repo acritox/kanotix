@@ -13,7 +13,6 @@ synaptic
 apt-xapian-index
 
 # multimedia
-me-tv
 gecko-mediaplayer
 exaile
 gstreamer0.10-plugins-ugly
@@ -61,6 +60,5 @@ fonts-droid
 xpad
 guvcview
 sylpheed-i18n
-foobillard
 gst123
 xskat
