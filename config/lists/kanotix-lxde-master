@@ -17,6 +17,7 @@ gecko-mediaplayer
 exaile
 gstreamer0.10-plugins-ugly
 gstreamer0.10-pulseaudio
+gstreamer0.10-alsa
 vlc
 #nif DISTRIBUTION squeeze
 vlc-plugin-pulse
