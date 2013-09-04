@@ -1,11 +1,14 @@
 #!/bin/sh
 
 if [ -x /usr/sbin/lightdm ]; then
-set -e
+    # only on i386
+    if ! [ -d /lib/x86_64-linux-gnu ]; then
+    set -e
 
-# Remove GNOME icon cache.
-# has to be generated later
-# This saves space some space (11MB on K-LXDE)
+    # Remove GNOME icon cache.
+    # has to be generated later
+    # This saves space some space (11MB on K-LXDE)
 
-rm -f /usr/share/icons/*/icon-theme.cache
+    rm -f /usr/share/icons/*/icon-theme.cache
+    fi
 fi

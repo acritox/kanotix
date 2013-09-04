@@ -7,6 +7,9 @@
 evince-gtk
 simple-scan
 geany
+#if ARCHITECTURE amd64
+#include <office>
+#endif
 
 # package tool
 synaptic

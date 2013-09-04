@@ -1,7 +1,14 @@
 # Kanotix with LXDE (lxde-base)
 
 #include <base>
+
+#if ARCHITECTURE i386
 #include <desktop-base>
+#endif
+
+#if ARCHITECTURE amd64
+#include <desktop>
+#endif
 
 # Kanotix
 etcskel-kanotix-lxde

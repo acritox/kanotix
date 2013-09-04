@@ -14,8 +14,9 @@ if [ -x /usr/sbin/lightdm ]; then
     # Industrial conflicts
     sed -i s/Industrial/Clearlooks-Phenix/ /etc/skel/.gtkrc-2.0
 
-    # on lxde delete packages to reduce image-size
+    # on lxde i386 delete packages to reduce image-size
+    if ! [ -d /lib/x86_64-linux-gnu ]; then
     apt-get purge --yes aptitude aptitude-common
     apt-get purge --yes vim vim-common vim-runtime
-
+    fi
 fi
