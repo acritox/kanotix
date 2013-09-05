@@ -1,0 +1,29 @@
+#!/bin/sh
+
+Composit ()
+{
+	# Checking if configured
+	if [ -e /var/lib/live/config/composit ]
+	then
+		return
+	fi
+	echo -n " composit"
+	Configure_composit
+}
+Configure_composit ()
+{
+	# Boot parameters can be acted up either this way...
+	if grep -qs "compton" /proc/cmdline
+	then
+	    touch /home/${LIVE_USERNAME}/.compton
+	    touch /home/${LIVE_USERNAME}/.nocompiz
+	fi
+	if grep -qs "nocompiz" /proc/cmdline
+	then
+	    touch /home/${LIVE_USERNAME}/.nocompiz
+	fi
+	# Creating state file
+	touch /var/lib/live/config/composit
+}
+
+Composit

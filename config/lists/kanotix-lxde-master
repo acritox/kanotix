@@ -2,6 +2,7 @@
 
 #include <kanotix-lxde-base>
 #include <compiz-gtk>
+compton
 
 # office
 evince-gtk
