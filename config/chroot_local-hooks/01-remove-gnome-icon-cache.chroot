@@ -1,13 +1,18 @@
 #!/bin/sh
 
+set -e
+
+# wheezy live-build deletes this by default on all platforms
+# the hook is removed in upcoming lb-versions
+# so i keep it here
+
 if [ -x /usr/sbin/lightdm ]; then
     # only on i386
     if ! [ -d /lib/x86_64-linux-gnu ]; then
-    set -e
 
-    # Remove GNOME icon cache.
+    # Remove icon caches
     # has to be generated later
-    # This saves space some space (11MB on K-LXDE)
+    # This saves some space (11MB on Kanotix-LXDE)
 
     rm -f /usr/share/icons/*/icon-theme.cache
     fi
