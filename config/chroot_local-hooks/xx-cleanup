@@ -1,0 +1,45 @@
+#!/bin/sh
+
+set -e
+
+# file created from selected hooks from /usr/share/live/build/hooks/
+
+# Remove backup files
+rm -f /boot/*.bak
+rm -f /boot/*.old-dkms
+
+rm -f /etc/apt/sources.list~
+rm -f /etc/apt/trusted.gpg~
+
+rm -f /etc/passwd-
+rm -f /etc/group-
+rm -f /etc/shadow-
+rm -f /etc/gshadow-
+
+rm -f /var/cache/debconf/*-old
+rm -f /var/lib/dpkg/*-old
+
+# Truncate log files
+for _FILE in $(find /var/log/ -type f)
+do
+	: > ${_FILE}
+done
+
+
+# Remove Python *.py files.
+#
+# This removes byte-compiled Python modules to save some space.
+
+find /usr -name "*.pyc" -print0 | xargs -0r rm -f
+
+
+# Remove temporary files
+rm -rf /var/cache/man/*
+
+for _DIRECTORY in /tmp /var/tmp
+do
+	rm -rf ${_DIRECTORY}
+
+	mkdir -p ${_DIRECTORY}
+	chmod 1777 ${_DIRECTORY}
+done
