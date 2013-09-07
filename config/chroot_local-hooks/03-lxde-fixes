@@ -18,5 +18,7 @@ if [ -x /usr/sbin/lightdm ]; then
     if ! [ -d /lib/x86_64-linux-gnu ]; then
     apt-get purge --yes aptitude aptitude-common
     apt-get purge --yes vim vim-common vim-runtime
+    apt-get purge --yes devscripts python3 python3-minimal python3.2 python3.2-minimal
+    apt-get install --yes devscripts=2.12.6
     fi
 fi
