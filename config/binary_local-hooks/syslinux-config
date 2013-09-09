@@ -12,3 +12,4 @@ esac
 
 	mkdir -p binary/isolinux
         cp config/binary_syslinux/* binary/isolinux/
+	cp chroot/usr/share/misc/pci.ids binary/isolinux/
