@@ -31,15 +31,20 @@ kanotix-lxde-extra
 # LXDE
 lxde
 lxappearance-obconf
-
 gvfs-backends
 menu
 menu-xdg
 lxtask
 zenity
 lxpolkit
-network-manager-gnome
 desktop-base
+
+# network
+network-manager-gnome
+modemmanager
+mobile-broadband-provider-info
+gnome-keyring
+network-manager-openvpn
 
 #if DISTRIBUTION squeeze
 gdm
@@ -64,8 +69,6 @@ xterm
 #endif
 
 # other hardware
-modemmanager
-mobile-broadband-provider-info
 
 # irc
 xchat

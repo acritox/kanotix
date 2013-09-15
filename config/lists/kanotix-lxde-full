@@ -1,9 +1,11 @@
 # Kanotix with LXDE (full)
-# not used yet
+# enhandeced List only for amd64 used
 
-#include <kanotix-lxde-master>
-
+# office
 #include <office>
+
+# multimedia
+me-tv
 
 # graphics
 gimp
@@ -14,8 +16,6 @@ sane-utils
 sane
 
 # network
-openvpn
-network-manager-openvpn
 
 # email
 icedove-l10n-de

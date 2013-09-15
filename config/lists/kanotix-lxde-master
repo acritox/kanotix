@@ -1,6 +1,11 @@
 # Kanotix with LXDE (Master CD-Version)
 
 #include <kanotix-lxde-base>
+
+#if ARCHITECTURE amd64
+#include <kanotix-lxde-full>
+#endif
+
 #include <compiz-gtk>
 compton
 
@@ -8,9 +13,6 @@ compton
 evince-gtk
 simple-scan
 geany
-#if ARCHITECTURE amd64
-#include <office>
-#endif
 
 # package tool
 synaptic
@@ -36,6 +38,10 @@ xfburn
 w-scan
 
 # email
+
+#if ARCHITECTURE i386
+sylpheed-i18n
+#endif
 
 # grafik
 qtqr
@@ -64,6 +70,5 @@ fonts-droid
 # isofiller
 xpad
 guvcview
-sylpheed-i18n
 gst123
 xskat
