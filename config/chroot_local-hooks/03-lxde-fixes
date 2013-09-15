@@ -18,7 +18,24 @@ if [ -x /usr/sbin/lightdm ]; then
     if ! [ -d /lib/x86_64-linux-gnu ]; then
     apt-get purge --yes aptitude aptitude-common
     apt-get purge --yes vim vim-common vim-runtime
+    rm -rf /usr/lib/python3/dist-packages/devscripts
     apt-get purge --yes devscripts python3 python3-minimal python3.2 python3.2-minimal
     apt-get install --yes devscripts=2.12.6
     fi
+
+    # tmp skel
+    mkdir -p /etc/skel/Desktop/KANOTIX
+    mkdir -p /etc/skel/.mplayer
+    touch /etc/skel/.mplayer/input.conf
+cat <<"EOF" >/etc/skel/.mplayer/config
+[default]
+# Write your default config options here!
+
+#ao pulse
+#ao alsa
+#af=volnorm
+#cache=4096
+#aspect=16:9
+EOF
+
 fi
