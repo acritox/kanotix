@@ -34,7 +34,7 @@ network-manager-gnome
 modemmanager
 mobile-broadband-provider-info
 gnome-keyring
-network-manager-openvpn
+network-manager-openvpn-gnome
 
 #if DISTRIBUTION squeeze
 gdm
