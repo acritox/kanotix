@@ -20,7 +20,7 @@ if [ -x /usr/sbin/lightdm ]; then
     apt-get purge --yes vim vim-common vim-runtime
     rm -rf /usr/lib/python3/dist-packages/devscripts
     apt-get purge --yes devscripts python3 python3-minimal python3.2 python3.2-minimal
-    apt-get install --yes devscripts=2.12.6
+    apt-get install --yes -t wheezy devscripts
     fi
 
     # tmp skel
