@@ -37,7 +37,6 @@ menu-xdg
 lxtask
 zenity
 lxpolkit
-desktop-base
 
 compton
 

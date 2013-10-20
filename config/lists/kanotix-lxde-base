@@ -27,7 +27,6 @@ menu-xdg
 lxtask
 zenity
 lxpolkit
-desktop-base
 
 # network
 network-manager-gnome
