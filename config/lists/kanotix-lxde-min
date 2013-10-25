@@ -79,3 +79,5 @@ xchat
 
 # other
 gnome-screenshot
+#include <awesome>
+seahorse

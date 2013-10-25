@@ -72,3 +72,5 @@ xpad
 guvcview
 gst123
 xskat
+#include <awesome>
+seahorse

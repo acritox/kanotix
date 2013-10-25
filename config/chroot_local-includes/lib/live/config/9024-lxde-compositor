@@ -22,6 +22,21 @@ Configure_composit ()
 	then
 	    touch /home/${LIVE_USERNAME}/.nocompiz
 	fi
+	if grep -qs "awesome" /proc/cmdline
+	then
+	    if [ -x /usr/bin/awesome ]; then
+		touch /home/${LIVE_USERNAME}/.nocompiz
+		touch /home/${LIVE_USERNAME}/.awesome-wmanager
+		if [ -x /usr/sbin/lightdm ]; then
+		    if ! [ -d /lib/x86_64-linux-gnu ]; then
+		    /usr/lib/i386-linux-gnu/lightdm/lightdm-set-defaults -s awesome
+		    else
+		    /usr/lib/x86_64-linux-gnu/lightdm/lightdm-set-defaults -s awesome
+		    fi
+		fi
+		update-alternatives --set x-window-manager /usr/bin/awesome >/dev/null
+	    fi
+	fi
 	# Creating state file
 	touch /var/lib/live/config/composit
 }
