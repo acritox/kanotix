@@ -17,6 +17,7 @@ geany
 # package tool
 synaptic
 apt-xapian-index
+gdebi
 
 # multimedia
 gecko-mediaplayer
@@ -57,6 +58,7 @@ xzdec
 # games
 mahjongg
 gnome-sudoku
+xskat
 
 # benchmark
 
@@ -71,6 +73,5 @@ fonts-droid
 xpad
 guvcview
 gst123
-xskat
 #include <awesome>
 seahorse
