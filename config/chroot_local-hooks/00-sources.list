@@ -1,5 +1,10 @@
 #!/bin/sh
 for file in /root/config/*; do [ -r $file ] && . $file; done
 
-sed -i -e "s|@DISTRIBUTION@|${LB_DISTRIBUTION}|g" /etc/apt/sources.list
+for x in /etc/apt/sources.list.d/*.list; do
+   if grep -q '### THIS FILE IS AUTOMATICALLY CONFIGURED ###' $x; then
+      rm -f $x
+   fi
+done
 
+sed -i -e "s|@DISTRIBUTION@|${LB_DISTRIBUTION}|g" /etc/apt/sources.list
