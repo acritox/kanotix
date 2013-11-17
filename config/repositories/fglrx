@@ -1,0 +1,3 @@
+# Kanotix fglrx extra
+deb http://kanotix.com/files/fix/fglrx.wheezy ./
+deb-src http://kanotix.com/files/fix/fglrx.wheezy ./

@@ -72,6 +72,8 @@ grep -wq -e virtualbox -e vbox <<<"$LB_PACKAGES $LB_PACKAGES_LISTS" && LB_REPOSI
 grep -wq -e opera <<<"$LB_PACKAGES $LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" opera"
 grep -wq google-chrome <<<"$LB_PACKAGES $LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" google-chrome"
 grep -wq mesa <<<"$LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" mesa"
+grep -wq nvidia <<<"$LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" nvidia"
+grep -wq fglrx <<<"$LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" fglrx"
 grep -wq steam <<<"$LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" steam steam-wheezy"
 grep -wq firefox <<<"$LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" firefox-wheezy"
 grep -wq silverlight <<<"$LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" silverlight"

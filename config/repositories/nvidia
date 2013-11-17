@@ -1,0 +1,3 @@
+# Kanotix nvidia extra
+deb http://kanotix.com/files/fix/nvidia.wheezy ./
+deb-src http://kanotix.com/files/fix/nvidia.wheezy ./
