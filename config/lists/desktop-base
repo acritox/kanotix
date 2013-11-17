@@ -15,9 +15,6 @@ dvdauthor
 normalize-audio
 dvd+rw-tools
 
-# browser
-iceweasel-l10n-de
-
 # chat, irc
 ca-certificates
 
