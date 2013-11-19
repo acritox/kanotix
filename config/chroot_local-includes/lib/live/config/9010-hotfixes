@@ -43,6 +43,33 @@ sudo perl -pi -e 's/tty/xty/g' /var/run/utmp
 EOF
 chmod +x /home/${LIVE_USERNAME}/.kde/shutdown/kdm-force-shutdown-hack
 
+# google chrome hack
+if [ -x /var/lib/dpkg/info/google-chrome-stable.postinst ]; then
+cat <<EOT >/etc/apt/sources.list.d/google-chrome.list
+### THIS FILE IS AUTOMATICALLY CONFIGURED ###
+# You may comment out this entry, but any other modifications may be lost.
+deb http://dl.google.com/linux/chrome/deb/ stable main
+EOT
+fi
+
+# google earth hack
+if [ -x /var/lib/dpkg/info/google-earth-stable.postinst ]; then
+cat <<EOT >/etc/apt/sources.list.d/google-earth.list
+### THIS FILE IS AUTOMATICALLY CONFIGURED ###
+# You may comment out this entry, but any other modifications may be lost.
+deb http://dl.google.com/linux/earth/deb/ stable main
+EOT
+fi
+
+# google talkplugin hack
+if [ -x /var/lib/dpkg/info/google-talkplugin.postinst ]; then
+cat <<EOT >/etc/apt/sources.list.d/google-talkplugin.list
+### THIS FILE IS AUTOMATICALLY CONFIGURED ###
+# You may comment out this entry, but any other modifications may be lost.
+deb http://dl.google.com/linux/talkplugin/deb/ stable main
+EOT
+fi
+
 # reconfigure console-setup
 rm -f /etc/default/console-setup
 . /etc/default/locale
