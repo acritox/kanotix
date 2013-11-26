@@ -1,4 +1,3 @@
 #!/bin/bash
 [ -x /etc/init.d/vboxdrv ] || exit 0
-export KERN_DIR="$(ls -d /usr/src/linux-headers-* | head -n1)"
 /etc/init.d/vboxdrv setup 
