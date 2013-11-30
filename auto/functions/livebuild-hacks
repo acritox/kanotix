@@ -3,6 +3,13 @@
 
 current_script="$(basename "$0"|sed 's/^lb_//')"
 
+# remove isohybrid-acritox space file from md5sums.txt because it will be
+# modified afterwards so the checksum will never match
+if [ "$current_script" = "binary_iso" ]; then
+	echo "HOOK: livebuild-hacks@binary_iso: fix isohybrid-acritox checksums"
+    sed -i '/boot\.isohybrid/d' binary/md5sum.txt
+fi
+
 # ISO sorting
 if [ "$current_script" = "binary_iso" ]; then
 	echo "HOOK: livebuild-hacks@binary_iso"
