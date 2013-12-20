@@ -1,2 +1,5 @@
 # google-earth
 google-earth-stable
+#if ARCHITECTURE i386
+libcurl3
+#endif

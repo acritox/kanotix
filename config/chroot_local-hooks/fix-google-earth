@@ -1,0 +1,6 @@
+#!/bin/sh
+
+dpkg -l google-earth* | grep -q 6.0.3.2197 || exit 0
+
+rm -vf /opt/google/earth/free/libcurl.so.4
+ldconfig
