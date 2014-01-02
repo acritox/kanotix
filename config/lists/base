@@ -74,6 +74,7 @@ usbutils
 exif
 fsarchiver
 xterm
+libnotify-bin
 
 # network
 pcmciautils
