@@ -1,0 +1,3 @@
+# Kanotix mesa extra from SteamOS
+deb http://kanotix.com/files/fix/mesa.steamos ./
+deb-src http://kanotix.com/files/fix/mesa.steamos ./

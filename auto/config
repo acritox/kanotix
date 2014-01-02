@@ -74,6 +74,7 @@ grep -wq google-chrome <<<"$LB_PACKAGES $LB_PACKAGES_LISTS" && LB_REPOSITORIES+=
 grep -wq -e hangouts -e google-talkplugin <<<"$LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" google-talkplugin"
 grep -wq google-earth <<<"$LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" google-earth"
 grep -wq mesa <<<"$LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" mesa"
+grep -wq msos <<<"$LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" mesa-steamos"
 grep -wq nvidia <<<"$LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" nvidia"
 grep -wq fglrx <<<"$LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" fglrx"
 grep -wq steam <<<"$LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" steam steam-wheezy"
