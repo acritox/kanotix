@@ -1,7 +1,3 @@
 # Kanotix Dragonfire
 deb http://kanotix.com/files/dragonfire ./
 deb-src http://kanotix.com/files/dragonfire ./
-
-# Kanotix Dragonfire unofficial (by acritox)
-deb http://kanotix.acritox.com/debian dragonfire main
-deb-src http://kanotix.acritox.com/debian dragonfire main
