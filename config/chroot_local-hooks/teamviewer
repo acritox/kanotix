@@ -2,11 +2,7 @@
 for file in /root/config/*; do [ -r $file ] && . $file; done
 echo "$LB_PACKAGE_LISTS" | grep -qw teamviewer || exit 0
 TMP=$(mktemp -d /tmp/teamviewer.XXXXXX)
-if [ "$LB_ARCHITECTURE" = "amd64" ]; then
-wget -NP $TMP "http://www.teamviewer.com/download/teamviewer_linux_x64.deb"
-else
 wget -NP $TMP "http://www.teamviewer.com/download/teamviewer_linux.deb"
-fi
 dpkg -i $TMP/*.deb
 apt-get update
 DEBIAN_FRONTEND=noninteractive apt-get -f -y install
@@ -14,7 +10,7 @@ rm -rf $TMP
 /etc/init.d/teamviewerd stop || :
 killall teamviewerd || :
 while sleep 1; do pidof teamviewerd >/dev/null || break; done
-cat <<"EOF" >/opt/teamviewer8/config/global.conf
+cat <<"EOF" >/opt/teamviewer9/config/global.conf
 TeamViewer Global Settings
 # It is not recommended to edit this file manually
 
