@@ -70,6 +70,14 @@ deb http://dl.google.com/linux/talkplugin/deb/ stable main
 EOT
 fi
 
+# steam list hack
+if [ -x /var/lib/dpkg/info/steam-launcher.postinst ]; then
+cat <<EOT >/etc/apt/sources.list.d/steam.list
+deb [arch=amd64,i386] http://repo.steampowered.com/steam/ precise steam
+deb-src [arch=amd64,i386] http://repo.steampowered.com/steam/ precise steam
+EOT
+fi
+
 # reconfigure console-setup
 rm -f /etc/default/console-setup
 . /etc/default/locale

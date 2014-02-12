@@ -7,4 +7,8 @@ for x in /etc/apt/sources.list.d/*.list; do
    fi
 done
 
+if [ -f /etc/apt/sources.list.d/steam.list ]; then
+    rm -f /etc/apt/sources.list.d/steam.list
+fi
+
 sed -i -e "s|@DISTRIBUTION@|${LB_DISTRIBUTION}|g" /etc/apt/sources.list
