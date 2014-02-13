@@ -18,12 +18,12 @@ gtk2-engines
 joystick
 
 # some tools or fixes
-xxxterm
 epdfview
 ca-certificates
 #  desktop finish
 
 # Kanotix
+kanotix-power-button
 etcskel-kanotix-lxde
 kmenu-icon-kanotix
 kanotix-lxde-extra
@@ -37,11 +37,21 @@ menu-xdg
 lxtask
 zenity
 lxpolkit
+clearlooks-phenix-theme
 
+# tools
+synaptic
+notification-daemon
+
+# compositting
 compton
 
 # multimedia
 smplayer-translations
+exaile
+gstreamer0.10-plugins-ugly
+gstreamer0.10-pulseaudio
+gstreamer0.10-alsa
 
 # network
 network-manager-gnome
@@ -59,7 +69,6 @@ lightdm
 
 # power management
 xfce4-power-manager
-xfce4-power-manager-plugins
 
 # audio
 # xterm is needed by lxpanel to use alsamixer
@@ -79,5 +88,5 @@ xchat
 
 # other
 gnome-screenshot
-#include <awesome>
 seahorse
+#include <skype>
