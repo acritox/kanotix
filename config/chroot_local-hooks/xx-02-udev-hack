@@ -1,0 +1,4 @@
+#!/bin/sh
+for x in i386-linux-gnu x86_64-linux-gnu; do 
+	test -L /lib/$x/libudev.so.0 -a -L /lib/$x/libudev.so.1 && ln -sfv libudev.so.1 /lib/$x/libudev.so.0 || :
+done
