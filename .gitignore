@@ -2,6 +2,7 @@
 /binary*
 /kanotix*iso
 /chroot
+/chroot.packages.*
 /.stage
 /.build
 /config/all
