@@ -17,7 +17,7 @@ case "$bit" in
 	;;
 32)
 	platform=i386-efi
-	efi_name=x86
+	efi_name=ia32
 	shell_dir=Ia32
 	;;
 esac
