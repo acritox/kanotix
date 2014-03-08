@@ -45,7 +45,6 @@ lightdm
 
 # power management
 xfce4-power-manager
-xfce4-power-manager-plugins
 
 # audio
 # xterm is needed by lxpanel to use alsamixer
