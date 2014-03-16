@@ -1,0 +1,3 @@
+#!/bin/sh
+# include nfsv2, nfsv3 and nfsv4 in initramfs
+printf 'nfsv2\nnfsv3\nnfsv4\n' > /usr/share/initramfs-tools/modules.d/nfs
