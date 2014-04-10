@@ -10,7 +10,7 @@ gksu
 
 # themes
 gtk2-engines
-#if DISTRIBUTION wheezy
+#nif DISTRIBUTION squeeze
 #include <wheezy-desktop>
 #endif
 

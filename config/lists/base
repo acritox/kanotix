@@ -99,7 +99,12 @@ foomatic-db-engine
 foomatic-db
 foomatic-db-gutenprint
 cups-driver-gutenprint
+#if DISTRIBUTION squeeze
 foo2zjs
+#endif
+#nif DISTRIBUTION squeeze
+printer-driver-foo2zjs
+#endif
 #printconf
 printer-driver-splix
 
@@ -148,7 +153,9 @@ gpart
 
 # filesystems
 ntfs-3g
+#if DISTRIBUTION squeeze
 ntfsprogs
+#endif
 reiserfsprogs
 dmraid
 kpartx

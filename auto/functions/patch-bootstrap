@@ -9,7 +9,7 @@ if [ "$current_script" = "chroot" -a ! -e chroot/usr/local/sbin/update-initramfs
 	ln -fs /bin/true chroot/usr/local/sbin/update-initramfs
 	
 	. config/bootstrap
-	if [ "$LB_ARCHITECTURE" = "amd64" -o "$LB_ARCHITECTURES" = "amd64" ] && [ "$LB_DISTRIBUTION" = "wheezy" ]; then
+	if [ "$LB_ARCHITECTURE" = "amd64" -o "$LB_ARCHITECTURES" = "amd64" ] && [ "$LB_DISTRIBUTION" != "squeeze" ]; then
 		echo "HACK: Enabling multiarch: amd64 + i386"
 		chroot chroot dpkg --add-architecture i386
 	fi

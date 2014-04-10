@@ -17,12 +17,19 @@ plasma-runners-addons
 plasma-scriptengine-python
 
 # network
+#if DISTRIBUTION squeeze
 network-manager-kde
+#endif
+#nif DISTRIBUTION squeeze
+plasma-widget-networkmanagement
+#endif
 
 # other hardware
 kde-config-touchpad
 kde-config-tablet
-system-config-printer-kde 
+#if DISTRIBUTION squeeze wheezy
+system-config-printer-kde
+#endif
 blueman
 
 # tools

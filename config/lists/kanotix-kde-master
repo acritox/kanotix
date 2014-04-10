@@ -33,7 +33,9 @@ khelpcenter4
 kuser
 
 # updates
+#if DISTRIBUTION squeeze wheezy
 update-manager-core
+#endif
 update-notifier-kde
 
 # wine
@@ -42,7 +44,7 @@ wine1.3
 wine1.3-gecko
 winetricks
 #endif
-#if DISTRIBUTION wheezy
+#nif DISTRIBUTION squeeze
 #include <wheezy-wine>
 #endif
 

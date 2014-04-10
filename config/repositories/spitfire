@@ -1,0 +1,3 @@
+# Kanotix Spitfire
+deb http://kanotix.com/files/spitfire ./
+deb-src http://kanotix.com/files/spitfire ./

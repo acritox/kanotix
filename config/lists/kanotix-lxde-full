@@ -26,7 +26,7 @@ wine1.3
 wine1.3-gecko
 winetricks
 #endif
-#if DISTRIBUTION wheezy
+#nif DISTRIBUTION squeeze
 #include <wheezy-wine>
 #endif
 
