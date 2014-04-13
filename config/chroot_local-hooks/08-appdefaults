@@ -8,3 +8,4 @@ update-alternatives --set x-session-manager /usr/bin/startlxde || true
 update-alternatives --set x-session-manager /usr/bin/startkde || true
 update-alternatives --set editor /usr/bin/vim.basic || true
 update-alternatives --set editor /usr/bin/mcedit || true
+update-alternatives --set x-cursor-theme /etc/X11/cursors/oxy-black.theme || true
