@@ -157,7 +157,7 @@ ntfs-3g
 ntfsprogs
 #endif
 reiserfsprogs
-dmraid
+#dmraid
 kpartx
 dosfstools
 lvm2
