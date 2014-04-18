@@ -1,4 +1,5 @@
 #!/bin/sh
+for file in /root/config/*; do [ -r $file ] && . $file; done
 
 if [ -x /usr/sbin/lightdm ]; then
     # dirty hack kanotix wallpaper on login-screen
@@ -10,17 +11,21 @@ if [ -x /usr/sbin/lightdm ]; then
 	sed -i 's/^#display-setup-script=/display-setup-script=\/usr\/sbin\/kanotix-lightdm-display-setup-script/' /etc/lightdm/lightdm.conf
     fi
     # old kanotix icon in login
-    sed -i 's/computer/kanotix/' /usr/share/lightdm-gtk-greeter/greeter.ui
+    if [ "$LB_DISTRIBUTION" = "wheezy" ]; then
+	sed -i 's/computer/kanotix/' /usr/share/lightdm-gtk-greeter/greeter.ui
+    fi
     # Industrial conflicts
     sed -i s/Industrial/Clearlooks-Phenix/ /etc/skel/.gtkrc-2.0
 
     # on lxde i386 delete packages to reduce image-size
-    if ! [ -d /lib/x86_64-linux-gnu ]; then
+    if [ "$LB_ARCHITECTURE" = "i386" ]; then
     apt-get purge --yes aptitude aptitude-common
     apt-get purge --yes vim vim-common vim-runtime
-    rm -rf /usr/lib/python3/dist-packages/devscripts
-    apt-get purge --yes devscripts python3 python3-minimal python3.2 python3.2-minimal
-    apt-get install --yes -t wheezy devscripts
+	if [ "$LB_DISTRIBUTION" = "wheezy" ]; then
+	    rm -rf /usr/lib/python3/dist-packages/devscripts
+	    apt-get purge --yes devscripts python3 python3-minimal python3.2 python3.2-minimal
+	    apt-get install --yes -t wheezy devscripts
+	fi
     fi
 
     # tmp skel
@@ -38,4 +43,17 @@ cat <<"EOF" >/etc/skel/.mplayer/config
 #aspect=16:9
 EOF
 
+    if [ "$LB_DISTRIBUTION" != "wheezy" ]; then
+cat <<"EOF" >/etc/skel/.config/lxsession/LXDE/autostart
+@lxpanel --profile LXDE
+@pcmanfm --desktop --profile LXDE
+@xscreensaver -no-splash
+@xfce4-power-manager-wrapper
+EOF
+
+	# awesome in lightdm-menu
+	if [ -e /usr/share/xsessions/awesome.desktop ]; then
+	    sed -i '/NoDisplay/d' /usr/share/xsessions/awesome.desktop
+	fi
+    fi
 fi
