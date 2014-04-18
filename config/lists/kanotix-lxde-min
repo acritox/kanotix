@@ -2,6 +2,10 @@
 
 #include <base>
 
+#nif DISTRIBUTION squeeze wheezy
+lsb-release
+#endif
+
 ## in desktop
 # needed packages from desktop list
 # tools
