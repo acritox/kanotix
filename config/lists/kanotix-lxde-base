@@ -60,7 +60,13 @@ xterm
 # other hardware
 
 # irc
+#nif DISTRIBUTION squeeze
+hexchat
+#endif
+
+#if DISTRIBUTION squeeze
 xchat
+#endif
 
 # other
 gnome-screenshot
