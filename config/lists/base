@@ -144,6 +144,10 @@ libgl1-mesa-glx:i386
 #endif
 vainfo
 i965-va-driver
+vdpauinfo
+#nif DISTRIBUTION squeeze wheezy
+mesa-vdpau-drivers
+#endif
 xinit
 
 # disktools
