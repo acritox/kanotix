@@ -1,0 +1,4 @@
+#!/bin/sh
+if grep -qs 'aticonfig --get-pcs-key=LDC,ReleaseVersion' /usr/lib/kde4/libexec/kwin_opengl_test; then
+    sed -i 's/aticonfig --get-pcs-key=LDC,ReleaseVersion/echo    String: 14.10.1006-140417a-171101C/' /usr/lib/kde4/libexec/kwin_opengl_test
+fi
