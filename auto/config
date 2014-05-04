@@ -86,7 +86,13 @@ grep -wq msa9 <<<"$LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" mesa-9"
 grep -wq msos <<<"$LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" mesa-steamos"
 grep -wq nvidia <<<"$LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" nvidia"
 grep -wq fglrx <<<"$LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" fglrx"
-grep -wq steam <<<"$LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" steam steam-wheezy"
+if grep -wq steam <<<"$LB_PACKAGES_LISTS"; then
+    if [ "$LB_DISTRIBUTION" = "wheezy" ]; then
+        LB_REPOSITORIES+=" steam steam-wheezy"
+    else
+        LB_REPOSITORIES+=" steam"
+    fi
+fi
 grep -wq iceweasel <<<"$LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" iceweasel"
 grep -wq firefox <<<"$LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" firefox-wheezy"
 grep -wq silverlight <<<"$LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" silverlight"
