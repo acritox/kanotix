@@ -13,7 +13,7 @@ Configure_hotfixes
 Configure_hotfixes ()
 {
 # Reading kernel command line
-for _PARAMETER in ${_CMDLINE}; do
+for _PARAMETER in ${_CMDLINE} ${LIVE_CONFIG_CMDLINE}; do
  case "${_PARAMETER}" in
   live-config.timezone=*|timezone=*)
    LIVE_TIMEZONE="${_PARAMETER#*timezone=}"
