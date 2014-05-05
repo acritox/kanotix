@@ -1,0 +1,5 @@
+#!/bin/sh
+if  [ -x /usr/bin/wine-unstable -a ! -x /usr/bin/wine ]; then
+    printf '#!/bin/sh\nwine-unstable "$@"\n' > /usr/bin/wine
+    chmod +x /usr/bin/wine
+fi
