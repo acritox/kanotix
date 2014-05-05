@@ -131,6 +131,7 @@ menu
 menu-l10n
 console-setup
 locales
+lsb-release
 
 # xorg
 xserver-xorg-video-all
@@ -145,7 +146,7 @@ libgl1-mesa-glx:i386
 vainfo
 i965-va-driver
 vdpauinfo
-#nif DISTRIBUTION squeeze wheezy
+#nif DISTRIBUTION wheezy
 mesa-vdpau-drivers
 #endif
 xinit
