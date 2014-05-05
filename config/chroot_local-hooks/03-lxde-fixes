@@ -36,8 +36,8 @@ cat <<"EOF" >/etc/skel/.mplayer/config
 [default]
 # Write your default config options here!
 
-#ao pulse
-#ao alsa
+#ao=pulse
+#ao=alsa
 #af=volnorm
 #cache=4096
 #aspect=16:9
@@ -49,6 +49,7 @@ cat <<"EOF" >/etc/skel/.config/lxsession/LXDE/autostart
 @pcmanfm --desktop --profile LXDE
 @xscreensaver -no-splash
 @xfce4-power-manager-wrapper
+@lxpolkit
 EOF
 
 	# awesome in lightdm-menu
