@@ -56,5 +56,6 @@ EOF
 	if [ -e /usr/share/xsessions/awesome.desktop ]; then
 	    sed -i '/NoDisplay/d' /usr/share/xsessions/awesome.desktop
 	fi
+	sed -i 's/splash_background_dragonfire.png/splash_background_spitfire.png/' /etc/skel/.config/compiz/compizconfig/Default.ini
     fi
 fi
