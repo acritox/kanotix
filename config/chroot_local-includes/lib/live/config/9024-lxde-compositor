@@ -17,6 +17,8 @@ Configure_composit ()
 	then
 	    touch /home/${LIVE_USERNAME}/.compton
 	    touch /home/${LIVE_USERNAME}/.nocompiz
+	    chown 1000:1000 /home/${LIVE_USERNAME}/.compton
+	    chown 1000:1000 /home/${LIVE_USERNAME}/.nocompiz
 	fi
 	if grep -qs "nocompiz" /proc/cmdline
 	then
@@ -27,14 +29,22 @@ Configure_composit ()
 	    if [ -x /usr/bin/awesome ]; then
 		touch /home/${LIVE_USERNAME}/.nocompiz
 		touch /home/${LIVE_USERNAME}/.awesome-wmanager
-		if [ -x /usr/sbin/lightdm ]; then
-		    if ! [ -d /lib/x86_64-linux-gnu ]; then
-		    /usr/lib/i386-linux-gnu/lightdm/lightdm-set-defaults -s awesome
-		    else
-		    /usr/lib/x86_64-linux-gnu/lightdm/lightdm-set-defaults -s awesome
-		    fi
-		fi
-		update-alternatives --set x-window-manager /usr/bin/awesome >/dev/null
+		chown 1000:1000 /home/${LIVE_USERNAME}/.compton
+		chown 1000:1000 /home/${LIVE_USERNAME}/.awesome-wmanager
+		echo "[Desktop]" >/home/${LIVE_USERNAME}/.dmrc
+		echo "Session=awesome" >>/home/${LIVE_USERNAME}/.dmrc
+		chown 1000:1000 /home/${LIVE_USERNAME}/.dmrc
+	    fi
+	fi
+	
+	if grep -qs "xbmc" /proc/cmdline
+	then
+	    if [ -x /usr/bin/xbmc ]; then
+		touch /home/${LIVE_USERNAME}/.nocompiz
+		chown 1000:1000 /home/${LIVE_USERNAME}/.nocompiz
+		echo "[Desktop]" >/home/${LIVE_USERNAME}/.dmrc
+		echo "Session=XBMC" >>/home/${LIVE_USERNAME}/.dmrc
+		chown 1000:1000 /home/${LIVE_USERNAME}/.dmrc
 	    fi
 	fi
 	# Creating state file
