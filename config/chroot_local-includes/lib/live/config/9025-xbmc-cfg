@@ -1,0 +1,46 @@
+#!/bin/sh
+
+Xbmccfg ()
+{
+	# Checking if configured
+	if [ -e /var/lib/live/config/xbmccfg ]
+	then
+		return
+	fi
+	echo -n " xbmc-cfg"
+	Configure_xbmccfg
+}
+Configure_xbmccfg ()
+{
+	# Boot parameters can be acted up either this way...
+	mkdir -p /home/${LIVE_USERNAME}/.xbmc/userdata
+	if grep -qs "keyboard-layouts=de" /proc/cmdline
+	then
+	    # german
+cat > /home/${LIVE_USERNAME}/.xbmc/userdata/guisettings.xml <<"EOF"
+<settings>
+    <locale>
+        <country>Deutschland</country>
+        <language>German</language>
+    </locale>
+    <defaultvideosettings>
+        <deinterlacemode>1</deinterlacemode>
+    </defaultvideosettings>
+</settings>
+EOF
+	else
+	    # default
+cat > /home/${LIVE_USERNAME}/.xbmc/userdata/guisettings.xml <<"EOF"
+<settings>
+    <defaultvideosettings>
+        <deinterlacemode>1</deinterlacemode>
+    </defaultvideosettings>
+</settings>
+EOF
+	fi
+	chown -R 1000:1000 /home/${LIVE_USERNAME}/.xbmc
+	# Creating state file
+	touch /var/lib/live/config/xbmccfg
+}
+
+Xbmccfg
