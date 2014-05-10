@@ -146,7 +146,7 @@ tr '\a' '\n' <<<"$tail" >> out/boot/grub/grub.cfg
 
 vim out/boot/grub/grub.cfg
 
-wget -qO- "http://git.acritox.com/kanotix/plain/config/binary_iso/isoimage.sort" | sed "s/^binary/out$/" > isoimage.sort
+wget -qO- "http://git.acritox.com/kanotix/plain/config/binary_iso/isoimage.sort" | sed "s/^binary/out/" > isoimage.sort
 
 echo "Generating md5sums.txt..."
 cd out
