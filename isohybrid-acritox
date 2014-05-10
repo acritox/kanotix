@@ -230,7 +230,7 @@ do
 	esac
 done
 
-set -- \$(ls -i \$workdir/efi/boot/boot*.efi)
+set -- \$(ls -ir \$workdir/efi/boot/boot*.efi)
 inode=\$1
 
 umount "$mountpoint"
