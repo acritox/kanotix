@@ -57,13 +57,5 @@ EOF
 	    sed -i '/NoDisplay/d' /usr/share/xsessions/awesome.desktop
 	fi
 	sed -i 's/splash_background_dragonfire.png/splash_background_spitfire.png/' /etc/skel/.config/compiz/compizconfig/Default.ini
-	if  [ -x /usr/bin/notification-daemon ]; then
-cat <<"EOF" >/usr/share/dbus-1/services/org.freedesktop.Notifications.service
-[D-BUS Service]
-Name=org.freedesktop.Notifications
-Exec=/usr/lib/notification-daemon/notification-daemon
-EOF
-
-	fi
     fi
 fi
