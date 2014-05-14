@@ -31,3 +31,5 @@ phonon-backend-gstreamer
 # other hardware
 modemmanager
 
+# kde database backend
+virtuoso-minimal

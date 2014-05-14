@@ -16,6 +16,9 @@ plasma-widgets-addons
 plasma-runners-addons
 plasma-scriptengine-python
 
+# kde database backend
+virtuoso-minimal
+
 # network
 #if DISTRIBUTION squeeze
 network-manager-kde
