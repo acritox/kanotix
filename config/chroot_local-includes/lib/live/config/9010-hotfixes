@@ -83,6 +83,11 @@ rm -f /etc/default/console-setup
 . /etc/default/locale
 dpkg-reconfigure console-setup -fnoninteractive
 
+# disable update-apt-xapian-index in live mode
+if [ -x /usr/sbin/update-apt-xapian-index ]; then
+    chmod -x /usr/sbin/update-apt-xapian-index
+fi
+
 touch /var/lib/live/config/hotfixes
 }
 
