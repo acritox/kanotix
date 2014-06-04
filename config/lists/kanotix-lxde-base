@@ -58,6 +58,7 @@ xterm
 #endif
 
 # other hardware
+xfce4-notifyd
 
 # irc
 #nif DISTRIBUTION squeeze
