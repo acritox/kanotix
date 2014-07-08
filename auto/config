@@ -59,15 +59,15 @@ squeeze)
 wheezy)
 	LB_REPOSITORIES+=" dragonfire"
 	case $LB_ARCHITECTURE in
-	amd64) LB_LINUX_PACKAGES="linux-image-extra-3.15.0-6 linux-headers-3.15.0-6"; LB_LINUX_FLAVOURS="generic";;
-	i386)  LB_LINUX_PACKAGES="linux-image-extra-3.15.0-6 linux-headers-3.15.0-6"; LB_LINUX_FLAVOURS="generic";;
+	amd64) LB_LINUX_PACKAGES="linux-image-extra-3.16.0-2 linux-headers-3.16.0-2"; LB_LINUX_FLAVOURS="generic";;
+	i386)  LB_LINUX_PACKAGES="linux-image-extra-3.16.0-2 linux-headers-3.16.0-2"; LB_LINUX_FLAVOURS="generic";;
 	esac
 	;;
 jessie|*)
     LB_REPOSITORIES+=" dragonfire spitfire"
 	case $LB_ARCHITECTURE in
-	amd64) LB_LINUX_PACKAGES="linux-image-extra-3.15.0-6 linux-headers-3.15.0-6"; LB_LINUX_FLAVOURS="generic";;
-	i386)  LB_LINUX_PACKAGES="linux-image-extra-3.15.0-6 linux-headers-3.15.0-6"; LB_LINUX_FLAVOURS="generic";;
+	amd64) LB_LINUX_PACKAGES="linux-image-extra-3.16.0-2 linux-headers-3.16.0-2"; LB_LINUX_FLAVOURS="generic";;
+	i386)  LB_LINUX_PACKAGES="linux-image-extra-3.16.0-2 linux-headers-3.16.0-2"; LB_LINUX_FLAVOURS="generic";;
 	esac
 	;;
 esac
