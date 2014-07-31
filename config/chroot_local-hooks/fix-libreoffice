@@ -1,4 +1,0 @@
-#!/bin/bash
-# fix permissions of libreoffice because of packaging error
-[ -d /opt/libreoffice4.1 ] || exit 0
-chown 0:0 -R /opt/libreoffice4.1/
