@@ -84,7 +84,9 @@ cifs-utils
 pppoeconf
 nfs-common
 ncpfs
+#if DISTRIBUTION wheezy
 bluez-audio
+#endif
 ethtool
 vpnc
 comgt
@@ -188,7 +190,9 @@ ndiswrapper-dkms
 
 # other hardware
 bluez
+#if DISTRIBUTION wheezy
 bluez-compat
+#endif
 pm-utils
 vbetool
 radeontool
