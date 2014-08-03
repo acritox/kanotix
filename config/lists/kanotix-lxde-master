@@ -6,9 +6,7 @@
 #include <kanotix-lxde-full>
 #endif
 
-#if DISTRIBUTION wheezy
 #include <compiz-gtk>
-#endif
 compton
 
 # office
