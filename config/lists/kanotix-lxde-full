@@ -21,13 +21,11 @@ sane
 icedove-l10n-de
 
 # wine
-#if DISTRIBUTION squeeze
-wine1.3
-wine1.3-gecko
-winetricks
-#endif
-#nif DISTRIBUTION squeeze
+#if DISTRIBUTION wheezy
 #include <wheezy-wine>
+#endif
+#nif DISTRIBUTION wheezy
+#include <jessie-wine>
 #endif
 
 # games

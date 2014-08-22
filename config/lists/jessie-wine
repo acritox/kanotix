@@ -1,0 +1,13 @@
+# wine for jessie (multiarch)
+
+winetricks
+
+#if ARCHITECTURE i386
+wine-development
+#endif
+
+#if ARCHITECTURE amd64
+wine-development:i386
+libncurses5:i386
+libxtst6:i386
+#endif

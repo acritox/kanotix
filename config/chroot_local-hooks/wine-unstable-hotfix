@@ -1,5 +1,7 @@
 #!/bin/sh
-if  [ -x /usr/bin/wine-unstable -a ! -x /usr/bin/wine ]; then
-    printf '#!/bin/sh\nwine-unstable "$@"\n' > /usr/bin/wine
-    chmod +x /usr/bin/wine
-fi
+for w in wine-unstable wine-development; do
+    if  [ -x /usr/bin/$w -a ! -x /usr/bin/wine ]; then
+        printf '#!/bin/sh\n'$w' "$@"\n' > /usr/bin/wine
+        chmod +x /usr/bin/wine
+    fi
+done
