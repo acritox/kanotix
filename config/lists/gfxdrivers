@@ -2,3 +2,7 @@ nvidia-glx nvidia-settings vdpau-va-driver nvidia-xconfig nvidia-kernel-dkms
 #if ARCHITECTURE amd64
 libgl1-nvidia-glx:i386
 #endif
+fglrx-driver fglrx-modules-dkms xvba-va-driver fglrx-atieventsd fglrx-control
+#if ARCHITECTURE amd64
+libgl1-fglrx-glx:i386
+#endif
