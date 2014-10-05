@@ -36,7 +36,9 @@ kuser
 #if DISTRIBUTION squeeze wheezy
 update-manager-core
 #endif
-update-notifier-kde
+
+# not needed with apper
+#update-notifier-kde
 
 # wine
 #if DISTRIBUTION wheezy
