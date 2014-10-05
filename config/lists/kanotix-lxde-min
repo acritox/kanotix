@@ -7,6 +7,7 @@
 # tools
 gparted
 gksu
+#include <gstreamer>
 
 # themes
 gtk2-engines
@@ -49,9 +50,6 @@ compton
 # multimedia
 smplayer-translations
 exaile
-gstreamer0.10-plugins-ugly
-gstreamer0.10-pulseaudio
-gstreamer0.10-alsa
 
 # network
 network-manager-gnome
@@ -75,10 +73,6 @@ xfce4-power-manager
 #if DISTRIBUTION squeeze
 alsa-utils
 xterm
-#endif
-
-#nif DISTRIBUTION squeeze
-#include <wheezy-pulseaudio-base>
 #endif
 
 # other hardware

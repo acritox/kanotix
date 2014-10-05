@@ -1,4 +1,0 @@
-# pulseaudio for wheezy with vlc (multiarch)
-
-#include <wheezy-pulseaudio-base>
-vlc-plugin-pulse

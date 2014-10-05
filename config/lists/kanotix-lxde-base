@@ -53,10 +53,6 @@ alsa-utils
 xterm
 #endif
 
-#nif DISTRIBUTION squeeze
-#include <wheezy-pulseaudio-base>
-#endif
-
 # other hardware
 xfce4-notifyd
 

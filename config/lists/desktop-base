@@ -1,5 +1,7 @@
 # Kanotix Desktop Packages List without pidgin
 
+#include <gstreamer>
+
 # java, plugins
 #if DISTRIBUTION squeeze
 icedtea6-plugin

@@ -20,11 +20,8 @@ vlc
 #if DISTRIBUTION squeeze
 phonon-backend-xine
 #endif
-gstreamer0.10-plugins-ugly
 #nif DISTRIBUTION squeeze
-#include <wheezy-pulseaudio>
 vlc-plugin-pulse
-gstreamer0.10-pulseaudio
 phonon-backend-gstreamer
 #endif
 

@@ -22,9 +22,6 @@ gdebi
 # multimedia
 gecko-mediaplayer
 exaile
-gstreamer0.10-plugins-ugly
-gstreamer0.10-pulseaudio
-gstreamer0.10-alsa
 #if ARCHITECTURE amd64
 vlc
 vlc-plugin-pulse
