@@ -67,6 +67,9 @@ lightdm
 
 # power management
 xfce4-power-manager
+#nif DISTRIBUTION wheezy
+xfce4-power-manager-lxpanel-plugin
+#endif
 
 # audio
 # xterm is needed by lxpanel to use alsamixer
