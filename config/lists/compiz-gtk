@@ -3,7 +3,7 @@
 fusion-icon
 compiz-gtk
 compiz-plugins
-compiz-fusion-plugins-main
+#compiz-fusion-plugins-main
 compiz-fusion-plugins-extra
 compiz-fusion-plugins-unsupported
 compizconfig-settings-manager
