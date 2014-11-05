@@ -37,7 +37,9 @@ menu
 menu-xdg
 lxtask
 zenity
+#if DISTRIBUTION wheezy
 lxpolkit
+#endif
 clearlooks-phenix-theme
 
 # tools

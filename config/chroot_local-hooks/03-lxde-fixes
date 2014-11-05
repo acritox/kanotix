@@ -49,7 +49,6 @@ cat <<"EOF" >/etc/skel/.config/lxsession/LXDE/autostart
 @pcmanfm --desktop --profile LXDE
 @xscreensaver -no-splash
 @xfce4-power-manager-wrapper
-@lxpolkit
 EOF
 
 	# awesome in lightdm-menu
