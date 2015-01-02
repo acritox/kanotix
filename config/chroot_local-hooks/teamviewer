@@ -10,11 +10,11 @@ rm -rf $TMP
 /etc/init.d/teamviewerd stop || :
 killall teamviewerd || :
 while sleep 1; do pidof teamviewerd >/dev/null || break; done
-cat <<"EOF" >/opt/teamviewer9/config/global.conf
+cat <<"EOF" >/opt/teamviewer/config/global.conf
 TeamViewer Global Settings
 # It is not recommended to edit this file manually
 
 
 [int32] EulaAccepted = 1
-[int32] EulaAcceptedRevision = 5
+[int32] EulaAcceptedRevision = 6
 EOF
