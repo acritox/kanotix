@@ -44,6 +44,12 @@ kwalletmanager
 kmix
 polkit-kde-1
 
+# kde now optional depends
+libkactivities-bin
+#nif DISTRIBUTION wheezy
+kde-workspace-randr
+#endif
+
 # kde plasma
 plasma-widgets-addons
 plasma-runners-addons
