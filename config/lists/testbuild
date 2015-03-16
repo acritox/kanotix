@@ -33,7 +33,9 @@ blueman
 # tools
 ksnapshot
 kcalc
+#if DISTRIBUTION squeeze wheezy
 gdebi-kde
+#endif
 gparted
 gksu
 
