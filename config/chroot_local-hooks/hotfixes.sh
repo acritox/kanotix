@@ -13,9 +13,10 @@ fi
 # vim tuning
 if [ -d /etc/vim ]; then
  rm -f /etc/vim/vimrc.local
-wget -O /etc/vim/vimrc.local https://raw.github.com/amix/vimrc/master/vimrcs/basic.vim
-cat <<EOT >> /etc/vim/vimrc.local
-
+cat <<EOT > /etc/vim/vimrc.local
+syntax on
+set background=dark
+set showmatch          " Show matching brackets.
 set pastetoggle=<F10>
 EOT
 fi
