@@ -5,3 +5,8 @@ for w in wine-unstable wine-development; do
         chmod +x /usr/bin/wine
     fi
 done
+
+if [ -x /opt/wine-staging/bin/wine ]; then
+    printf '#!/bin/sh\n/opt/wine-staging/bin/wine "$@"\n' > /usr/bin/wine
+    chmod +x /usr/bin/wine
+fi

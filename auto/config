@@ -57,14 +57,14 @@ squeeze)
 	esac
 	;;
 wheezy)
-	LB_REPOSITORIES+=" dragonfire dragonfire-acritox"
+	LB_REPOSITORIES+=" dragonfire fds-team-wheezy fds-team-source dragonfire-acritox"
 	case $LB_ARCHITECTURE in
 	amd64) LB_LINUX_PACKAGES="linux-image-extra-3.18.0-14 linux-headers-3.18.0-14"; LB_LINUX_FLAVOURS="generic";;
 	i386)  LB_LINUX_PACKAGES="linux-image-extra-3.18.0-14 linux-headers-3.18.0-14"; LB_LINUX_FLAVOURS="generic";;
 	esac
 	;;
 jessie|*)
-    LB_REPOSITORIES+=" dragonfire spitfire spitfire-acritox"
+    LB_REPOSITORIES+=" dragonfire spitfire fds-team-debian fds-team-source spitfire-acritox"
 	case $LB_ARCHITECTURE in
 	amd64) LB_LINUX_PACKAGES="linux-image-extra-3.18.0-14 linux-headers-3.18.0-14"; LB_LINUX_FLAVOURS="generic";;
 	i386)  LB_LINUX_PACKAGES="linux-image-extra-3.18.0-14 linux-headers-3.18.0-14"; LB_LINUX_FLAVOURS="generic";;
@@ -91,6 +91,13 @@ if grep -wq steam <<<"$LB_PACKAGES_LISTS"; then
         LB_REPOSITORIES+=" steam steam-wheezy"
     else
         LB_REPOSITORIES+=" steam"
+    fi
+fi
+if grep -wq wine-staging <<<"$LB_PACKAGES $LB_PACKAGES_LISTS"; then
+    if [ "$LB_DISTRIBUTION" = "wheezy" ]; then
+        LB_REPOSITORIES+=" fds-team-wheezy fds-team-source"
+    else
+        LB_REPOSITORIES+=" fds-team-debian fds-team-source"
     fi
 fi
 grep -wq iceweasel <<<"$LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" iceweasel"

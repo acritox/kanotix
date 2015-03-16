@@ -21,12 +21,7 @@ sane
 icedove-l10n-de
 
 # wine
-#if DISTRIBUTION wheezy
-#include <wheezy-wine>
-#endif
-#nif DISTRIBUTION wheezy
-#include <jessie-wine>
-#endif
+#include <wine-staging>
 
 # games
 
