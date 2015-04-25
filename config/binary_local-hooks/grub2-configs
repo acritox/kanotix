@@ -15,3 +15,11 @@ then
         cp config/binary_grub/grub*.cfg binary/boot/grub/
 fi
 
+if echo "$LB_PACKAGE_LISTS" | grep -qw gfxdetect; then
+	# keep gfxdetect entries in grub.cfg (for gfxdetect-builds)
+	echo "grub2-configs: keeping gfxdetect entries"
+else
+	# remove gfxdetect entries from grub.cfg (for non-gfxdetect-builds)
+	sed -i '/gfxdetect/,/^}/{d}' binary/boot/grub/grub.cfg
+fi
+
