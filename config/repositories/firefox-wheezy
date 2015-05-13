@@ -1,3 +1,0 @@
-# mozilla.debian.net
-deb http://mozilla.debian.net/ wheezy-backports iceweasel-release
-deb-src http://mozilla.debian.net/ wheezy-backports iceweasel-release

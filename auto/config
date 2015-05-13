@@ -49,13 +49,6 @@ lb config noauto \
 
 # architecture and distribution depending stuff (e.g. kernel)
 case "$LB_DISTRIBUTION" in
-squeeze)
-	LB_REPOSITORIES+=" firefox wine-ppa squeeze-backports hellfire acritox"
-	case $LB_ARCHITECTURE in
-	amd64) LB_LINUX_PACKAGES="linux-image linux-headers"; LB_LINUX_FLAVOURS="amd64";;
-	i386)  LB_LINUX_PACKAGES="linux-image linux-headers"; LB_LINUX_FLAVOURS="686-pae";;
-	esac
-	;;
 wheezy)
 	LB_REPOSITORIES+=" dragonfire fds-team-wheezy fds-team-source dragonfire-acritox"
 	case $LB_ARCHITECTURE in
@@ -63,7 +56,14 @@ wheezy)
 	i386)  LB_LINUX_PACKAGES="linux-image linux-headers"; LB_LINUX_FLAVOURS="686-pae";;
 	esac
 	;;
-jessie|*)
+jessie)
+    LB_REPOSITORIES+=" dragonfire spitfire fds-team-debian fds-team-source spitfire-acritox"
+	case $LB_ARCHITECTURE in
+	amd64) LB_LINUX_PACKAGES="linux-image linux-headers"; LB_LINUX_FLAVOURS="amd64";;
+	i386)  LB_LINUX_PACKAGES="linux-image linux-headers"; LB_LINUX_FLAVOURS="686-pae";;
+	esac
+	;;
+*)
     LB_REPOSITORIES+=" dragonfire spitfire fds-team-debian fds-team-source spitfire-acritox"
 	case $LB_ARCHITECTURE in
 	amd64) LB_LINUX_PACKAGES="linux-image linux-headers"; LB_LINUX_FLAVOURS="amd64";;
@@ -101,7 +101,7 @@ if grep -wq wine-staging <<<"$LB_PACKAGES $LB_PACKAGES_LISTS"; then
     fi
 fi
 grep -wq iceweasel <<<"$LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" iceweasel"
-grep -wq firefox <<<"$LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" firefox-wheezy"
+grep -wq firefox <<<"$LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" firefox"
 grep -wq silverlight <<<"$LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" silverlight"
 grep -wq spotify <<<"$LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" spotify"
 grep -wq dropbox <<<"$LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" dropbox"
