@@ -6,12 +6,12 @@ kde-l10n-it
 
 # libre office packages
 
-libobasis4.4-it
-libobasis4.4-it-base
-libobasis4.4-it-calc
-libobasis4.4-it-help
-libobasis4.4-it-math
-libobasis4.4-it-res
-libobasis4.4-it-writer
-libreoffice4.4-dict-it
-libreoffice4.4-it
+libobasis5.0-it
+libobasis5.0-it-base
+libobasis5.0-it-calc
+libobasis5.0-it-help
+libobasis5.0-it-math
+libobasis5.0-it-res
+libobasis5.0-it-writer
+libreoffice5.0-dict-it
+libreoffice5.0-it
