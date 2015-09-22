@@ -1,0 +1,3 @@
+# Kanotix mesa 11 extra
+deb http://kanotix.com/files/fix/mesa.jessie ./
+deb-src http://kanotix.com/files/fix/mesa.jessie ./
