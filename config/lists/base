@@ -172,6 +172,7 @@ lvm2
 hfsprogs
 exfat-utils
 zram
+httpfs2
 
 # filesystem tools
 parted
