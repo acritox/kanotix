@@ -1,0 +1,2 @@
+# Wine Staging
+deb http://repos.wine-staging.com/debian @DISTRIBUTION@ main

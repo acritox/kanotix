@@ -50,21 +50,21 @@ lb config noauto \
 # architecture and distribution depending stuff (e.g. kernel)
 case "$LB_DISTRIBUTION" in
 wheezy)
-	LB_REPOSITORIES+=" dragonfire fds-team-wheezy fds-team-source dragonfire-acritox"
+	LB_REPOSITORIES+=" dragonfire wine-staging dragonfire-acritox"
 	case $LB_ARCHITECTURE in
 	amd64) LB_LINUX_PACKAGES="linux-image linux-headers"; LB_LINUX_FLAVOURS="amd64";;
 	i386)  LB_LINUX_PACKAGES="linux-image linux-headers"; LB_LINUX_FLAVOURS="686-pae";;
 	esac
 	;;
 jessie)
-    LB_REPOSITORIES+=" dragonfire spitfire fds-team-debian fds-team-source spitfire-acritox"
+    LB_REPOSITORIES+=" dragonfire spitfire wine-staging spitfire-acritox"
 	case $LB_ARCHITECTURE in
 	amd64) LB_LINUX_PACKAGES="linux-image linux-headers"; LB_LINUX_FLAVOURS="amd64";;
 	i386)  LB_LINUX_PACKAGES="linux-image linux-headers"; LB_LINUX_FLAVOURS="686-pae";;
 	esac
 	;;
 *)
-    LB_REPOSITORIES+=" dragonfire spitfire fds-team-debian fds-team-source spitfire-acritox"
+    LB_REPOSITORIES+=" dragonfire spitfire wine-staging spitfire-acritox"
 	case $LB_ARCHITECTURE in
 	amd64) LB_LINUX_PACKAGES="linux-image linux-headers"; LB_LINUX_FLAVOURS="amd64";;
 	i386)  LB_LINUX_PACKAGES="linux-image linux-headers"; LB_LINUX_FLAVOURS="686-pae";;
@@ -94,13 +94,7 @@ if grep -wq steam <<<"$LB_PACKAGES_LISTS"; then
         LB_REPOSITORIES+=" steam"
     fi
 fi
-if grep -wq wine-staging <<<"$LB_PACKAGES $LB_PACKAGES_LISTS"; then
-    if [ "$LB_DISTRIBUTION" = "wheezy" ]; then
-        LB_REPOSITORIES+=" fds-team-wheezy fds-team-source"
-    else
-        LB_REPOSITORIES+=" fds-team-debian fds-team-source"
-    fi
-fi
+grep -wq wine-staging <<<"$LB_PACKAGES $LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" wine-staging"
 grep -wq iceweasel <<<"$LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" iceweasel"
 grep -wq firefox <<<"$LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" firefox"
 grep -wq silverlight <<<"$LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" silverlight"

@@ -9,3 +9,13 @@ wine-staging
 #if ARCHITECTURE amd64
 wine-staging:i386
 #endif
+
+# compatibility symlinks
+
+#if ARCHITECTURE i386
+wine-staging-compat
+#endif
+
+#if ARCHITECTURE amd64
+wine-staging-compat:i386
+#endif
