@@ -1,0 +1,4 @@
+nvidia-legacy-340xx-driver nvidia-settings-legacy-340xx nvidia-legacy-340xx-kernel-dkms
+#if ARCHITECTURE amd64
+libgl1-nvidia-legacy-340xx-glx:i386
+#endif
