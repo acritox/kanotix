@@ -1,3 +1,4 @@
 gfxdetect
 
 #include <gfxdrivers>
+#include <gfxdrivers-legacy>
