@@ -1,4 +1,4 @@
-nvidia-glx nvidia-settings vdpau-va-driver nvidia-xconfig nvidia-kernel-dkms
+nvidia-driver nvidia-settings nvidia-xconfig nvidia-kernel-dkms
 #if ARCHITECTURE amd64
 libgl1-nvidia-glx:i386
 #endif
