@@ -6,7 +6,7 @@ set -e
 # the hook is removed in upcoming lb-versions
 # so i keep it here
 
-if [ -x /usr/sbin/lightdm ]; then
+if [ -x /usr/bin/lxde-logout ]; then
     # only on i386
     if ! [ -d /lib/x86_64-linux-gnu ]; then
 
