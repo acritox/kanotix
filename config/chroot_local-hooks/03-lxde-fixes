@@ -4,8 +4,6 @@ for file in /root/config/*; do [ -r $file ] && . $file; done
 if [ -x /usr/bin/lxde-logout ]; then
     # dirty hack kanotix wallpaper on login-screen
     echo "background=/usr/share/images/kanotix-starrise/kanotix-starrise.png" >>/etc/lightdm/lightdm-gtk-greeter.conf
-    # enable display of users at login prompt
-    sed -i 's/^greeter-hide-users=true/greeter-hide-users=false/' /etc/lightdm/lightdm.conf
 
     # old kanotix icon in login
     if [ "$LB_DISTRIBUTION" = "wheezy" ]; then

@@ -1,0 +1,7 @@
+#!/bin/sh
+for file in /root/config/*; do [ -r $file ] && . $file; done
+
+if [ -x /usr/sbin/lightdm ]; then
+    # enable display of users at login prompt
+    sed -i 's/^greeter-hide-users=true/greeter-hide-users=false/' /etc/lightdm/lightdm.conf
+fi
