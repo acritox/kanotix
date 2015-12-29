@@ -61,6 +61,11 @@ xterm
 # other hardware
 xfce4-notifyd
 
+#nif DISTRIBUTION wheezy
+onboard
+onboard-kanotix
+#endif
+
 # irc
 #nif DISTRIBUTION squeeze
 hexchat

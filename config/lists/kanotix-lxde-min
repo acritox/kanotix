@@ -82,6 +82,11 @@ xterm
 
 # other hardware
 
+#nif DISTRIBUTION wheezy
+onboard
+onboard-kanotix
+#endif
+
 # irc
 #nif DISTRIBUTION squeeze
 hexchat
