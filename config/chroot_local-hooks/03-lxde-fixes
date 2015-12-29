@@ -2,26 +2,23 @@
 for file in /root/config/*; do [ -r $file ] && . $file; done
 
 if [ -x /usr/bin/lxde-logout ]; then
-    # dirty hack kanotix wallpaper on login-screen
-    echo "background=/usr/share/images/kanotix-starrise/kanotix-starrise.png" >>/etc/lightdm/lightdm-gtk-greeter.conf
 
-    # old kanotix icon in login
-    if [ "$LB_DISTRIBUTION" = "wheezy" ]; then
-	sed -i 's/computer/kanotix/' /usr/share/lightdm-gtk-greeter/greeter.ui
-    fi
     # Industrial conflicts
     sed -i s/Industrial/Clearlooks-Phenix/ /etc/skel/.gtkrc-2.0
 
-    # on lxde i386 wheezy delete packages to reduce image-size
+
     if [ "$LB_DISTRIBUTION" = "wheezy" ]; then
+	# old kanotix icon in login
+	sed -i 's/computer/kanotix/' /usr/share/lightdm-gtk-greeter/greeter.ui
+	# dirty hack kanotix wallpaper on login-screen
+	echo "background=/usr/share/images/kanotix-starrise/kanotix-starrise.png" >>/etc/lightdm/lightdm-gtk-greeter.conf
+	# on lxde i386 wheezy delete packages to reduce image-size
 	if [ "$LB_ARCHITECTURE" = "i386" ]; then
 	    apt-get purge --yes aptitude aptitude-common
 	    apt-get purge --yes vim vim-common vim-runtime
-		if [ "$LB_DISTRIBUTION" = "wheezy" ]; then
 		    rm -rf /usr/lib/python3/dist-packages/devscripts
 		    apt-get purge --yes devscripts python3 python3-minimal python3.2 python3.2-minimal
 		    apt-get install --yes -t wheezy devscripts
-		fi
 	fi
     fi
 
