@@ -1,7 +1,16 @@
 #!/bin/sh
 for file in /root/config/*; do [ -r $file ] && . $file; done
 
+
+
 if [ -x /usr/sbin/lightdm ]; then
-    # enable display of users at login prompt
-    sed -i 's/^greeter-hide-users=true/greeter-hide-users=false/' /etc/lightdm/lightdm.conf
+
+    if [ "$LB_DISTRIBUTION" = "wheezy" ]; then
+	# enable display of users at login prompt
+	sed -i 's/^greeter-hide-users=true/greeter-hide-users=false/' /etc/lightdm/lightdm.conf
+    fi
+fi
+
+if [ -x /var/lib/dpkg/info/onboard-kanotix.postinst ]; then
+    dpkg-reconfigure onboard-kanotix
 fi
