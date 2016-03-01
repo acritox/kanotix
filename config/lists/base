@@ -170,6 +170,7 @@ kpartx
 dosfstools
 lvm2
 hfsprogs
+exfat-fuse
 exfat-utils
 zram
 httpfs2
