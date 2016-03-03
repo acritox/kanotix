@@ -1,1 +1,9 @@
+# use chromium instead of chrome for 32 bit
+
+#if ARCHITECTURE i386
+chromium
+#endif
+
+#if ARCHITECTURE amd64
 google-chrome-stable
+#endif
