@@ -4,6 +4,7 @@ update-alternatives --set pager /usr/bin/most || true
 update-alternatives --set x-window-manager /usr/bin/openbox || true
 update-alternatives --set x-window-manager /usr/bin/kwin || true
 update-alternatives --set x-www-browser /usr/bin/iceweasel || true
+update-alternatives --set x-www-browser /usr/bin/firefox || true
 update-alternatives --set x-session-manager /usr/bin/startlxde || true
 update-alternatives --set x-session-manager /usr/bin/startkde || true
 update-alternatives --set editor /usr/bin/vim.basic || true
