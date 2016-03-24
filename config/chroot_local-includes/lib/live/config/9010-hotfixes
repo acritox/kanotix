@@ -48,7 +48,7 @@ if [ -x /var/lib/dpkg/info/google-chrome-stable.postinst ]; then
 cat <<EOT >/etc/apt/sources.list.d/google-chrome.list
 ### THIS FILE IS AUTOMATICALLY CONFIGURED ###
 # You may comment out this entry, but any other modifications may be lost.
-deb http://dl.google.com/linux/chrome/deb/ stable main
+deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main
 EOT
 fi
 

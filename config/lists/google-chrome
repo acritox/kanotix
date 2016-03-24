@@ -1,7 +1,7 @@
 # use chromium instead of chrome for 32 bit
 
 #if ARCHITECTURE i386
-chromium
+chromium-l10n
 #endif
 
 #if ARCHITECTURE amd64
