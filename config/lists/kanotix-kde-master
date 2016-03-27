@@ -22,6 +22,7 @@ gwenview
 # network
 openvpn
 network-manager-openvpn
+network-manager-vpnc
 
 # skype
 #include <skype>
