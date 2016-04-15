@@ -81,6 +81,7 @@ grep -wq -e opera <<<"$LB_PACKAGES $LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" ope
 grep -wq google-chrome <<<"$LB_PACKAGES $LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" google-chrome"
 grep -wq -e hangouts -e google-talkplugin <<<"$LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" google-talkplugin"
 grep -wq google-earth <<<"$LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" google-earth"
+grep -wq vivaldi <<<"$LB_PACKAGES $LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" vivaldi"
 grep -wq mesa <<<"$LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" mesa"
 grep -wq msa9 <<<"$LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" mesa-9"
 grep -wq ms11 <<<"$LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" mesa-11"

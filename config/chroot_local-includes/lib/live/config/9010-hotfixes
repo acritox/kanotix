@@ -78,6 +78,15 @@ deb-src [arch=amd64,i386] http://repo.steampowered.com/steam/ precise steam
 EOT
 fi
 
+# vivaldi hack
+if [ -x /var/lib/dpkg/info/vivaldi.postinst ]; then
+cat <<EOT >/etc/apt/sources.list.d/vivaldi.list
+### THIS FILE IS AUTOMATICALLY CONFIGURED ###
+# You may comment out this entry, but any other modifications may be lost.
+deb http://repo.vivaldi.com/stable/deb/ stable main
+EOT
+fi
+
 # reconfigure console-setup
 rm -f /etc/default/console-setup
 . /etc/default/locale
