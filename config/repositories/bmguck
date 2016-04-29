@@ -1,0 +1,3 @@
+# Besenmuckel
+deb http://besenmuckel.de/project/bmguck/@DISTRIBUTION@ ./
+deb-src http://besenmuckel.de/project/bmguck/@DISTRIBUTION@ ./
