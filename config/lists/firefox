@@ -1,1 +1,6 @@
+#if DISTRIBUTION wheezy
+firefox-esr-l10n-de
+#endif
+#nif DISTRIBUTION wheezy
 firefox-l10n-de
+#endif
