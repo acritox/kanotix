@@ -12,7 +12,7 @@ grub2|burg)
 esac
 
 size=$((3*1024)) # 3MB
-chroot chroot grub-mkimage -d /usr/lib/grub/i386-pc -o "/boot.isohybrid" -O i386-pc biosdisk iso9660
+chroot chroot grub-mkimage -p "/boot/grub" -d /usr/lib/grub/i386-pc -o "/boot.isohybrid" -O i386-pc biosdisk iso9660
 perl -e "print '<ACRITOX-HYBRID>'x(64*$size);" > binary/boot.isohybrid
 dd if=chroot/boot.isohybrid of=binary/boot.isohybrid bs=1M conv=notrunc
 rm -f chroot/boot.isohybrid
