@@ -25,7 +25,8 @@ lb config noauto \
 	--apt apt \
 	--apt-recommends false \
 	--bootappend-live 'utc=no timezone=Europe/Berlin locales=de keyboard-layouts=de keyboard-variant=nodeadkeys splash' \
-        --archive-areas "main contrib non-free" \
+	--archive-areas "main contrib non-free" \
+	--debootstrap-options "--include=apt-transport-https,ca-certificates --exclude=nano" \
 	--repositories "live.debian.net lo" \
 	--security true \
 	--checksums md5 \
