@@ -1,4 +1,4 @@
-# pulseaudio for wheezy-base (multiarch)
+# pulseaudio for wheezy-jessie-base (multiarch)
 
 pulseaudio-module-x11
 pulseaudio-module-bluetooth
