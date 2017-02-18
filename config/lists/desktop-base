@@ -6,8 +6,11 @@
 #if DISTRIBUTION squeeze
 icedtea6-plugin
 #endif
-#nif DISTRIBUTION squeeze
+#if DISTRIBUTION wheezy jessie
 icedtea-7-plugin
+#endif
+#if DISTRIBUTION stretch sid
+icedtea-8-plugin
 #endif
 
 # multimedia
