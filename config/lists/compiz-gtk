@@ -1,5 +1,6 @@
 # compiz gtk
 
+#if DISTRIBUTION squeeze wheezy jessie
 fusion-icon
 compiz-gtk
 compiz-plugins
@@ -9,3 +10,13 @@ compiz-fusion-plugins-unsupported
 compizconfig-settings-manager
 etcskel-kanotix-compiz
 emerald
+#endif
+
+#if DISTRIBUTION stretch sid
+fusion-icon
+etcskel-kanotix-compiz
+compiz
+compiz-gnome
+compiz-plugins
+compizconfig-settings-manager
+#endif
