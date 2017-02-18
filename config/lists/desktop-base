@@ -1,6 +1,12 @@
 # Kanotix Desktop Packages List without pidgin
 
+#if DISTRIBUTION squeeze wheezy jessie
 #include <gstreamer>
+#endif
+
+#if DISTRIBUTION stretch sid
+#include <gstreamer-1.0>
+#endif
 
 # java, plugins
 #if DISTRIBUTION squeeze
