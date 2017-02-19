@@ -14,8 +14,10 @@ apper
 apt-xapian-index
 
 # multimedia
+#if DISTRIBUTION squeeze wheezy jessie
 gecko-mediaplayer
 mplayerthumbs
+#endif
 #include <vlc>
 #if DISTRIBUTION squeeze
 phonon-backend-xine

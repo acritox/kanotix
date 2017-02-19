@@ -20,8 +20,8 @@ apt-xapian-index
 gdebi
 
 # multimedia
-gecko-mediaplayer
 #if DISTRIBUTION squeeze wheezy jessie
+gecko-mediaplayer
 exaile
 #endif
 #if DISTRIBUTION stretch sid

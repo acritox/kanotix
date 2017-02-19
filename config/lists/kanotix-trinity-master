@@ -11,7 +11,9 @@ synaptic
 
 # multimedia
 amarok-trinity
+#if DISTRIBUTION squeeze wheezy jessie
 gecko-mediaplayer
+#endif
 
 # skype
 skype
