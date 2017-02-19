@@ -5,7 +5,9 @@
 #include <office>
 
 # multimedia
+#if DISTRIBUTION squeeze wheezy jessie
 me-tv
+#endif
 
 # graphics
 gimp
