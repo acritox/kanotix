@@ -16,12 +16,11 @@ apt-xapian-index
 # multimedia
 gecko-mediaplayer
 mplayerthumbs
-vlc
+#include <vlc>
 #if DISTRIBUTION squeeze
 phonon-backend-xine
 #endif
 #nif DISTRIBUTION squeeze
-vlc-plugin-pulse
 phonon-backend-gstreamer
 #endif
 

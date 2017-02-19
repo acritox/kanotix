@@ -1,0 +1,7 @@
+# vlc list
+
+vlc
+
+#if DISTRIBUTION wheezy
+vlc-plugin-pulse
+#endif

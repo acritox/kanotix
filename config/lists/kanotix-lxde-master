@@ -23,8 +23,7 @@ gdebi
 gecko-mediaplayer
 exaile
 #if ARCHITECTURE amd64
-vlc
-vlc-plugin-pulse
+#include <vlc>
 #endif
 #if ARCHITECTURE i386
 smplayer-translations
