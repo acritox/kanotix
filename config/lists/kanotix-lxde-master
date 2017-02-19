@@ -61,7 +61,12 @@ xzdec
 #include <skype>
 
 # games
+#if DISTRIBUTION squeeze wheezy jessie
 mahjongg
+#endif
+#if DISTRIBUTION stretch sid
+gnome-mahjongg
+#endif
 gnome-sudoku
 xskat
 
