@@ -57,7 +57,13 @@ compton
 
 # multimedia
 smplayer-translations
+#if DISTRIBUTION squeeze wheezy jessie
 exaile
+#endif
+#if DISTRIBUTION stretch sid
+clementine
+#endif
+
 
 # network
 network-manager-gnome

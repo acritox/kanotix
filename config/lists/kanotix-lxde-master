@@ -21,7 +21,13 @@ gdebi
 
 # multimedia
 gecko-mediaplayer
+#if DISTRIBUTION squeeze wheezy jessie
 exaile
+#endif
+#if DISTRIBUTION stretch sid
+clementine
+#endif
+
 #if ARCHITECTURE amd64
 #include <vlc>
 #endif
