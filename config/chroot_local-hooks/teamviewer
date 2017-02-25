@@ -2,7 +2,7 @@
 for file in /root/config/*; do [ -r $file ] && . $file; done
 echo "$LB_PACKAGE_LISTS" | grep -qw teamviewer || exit 0
 TMP=$(mktemp -d /tmp/teamviewer.XXXXXX)
-wget -NP $TMP "http://www.teamviewer.com/download/teamviewer_linux.deb"
+wget -NP $TMP http://download.teamviewer.com/download/teamviewer_i386.deb
 dpkg -i $TMP/*.deb
 apt-get update
 DEBIAN_FRONTEND=noninteractive apt-get -f -y install
