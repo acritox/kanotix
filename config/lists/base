@@ -94,6 +94,7 @@ comgt
 wvdial
 rfkill
 nmap
+net-tools
 
 # print
 cups-bsd
@@ -159,6 +160,7 @@ vdpauinfo
 mesa-vdpau-drivers
 #endif
 xinit
+freerdp-x11
 
 # disktools
 gddrescue
