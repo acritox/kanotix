@@ -32,7 +32,7 @@ clementine
 #include <vlc>
 #endif
 #if ARCHITECTURE i386
-smplayer-translations
+#include <smplayer>
 #endif
 ffmpegthumbnailer
 

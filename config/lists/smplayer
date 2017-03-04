@@ -1,0 +1,10 @@
+# smplayer list
+
+smplayer
+
+#if DISTRIBUTION squeeze wheezy
+smplayer-translations
+#endif
+#if DISTRIBUTION jessie stretch sid
+smplayer-l10n
+#endif
