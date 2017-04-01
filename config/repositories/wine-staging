@@ -1,2 +1,2 @@
 # Wine Staging
-deb http://repos.wine-staging.com/debian @DISTRIBUTION@ main
+deb https://dl.winehq.org/wine-builds/debian @DISTRIBUTION@ main
