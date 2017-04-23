@@ -20,7 +20,7 @@ sane
 # network
 
 # email
-icedove-l10n-de
+thunderbird-l10n-de
 
 # wine
 #include <wine-staging>
