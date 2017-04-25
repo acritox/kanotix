@@ -178,7 +178,9 @@ lvm2
 hfsprogs
 exfat-fuse
 exfat-utils
+#nif DISTRIBUTION wheezy
 zram
+#endif
 httpfs2
 
 # filesystem tools
