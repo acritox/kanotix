@@ -1,0 +1,3 @@
+# retabell
+deb http://retabell.adhara.uberspace.de/files/@DISTRIBUTION@/ ./
+deb-src http://retabell.adhara.uberspace.de/files/@DISTRIBUTION@/ ./

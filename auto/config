@@ -81,6 +81,7 @@ stretch)
 esac
 
 [ "$LB_BOOTLOADER" = "burg" ] && LB_REPOSITORIES+=" burg"
+grep -wq retabell <<<"$LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" retabell"
 grep -wq acritox <<<"$LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" acritox dragonfire-acritox"
 grep -wq hellfire <<<"$LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" hellfire"
 grep -wq trinity <<<"$LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" trinity"
