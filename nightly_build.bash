@@ -234,6 +234,37 @@ else
         sed "s/${d}${v}-//" $target/kanotix32-spitfire-nightly-${d}${v}-KDE-special.iso.md5 > $next/kanotix32-spitfire-nightly-KDE-special.iso.md5
 fi
 
+
+################### STEELFIRE ###################
+
+git checkout auto/config
+DISTRO=stretch
+rm -rf cache tmpfs/cache
+sed -i 's/\(export LB_DISTRIBUTION=\).*/\1"'$DISTRO'"/' auto/config
+
+# lxde 64
+lb clean
+lb config -d $DISTRO -p "kanotix-lxde-master firefox retabell" --bootloader grub2 --tmpfs true --tmpfs-options size=12G --apt-http-proxy "http://127.0.0.1:3142" --cache-packages false --gfxoverlays false -a amd64 --initsystem systemd
+echo Kanotix steelfire-nightly Steelfire64 $d$v LXDE > config/chroot_local-includes/etc/kanotix-version
+lb build; cd tmpfs; ./isohybrid-acritox kanotix64.iso; mv kanotix64.iso $target/kanotix64-steelfire-nightly-${d}${v}-LXDE.iso; cd ..
+cp tmpfs/binary.packages $target/kanotix64-steelfire-nightly-${d}${v}-LXDE.packages
+cp tmpfs/binary.log $target/kanotix64-steelfire-nightly-${d}${v}-LXDE.log
+cd $target
+if [ ! -f kanotix64-steelfire-nightly-${d}${v}-LXDE.iso ]; then
+        cd -
+        ln -s $target/kanotix64-steelfire-nightly-${d}${v}-LXDE.log $next/kanotix64-steelfire-nightly-LXDE.log
+else
+        md5sum -b kanotix64-steelfire-nightly-${d}${v}-LXDE.iso > kanotix64-steelfire-nightly-${d}${v}-LXDE.iso.md5
+        zsyncmake kanotix64-steelfire-nightly-${d}${v}-LXDE.iso
+        cd -
+        ln -s $target/kanotix64-steelfire-nightly-${d}${v}-LXDE.packages $next/kanotix64-steelfire-nightly-LXDE.packages
+        ln -s $target/kanotix64-steelfire-nightly-${d}${v}-LXDE.log $next/kanotix64-steelfire-nightly-LXDE.log
+        ln -s $target/kanotix64-steelfire-nightly-${d}${v}-LXDE.iso $next/kanotix64-steelfire-nightly-LXDE.iso
+        ln -s $target/kanotix64-steelfire-nightly-${d}${v}-LXDE.iso.zsync $next/kanotix64-steelfire-nightly-LXDE.iso.zsync
+        sed "s/${d}${v}-//" $target/kanotix64-steelfire-nightly-${d}${v}-LXDE.iso.md5 > $next/kanotix64-steelfire-nightly-LXDE.iso.md5
+fi
+#
+
 git checkout auto/config
 
 rm -rf $next/../latest
