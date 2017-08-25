@@ -83,6 +83,8 @@ fonts-droid
 xpad
 guvcview
 gst123
+#if DISTRIBUTION wheezy jessie
 #include <awesome>
+#endif
 seahorse
 keepassx
