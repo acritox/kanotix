@@ -37,6 +37,9 @@ kanotix-lxde-extra
 
 # LXDE
 lxde
+lxde-common
+openbox
+lxpolkit
 lxappearance-obconf
 gvfs-backends
 menu

@@ -18,6 +18,9 @@ kanotix-power-button
 
 # LXDE
 lxde
+lxde-common
+openbox
+lxpolkit
 lxappearance-obconf
 console-data
 clearlooks-phenix-theme
@@ -27,9 +30,6 @@ menu
 menu-xdg
 lxtask
 zenity
-#if DISTRIBUTION wheezy
-lxpolkit
-#endif
 
 # network
 network-manager-gnome
