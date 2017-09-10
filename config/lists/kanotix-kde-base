@@ -1,7 +1,12 @@
 # Kanotix with KDE (minimal)
 
 #include <base>
+#if DISTRIBUTION squeeze wheezy jessie
 #include <kde>
+#endif
+#if DISTRIBUTION stretch buster sid
+#include <kde5>
+#endif
 #include <kde.kanotix>
 
 # package tool
