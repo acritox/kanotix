@@ -52,7 +52,12 @@ update-manager-core
 
 # games
 armagetronad
+#if DISTRIBUTION squeeze wheezy
 foobillard
+#endif
+#if DISTRIBUTION jessie stretch buster sid
+foobillardplus
+#endif
 neverball
 neverputt
 kmahjongg
