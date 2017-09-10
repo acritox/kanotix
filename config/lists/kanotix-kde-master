@@ -29,7 +29,12 @@ network-manager-vpnc
 #include <skype>
 
 # kde
+#if DISTRIBUTION squeeze wheezy jessie
 khelpcenter4
+#endif
+#if DISTRIBUTION stretch buster sid
+khelpcenter
+#endif
 
 # tools
 kuser
