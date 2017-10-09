@@ -1,0 +1,13 @@
+#!/bin/sh
+if [ "$(id -u)" != 0 ]; then
+ echo Error: You must be root to run this script!
+ exit 1
+fi
+
+# delete "buggy file" to enable autologin in live-mode
+
+if [ -e /usr/share/lightdm/lightdm.conf.d/40-kde-plasma-kf5.conf ]; then
+
+    rm -f /usr/share/lightdm/lightdm.conf.d/40-kde-plasma-kf5.conf
+
+fi
