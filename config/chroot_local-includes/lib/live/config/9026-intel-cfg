@@ -1,0 +1,62 @@
+#!/bin/sh
+
+Intelcfg ()
+{
+	# Checking if configured
+	if [ -e /var/lib/live/config/intelcfg ]
+	then
+		return
+	fi
+	echo -n " intel-cfg"
+	Configure_intelcfg
+}
+Configure_intelcfg ()
+{
+	# Boot parameters can be acted up either this way...
+	if [ -x /var/lib/dpkg/info/xserver-xorg-video-intel.postinst ]
+	then
+		if grep -qs "intelcfg" /proc/cmdline
+		then
+			#
+			mkdir -p /etc/X11/xorg.conf.d
+cat > /etc/X11/xorg.conf.d/25-xorg-intel.conf <<"EOF"
+Section "Device"
+    Identifier "Intel"
+    Driver "intel"
+    #Option "AccelMethod" "uxa"
+    #Option "DRI" "2"
+EndSection
+EOF
+			if grep -qs "intelcfgold" /proc/cmdline
+			then
+				#
+cat > /etc/X11/xorg.conf.d/25-xorg-intel.conf <<"EOF"
+Section "Device"
+    Identifier "Intel"
+    Driver "intel"
+    Option "AccelMethod" "uxa"
+    #Option "DRI" "2"
+EndSection
+EOF
+			fi
+		fi
+	fi
+# workaround radeon
+if grep -qs "radeoncfg" /proc/cmdline
+		then
+			#
+			mkdir -p /etc/X11/xorg.conf.d
+cat > /etc/X11/xorg.conf.d/25-xorg-radeon.conf <<"EOF"
+Section "Device"
+    Identifier "DeviceRadeon"
+    Driver "radeon"
+    Option "AccelMethod" "glamor"
+    Option "DRI" "3"
+EndSection
+EOF
+fi
+	# Creating state file
+	touch /var/lib/live/config/intelcfg
+}
+
+Intelcfg
