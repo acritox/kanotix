@@ -1,0 +1,94 @@
+# Kanotix list for kde5
+
+#include <desktop>
+
+# kanotix stuff
+etcskel-kanotix-kf5
+
+# office
+okular
+okular-extra-backends
+okularplugin
+
+# plugins
+
+# multimedia
+libsdl1.2debian
+kdemultimedia-kio-plugins
+kamera
+kio-extras
+
+# burn
+k3b
+k3b-i18n
+libk3b6-extracodecs
+
+# chat, irc
+konversation
+
+# editors
+kate
+
+# archive
+ark
+
+# tools
+ksnapshot
+kcalc
+
+# kde
+# kde-plasma-desktop is a metapackage bump out konquerror etc
+kde-runtime
+plasma-desktop
+plasma-workspace
+udisks2
+upower
+
+# kdebase-apps is a metapackage
+kde-baseapps-bin
+dolphin
+konsole
+kwrite
+
+lightdm
+onboard
+onboard-kanotix
+systemsettings
+kde-l10n-de
+kwalletmanager
+polkit-kde-1
+kde-config-screenlocker
+
+# kde now optional depends
+kactivities-bin
+
+# kde plasma
+plasma-widgets-addons
+plasma-runners-addons
+
+# themes
+kde-config-gtk-style
+gnome-icon-theme
+clearlooks-phenix-theme
+
+# network
+plasma-nm
+
+# other hardware
+kde-config-touchpad
+
+blueman
+
+kwin-x11
+kwin-decoration-oxygen
+kde-wallpapers-default
+powerdevil
+kscreen
+plasma-pa
+print-manager
+
+# tmp stuff for devel
+inkscape
+
+kdeutils
+kdeconnect
