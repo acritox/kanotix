@@ -1,0 +1,21 @@
+#!/bin/sh
+for file in /root/config/*; do [ -r $file ] && . $file; done
+
+if [ "$LB_DISTRIBUTION" = "stretch" ]; then
+
+# enable tapping
+
+mkdir -p /etc/X11/xorg.conf.d
+
+cat <<"EOF" >/etc/X11/xorg.conf.d/40-libinput.conf
+Section "InputClass"
+        Identifier "libinput touchpad catchall"
+        MatchIsTouchpad "on"
+        MatchDevicePath "/dev/input/event*"
+        Driver "libinput"
+        Option "Tapping" "on"
+        #Option "DisableWhileTyping" "1"
+EndSection
+EOF
+
+fi
