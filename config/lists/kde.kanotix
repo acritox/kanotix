@@ -1,9 +1,16 @@
 # Kanotix KDE
+#if DISTRIBUTION squeeze wheezy jessie
 kanotix-plasma-script
 badge-icon-kanotix
 kdm-theme-kanotix-starrise
 kmenu-icon-kanotix
 ksplash-theme-kanotix-starrise
+#endif
+
+#nif DISTRIBUTION squeeze wheezy jessie
+badge-icon-kanotix
+kmenu-icon-kanotix
+#endif
 
 # sudo must not be in a trinity-packageslist-set, therefore it's added here:
 sudo
