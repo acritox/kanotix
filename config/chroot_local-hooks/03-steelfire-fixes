@@ -18,4 +18,9 @@ Section "InputClass"
 EndSection
 EOF
 
+# set gtk2 theme
+    sed -i s/Industrial/Clearlooks-Phenix/ /etc/skel/.gtkrc-2.0
+    echo 'gtk-theme-name="Clearlooks-Phenix"' >>/etc/skel/.gtkrc-2.0
+    ln -s .gtkrc-2.0 /etc/skel/.gtkrc-2.0-kde4
+
 fi
