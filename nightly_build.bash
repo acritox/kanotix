@@ -286,6 +286,50 @@ else
         sed "s/${d}${v}-//" $target/kanotix32-steelfire-nightly-${d}${v}-LXDE.iso.md5 > $next/kanotix32-steelfire-nightly-LXDE.iso.md5
 fi
 #
+# kde 64
+lb clean
+lb config -d $DISTRO -p "kanotix-kde-master firefox retabell" --bootloader grub2 --tmpfs true --tmpfs-options size=12G --apt-http-proxy "http://127.0.0.1:3142" --cache-packages false --gfxoverlays false -a amd64 --initsystem systemd
+echo Kanotix steelfire-nightly Steelfire64 $d$v KDE > config/chroot_local-includes/etc/kanotix-version
+lb build; cd tmpfs; ./isohybrid-acritox kanotix64.iso; mv kanotix64.iso $target/kanotix64-steelfire-nightly-${d}${v}-KDE.iso; cd ..
+cp tmpfs/binary.packages $target/kanotix64-steelfire-nightly-${d}${v}-KDE.packages
+cp tmpfs/binary.log $target/kanotix64-steelfire-nightly-${d}${v}-KDE.log
+cd $target
+if [ ! -f kanotix64-steelfire-nightly-${d}${v}-KDE.iso ]; then
+        cd -
+        ln -s $target/kanotix64-steelfire-nightly-${d}${v}-KDE.log $next/kanotix64-steelfire-nightly-KDE.log
+else
+        md5sum -b kanotix64-steelfire-nightly-${d}${v}-KDE.iso > kanotix64-steelfire-nightly-${d}${v}-KDE.iso.md5
+        zsyncmake kanotix64-steelfire-nightly-${d}${v}-KDE.iso
+        cd -
+        ln -s $target/kanotix64-steelfire-nightly-${d}${v}-KDE.packages $next/kanotix64-steelfire-nightly-KDE.packages
+        ln -s $target/kanotix64-steelfire-nightly-${d}${v}-KDE.log $next/kanotix64-steelfire-nightly-KDE.log
+        ln -s $target/kanotix64-steelfire-nightly-${d}${v}-KDE.iso $next/kanotix64-steelfire-nightly-KDE.iso
+        ln -s $target/kanotix64-steelfire-nightly-${d}${v}-KDE.iso.zsync $next/kanotix64-steelfire-nightly-KDE.iso.zsync
+        sed "s/${d}${v}-//" $target/kanotix64-steelfire-nightly-${d}${v}-KDE.iso.md5 > $next/kanotix64-steelfire-nightly-KDE.iso.md5
+fi
+#
+# kde 32
+lb clean
+lb config -d $DISTRO -p "kanotix-kde-master firefox retabell" --bootloader grub2 --tmpfs true --tmpfs-options size=12G --apt-http-proxy "http://127.0.0.1:3142" --cache-packages false --gfxoverlays false -a i386 --initsystem systemd
+echo Kanotix steelfire-nightly Steelfire32 $d$v KDE > config/chroot_local-includes/etc/kanotix-version
+lb build; cd tmpfs; ./isohybrid-acritox kanotix32.iso; mv kanotix32.iso $target/kanotix32-steelfire-nightly-${d}${v}-KDE.iso; cd ..
+cp tmpfs/binary.packages $target/kanotix32-steelfire-nightly-${d}${v}-KDE.packages
+cp tmpfs/binary.log $target/kanotix32-steelfire-nightly-${d}${v}-KDE.log
+cd $target
+if [ ! -f kanotix32-steelfire-nightly-${d}${v}-KDE.iso ]; then
+        cd -
+        ln -s $target/kanotix32-steelfire-nightly-${d}${v}-KDE.log $next/kanotix32-steelfire-nightly-KDE.log
+else
+        md5sum -b kanotix32-steelfire-nightly-${d}${v}-KDE.iso > kanotix32-steelfire-nightly-${d}${v}-KDE.iso.md5
+        zsyncmake kanotix32-steelfire-nightly-${d}${v}-KDE.iso
+        cd -
+        ln -s $target/kanotix32-steelfire-nightly-${d}${v}-KDE.packages $next/kanotix32-steelfire-nightly-KDE.packages
+        ln -s $target/kanotix32-steelfire-nightly-${d}${v}-KDE.log $next/kanotix32-steelfire-nightly-KDE.log
+        ln -s $target/kanotix32-steelfire-nightly-${d}${v}-KDE.iso $next/kanotix32-steelfire-nightly-KDE.iso
+        ln -s $target/kanotix32-steelfire-nightly-${d}${v}-KDE.iso.zsync $next/kanotix32-steelfire-nightly-KDE.iso.zsync
+        sed "s/${d}${v}-//" $target/kanotix32-steelfire-nightly-${d}${v}-KDE.iso.md5 > $next/kanotix32-steelfire-nightly-KDE.iso.md5
+fi
+
 git checkout auto/config
 
 rm -rf $next/../latest
