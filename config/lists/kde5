@@ -58,6 +58,7 @@ kde-l10n-de
 kwalletmanager
 polkit-kde-1
 kde-config-screenlocker
+khotkeys
 
 # kde now optional depends
 kactivities-bin
