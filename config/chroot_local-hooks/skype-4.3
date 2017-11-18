@@ -1,0 +1,8 @@
+#!/bin/bash
+for file in /root/config/*; do [ -r $file ] && . $file; done
+
+dpkg -l | grep -qw skype | grep -qw 4.3 && exit 0
+
+if [ -x /usr/bin/skype ]; then
+    sed -i 's/4\(\.3\.0\.3\)/8\1/' /usr/bin/skype
+fi
