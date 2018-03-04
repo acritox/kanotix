@@ -1,8 +1,5 @@
 linux-firmware
 linux-firmware-nonfree
 
-# missing firmware in case of debian kernel
-firmware-bnx2
-
 # broadcom
 broadcom-sta-dkms
