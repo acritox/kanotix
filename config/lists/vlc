@@ -5,3 +5,7 @@ vlc
 #if DISTRIBUTION wheezy
 vlc-plugin-pulse
 #endif
+
+#nif DISTRIBUTION wheezy jessie
+vlc-l10n
+#endif
