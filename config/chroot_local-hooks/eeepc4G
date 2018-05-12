@@ -1,0 +1,10 @@
+#!/bin/bash
+for file in /root/config/*; do [ -r $file ] && . $file; done
+echo "$LB_PACKAGE_LISTS" | grep -qw eeepc4G || exit 0
+
+echo "D: $LB_PACKAGE_LISTS"
+echo "D: $LB_PACKAGES_LISTS"
+
+echo "# enable 900Mhz clock" >/etc/modules-load.d/eepc4G.conf
+echo "p4-clockmod" >>/etc/modules-load.d/eepc4G.conf
+exit 0
