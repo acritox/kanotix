@@ -1,0 +1,330 @@
+# Kanotix with LXDE for eeepc4G
+
+# Kanotix base Packages List
+# install only needed firmware
+firmware-atheros
+
+#include <base.kanotix>
+
+# bootloader
+#if BOOTLOADER burg
+burg-pc
+#endif
+#if BOOTLOADER grub grub2 syslinux
+grub-pc
+grub-efi-amd64-bin
+grub-efi-ia32-bin
+efibootmgr
+syslinux-common
+#endif
+
+#if KANOTIX_GFXOVERLAYS true
+gfxoverlay
+#endif
+
+# multimedia
+sox
+alsa-oss
+alsa-utils
+w-scan
+
+# chat, irc
+weechat
+
+# editors
+
+# archive
+unrar
+unzip
+p7zip-full
+zip
+unp
+
+# tools
+bc
+mc
+most
+less
+rsync
+hdparm
+pciutils
+wireless-tools
+sux
+htop
+time
+bash-completion
+di
+cfv
+whois
+screen
+ntpdate
+usb-modeswitch
+tofrodos
+schedtool
+hwinfo
+alsa-oss
+smartmontools
+eject
+file
+user-setup
+whois
+zsync
+debconf-utils
+rpm2cpio
+usbutils
+exif
+fsarchiver
+xterm
+ncdu
+libnotify-bin
+
+# network
+inetutils-ping
+pcmciautils
+openssh-client
+sshfs
+cifs-utils
+pppoeconf
+nfs-common
+ncpfs
+#if DISTRIBUTION wheezy
+bluez-audio
+#endif
+ethtool
+vpnc
+comgt
+wvdial
+rfkill
+nmap
+net-tools
+
+# print
+cups-bsd
+cups-client
+
+# build
+module-assistant
+build-essential
+fakeroot
+libstdc++5
+bzip2
+cdbs
+dkms
+devscripts
+pbuilder
+
+# system
+cpufrequtils
+hddtemp
+acpi
+acpid
+acpi-support
+xdg-utils
+menu-xdg
+menu
+menu-l10n
+console-setup
+locales
+lsb-release
+
+# xorg
+xserver-xorg-video-all
+xserver-xorg-video-intel
+xserver-xorg-input-all
+mesa-utils
+libgl1-mesa-dri
+libgl1-mesa-glx
+#if ARCHITECTURE amd64
+libgl1-mesa-dri:i386
+libgl1-mesa-glx:i386
+#endif
+vainfo
+i965-va-driver
+vdpauinfo
+#nif DISTRIBUTION wheezy
+mesa-vdpau-drivers
+#endif
+xinit
+freerdp-x11
+
+# disktools
+gddrescue
+testdisk
+gpart
+
+# filesystems
+ntfs-3g
+#if DISTRIBUTION squeeze
+ntfsprogs
+#endif
+reiserfsprogs
+#dmraid
+kpartx
+dosfstools
+lvm2
+hfsprogs
+exfat-fuse
+exfat-utils
+#nif DISTRIBUTION wheezy
+zram
+#endif
+httpfs2
+
+# filesystem tools
+parted
+os-prober
+mtools
+mdadm
+cryptsetup
+hfsplus
+hfsutils
+jfsutils
+xfsprogs
+btrfs-tools
+
+# firmware
+ndiswrapper-utils-1.9
+ndiswrapper-dkms
+
+# other hardware
+blueman
+#if DISTRIBUTION wheezy
+bluez-compat
+#endif
+pm-utils
+vbetool
+radeontool
+tp-trackpoint-scroll
+gobi-loader
+
+# s2tc
+libtxc-dxtn-s2tc0
+#if ARCHITECTURE amd64
+libtxc-dxtn-s2tc0:i386
+#endif
+
+# v4l
+libv4l-0
+#if ARCHITECTURE amd64
+libv4l-0:i386
+#endif
+
+## base list end
+
+
+#include <compiz-gtk>
+
+## in desktop
+# needed packages from desktop list
+# tools
+gparted
+gksu
+#if DISTRIBUTION squeeze wheezy jessie
+#include <gstreamer>
+#endif
+
+#nif DISTRIBUTION squeeze wheezy jessie
+#include <gstreamer-1.0>
+#endif
+
+# themes
+gtk2-engines
+#nif DISTRIBUTION squeeze
+#include <wheezy-desktop>
+#endif
+
+# tools
+joystick
+
+# some tools or fixes
+epdfview
+ca-certificates
+#  desktop finish
+
+# Kanotix
+etcskel-kanotix-lxde
+kmenu-icon-kanotix
+kanotix-lxde-extra
+
+# LXDE
+lxde
+lxde-common
+openbox
+lxpolkit
+lxappearance-obconf
+gvfs-backends
+menu
+menu-xdg
+lxtask
+zenity
+xfce4-notifyd
+#if DISTRIBUTION wheezy
+lxpolkit
+#endif
+clearlooks-phenix-theme
+
+# tools
+synaptic
+notification-daemon
+
+# compositting
+compton
+
+# multimedia
+#include <smplayer>
+#if DISTRIBUTION squeeze wheezy jessie
+exaile
+#endif
+#nif DISTRIBUTION squeeze wheezy jessie
+clementine
+#endif
+
+
+# network
+network-manager-gnome
+modemmanager
+mobile-broadband-provider-info
+gnome-keyring
+network-manager-openvpn-gnome
+network-manager-vpnc-gnome
+
+#if DISTRIBUTION squeeze
+gdm
+#endif
+#nif DISTRIBUTION squeeze
+lightdm
+#endif
+
+# power management
+xfce4-power-manager
+#nif DISTRIBUTION wheezy
+xfce4-power-manager-lxpanel-plugin
+#endif
+
+# audio
+# xterm is needed by lxpanel to use alsamixer
+#if DISTRIBUTION squeeze
+alsa-utils
+xterm
+#endif
+
+# other hardware
+
+#nif DISTRIBUTION wheezy
+onboard
+onboard-kanotix
+#endif
+
+# irc
+#nif DISTRIBUTION squeeze
+hexchat
+#endif
+
+#if DISTRIBUTION squeeze
+xchat
+#endif
+
+# other
+gnome-screenshot
+seahorse
+keepassx
