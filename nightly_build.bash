@@ -329,6 +329,28 @@ else
         ln -s $target/kanotix32-steelfire-nightly-${d}${v}-KDE.iso.zsync $next/kanotix32-steelfire-nightly-KDE.iso.zsync
         sed "s/${d}${v}-//" $target/kanotix32-steelfire-nightly-${d}${v}-KDE.iso.md5 > $next/kanotix32-steelfire-nightly-KDE.iso.md5
 fi
+#
+# eeepc4G with LXDE
+lb clean
+lb config -d $DISTRO -p "kanotix-eeepc4G firefox retabell" --bootloader grub2 --tmpfs true --tmpfs-options size=12G --apt-http-proxy "http://127.0.0.1:3142" --cache-packages false --gfxoverlays false -a i386 --initsystem systemd
+echo Kanotix steelfire-nightly Steelfire32 $d$v eeepc4G > config/chroot_local-includes/etc/kanotix-version
+lb build; cd tmpfs; ./isohybrid-acritox kanotix32.iso; mv kanotix32.iso $target/kanotix32-steelfire-nightly-${d}${v}-eeepc4G.iso; cd ..
+cp tmpfs/binary.packages $target/kanotix32-steelfire-nightly-${d}${v}-eeepc4G.packages
+cp tmpfs/binary.log $target/kanotix32-steelfire-nightly-${d}${v}-eeepc4G.log
+cd $target
+if [ ! -f kanotix32-steelfire-nightly-${d}${v}-eeepc4G.iso ]; then
+        cd -
+        ln -s $target/kanotix32-steelfire-nightly-${d}${v}-eeepc4G.log $next/kanotix32-steelfire-nightly-eeepc4G.log
+else
+        md5sum -b kanotix32-steelfire-nightly-${d}${v}-eeepc4G.iso > kanotix32-steelfire-nightly-${d}${v}-eeepc4G.iso.md5
+        zsyncmake kanotix32-steelfire-nightly-${d}${v}-eeepc4G.iso
+        cd -
+        ln -s $target/kanotix32-steelfire-nightly-${d}${v}-eeepc4G.packages $next/kanotix32-steelfire-nightly-eeepc4G.packages
+        ln -s $target/kanotix32-steelfire-nightly-${d}${v}-eeepc4G.log $next/kanotix32-steelfire-nightly-eeepc4G.log
+        ln -s $target/kanotix32-steelfire-nightly-${d}${v}-eeepc4G.iso $next/kanotix32-steelfire-nightly-eeepc4G.iso
+        ln -s $target/kanotix32-steelfire-nightly-${d}${v}-eeepc4G.iso.zsync $next/kanotix32-steelfire-nightly-eeepc4G.iso.zsync
+        sed "s/${d}${v}-//" $target/kanotix32-steelfire-nightly-${d}${v}-eeepc4G.iso.md5 > $next/kanotix32-steelfire-nightly-eeepc4G.iso.md5
+fi
 
 git checkout auto/config
 
