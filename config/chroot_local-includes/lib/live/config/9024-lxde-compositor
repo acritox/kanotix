@@ -23,7 +23,7 @@ Configure_composit ()
 	if grep -qs "nocompiz" /proc/cmdline
 	then
 	    touch /home/${LIVE_USERNAME}/.nocompiz
-	    chown 1000:1000 /home/${LIVE_USERNAME}/.compiz
+	    chown 1000:1000 /home/${LIVE_USERNAME}/.nocompiz
 	    if [ -e /home/${LIVE_USERNAME}/.config/kwinrc ]; then
 		echo "[Compositing]" >>/home/${LIVE_USERNAME}/.config/kwinrc
 		echo "Enabled=false" >>/home/${LIVE_USERNAME}/.config/kwinrc
