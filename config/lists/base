@@ -170,6 +170,9 @@ vdpauinfo
 #nif DISTRIBUTION wheezy
 mesa-vdpau-drivers
 #endif
+#nif DISTRIBUTION wheezy jessie
+#include <vulkan>
+#endif
 xinit
 #if DISTRIBUTION wheezy jessie stretch
 freerdp-x11

@@ -1,0 +1,4 @@
+#if ARCHITECTURE amd64
+mesa-vulkan-drivers
+vulkan-utils
+#endif
