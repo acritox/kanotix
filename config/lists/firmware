@@ -1,3 +1,10 @@
+# install microcodes
+#nif DISTRIBUTION squeeze wheezy
+intel-microcode
+amd64-microcode
+#endif
+
+# other
 linux-firmware
 linux-firmware-nonfree
 
