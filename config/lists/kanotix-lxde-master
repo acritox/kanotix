@@ -57,9 +57,6 @@ simple-scan
 ncdu
 xzdec
 
-# skype
-#include <skype>
-
 # games
 #if DISTRIBUTION squeeze wheezy jessie
 mahjongg

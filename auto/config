@@ -111,6 +111,7 @@ grep -wq firefox <<<"$LB_PACKAGES_LISTS"
 grep -wq silverlight <<<"$LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" silverlight"
 grep -wq spotify <<<"$LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" spotify"
 grep -wq dropbox <<<"$LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" dropbox"
+grep -wq skypeforlinux <<<"$LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" skype-stable"
 
 # special hack
 if grep -wq gfxdetect <<<"$LB_PACKAGES_LISTS"; then

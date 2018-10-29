@@ -25,9 +25,6 @@ openvpn
 network-manager-openvpn
 network-manager-vpnc
 
-# skype
-#include <skype>
-
 # kde
 #if DISTRIBUTION squeeze wheezy jessie
 khelpcenter4

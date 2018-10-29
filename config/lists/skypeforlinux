@@ -1,0 +1,5 @@
+# skype (64 bit)
+
+#if ARCHITECTURE amd64
+skypeforlinux
+#endif

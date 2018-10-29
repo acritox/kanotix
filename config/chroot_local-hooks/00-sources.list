@@ -11,4 +11,8 @@ if [ -f /etc/apt/sources.list.d/steam.list ]; then
     rm -f /etc/apt/sources.list.d/steam.list
 fi
 
+if [ -f /etc/apt/sources.list.d/skype-stable.list ]; then
+    rm -f /etc/apt/sources.list.d/skype-stable.list
+fi
+
 sed -i -e "s|@DISTRIBUTION@|${LB_DISTRIBUTION}|g" /etc/apt/sources.list

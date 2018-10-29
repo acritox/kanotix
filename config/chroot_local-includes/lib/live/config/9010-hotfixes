@@ -87,6 +87,13 @@ deb http://repo.vivaldi.com/stable/deb/ stable main
 EOT
 fi
 
+# skype hack
+if [ -x /opt/skypeforlinux/skypeforlinux ]; then
+cat <<EOT >/etc/apt/sources.list.d/skype-stable.list
+deb [arch=amd64] https://repo.skype.com/deb stable main
+EOT
+fi
+
 # reconfigure console-setup
 rm -f /etc/default/console-setup
 . /etc/default/locale

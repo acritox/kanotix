@@ -16,10 +16,6 @@ amarok-trinity
 gecko-mediaplayer
 #endif
 
-# skype
-skype
-pidgin-skype
-
 # trinity
 khelpcenter-trinity
 
