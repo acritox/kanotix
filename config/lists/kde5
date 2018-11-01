@@ -78,6 +78,7 @@ kactivities-bin
 # kde plasma
 plasma-widgets-addons
 plasma-runners-addons
+qml-module-org-kde-runnermodel
 
 # themes
 kde-config-gtk-style
