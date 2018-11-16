@@ -1,0 +1,30 @@
+#!/bin/sh
+for file in /root/config/*; do [ -r $file ] && . $file; done
+
+if [ "$LB_DISTRIBUTION" = "buster" ]; then
+
+# Installer Hotfix
+cd /usr/share/acritoxinstaller/modules
+
+cat <<"EOF" >partmgr.patch
+--- partmgr.orig        2018-11-16 16:22:52.000000000 +0100
++++ partmgr     2018-11-16 17:06:30.473477117 +0100
+@@ -7,9 +7,8 @@
+		get_root
+		TERM=xterm /sbin/"$1" "$2"
+		;;
+-	gparted|qtparted)
+-		get_root X
+-		"$1" "$2"
++	gparted)
++		"/usr/sbin/$1" "$2"
+		;;
+	esac
+ }
+
+EOF
+
+patch -p0 -i partmgr.patch
+rm -f partmgr.patch
+cd -
+fi
