@@ -106,7 +106,7 @@ rm -rf cache tmpfs/cache
 sed -i 's/\(export LB_DISTRIBUTION=\).*/\1"'$DISTRO'"/' auto/config
 
 lb clean
-lb config -d $DISTRO -p "kanotix-kde-master firefox" --bootloader grub2 --tmpfs true --tmpfs-options size=12G --apt-http-proxy "http://127.0.0.1:3142" --cache-packages false --gfxoverlays false -a amd64 --initsystem systemd
+lb config -d $DISTRO -p "kanotix-kde-master firefox skypeforlinux" --bootloader grub2 --tmpfs true --tmpfs-options size=12G --apt-http-proxy "http://127.0.0.1:3142" --cache-packages false --gfxoverlays false -a amd64 --initsystem systemd
 echo Kanotix spitfire-nightly Spitfire64 $d$v KDE > config/chroot_local-includes/etc/kanotix-version 
 lb build; cd tmpfs; ./isohybrid-acritox kanotix64.iso; mv kanotix64.iso $target/kanotix64-spitfire-nightly-${d}${v}-KDE.iso; cd ..
 cp tmpfs/binary.packages $target/kanotix64-spitfire-nightly-${d}${v}-KDE.packages
@@ -148,7 +148,7 @@ else
 fi
 
 lb clean
-lb config -d $DISTRO -p "kanotix-lxde-master firefox" --bootloader grub2 --tmpfs true --tmpfs-options size=12G --apt-http-proxy "http://127.0.0.1:3142" --cache-packages false --gfxoverlays false -a amd64 --initsystem systemd
+lb config -d $DISTRO -p "kanotix-lxde-master firefox skypeforlinux" --bootloader grub2 --tmpfs true --tmpfs-options size=12G --apt-http-proxy "http://127.0.0.1:3142" --cache-packages false --gfxoverlays false -a amd64 --initsystem systemd
 echo Kanotix spitfire-nightly Spitfire64 $d$v LXDE > config/chroot_local-includes/etc/kanotix-version 
 lb build; cd tmpfs; ./isohybrid-acritox kanotix64.iso; mv kanotix64.iso $target/kanotix64-spitfire-nightly-${d}${v}-LXDE.iso; cd ..
 cp tmpfs/binary.packages $target/kanotix64-spitfire-nightly-${d}${v}-LXDE.packages
@@ -193,7 +193,7 @@ fi
 #git checkout config/binary_grub/grub.cfg
 
 lb clean
-lb config -d $DISTRO -p "kanotix-master firefox google-chrome virtualbox android steam xbmc gfxdetect" --bootloader grub2 --tmpfs true --tmpfs-options size=12G --apt-http-proxy "http://127.0.0.1:3142" --cache-packages false --gfxoverlays false -a amd64 --initsystem systemd
+lb config -d $DISTRO -p "kanotix-master firefox google-chrome skypeforlinux virtualbox android steam xbmc gfxdetect" --bootloader grub2 --tmpfs true --tmpfs-options size=12G --apt-http-proxy "http://127.0.0.1:3142" --cache-packages false --gfxoverlays false -a amd64 --initsystem systemd
 echo Kanotix spitfire-nightly Spitfire64 $d$v KDE-special > config/chroot_local-includes/etc/kanotix-version 
 lb build; cd tmpfs; ./isohybrid-acritox kanotix64.iso; mv kanotix64.iso $target/kanotix64-spitfire-nightly-${d}${v}-KDE-special.iso; cd ..
 cp tmpfs/binary.packages $target/kanotix64-spitfire-nightly-${d}${v}-KDE-special.packages
@@ -244,7 +244,7 @@ sed -i 's/\(export LB_DISTRIBUTION=\).*/\1"'$DISTRO'"/' auto/config
 
 # lxde 64
 lb clean
-lb config -d $DISTRO -p "kanotix-lxde-master firefox retabell" --bootloader grub2 --tmpfs true --tmpfs-options size=12G --apt-http-proxy "http://127.0.0.1:3142" --cache-packages false --gfxoverlays false -a amd64 --initsystem systemd
+lb config -d $DISTRO -p "kanotix-lxde-master firefox skypeforlinux retabell" --bootloader grub2 --tmpfs true --tmpfs-options size=12G --apt-http-proxy "http://127.0.0.1:3142" --cache-packages false --gfxoverlays false -a amd64 --initsystem systemd
 echo Kanotix steelfire-nightly Steelfire64 $d$v LXDE > config/chroot_local-includes/etc/kanotix-version
 lb build; cd tmpfs; ./isohybrid-acritox kanotix64.iso; mv kanotix64.iso $target/kanotix64-steelfire-nightly-${d}${v}-LXDE.iso; cd ..
 cp tmpfs/binary.packages $target/kanotix64-steelfire-nightly-${d}${v}-LXDE.packages
@@ -288,7 +288,7 @@ fi
 #
 # kde 64
 lb clean
-lb config -d $DISTRO -p "kanotix-kde-master firefox retabell" --bootloader grub2 --tmpfs true --tmpfs-options size=12G --apt-http-proxy "http://127.0.0.1:3142" --cache-packages false --gfxoverlays false -a amd64 --initsystem systemd
+lb config -d $DISTRO -p "kanotix-kde-master firefox skypeforlinux retabell" --bootloader grub2 --tmpfs true --tmpfs-options size=12G --apt-http-proxy "http://127.0.0.1:3142" --cache-packages false --gfxoverlays false -a amd64 --initsystem systemd
 echo Kanotix steelfire-nightly Steelfire64 $d$v KDE > config/chroot_local-includes/etc/kanotix-version
 lb build; cd tmpfs; ./isohybrid-acritox kanotix64.iso; mv kanotix64.iso $target/kanotix64-steelfire-nightly-${d}${v}-KDE.iso; cd ..
 cp tmpfs/binary.packages $target/kanotix64-steelfire-nightly-${d}${v}-KDE.packages
