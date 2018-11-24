@@ -83,5 +83,5 @@ done
 
 # include EFI shell
 [ -f binary/efi/boot/shell$efi_name.efi ] || \
-wget -O binary/efi/boot/shell$efi_name.efi "https://github.com/tianocore/edk2/raw/master/EdkShellBinPkg/FullShell/$shell_dir/Shell_Full.efi"
+wget -O binary/efi/boot/shell$efi_name.efi "https://github.com/tianocore/edk2-archive/raw/master/EdkShellBinPkg/FullShell/$shell_dir/Shell_Full.efi"
 
