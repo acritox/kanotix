@@ -24,6 +24,9 @@ lxpolkit
 lxappearance-obconf
 console-data
 clearlooks-phenix-theme
+#nif DISTRIBUTION wheezy jessie
+gtk3-nocsd
+#endif
 
 gvfs-backends
 menu
