@@ -1,1 +1,3 @@
+#if ARCHITECTURE amd64
 virtualbox-6.0
+#endif
