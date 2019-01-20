@@ -116,6 +116,10 @@ printer-driver-foo2zjs
 #endif
 #printconf
 printer-driver-splix
+#nif DISTRIBUTION squeeze wheezy
+printer-driver-escpr
+printer-driver-min12xxw
+#endif
 
 # build
 module-assistant
