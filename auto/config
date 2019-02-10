@@ -130,6 +130,7 @@ fi
 grep -wq wine-staging <<<"$LB_PACKAGES $LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" wine-staging"
 grep -wq iceweasel <<<"$LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" iceweasel"
 grep -wq firefox <<<"$LB_PACKAGES_LISTS"
+grep -wq midori <<<"$LB_PACKAGES_LISTS"
 grep -wq silverlight <<<"$LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" silverlight"
 grep -wq spotify <<<"$LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" spotify"
 grep -wq dropbox <<<"$LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" dropbox"
