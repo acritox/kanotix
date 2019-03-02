@@ -171,6 +171,7 @@ vdpauinfo
 mesa-vdpau-drivers
 #endif
 #nif DISTRIBUTION wheezy jessie
+mesa-va-drivers
 #include <vulkan>
 #endif
 xinit
