@@ -44,11 +44,6 @@ update-manager-core
 # not needed with apper
 #update-notifier-kde
 
-# wine
-#nif DISTRIBUTION wheezy
-#include <wine-staging>
-#endif
-
 # games
 armagetronad
 #if DISTRIBUTION squeeze wheezy

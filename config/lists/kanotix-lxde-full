@@ -23,11 +23,6 @@ sane
 thunderbird-l10n-de
 lightning-l10n-de
 
-# wine
-#nif DISTRIBUTION wheezy
-#include <wine-staging>
-#endif
-
 # games
 
 # benchmark
