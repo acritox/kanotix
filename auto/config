@@ -141,9 +141,12 @@ wheezy)
     MIRROR_BOOTSTRAP="$MIRROR_CHROOT"
     lb config noauto \
 	--mirror-bootstrap ${MIRROR_BOOTSTRAP} \
+	--parent-mirror-bootstrap ${MIRROR_BOOTSTRAP} \
 	--mirror-chroot ${MIRROR_CHROOT} \
+	--parent-mirror-chroot ${MIRROR_CHROOT} \
 	--mirror-chroot-security ${MIRROR_CHROOT_SECURITY} \
 	--mirror-binary ${MIRROR_BINARY} \
+	--parent-mirror-binary ${MIRROR_BINARY} \
 	--mirror-binary-security ${MIRROR_BINARY_SECURITY} \
 	--updates false
     ;;
