@@ -134,8 +134,8 @@ chmod 755 config/chroot_local-includes/usr/local/bin/*sh || :
 
 case "$LB_DISTRIBUTION" in
 wheezy)
-    MIRROR_CHROOT=http://ftp.de.debian.org/debian-archive/debian
-    MIRROR_BINARY=http://ftp.de.debian.org/debian-archive/debian
+    MIRROR_CHROOT=http://archive.debian.org/debian
+    MIRROR_BINARY=http://archive.debian.org/debian
     MIRROR_CHROOT_SECURITY=http://security.debian.org/
     MIRROR_BINARY_SECURITY=http://security.debian.org/
     MIRROR_BOOTSTRAP="$MIRROR_CHROOT"
