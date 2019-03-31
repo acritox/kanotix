@@ -15,6 +15,10 @@ mkdir -p $target $next
 ## remove gfxdetect entries from grub.cfg (for non-gfxdetect-builds)
 #sed -i '/gfxdetect/,/^}/{d}' config/binary_grub/grub.cfg
 
+BUILD_WHEEZY=true
+
+
+if $BUILD_WHEEZY; then
 lb clean
 lb config -d wheezy -p "kanotix-kde-master firefox" --bootloader grub2 --tmpfs true --tmpfs-options size=12G --apt-http-proxy "http://127.0.0.1:3142" --cache-packages false --gfxoverlays false -a amd64
 echo Kanotix dragonfire-nightly Dragonfire64 $d$v KDE > config/chroot_local-includes/etc/kanotix-version 
@@ -98,6 +102,7 @@ else
         ln -s $target/kanotix32-dragonfire-nightly-${d}${v}-LXDE.iso.zsync $next/kanotix32-dragonfire-nightly-LXDE.iso.zsync
         sed "s/${d}${v}-//" $target/kanotix32-dragonfire-nightly-${d}${v}-LXDE.iso.md5 > $next/kanotix32-dragonfire-nightly-LXDE.iso.md5
 fi
+fi # end of wheezy build
 
 ################### SPITFIRE ###################
 
