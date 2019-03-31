@@ -16,3 +16,8 @@ if [ -f /etc/apt/sources.list.d/skype-stable.list ]; then
 fi
 
 sed -i -e "s|@DISTRIBUTION@|${LB_DISTRIBUTION}|g" /etc/apt/sources.list
+
+# fix for archive
+if [ "$LB_DISTRIBUTION" = "wheezy" ]; then
+   sed -i -e "s|ftp.de.debian.org/debian wheezy|archive.debian.org/debian wheezy|g" /etc/apt/sources.list
+fi
