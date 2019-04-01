@@ -15,7 +15,7 @@ mkdir -p $target $next
 ## remove gfxdetect entries from grub.cfg (for non-gfxdetect-builds)
 #sed -i '/gfxdetect/,/^}/{d}' config/binary_grub/grub.cfg
 
-BUILD_WHEEZY=true
+BUILD_WHEEZY=false
 
 
 if $BUILD_WHEEZY; then
