@@ -1,0 +1,3 @@
+# Kanotix Steelfire
+deb http://kanotix.com/files/steelfire ./
+deb-src http://kanotix.com/files/steelfire ./
