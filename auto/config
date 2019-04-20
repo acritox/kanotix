@@ -15,6 +15,15 @@ export LB_BOOTLOADER="grub2"
 export LB_SYSLINUX_MENU_LIVE_ENTRY="Kanotix"
 export LB_LINUX_PACKAGES="linux-image linux-headers"
 
+echo "We build $LB_DISTRIBUTION"
+# since buster we need packages in debootstrap not avaible in earlier distributions
+
+if [ "$LB_DISTRIBUTION" = "wheezy" -o "$LB_DISTRIBUTION" = "jessie" -o "$LB_DISTRIBUTION" = "stretch"  ]; then
+ KDEBOOTSTRAPOPTIONS="--include=apt-transport-https,ca-certificates --exclude=nano"
+else
+ KDEBOOTSTRAPOPTIONS="--include=apt-transport-https,ca-certificates,gpg,gpg-agent,mime-support --exclude=nano"
+fi
+
 lb config noauto \
 	--iso-volume KANOTIX \
 	--iso-preparer kanotix.com \
@@ -26,7 +35,7 @@ lb config noauto \
 	--apt-recommends false \
 	--bootappend-live 'utc=no timezone=Europe/Berlin locales=de keyboard-layouts=de keyboard-variant=nodeadkeys splash' \
 	--archive-areas "main contrib non-free" \
-	--debootstrap-options "--include=apt-transport-https,ca-certificates --exclude=nano" \
+	--debootstrap-options "${KDEBOOTSTRAPOPTIONS}" \
 	--repositories "live.debian.net lo" \
 	--security true \
 	--checksums md5 \
