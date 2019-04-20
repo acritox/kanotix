@@ -16,6 +16,9 @@ mkdir -p $target $next
 #sed -i '/gfxdetect/,/^}/{d}' config/binary_grub/grub.cfg
 
 BUILD_WHEEZY=false
+BUILD_JESSIE=true
+BUILD_STRETCH=true
+BUILD_BUSTER=false
 
 
 if $BUILD_WHEEZY; then
@@ -106,6 +109,8 @@ fi # end of wheezy build
 
 ################### SPITFIRE ###################
 
+if $BUILD_JESSIE; then
+git checkout auto/config
 DISTRO=jessie
 rm -rf cache tmpfs/cache
 sed -i 's/\(export LB_DISTRIBUTION=\).*/\1"'$DISTRO'"/' auto/config
@@ -238,10 +243,11 @@ else
         ln -s $target/kanotix32-spitfire-nightly-${d}${v}-KDE-special.iso.zsync $next/kanotix32-spitfire-nightly-KDE-special.iso.zsync
         sed "s/${d}${v}-//" $target/kanotix32-spitfire-nightly-${d}${v}-KDE-special.iso.md5 > $next/kanotix32-spitfire-nightly-KDE-special.iso.md5
 fi
-
+fi # end of jessie build
 
 ################### STEELFIRE ###################
 
+if $BUILD_STRETCH; then
 git checkout auto/config
 DISTRO=stretch
 rm -rf cache tmpfs/cache
@@ -356,6 +362,127 @@ else
         ln -s $target/kanotix32-steelfire-nightly-${d}${v}-eeepc4G.iso.zsync $next/kanotix32-steelfire-nightly-eeepc4G.iso.zsync
         sed "s/${d}${v}-//" $target/kanotix32-steelfire-nightly-${d}${v}-eeepc4G.iso.md5 > $next/kanotix32-steelfire-nightly-eeepc4G.iso.md5
 fi
+fi # end of stretch build
+
+################### SILVERFIRE ###################
+
+if $BUILD_BUSTER; then
+git checkout auto/config
+DISTRO=buster
+rm -rf cache tmpfs/cache
+sed -i 's/\(export LB_DISTRIBUTION=\).*/\1"'$DISTRO'"/' auto/config
+
+# lxde 64
+lb clean
+lb config -d $DISTRO -p "kanotix-lxde-master firefox wine-staging skypeforlinux retabell" --bootloader grub2 --tmpfs true --tmpfs-options size=12G --apt-http-proxy "http://127.0.0.1:3142" --cache-packages false --gfxoverlays false -a amd64 --initsystem systemd
+echo Kanotix silverfire-nightly Silverfire64 $d$v LXDE > config/chroot_local-includes/etc/kanotix-version
+lb build; cd tmpfs; ./isohybrid-acritox kanotix64.iso; mv kanotix64.iso $target/kanotix64-silverfire-nightly-${d}${v}-LXDE.iso; cd ..
+cp tmpfs/binary.packages $target/kanotix64-silverfire-nightly-${d}${v}-LXDE.packages
+cp tmpfs/binary.log $target/kanotix64-silverfire-nightly-${d}${v}-LXDE.log
+cd $target
+if [ ! -f kanotix64-silverfire-nightly-${d}${v}-LXDE.iso ]; then
+        cd -
+        ln -s $target/kanotix64-silverfire-nightly-${d}${v}-LXDE.log $next/kanotix64-silverfire-nightly-LXDE.log
+else
+        md5sum -b kanotix64-silverfire-nightly-${d}${v}-LXDE.iso > kanotix64-silverfire-nightly-${d}${v}-LXDE.iso.md5
+        zsyncmake kanotix64-silverfire-nightly-${d}${v}-LXDE.iso
+        cd -
+        ln -s $target/kanotix64-silverfire-nightly-${d}${v}-LXDE.packages $next/kanotix64-silverfire-nightly-LXDE.packages
+        ln -s $target/kanotix64-silverfire-nightly-${d}${v}-LXDE.log $next/kanotix64-silverfire-nightly-LXDE.log
+        ln -s $target/kanotix64-silverfire-nightly-${d}${v}-LXDE.iso $next/kanotix64-silverfire-nightly-LXDE.iso
+        ln -s $target/kanotix64-silverfire-nightly-${d}${v}-LXDE.iso.zsync $next/kanotix64-silverfire-nightly-LXDE.iso.zsync
+        sed "s/${d}${v}-//" $target/kanotix64-silverfire-nightly-${d}${v}-LXDE.iso.md5 > $next/kanotix64-silverfire-nightly-LXDE.iso.md5
+fi
+#
+# lxde 32
+lb clean
+lb config -d $DISTRO -p "kanotix-lxde-master firefox wine-staging retabell" --bootloader grub2 --tmpfs true --tmpfs-options size=12G --apt-http-proxy "http://127.0.0.1:3142" --cache-packages false --gfxoverlays false -a i386 --initsystem systemd
+echo Kanotix silverfire-nightly Silverfire32 $d$v LXDE > config/chroot_local-includes/etc/kanotix-version
+lb build; cd tmpfs; ./isohybrid-acritox kanotix32.iso; mv kanotix32.iso $target/kanotix32-silverfire-nightly-${d}${v}-LXDE.iso; cd ..
+cp tmpfs/binary.packages $target/kanotix32-silverfire-nightly-${d}${v}-LXDE.packages
+cp tmpfs/binary.log $target/kanotix32-silverfire-nightly-${d}${v}-LXDE.log
+cd $target
+if [ ! -f kanotix32-silverfire-nightly-${d}${v}-LXDE.iso ]; then
+        cd -
+        ln -s $target/kanotix32-silverfire-nightly-${d}${v}-LXDE.log $next/kanotix32-silverfire-nightly-LXDE.log
+else
+        md5sum -b kanotix32-silverfire-nightly-${d}${v}-LXDE.iso > kanotix32-silverfire-nightly-${d}${v}-LXDE.iso.md5
+        zsyncmake kanotix32-silverfire-nightly-${d}${v}-LXDE.iso
+        cd -
+        ln -s $target/kanotix32-silverfire-nightly-${d}${v}-LXDE.packages $next/kanotix32-silverfire-nightly-LXDE.packages
+        ln -s $target/kanotix32-silverfire-nightly-${d}${v}-LXDE.log $next/kanotix32-silverfire-nightly-LXDE.log
+        ln -s $target/kanotix32-silverfire-nightly-${d}${v}-LXDE.iso $next/kanotix32-silverfire-nightly-LXDE.iso
+        ln -s $target/kanotix32-silverfire-nightly-${d}${v}-LXDE.iso.zsync $next/kanotix32-silverfire-nightly-LXDE.iso.zsync
+        sed "s/${d}${v}-//" $target/kanotix32-silverfire-nightly-${d}${v}-LXDE.iso.md5 > $next/kanotix32-silverfire-nightly-LXDE.iso.md5
+fi
+#
+# kde 64
+lb clean
+lb config -d $DISTRO -p "kanotix-kde-master firefox wine-staging skypeforlinux retabell" --bootloader grub2 --tmpfs true --tmpfs-options size=12G --apt-http-proxy "http://127.0.0.1:3142" --cache-packages false --gfxoverlays false -a amd64 --initsystem systemd
+echo Kanotix silverfire-nightly Silverfire64 $d$v KDE > config/chroot_local-includes/etc/kanotix-version
+lb build; cd tmpfs; ./isohybrid-acritox kanotix64.iso; mv kanotix64.iso $target/kanotix64-silverfire-nightly-${d}${v}-KDE.iso; cd ..
+cp tmpfs/binary.packages $target/kanotix64-silverfire-nightly-${d}${v}-KDE.packages
+cp tmpfs/binary.log $target/kanotix64-silverfire-nightly-${d}${v}-KDE.log
+cd $target
+if [ ! -f kanotix64-silverfire-nightly-${d}${v}-KDE.iso ]; then
+        cd -
+        ln -s $target/kanotix64-silverfire-nightly-${d}${v}-KDE.log $next/kanotix64-silverfire-nightly-KDE.log
+else
+        md5sum -b kanotix64-silverfire-nightly-${d}${v}-KDE.iso > kanotix64-silverfire-nightly-${d}${v}-KDE.iso.md5
+        zsyncmake kanotix64-silverfire-nightly-${d}${v}-KDE.iso
+        cd -
+        ln -s $target/kanotix64-silverfire-nightly-${d}${v}-KDE.packages $next/kanotix64-silverfire-nightly-KDE.packages
+        ln -s $target/kanotix64-silverfire-nightly-${d}${v}-KDE.log $next/kanotix64-silverfire-nightly-KDE.log
+        ln -s $target/kanotix64-silverfire-nightly-${d}${v}-KDE.iso $next/kanotix64-silverfire-nightly-KDE.iso
+        ln -s $target/kanotix64-silverfire-nightly-${d}${v}-KDE.iso.zsync $next/kanotix64-silverfire-nightly-KDE.iso.zsync
+        sed "s/${d}${v}-//" $target/kanotix64-silverfire-nightly-${d}${v}-KDE.iso.md5 > $next/kanotix64-silverfire-nightly-KDE.iso.md5
+fi
+#
+# kde 32
+lb clean
+lb config -d $DISTRO -p "kanotix-kde-master firefox wine-staging retabell" --bootloader grub2 --tmpfs true --tmpfs-options size=12G --apt-http-proxy "http://127.0.0.1:3142" --cache-packages false --gfxoverlays false -a i386 --initsystem systemd
+echo Kanotix silverfire-nightly Silverfire32 $d$v KDE > config/chroot_local-includes/etc/kanotix-version
+lb build; cd tmpfs; ./isohybrid-acritox kanotix32.iso; mv kanotix32.iso $target/kanotix32-silverfire-nightly-${d}${v}-KDE.iso; cd ..
+cp tmpfs/binary.packages $target/kanotix32-silverfire-nightly-${d}${v}-KDE.packages
+cp tmpfs/binary.log $target/kanotix32-silverfire-nightly-${d}${v}-KDE.log
+cd $target
+if [ ! -f kanotix32-silverfire-nightly-${d}${v}-KDE.iso ]; then
+        cd -
+        ln -s $target/kanotix32-silverfire-nightly-${d}${v}-KDE.log $next/kanotix32-silverfire-nightly-KDE.log
+else
+        md5sum -b kanotix32-silverfire-nightly-${d}${v}-KDE.iso > kanotix32-silverfire-nightly-${d}${v}-KDE.iso.md5
+        zsyncmake kanotix32-silverfire-nightly-${d}${v}-KDE.iso
+        cd -
+        ln -s $target/kanotix32-silverfire-nightly-${d}${v}-KDE.packages $next/kanotix32-silverfire-nightly-KDE.packages
+        ln -s $target/kanotix32-silverfire-nightly-${d}${v}-KDE.log $next/kanotix32-silverfire-nightly-KDE.log
+        ln -s $target/kanotix32-silverfire-nightly-${d}${v}-KDE.iso $next/kanotix32-silverfire-nightly-KDE.iso
+        ln -s $target/kanotix32-silverfire-nightly-${d}${v}-KDE.iso.zsync $next/kanotix32-silverfire-nightly-KDE.iso.zsync
+        sed "s/${d}${v}-//" $target/kanotix32-silverfire-nightly-${d}${v}-KDE.iso.md5 > $next/kanotix32-silverfire-nightly-KDE.iso.md5
+fi
+#
+# eeepc4G with LXDE
+lb clean
+lb config -d $DISTRO -p "kanotix-eeepc4G firefox retabell" --bootloader grub2 --tmpfs true --tmpfs-options size=12G --apt-http-proxy "http://127.0.0.1:3142" --cache-packages false --gfxoverlays false -a i386 --initsystem systemd
+echo Kanotix silverfire-nightly Silverfire32 $d$v eeepc4G > config/chroot_local-includes/etc/kanotix-version
+lb build; cd tmpfs; ./isohybrid-acritox kanotix32.iso; mv kanotix32.iso $target/kanotix32-silverfire-nightly-${d}${v}-eeepc4G.iso; cd ..
+cp tmpfs/binary.packages $target/kanotix32-silverfire-nightly-${d}${v}-eeepc4G.packages
+cp tmpfs/binary.log $target/kanotix32-silverfire-nightly-${d}${v}-eeepc4G.log
+cd $target
+if [ ! -f kanotix32-silverfire-nightly-${d}${v}-eeepc4G.iso ]; then
+        cd -
+        ln -s $target/kanotix32-silverfire-nightly-${d}${v}-eeepc4G.log $next/kanotix32-silverfire-nightly-eeepc4G.log
+else
+        md5sum -b kanotix32-silverfire-nightly-${d}${v}-eeepc4G.iso > kanotix32-silverfire-nightly-${d}${v}-eeepc4G.iso.md5
+        zsyncmake kanotix32-silverfire-nightly-${d}${v}-eeepc4G.iso
+        cd -
+        ln -s $target/kanotix32-silverfire-nightly-${d}${v}-eeepc4G.packages $next/kanotix32-silverfire-nightly-eeepc4G.packages
+        ln -s $target/kanotix32-silverfire-nightly-${d}${v}-eeepc4G.log $next/kanotix32-silverfire-nightly-eeepc4G.log
+        ln -s $target/kanotix32-silverfire-nightly-${d}${v}-eeepc4G.iso $next/kanotix32-silverfire-nightly-eeepc4G.iso
+        ln -s $target/kanotix32-silverfire-nightly-${d}${v}-eeepc4G.iso.zsync $next/kanotix32-silverfire-nightly-eeepc4G.iso.zsync
+        sed "s/${d}${v}-//" $target/kanotix32-silverfire-nightly-${d}${v}-eeepc4G.iso.md5 > $next/kanotix32-silverfire-nightly-eeepc4G.iso.md5
+fi
+fi # end of buster build
+
 
 git checkout auto/config
 
