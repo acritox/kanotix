@@ -1,22 +1,19 @@
 # Kanotix Desktop Packages List without pidgin
 
-#if DISTRIBUTION squeeze wheezy jessie
+#if DISTRIBUTION wheezy jessie
 #include <gstreamer>
 #endif
 
-#if DISTRIBUTION stretch sid
+#nif DISTRIBUTION wheezy jessie
 #include <gstreamer-1.0>
 #endif
 
 # java, plugins
-#if DISTRIBUTION squeeze
-icedtea6-plugin
-#endif
-#if DISTRIBUTION wheezy jessie
+#if DISTRIBUTION wheezy
 icedtea-7-plugin
 #endif
-#if DISTRIBUTION stretch sid
-icedtea-8-plugin
+#nif DISTRIBUTION wheezy
+default-jre
 #endif
 
 # multimedia
