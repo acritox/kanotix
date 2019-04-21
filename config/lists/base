@@ -217,9 +217,8 @@ tp-trackpoint-scroll
 gobi-loader
 
 # s2tc
-libtxc-dxtn-s2tc0
-#if ARCHITECTURE amd64
-libtxc-dxtn-s2tc0:i386
+#if DISTRIBUTION wheezy jessie stretch
+#include <s2tc>
 #endif
 
 # v4l

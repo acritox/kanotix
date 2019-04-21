@@ -1,0 +1,5 @@
+# s2tc
+libtxc-dxtn-s2tc0
+#if ARCHITECTURE amd64
+libtxc-dxtn-s2tc0:i386
+#endif
