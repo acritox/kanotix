@@ -8,7 +8,12 @@ thunderbird-l10n-de
 lightning-l10n-de
 
 # multimedia
+#if DISTRIBUTION wheezy jessie stretch
 amarok
+#endif
+#nif DISTRIBUTION wheezy jessie stretch
+clementine
+#endif
 kaffeine
 
 # graphics
