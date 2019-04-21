@@ -101,7 +101,9 @@ cups-bsd
 cups-client
 foomatic-db-engine
 foomatic-db
+#if DISTRIBUTION wheezy jessie stretch
 foomatic-db-gutenprint
+#endif
 #if DISTRIBUTION wheezy jessie
 cups-driver-gutenprint
 #endif
