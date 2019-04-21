@@ -16,6 +16,11 @@ efibootmgr
 syslinux-common
 #endif
 
+# fix slow boot
+#nif DISTRIBUTION wheezy jessie stretch
+haveged
+#endif
+
 #if KANOTIX_GFXOVERLAYS true
 gfxoverlay
 #endif
