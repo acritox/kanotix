@@ -7,11 +7,11 @@
 # tools
 gparted
 gksu
-#if DISTRIBUTION squeeze wheezy jessie
+#if DISTRIBUTION wheezy jessie
 #include <gstreamer>
 #endif
 
-#if DISTRIBUTION stretch sid
+#nif DISTRIBUTION wheezy jessie
 #include <gstreamer-1.0>
 #endif
 
@@ -61,10 +61,10 @@ compton
 
 # multimedia
 #include <smplayer>
-#if DISTRIBUTION squeeze wheezy jessie
+#if DISTRIBUTION wheezy jessie
 exaile
 #endif
-#if DISTRIBUTION stretch sid
+#nif DISTRIBUTION wheezy jessie
 clementine
 #endif
 

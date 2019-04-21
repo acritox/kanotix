@@ -1,6 +1,6 @@
 # compiz gtk
 
-#if DISTRIBUTION squeeze wheezy jessie
+#if DISTRIBUTION wheezy jessie
 fusion-icon
 compiz-gtk
 compiz-plugins
@@ -12,7 +12,7 @@ etcskel-kanotix-compiz
 emerald
 #endif
 
-#if DISTRIBUTION stretch sid
+#nif DISTRIBUTION wheezy jessie
 fusion-icon
 etcskel-kanotix-compiz
 compiz

@@ -2,9 +2,9 @@
 
 smplayer
 
-#if DISTRIBUTION squeeze wheezy
+#if DISTRIBUTION wheezy
 smplayer-translations
 #endif
-#if DISTRIBUTION jessie stretch sid
+#nif DISTRIBUTION wheezy
 smplayer-l10n
 #endif

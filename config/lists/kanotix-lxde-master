@@ -20,11 +20,11 @@ apt-xapian-index
 gdebi
 
 # multimedia
-#if DISTRIBUTION squeeze wheezy jessie
+#if DISTRIBUTION wheezy jessie
 gecko-mediaplayer
 exaile
 #endif
-#if DISTRIBUTION stretch sid
+#nif DISTRIBUTION wheezy jessie
 clementine
 #endif
 
@@ -58,10 +58,10 @@ ncdu
 xzdec
 
 # games
-#if DISTRIBUTION squeeze wheezy jessie
+#if DISTRIBUTION wheezy jessie
 mahjongg
 #endif
-#if DISTRIBUTION stretch sid
+#nif DISTRIBUTION wheezy jessie
 gnome-mahjongg
 #endif
 gnome-sudoku

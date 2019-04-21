@@ -102,10 +102,10 @@ cups-client
 foomatic-db-engine
 foomatic-db
 foomatic-db-gutenprint
-#if DISTRIBUTION squeeze wheezy jessie
+#if DISTRIBUTION wheezy jessie
 cups-driver-gutenprint
 #endif
-#if DISTRIBUTION stretch sid
+#nif DISTRIBUTION wheezy jessie
 printer-driver-gutenprint
 #endif
 #if DISTRIBUTION squeeze
