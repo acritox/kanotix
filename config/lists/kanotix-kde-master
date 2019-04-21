@@ -26,18 +26,19 @@ network-manager-openvpn
 network-manager-vpnc
 
 # kde
-#if DISTRIBUTION squeeze wheezy jessie
+#if DISTRIBUTION wheezy jessie
 khelpcenter4
 #endif
-#if DISTRIBUTION stretch buster sid
+#nif DISTRIBUTION wheezy jessie
 khelpcenter
 #endif
 
 # tools
+#if DISTRIBUTION wheezy jessie stretch
 kuser
-
+#endif
 # updates
-#if DISTRIBUTION squeeze wheezy
+#if DISTRIBUTION wheezy
 update-manager-core
 #endif
 
@@ -46,10 +47,10 @@ update-manager-core
 
 # games
 armagetronad
-#if DISTRIBUTION squeeze wheezy
+#if DISTRIBUTION wheezy
 foobillard
 #endif
-#if DISTRIBUTION jessie stretch buster sid
+#nif DISTRIBUTION wheezy
 foobillardplus
 #endif
 neverball

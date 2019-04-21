@@ -1,4 +1,4 @@
-# Kanotix list for kde5
+# Kanotix list for kde5 (up from stretch)
 
 #include <desktop>
 
@@ -14,15 +14,19 @@ okularplugin
 
 # multimedia
 libsdl1.2debian
-kdemultimedia-kio-plugins
+kio-audiocd
 kamera
 kio-extras
 
 # burn
 k3b
 k3b-i18n
+#if DISTRIBUTION stretch
 libk3b6-extracodecs
-
+#endif
+#nif DISTRIBUTION stretch
+libk3b7-extracodecs
+#endif
 # chat, irc
 konversation
 
@@ -46,7 +50,13 @@ udisks2
 upower
 
 # kdebase-apps is a metapackage
+#if DISTRIBUTION stretch
 kde-baseapps-bin
+#endif
+#nif DISTRIBUTION stretch
+kdialog
+keditbookmarks
+#endif
 dolphin
 konsole
 kwrite
@@ -84,12 +94,13 @@ blueman
 
 kwin-x11
 kwin-decoration-oxygen
+#if DISTRIBUTION stretch
 kde-wallpapers-default
+#endif
 powerdevil
 kscreen
 plasma-pa
 print-manager
-
 # tmp stuff for devel
 inkscape
 
