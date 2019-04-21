@@ -166,8 +166,12 @@ vdpauinfo
 mesa-vdpau-drivers
 #endif
 xinit
+#if DISTRIBUTION wheezy jessie stretch
 freerdp-x11
-
+#endif
+#nif DISTRIBUTION wheezy jessie stretch
+freerdp2-x11
+#endif
 # disktools
 gddrescue
 testdisk

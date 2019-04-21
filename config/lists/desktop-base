@@ -40,4 +40,6 @@ hplip-gui
 
 # tools
 gparted
+#if DISTRIBUTION wheezy jessie stretch
 gksu
+#endif

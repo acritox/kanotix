@@ -145,7 +145,12 @@ vdpauinfo
 mesa-vdpau-drivers
 #endif
 xinit
+#if DISTRIBUTION wheezy jessie stretch
 freerdp-x11
+#endif
+#nif DISTRIBUTION wheezy jessie stretch
+freerdp2-x11
+#endif
 
 # disktools
 gddrescue
@@ -217,7 +222,9 @@ libv4l-0:i386
 # needed packages from desktop list
 # tools
 gparted
+#if DISTRIBUTION squeeze wheezy jessie stretch
 gksu
+#endif
 #if DISTRIBUTION squeeze wheezy jessie
 #include <gstreamer>
 #endif

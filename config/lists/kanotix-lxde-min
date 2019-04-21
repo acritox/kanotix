@@ -6,7 +6,9 @@
 # needed packages from desktop list
 # tools
 gparted
+#if DISTRIBUTION wheezy jessie stretch
 gksu
+#endif
 #if DISTRIBUTION wheezy jessie
 #include <gstreamer>
 #endif
