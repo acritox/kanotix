@@ -13,7 +13,9 @@ me-tv
 gimp
 gimp-gutenprint
 xsane
+#if DISTRIBUTION wheezy jessie stretch
 libsane-extras
+#endif
 sane-utils
 sane
 
