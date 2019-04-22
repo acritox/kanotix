@@ -1,5 +1,9 @@
 # Kanotix Desktop Packages List without pidgin
 
+#nif DISTRIBUTION wheezy jessie
+kanotix-iso-writer
+#endif
+
 #if DISTRIBUTION wheezy jessie
 #include <gstreamer>
 #endif
