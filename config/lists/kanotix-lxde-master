@@ -27,9 +27,11 @@ exaile
 #nif DISTRIBUTION wheezy jessie
 clementine
 #endif
-
 #if ARCHITECTURE amd64
 #include <vlc>
+#endif
+#nif DISTRIBUTION wheezy jessie
+mpv
 #endif
 #if ARCHITECTURE i386
 #include <smplayer>

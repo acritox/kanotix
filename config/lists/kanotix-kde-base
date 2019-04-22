@@ -24,6 +24,9 @@ gecko-mediaplayer
 mplayerthumbs
 #endif
 #include <vlc>
+#nif DISTRIBUTION wheezy jessie
+mpv
+#endif
 #if DISTRIBUTION squeeze
 phonon-backend-xine
 #endif
