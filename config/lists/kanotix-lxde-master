@@ -10,7 +10,12 @@
 compton
 
 # office
+#if DISTRIBUTION wheezy jessie
 evince-gtk
+#endif
+#nif DISTRIBUTION wheezy jessie
+evince
+#endif
 simple-scan
 geany
 
