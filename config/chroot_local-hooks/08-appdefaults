@@ -4,10 +4,16 @@ update-alternatives --set pager /usr/bin/most || true
 update-alternatives --set x-window-manager /usr/bin/openbox || true
 update-alternatives --set x-window-manager /usr/bin/kwin || true
 update-alternatives --set x-www-browser /usr/bin/iceweasel || true
+update-alternatives --set x-www-browser /usr/bin/midori || true
 update-alternatives --set x-www-browser /usr/bin/firefox-esr || true
 update-alternatives --set x-www-browser /usr/bin/firefox || true
+update-alternatives --set gnome-www-browser /usr/bin/iceweasel || true
+update-alternatives --set gnome-www-browser /usr/bin/midori || true
+update-alternatives --set gnome-www-browser /usr/bin/firefox-esr || true
+update-alternatives --set gnome-www-browser /usr/bin/firefox || true
 update-alternatives --set x-session-manager /usr/bin/startlxde || true
 update-alternatives --set x-session-manager /usr/bin/startkde || true
 update-alternatives --set editor /usr/bin/vim.basic || true
 update-alternatives --set editor /usr/bin/mcedit || true
 update-alternatives --set x-cursor-theme /etc/X11/cursors/oxy-black.theme || true
+update-alternatives --set x-terminal-emulator /usr/bin/lxterminal || true
