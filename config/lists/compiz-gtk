@@ -12,11 +12,23 @@ etcskel-kanotix-compiz
 emerald
 #endif
 
-#nif DISTRIBUTION wheezy jessie
+#if DISTRIBUTION stretch
 fusion-icon
 etcskel-kanotix-compiz
 compiz
 compiz-gnome
 compiz-plugins
+compizconfig-settings-manager
+#endif
+
+#nif DISTRIBUTION wheezy jessie stretch
+#fusion-icon
+etcskel-kanotix-compiz
+compiz
+compiz-gnome
+compiz-plugins
+compiz-plugins-main
+compiz-plugins-extra
+compiz-plugins-experimental
 compizconfig-settings-manager
 #endif
