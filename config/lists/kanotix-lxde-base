@@ -51,7 +51,7 @@ lightdm
 
 # power management
 xfce4-power-manager
-#nif DISTRIBUTION wheezy
+#if DISTRIBUTION jessie stretch
 xfce4-power-manager-lxpanel-plugin
 #endif
 
