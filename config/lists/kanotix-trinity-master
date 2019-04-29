@@ -32,4 +32,9 @@ modemmanager
 xfonts-base
 xfonts-100dpi
 fonts-liberation
+#if DISTRIBUTION wheezy jessie
 fonts-droid
+#endif
+#nif DISTRIBUTION wheezy jessie
+fonts-droid-fallback
+#endif
