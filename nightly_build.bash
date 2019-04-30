@@ -18,7 +18,7 @@ mkdir -p $target $next
 BUILD_WHEEZY=false
 BUILD_JESSIE=true
 BUILD_STRETCH=true
-BUILD_BUSTER=false
+BUILD_BUSTER=true
 
 
 if $BUILD_WHEEZY; then
