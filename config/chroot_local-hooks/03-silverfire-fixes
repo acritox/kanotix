@@ -43,4 +43,10 @@ cat <<"EOF" >/etc/skel/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-power-mana
   </property>
 </channel>
 EOF
+
+# set compiz splash
+    if [ -e /etc/skel/.config/compiz/compizconfig/Default.ini ]; then
+        sed -i 's/splash_background_spitfire.png/splash_background_silverfire.png/' /etc/skel/.config/compiz/compizconfig/Default.ini
+    fi
+
 fi
