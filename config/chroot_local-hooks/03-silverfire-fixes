@@ -56,4 +56,9 @@ EOF
 	cd -
     fi
 
+# hotfix for some dell machines causing 100% cpu load with dell bluetooth enabled
+    if [ -e /lib/udev/rules.d/97-hid2hci.rules ]; then
+	sed -i -e "s|ATTR{bInterfaceClass}==\"03\"|ACTION==\"add\", ATTR{bInterfaceClass}==\"03\"|g" /lib/udev/rules.d/97-hid2hci.rules
+    fi
+
 fi
