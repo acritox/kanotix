@@ -49,4 +49,11 @@ EOF
         sed -i 's/splash_background_spitfire.png/splash_background_silverfire.png/' /etc/skel/.config/compiz/compizconfig/Default.ini
     fi
 
+# hotfix lxde dead flag
+    if [ -e /usr/share/lxpanel/images/xkb-flags/de.png ]; then
+	cd /usr/share/lxpanel/images/xkb-flags
+	ln -s de.png "de(nodeadkeys).png"
+	cd -
+    fi
+
 fi
