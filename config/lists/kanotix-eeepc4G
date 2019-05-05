@@ -273,6 +273,9 @@ xfce4-notifyd
 lxpolkit
 #endif
 clearlooks-phenix-theme
+#nif DISTRIBUTION wheezy jessie
+gtk3-nocsd
+#endif
 
 # tools
 synaptic
