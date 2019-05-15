@@ -17,7 +17,7 @@ mkdir -p $target $next
 
 BUILD_BUSTER=true
 BUILD_STRETCH=true
-BUILD_JESSIE=false
+BUILD_JESSIE=true
 BUILD_WHEEZY=false
 
 ################### SILVERFIRE ###################
