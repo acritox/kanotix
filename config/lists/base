@@ -127,6 +127,10 @@ printer-driver-splix
 printer-driver-escpr
 printer-driver-min12xxw
 #endif
+libcups2
+#if ARCHITECTURE amd64
+libcups2:i386
+#endif
 
 # build
 module-assistant
