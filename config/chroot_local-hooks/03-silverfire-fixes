@@ -61,4 +61,8 @@ EOF
 	sed -i -e "s|ATTR{bInterfaceClass}==\"03\"|ACTION==\"add\", ATTR{bInterfaceClass}==\"03\"|g" /lib/udev/rules.d/97-hid2hci.rules
     fi
 
+# hotfix lxde pcmanfm compress broken with xarchiver
+    if [ -e /usr/share/libfm/archivers.list ]; then
+	sed 's/create=xarchiver --add-to %F/create=xarchiver --compress %F/' -i /usr/share/libfm/archivers.list
+    fi
 fi
