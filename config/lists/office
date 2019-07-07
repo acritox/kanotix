@@ -17,7 +17,9 @@ libobasis6.2-gnome-integration
 libobasis6.2-graphicfilter
 libobasis6.2-images
 libobasis6.2-impress
+#nif DISTRIBUTION stretch
 libobasis6.2-kde-integration
+#endif
 libobasis6.2-librelogo
 libobasis6.2-libreofficekit-data
 libobasis6.2-math
