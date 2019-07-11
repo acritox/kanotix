@@ -18,6 +18,7 @@ mkdir -p $target $next
 BUILD_BUSTER=true
 BUILD_STRETCH=true
 BUILD_JESSIE=true
+BUILD_JESSIE_SPECIAL=false
 BUILD_WHEEZY=false
 
 ################### SILVERFIRE ###################
@@ -353,6 +354,8 @@ fi
 ## gfxdetect
 #git checkout config/binary_grub/grub.cfg
 
+if $BUILD_JESSIE_SPECIAL; then
+
 lb clean
 lb config -d $DISTRO -p "kanotix-master firefox wine-staging google-chrome skypeforlinux virtualbox android steam xbmc gfxdetect" --bootloader grub2 --tmpfs true --tmpfs-options size=12G --apt-http-proxy "http://127.0.0.1:3142" --cache-packages false --gfxoverlays false -a amd64 --initsystem systemd
 echo Kanotix spitfire-nightly Spitfire64 $d$v KDE-special > config/chroot_local-includes/etc/kanotix-version 
@@ -394,6 +397,7 @@ else
         ln -s $target/kanotix32-spitfire-nightly-${d}${v}-KDE-special.iso.zsync $next/kanotix32-spitfire-nightly-KDE-special.iso.zsync
         sed "s/${d}${v}-//" $target/kanotix32-spitfire-nightly-${d}${v}-KDE-special.iso.md5 > $next/kanotix32-spitfire-nightly-KDE-special.iso.md5
 fi
+fi # end of jessie special build
 fi # end of jessie build
 
 ################### Dragonfire ###################
