@@ -65,6 +65,7 @@ lightdm
 onboard
 onboard-kanotix
 systemsettings
+libkf5kdelibs4support5-bin
 kde-l10n-de
 kwalletmanager
 polkit-kde-1
