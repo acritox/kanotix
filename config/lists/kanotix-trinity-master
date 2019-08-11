@@ -1,7 +1,12 @@
 # Kanotix with Trinity (Master)
 
 #include <kanotix-trinity-base>
+#if ARCHITECTURE amd64
 #include <office>
+#endif
+#if ARCHITECTURE i386
+#include <office-i386>
+#endif
 
 # email
 thunderbird-l10n-de
