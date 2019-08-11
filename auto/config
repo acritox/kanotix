@@ -17,12 +17,25 @@ export LB_LINUX_PACKAGES="linux-image linux-headers"
 
 echo "We build $LB_DISTRIBUTION"
 # since buster we need packages in debootstrap not avaible in earlier distributions
+# for stretch also use mime-support (fix build error)
 
-if [ "$LB_DISTRIBUTION" = "wheezy" -o "$LB_DISTRIBUTION" = "jessie" -o "$LB_DISTRIBUTION" = "stretch"  ]; then
- KDEBOOTSTRAPOPTIONS="--include=apt-transport-https,ca-certificates --exclude=nano"
-else
- KDEBOOTSTRAPOPTIONS="--include=apt-transport-https,ca-certificates,gpg,gpg-agent,mime-support --exclude=nano"
-fi
+case "$LB_DISTRIBUTION" in
+wheezy)
+        KDEBOOTSTRAPOPTIONS="--include=apt-transport-https,ca-certificates --exclude=nano"
+	;;
+jessie)
+        KDEBOOTSTRAPOPTIONS="--include=apt-transport-https,ca-certificates --exclude=nano"
+	;;
+stretch)
+        KDEBOOTSTRAPOPTIONS="--include=apt-transport-https,ca-certificates,mime-support --exclude=nano"
+	;;
+buster)
+        KDEBOOTSTRAPOPTIONS="--include=apt-transport-https,ca-certificates,gpg,gpg-agent,mime-support --exclude=nano"
+	;;
+*)
+        KDEBOOTSTRAPOPTIONS="--include=apt-transport-https,ca-certificates,gpg,gpg-agent,mime-support --exclude=nano"
+	;;
+esac
 
 lb config noauto \
 	--iso-volume KANOTIX \
