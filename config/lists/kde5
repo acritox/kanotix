@@ -39,6 +39,8 @@ ark
 # tools
 ksnapshot
 kcalc
+kfind
+qml-module-org-kde-activities
 
 # kde
 # kde-plasma-desktop is a metapackage bump out konquerror etc
