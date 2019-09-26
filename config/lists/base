@@ -89,7 +89,6 @@ sshfs
 cifs-utils
 pppoeconf
 nfs-common
-ncpfs
 #if DISTRIBUTION wheezy
 bluez-audio
 #endif
