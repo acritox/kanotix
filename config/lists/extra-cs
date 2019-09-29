@@ -1,0 +1,14 @@
+# default packages
+
+thunderbird-l10n-cs
+firefox-esr-l10n-cs
+lightning-l10n-cs
+kde-l10n-cs
+
+# libre office packages
+
+#if ARCHITECTURE amd64
+libobasis6.3-cs
+libobasis6.3-cs-help
+libreoffice6.3-cs
+#endif
