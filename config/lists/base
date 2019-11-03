@@ -3,6 +3,7 @@
 #include <firmware>
 
 #include <base.kanotix>
+sudo
 
 # bootloader
 #if BOOTLOADER burg
