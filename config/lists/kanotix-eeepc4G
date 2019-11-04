@@ -5,6 +5,7 @@
 firmware-atheros
 
 #include <base.kanotix>
+sudo
 
 # bootloader
 #if BOOTLOADER burg
