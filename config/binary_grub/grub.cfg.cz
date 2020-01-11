@@ -1,0 +1,218 @@
+echo Loading...
+set default=0
+set timeout=8
+
+set boot_en='boot=live config utc=yes locales=en_US.UTF-8'
+set boot_de='boot=live config utc=no timezone=Europe/Berlin locales=de_DE.UTF-8,en_US.UTF-8 keyboard-layouts=de keyboard-variants=nodeadkeys'
+set boot_cs='boot=live config utc=no timezone=Europe/Prague locales=cs_CZ.UTF-8,en_US.UTF-8 keyboard-layouts=cz'
+set search_file='kanotix*.iso'
+set isofile=''
+
+if loadfont /boot/grub/unicode.pf2 ; then
+  set gfxmode=800x600
+  if [ $efi != 1 ] ; then
+    insmod vbe
+    insmod vga
+  else
+    insmod efi_gop
+    insmod efi_uga
+  fi
+  insmod video_bochs
+  insmod video_cirrus
+  insmod gfxterm
+  terminal_output gfxterm
+  echo Loading...
+fi
+
+insmod png
+if background_image /boot/grub/kanotix-logo.png; then
+  set color_normal=white/black
+  set color_highlight=white/light-blue
+else
+  set menu_color_normal=cyan/blue
+  set menu_color_highlight=white/blue
+fi
+
+insmod part_msdos
+insmod btrfs
+set persistence=0
+if test -e ($root,msdos3) ; then
+  if search --label --set persistence --no-floppy persistence ($root,msdos3) ; then
+    if test -e (${persistence})/grub.cmdline ; then
+      source (${persistence})/grub.cmdline
+      insmod regexp
+      set lmp=live
+      regexp --set=lmp 'live-media-path=\([^ ]*\)' "${persistence_cmdline}"
+      if test -d /$lmp ; then
+        menuentry 'Start Kanotix (persistent)' {
+                echo    'Loading Linux ...'
+                linux   /$lmp/vmlinuz ${persistence_cmdline}
+                echo    'Loading initial ramdisk ...'
+                initrd  /$lmp/initrd.img
+        }
+      fi
+    fi
+  fi
+fi
+
+#####
+menuentry 'Start Kanotix DE' {
+        echo    'Loading Linux ...'
+        linux   /live/vmlinuz ${boot_de} quiet splash
+        echo    'Loading initial ramdisk ...'
+        initrd  /live/initrd.img
+}
+
+menuentry 'Start Kanotix DE (gfxdetect)' {
+        echo    'Loading Linux ...'
+        linux   /live/vmlinuz ${boot_de} quiet gfx=auto
+        echo    'Loading initial ramdisk ...'
+        initrd  /live/initrd.img
+}
+
+menuentry 'Start Kanotix EN' {
+        echo    'Loading Linux ...'
+        linux   /live/vmlinuz ${boot_en} quiet splash
+        echo    'Loading initial ramdisk ...'
+        initrd  /live/initrd.img
+}
+
+menuentry 'Start Kanotix EN (gfxdetect)' {
+        echo    'Loading Linux ...'
+        linux   /live/vmlinuz ${boot_en} quiet gfx=auto
+        echo    'Loading initial ramdisk ...'
+        initrd  /live/initrd.img
+}
+
+menuentry 'Start Kanotix CZ' {
+        echo    'Loading Linux ...'
+        linux   /live/vmlinuz ${boot_cs} quiet splash
+        echo    'Loading initial ramdisk ...'
+        initrd  /live/initrd.img
+}
+
+menuentry 'Start Kanotix CZ (gfxdetect)' {
+        echo    'Loading Linux ...'
+        linux   /live/vmlinuz ${boot_cs} quiet gfx=auto
+        echo    'Loading initial ramdisk ...'
+        initrd  /live/initrd.img
+}
+
+menuentry 'Start Kanotix DE (failsafe)' {
+        echo    'Loading Linux ...'
+        linux   /live/vmlinuz ${boot_de} quiet splash noapic noapm nodma nomce nolapic nomodeset nosmp vga=normal
+        echo    'Loading initial ramdisk ...'
+        initrd  /live/initrd.img
+}
+
+
+menuentry 'Start Kanotix EN (failsafe)' {
+        echo    'Loading Linux ...'
+        linux   /live/vmlinuz ${boot_en} quiet splash noapic noapm nodma nomce nolapic nomodeset nosmp vga=normal
+        echo    'Loading initial ramdisk ...'
+        initrd  /live/initrd.img
+}
+
+menuentry 'Start Kanotix CZ (failsafe)' {
+        echo    'Loading Linux ...'
+        linux   /live/vmlinuz ${boot_cs} quiet splash noapic noapm nodma nomce nolapic nomodeset nosmp vga=normal
+        echo    'Loading initial ramdisk ...'
+        initrd  /live/initrd.img
+}
+
+insmod regexp
+
+menuentry "Suche  Kanotix DE ISO" {
+for isofile in (*)/*/ISO/$search_file (*)/ISO/$search_file (*)/*/Downloads/$search_file (*)/Downloads/$search_file (*)/$search_file; do
+    if [ -e "$isofile" ]; then
+        regexp --set=device '(\(.*\))' "$isofile"
+        regexp --set=image '\(.*\)/(.*)' "$isofile"
+        menuentry "Boot $isofile" "$device" "$image" {
+                set root="$2"
+                set image="$3"
+                loopback iso /$image
+                linux (iso)/live/vmlinuz findiso=$image $boot_de quiet gfx=auto
+                initrd (iso)/live/initrd.img
+    }
+    fi
+done
+}
+
+menuentry "Search Kanotix EN ISO" {
+for isofile in (*)/*/ISO/$search_file (*)/ISO/$search_file (*)/*/Downloads/$search_file (*)/Downloads/$search_file (*)/$search_file; do
+    if [ -e "$isofile" ]; then
+        regexp --set=device '(\(.*\))' "$isofile"
+        regexp --set=image '\(.*\)/(.*)' "$isofile"
+        menuentry "Boot $isofile" "$device" "$image" {
+                set root="$2"
+                set image="$3"
+                loopback iso /$image
+                linux (iso)/live/vmlinuz findiso=$image $boot_en quiet gfx=auto
+                initrd (iso)/live/initrd.img
+        }
+    fi
+done
+}
+
+menuentry "Search Kanotix CZ ISO" {
+for isofile in (*)/*/ISO/$search_file (*)/ISO/$search_file (*)/*/Downloads/$search_file (*)/Downloads/$search_file (*)/$search_file; do
+    if [ -e "$isofile" ]; then
+        regexp --set=device '(\(.*\))' "$isofile"
+        regexp --set=image '\(.*\)/(.*)' "$isofile"
+        menuentry "Boot $isofile" "$device" "$image" {
+                set root="$2"
+                set image="$3"
+                loopback iso /$image
+                linux (iso)/live/vmlinuz findiso=$image $boot_cs quiet gfx=auto
+                initrd (iso)/live/initrd.img
+    }
+    fi
+done
+}
+
+#####
+
+if [ $efi != 1 ] ; then
+  menuentry 'Memtest86+' {
+        linux16 /live/memtest
+  }
+else
+  if test -f /efi/boot/shellx64.efi ; then
+    menuentry 'EFI Shell x64' {
+          chainloader /efi/boot/shellx64.efi
+    }
+  fi
+  if test -f /efi/boot/shellia32.efi ; then
+    menuentry 'EFI Shell x86' {
+          chainloader /efi/boot/shellia32.efi
+    }
+  fi
+  insmod regexp
+  for grub in (*)/EFI/*/grub*.efi; do
+  if [ -e "$grub" ]; then
+   regexp --set=device '(\(.*\))' "$grub"
+   menuentry "Boot GRUB UEFI loader from device $device" "$device" "$grub" {
+    set root="$2"
+    chainloader "$3"
+   }
+  fi
+ done
+  for bootmgfw in (*)/EFI/Microsoft/Boot/bootmgfw.efi; do
+   if [ -e "$bootmgfw" ]; then
+    regexp --set=device '(\(.*\))' "$bootmgfw"
+    menuentry "Boot Windows UEFI from device $device" "$device" "$bootmgfw" {
+     root="$2"
+     chainloader "$3"
+    }
+   fi
+  done
+  for gummiboot in (*)/EFI/gummiboot/gummiboot*.efi; do
+  if [ -e "$gummiboot" ]; then
+   regexp --set=device '(\(.*\))' "$gummiboot"
+   menuentry "Boot Gummiboot UEFI loader from device $device" "$device" "$gummiboot" {
+    set root="$2"
+    chainloader "$3"
+   }
+  fi
+ done
+fi
