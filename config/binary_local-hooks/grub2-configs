@@ -18,6 +18,10 @@ fi
 
 . config/chroot
 
+if echo "$LB_PACKAGE_LISTS" | grep -qw extra_cz; then
+	cp -f config/binary_grub/grub.cfg.cz binary/boot/grub/grub.cfg
+fi
+
 if echo "$LB_PACKAGE_LISTS" | grep -qw gfxdetect; then
 	# keep gfxdetect entries in grub.cfg (for gfxdetect-builds)
 	echo "grub2-configs: keeping gfxdetect entries"
