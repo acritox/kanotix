@@ -149,6 +149,9 @@ grep -wq spotify <<<"$LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" spotify"
 grep -wq dropbox <<<"$LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" dropbox"
 grep -wq skypeforlinux <<<"$LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" skype-stable"
 
+# Languages
+grep -wq extra_cz <<<"$LB_PACKAGES_LISTS"
+
 # special hack
 if grep -wq gfxdetect <<<"$LB_PACKAGES_LISTS"; then
     LB_REPOSITORIES+=" nvidia mesa-11"
