@@ -20,8 +20,8 @@ if [ "$LB_DISTRIBUTION" = "buster" ]; then
 
     # TODO lo version number
 
-    if [ -x /var/lib/dpkg/info/libreoffice6.3-debian-menus.postinst ]; then
-        apt install libobasis6.3-cs libobasis6.3-cs-help libreoffice6.3-cs
+    if [ -x /var/lib/dpkg/info/libreoffice6.4-debian-menus.postinst ]; then
+        apt install libobasis6.4-cs libobasis6.4-cs-help libreoffice6.4-cs
     fi
 
     if [ -e /etc/skel/.config/kxkbrc ]; then
