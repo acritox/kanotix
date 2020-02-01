@@ -115,13 +115,7 @@ grep -wq silverfire-extra <<<"$LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" silverfi
 grep -wq acritox <<<"$LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" acritox dragonfire-acritox"
 grep -wq hellfire <<<"$LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" hellfire"
 grep -wq trinity <<<"$LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" trinity"
-if grep -wq -e virtualbox -e vbox <<<"$LB_PACKAGES $LB_PACKAGES_LISTS"; then
-    if [ "$LB_DISTRIBUTION" = "buster" ]; then
-        LB_REPOSITORIES+=" vbox-bionic"
-    else
-        LB_REPOSITORIES+=" vbox"
-    fi
-fi
+grep -wq -e virtualbox -e vbox <<<"$LB_PACKAGES $LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" vbox"
 grep -wq bmguck <<<"$LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" bmguck"
 grep -wq -e opera <<<"$LB_PACKAGES $LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" opera"
 grep -wq google-chrome <<<"$LB_PACKAGES $LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" google-chrome"
