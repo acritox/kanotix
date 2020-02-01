@@ -1,0 +1,3 @@
+# Kanotix Silverfire
+deb http://kanotix.com/files/silverfire-extra ./
+deb-src http://kanotix.com/files/silverfire-extra ./
