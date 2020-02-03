@@ -1,2 +1,8 @@
+#if DISTRIBUTION wheezy jessie
 android-tools-adb
 android-tools-fastboot
+#endif
+#nif DISTRIBUTION wheezy jessie
+adb
+fastboot
+#endif
