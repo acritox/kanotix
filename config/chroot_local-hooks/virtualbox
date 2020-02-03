@@ -1,3 +1,5 @@
 #!/bin/bash
-[ -x /etc/init.d/vboxdrv ] || exit 0
-/etc/init.d/vboxdrv setup 
+[ -x /usr/lib/virtualbox/vboxdrv.sh ] || exit 0
+for k in /boot/vmlinuz-*; do
+	/usr/lib/virtualbox/vboxdrv.sh setup ${k#/boot/vmlinuz-} || :
+done
