@@ -16,6 +16,8 @@ mkdir -p $target $next
 #sed -i '/gfxdetect/,/^}/{d}' config/binary_grub/grub.cfg
 
 BUILD_BUSTER=true
+BUILD_BUSTER_EXTRA_KDE=false
+BUILD_BUSTER_EXTRA_LXDE=false
 BUILD_STRETCH=true
 BUILD_JESSIE=true
 BUILD_JESSIE_SPECIAL=false
@@ -28,7 +30,31 @@ git checkout auto/config
 DISTRO=buster
 rm -rf cache tmpfs/cache
 sed -i 's/\(export LB_DISTRIBUTION=\).*/\1"'$DISTRO'"/' auto/config
-
+if $BUILD_BUSTER_EXTRA_KDE; then
+#
+# kde 64-extra
+lb clean
+lb config -d $DISTRO -p "kanotix-kde-master silverfire-extra firefox google-chrome android virtualbox wine-staging skypeforlinux" --bootloader grub2 --tmpfs true --tmpfs-options size=12G --apt-http-proxy "http://127.0.0.1:3142" --cache-packages false --gfxoverlays false -a amd64 --initsystem systemd
+echo Kanotix silverfire-nightly Silverfire64 $d$v KDE-extra > config/chroot_local-includes/etc/kanotix-version
+lb build; cd tmpfs; ./isohybrid-acritox kanotix64.iso; mv kanotix64.iso $target/kanotix64-silverfire-nightly-${d}${v}-KDE-extra.iso; cd ..
+cp tmpfs/binary.packages $target/kanotix64-silverfire-nightly-${d}${v}-KDE-extra.packages
+cp tmpfs/binary.log $target/kanotix64-silverfire-nightly-${d}${v}-KDE-extra.log
+cd $target
+if [ ! -f kanotix64-silverfire-nightly-${d}${v}-KDE-extra.iso ]; then
+        cd -
+        ln -s $target/kanotix64-silverfire-nightly-${d}${v}-KDE-extra.log $next/kanotix64-silverfire-nightly-KDE-extra.log
+else
+        md5sum -b kanotix64-silverfire-nightly-${d}${v}-KDE-extra.iso > kanotix64-silverfire-nightly-${d}${v}-KDE-extra.iso.md5
+        zsyncmake kanotix64-silverfire-nightly-${d}${v}-KDE-extra.iso
+        cd -
+        ln -s $target/kanotix64-silverfire-nightly-${d}${v}-KDE-extra.packages $next/kanotix64-silverfire-nightly-KDE-extra.packages
+        ln -s $target/kanotix64-silverfire-nightly-${d}${v}-KDE-extra.log $next/kanotix64-silverfire-nightly-KDE-extra.log
+        ln -s $target/kanotix64-silverfire-nightly-${d}${v}-KDE-extra.iso $next/kanotix64-silverfire-nightly-KDE-extra.iso
+        ln -s $target/kanotix64-silverfire-nightly-${d}${v}-KDE-extra.iso.zsync $next/kanotix64-silverfire-nightly-KDE-extra.iso.zsync
+        sed "s/${d}${v}-//" $target/kanotix64-silverfire-nightly-${d}${v}-KDE-extra.iso.md5 > $next/kanotix64-silverfire-nightly-KDE-extra.iso.md5
+fi
+fi # end of kde extra
+#
 # lxde 64
 lb clean
 lb config -d $DISTRO -p "kanotix-lxde-master firefox wine-staging skypeforlinux" --bootloader grub2 --tmpfs true --tmpfs-options size=12G --apt-http-proxy "http://127.0.0.1:3142" --cache-packages false --gfxoverlays false -a amd64 --initsystem systemd
