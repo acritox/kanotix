@@ -54,6 +54,31 @@ else
         sed "s/${d}${v}-//" $target/kanotix64-silverfire-nightly-${d}${v}-KDE-extra.iso.md5 > $next/kanotix64-silverfire-nightly-KDE-extra.iso.md5
 fi
 fi # end of kde extra
+
+if $BUILD_BUSTER_EXTRA_LXDE; then
+#
+# lxde 64-extra
+lb clean
+lb config -d $DISTRO -p "kanotix-kde-master silverfire-extra firefox google-chrome android virtualbox wine-staging skypeforlinux" --bootloader grub2 --tmpfs true --tmpfs-options size=12G --apt-http-proxy "http://127.0.0.1:3142" --cache-packages false --gfxoverlays false -a amd64 --initsystem systemd
+echo Kanotix silverfire-nightly Silverfire64 $d$v LXDE-extra > config/chroot_local-includes/etc/kanotix-version
+lb build; cd tmpfs; ./isohybrid-acritox kanotix64.iso; mv kanotix64.iso $target/kanotix64-silverfire-nightly-${d}${v}-LXDE-extra.iso; cd ..
+cp tmpfs/binary.packages $target/kanotix64-silverfire-nightly-${d}${v}-LXDE-extra.packages
+cp tmpfs/binary.log $target/kanotix64-silverfire-nightly-${d}${v}-LXDE-extra.log
+cd $target
+if [ ! -f kanotix64-silverfire-nightly-${d}${v}-LXDE-extra.iso ]; then
+        cd -
+        ln -s $target/kanotix64-silverfire-nightly-${d}${v}-LXDE-extra.log $next/kanotix64-silverfire-nightly-LXDE-extra.log
+else
+        md5sum -b kanotix64-silverfire-nightly-${d}${v}-LXDE-extra.iso > kanotix64-silverfire-nightly-${d}${v}-LXDE-extra.iso.md5
+        zsyncmake kanotix64-silverfire-nightly-${d}${v}-LXDE-extra.iso
+        cd -
+        ln -s $target/kanotix64-silverfire-nightly-${d}${v}-LXDE-extra.packages $next/kanotix64-silverfire-nightly-LXDE-extra.packages
+        ln -s $target/kanotix64-silverfire-nightly-${d}${v}-LXDE-extra.log $next/kanotix64-silverfire-nightly-LXDE-extra.log
+        ln -s $target/kanotix64-silverfire-nightly-${d}${v}-LXDE-extra.iso $next/kanotix64-silverfire-nightly-LXDE-extra.iso
+        ln -s $target/kanotix64-silverfire-nightly-${d}${v}-LXDE-extra.iso.zsync $next/kanotix64-silverfire-nightly-LXDE-extra.iso.zsync
+        sed "s/${d}${v}-//" $target/kanotix64-silverfire-nightly-${d}${v}-LXDE-extra.iso.md5 > $next/kanotix64-silverfire-nightly-LXDE-extra.iso.md5
+fi
+fi # end of lxde extra
 #
 # lxde 64
 lb clean
