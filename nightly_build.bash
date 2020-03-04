@@ -16,8 +16,8 @@ mkdir -p $target $next
 #sed -i '/gfxdetect/,/^}/{d}' config/binary_grub/grub.cfg
 
 BUILD_BUSTER=true
-BUILD_BUSTER_EXTRA_KDE=false
-BUILD_BUSTER_EXTRA_LXDE=false
+BUILD_BUSTER_EXTRA_KDE=true
+BUILD_BUSTER_EXTRA_LXDE=true
 BUILD_STRETCH=true
 BUILD_JESSIE=true
 BUILD_JESSIE_SPECIAL=false
