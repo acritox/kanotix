@@ -59,7 +59,7 @@ if $BUILD_BUSTER_EXTRA_LXDE; then
 #
 # lxde 64-extra
 lb clean
-lb config -d $DISTRO -p "kanotix-kde-master silverfire-extra firefox google-chrome android virtualbox wine-staging skypeforlinux" --bootloader grub2 --tmpfs true --tmpfs-options size=14G --apt-http-proxy "http://127.0.0.1:3142" --cache-packages false --gfxoverlays false -a amd64 --initsystem systemd
+lb config -d $DISTRO -p "kanotix-lxde-master silverfire-extra firefox google-chrome android virtualbox wine-staging skypeforlinux" --bootloader grub2 --tmpfs true --tmpfs-options size=14G --apt-http-proxy "http://127.0.0.1:3142" --cache-packages false --gfxoverlays false -a amd64 --initsystem systemd
 echo Kanotix silverfire-nightly Silverfire64 $d$v LXDE-extra > config/chroot_local-includes/etc/kanotix-version
 lb build; cd tmpfs; ./isohybrid-acritox kanotix64.iso; mv kanotix64.iso $target/kanotix64-silverfire-nightly-${d}${v}-LXDE-extra.iso; cd ..
 cp tmpfs/binary.packages $target/kanotix64-silverfire-nightly-${d}${v}-LXDE-extra.packages
