@@ -2,6 +2,11 @@
 cd "$(dirname "$0")"
 rm -rf cache tmpfs/cache
 
+# delete iso files older 35 days
+
+find /data/kanotix/nightly -mtime +35 -type f -print -delete
+find /data/kanotix/nightly -type d -empty -print -delete
+
 # reset apt-cacher-ng cache
 find /var/cache/apt-cacher-ng \( -type f -name 'Packages*' -o -name 'Sources*' -o -name 'Release*' -o -name 'InRelease*' \) -delete
 
