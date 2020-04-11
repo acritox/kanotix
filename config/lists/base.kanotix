@@ -12,6 +12,10 @@ kanotix-irc
 kanotix-paste
 infobash
 
+#nif DISTRIBUTION wheezy jessie
+kanotix-udev-wlan-hack
+#endif
+
 # bootloader
 #if BOOTLOADER burg
 burg-themes
