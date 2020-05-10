@@ -10,7 +10,7 @@ LABEL=Kanotix
 export LB_BOOTLOADER LB_BINARY_IMAGES
 
 # Update kanotix-version (32/64-bit and timestamp)
-KANOTIX_CODENAMES="lenny=Excalibur squeeze=Hellfire wheezy=Dragonfire jessie=Spitfire"
+KANOTIX_CODENAMES="lenny=Excalibur squeeze=Hellfire wheezy=Dragonfire jessie=Spitfire stretch=Steelfire buster=Silverfire"
 KANOTIX_CODENAME="$(echo $KANOTIX_CODENAMES | fmt -w1 | grep "^${LB_DISTRIBUTION}=" | cut -d= -f2)"
 [ -z "$KANOTIX_CODENAME" ] && KANOTIX_CODENAME="$(echo $LB_DISTRIBUTION|sed -e 's/\b\(.\)/\u\1/g')"
 
