@@ -226,8 +226,13 @@ btrfs-progs
 #endif
 
 # firmware
+#if DISTRIBUTION wheezy jessie
 ndiswrapper-utils-1.9
 ndiswrapper-dkms
+#endif
+#if DISTRIBUTION stretch
+#include <ndiswrapper>
+#endif
 
 # other hardware
 bluez
