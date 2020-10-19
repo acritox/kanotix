@@ -1,4 +1,5 @@
-#if ARCHITECTURE amd64
 mesa-vulkan-drivers
 vulkan-utils
+#if ARCHITECTURE amd64
+mesa-vulkan-drivers:i386
 #endif
