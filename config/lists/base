@@ -176,6 +176,11 @@ mesa-vdpau-drivers
 #endif
 #nif DISTRIBUTION wheezy jessie
 mesa-va-drivers
+#endif
+#if DISTRIBUTION stretch
+#include <vulkan-steelfire>
+#endif
+#nif DISTRIBUTION wheezy jessie stretch
 #include <vulkan>
 #endif
 xinit
