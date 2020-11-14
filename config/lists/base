@@ -52,7 +52,7 @@ most
 less
 rsync
 hdparm
-pciutils
+nvidia-detect
 wireless-tools
 sux
 htop
