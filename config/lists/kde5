@@ -82,6 +82,9 @@ kactivities-bin
 plasma-widgets-addons
 plasma-runners-addons
 qml-module-org-kde-runnermodel
+#nif DISTRIBUTION stretch buster
+qml-module-org-kde-newstuff
+#endif
 
 # themes
 kde-config-gtk-style
