@@ -37,7 +37,7 @@ kate
 ark
 
 # tools
-ksnapshot
+kde-spectacle
 kcalc
 kfind
 qml-module-org-kde-activities
@@ -70,7 +70,7 @@ systemsettings
 libkf5kdelibs4support5-bin
 kde-l10n-de
 kwalletmanager
-polkit-kde-1
+polkit-kde-agent-1
 kde-config-screenlocker
 khotkeys
 ksysguard
