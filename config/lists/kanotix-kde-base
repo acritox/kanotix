@@ -4,7 +4,7 @@
 #if DISTRIBUTION squeeze wheezy jessie
 #include <kde>
 #endif
-#if DISTRIBUTION stretch buster sid
+#nif DISTRIBUTION squeeze wheezy jessie
 #include <kde5>
 #endif
 #include <kde.kanotix>
