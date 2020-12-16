@@ -119,7 +119,7 @@ bullseye)
 	esac
 	;;
 *)
-    LB_REPOSITORIES+=" dragonfire spitfire steelfire silverfire"
+    LB_REPOSITORIES+=" spitfire steelfire silverfire speedfire"
 	case $LB_ARCHITECTURE in
 	amd64) LB_LINUX_PACKAGES="linux-image linux-headers"; LB_LINUX_FLAVOURS="amd64";;
 	i386)  LB_LINUX_PACKAGES="linux-image linux-headers"; LB_LINUX_FLAVOURS="686-pae";;

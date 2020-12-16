@@ -1,0 +1,3 @@
+# Kanotix Speedfire
+deb http://kanotix.com/files/speedfire ./
+deb-src http://kanotix.com/files/speedfire ./
