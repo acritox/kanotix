@@ -16,6 +16,12 @@ export LB_SYSLINUX_MENU_LIVE_ENTRY="Kanotix"
 export LB_LINUX_PACKAGES="linux-image linux-headers"
 
 echo "We build $LB_DISTRIBUTION"
+# use flag for security and updates
+# since bullseye the name for security has changed, disable for now
+# live-build default is true
+KSECURITY="true"
+KUPDATES="true"
+
 # since buster we need packages in debootstrap not avaible in earlier distributions
 # for stretch also use mime-support (fix build error)
 
@@ -31,6 +37,10 @@ stretch)
 	;;
 buster)
         KDEBOOTSTRAPOPTIONS="--include=apt-transport-https,ca-certificates,gpg,gpg-agent,mime-support --exclude=nano"
+	;;
+bullseye)
+        KDEBOOTSTRAPOPTIONS="--include=apt-transport-https,ca-certificates,gpg,gpg-agent,mime-support --exclude=nano"
+        KSECURITY="false"
 	;;
 *)
         KDEBOOTSTRAPOPTIONS="--include=apt-transport-https,ca-certificates,gpg,gpg-agent,mime-support --exclude=nano"
@@ -50,7 +60,8 @@ lb config noauto \
 	--archive-areas "main contrib non-free" \
 	--debootstrap-options "${KDEBOOTSTRAPOPTIONS}" \
 	--repositories "live.debian.net lo" \
-	--security true \
+	--security "${KSECURITY}" \
+	--updates "${KUPDATES}" \
 	--checksums md5 \
 	--syslinux-timeout 5 \
 	--syslinux-menu true \
