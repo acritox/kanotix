@@ -55,7 +55,9 @@ htop
 time
 bash-completion
 di
+#if DISTRIBUTION wheezy jessie stretch buster
 cfv
+#endif
 whois
 screen
 ntpdate
