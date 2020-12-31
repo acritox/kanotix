@@ -81,4 +81,9 @@ xchat
 
 # other
 gnome-screenshot
+#if DISTRIBUTION wheezy jessie stretch buster
 clipit
+#endif
+#nif DISTRIBUTION wheezy jessie stretch buster
+diodon
+#endif
