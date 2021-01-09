@@ -91,7 +91,9 @@ fonts-droid
 #nif DISTRIBUTION wheezy jessie
 fonts-droid-fallback
 #endif
-
+#nif DISTRIBUTION wheezy jessie stretch
+fonts-hack
+#endif
 
 # isofiller
 xpad
