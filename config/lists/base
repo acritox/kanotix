@@ -52,7 +52,9 @@ most
 less
 rsync
 hdparm
+#if ARCHITECTURE amd64
 nvidia-detect
+#endif
 wireless-tools
 sux
 htop
