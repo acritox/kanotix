@@ -1,6 +1,7 @@
 # wine-staging (multiarch)
 
 winetricks
+cabextract
 
 #if ARCHITECTURE i386
 wine-staging
