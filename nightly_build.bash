@@ -81,7 +81,9 @@ if $BUILD_BUSTER_EXTRA_KDE; then
 lb clean
 lb config -d $DISTRO -p "kanotix-kde-master silverfire-extra firefox google-chrome android virtualbox wine-staging skypeforlinux" --bootloader grub2 --tmpfs true --tmpfs-options size=14G --apt-http-proxy "http://127.0.0.1:3142" --cache-packages false --gfxoverlays false -a amd64 --initsystem systemd
 echo Kanotix silverfire-nightly Silverfire64 $d$v KDE-extra > config/chroot_local-includes/etc/kanotix-version
-lb build; cd tmpfs; ./isohybrid-acritox kanotix64.iso; mv kanotix64.iso $target/kanotix64-silverfire-nightly-${d}${v}-KDE-extra.iso; cd ..
+lb build; cd tmpfs; ./isohybrid-acritox kanotix64.iso
+check_iso
+mv kanotix64.iso $target/kanotix64-silverfire-nightly-${d}${v}-KDE-extra.iso; cd ..
 cp tmpfs/binary.packages $target/kanotix64-silverfire-nightly-${d}${v}-KDE-extra.packages
 cp tmpfs/binary.log $target/kanotix64-silverfire-nightly-${d}${v}-KDE-extra.log
 cd $target
@@ -106,7 +108,9 @@ if $BUILD_BUSTER_EXTRA_LXDE; then
 lb clean
 lb config -d $DISTRO -p "kanotix-lxde-master silverfire-extra firefox google-chrome android virtualbox wine-staging skypeforlinux" --bootloader grub2 --tmpfs true --tmpfs-options size=14G --apt-http-proxy "http://127.0.0.1:3142" --cache-packages false --gfxoverlays false -a amd64 --initsystem systemd
 echo Kanotix silverfire-nightly Silverfire64 $d$v LXDE-extra > config/chroot_local-includes/etc/kanotix-version
-lb build; cd tmpfs; ./isohybrid-acritox kanotix64.iso; mv kanotix64.iso $target/kanotix64-silverfire-nightly-${d}${v}-LXDE-extra.iso; cd ..
+lb build; cd tmpfs; ./isohybrid-acritox kanotix64.iso
+check_iso
+mv kanotix64.iso $target/kanotix64-silverfire-nightly-${d}${v}-LXDE-extra.iso; cd ..
 cp tmpfs/binary.packages $target/kanotix64-silverfire-nightly-${d}${v}-LXDE-extra.packages
 cp tmpfs/binary.log $target/kanotix64-silverfire-nightly-${d}${v}-LXDE-extra.log
 cd $target
@@ -129,7 +133,9 @@ fi # end of lxde extra
 lb clean
 lb config -d $DISTRO -p "kanotix-lxde-master firefox wine-staging skypeforlinux ndiswrapper" --bootloader grub2 --tmpfs true --tmpfs-options size=14G --apt-http-proxy "http://127.0.0.1:3142" --cache-packages false --gfxoverlays false -a amd64 --initsystem systemd
 echo Kanotix silverfire-nightly Silverfire64 $d$v LXDE > config/chroot_local-includes/etc/kanotix-version
-lb build; cd tmpfs; ./isohybrid-acritox kanotix64.iso; mv kanotix64.iso $target/kanotix64-silverfire-nightly-${d}${v}-LXDE.iso; cd ..
+lb build; cd tmpfs; ./isohybrid-acritox kanotix64.iso
+check_iso
+mv kanotix64.iso $target/kanotix64-silverfire-nightly-${d}${v}-LXDE.iso; cd ..
 cp tmpfs/binary.packages $target/kanotix64-silverfire-nightly-${d}${v}-LXDE.packages
 cp tmpfs/binary.log $target/kanotix64-silverfire-nightly-${d}${v}-LXDE.log
 cd $target
@@ -151,7 +157,9 @@ fi
 lb clean
 lb config -d $DISTRO -p "kanotix-lxde-master firefox wine-staging ndiswrapper" --bootloader grub2 --tmpfs true --tmpfs-options size=14G --apt-http-proxy "http://127.0.0.1:3142" --cache-packages false --gfxoverlays false -a i386 --initsystem systemd
 echo Kanotix silverfire-nightly Silverfire32 $d$v LXDE > config/chroot_local-includes/etc/kanotix-version
-lb build; cd tmpfs; ./isohybrid-acritox kanotix32.iso; mv kanotix32.iso $target/kanotix32-silverfire-nightly-${d}${v}-LXDE.iso; cd ..
+lb build; cd tmpfs; ./isohybrid-acritox kanotix32.iso
+check_iso
+mv kanotix32.iso $target/kanotix32-silverfire-nightly-${d}${v}-LXDE.iso; cd ..
 cp tmpfs/binary.packages $target/kanotix32-silverfire-nightly-${d}${v}-LXDE.packages
 cp tmpfs/binary.log $target/kanotix32-silverfire-nightly-${d}${v}-LXDE.log
 cd $target
@@ -173,7 +181,9 @@ fi
 lb clean
 lb config -d $DISTRO -p "kanotix-kde-master firefox wine-staging skypeforlinux ndiswrapper" --bootloader grub2 --tmpfs true --tmpfs-options size=14G --apt-http-proxy "http://127.0.0.1:3142" --cache-packages false --gfxoverlays false -a amd64 --initsystem systemd
 echo Kanotix silverfire-nightly Silverfire64 $d$v KDE > config/chroot_local-includes/etc/kanotix-version
-lb build; cd tmpfs; ./isohybrid-acritox kanotix64.iso; mv kanotix64.iso $target/kanotix64-silverfire-nightly-${d}${v}-KDE.iso; cd ..
+lb build; cd tmpfs; ./isohybrid-acritox kanotix64.iso
+check_iso
+mv kanotix64.iso $target/kanotix64-silverfire-nightly-${d}${v}-KDE.iso; cd ..
 cp tmpfs/binary.packages $target/kanotix64-silverfire-nightly-${d}${v}-KDE.packages
 cp tmpfs/binary.log $target/kanotix64-silverfire-nightly-${d}${v}-KDE.log
 cd $target
@@ -195,7 +205,9 @@ fi
 lb clean
 lb config -d $DISTRO -p "kanotix-kde-master firefox wine-staging ndiswrapper" --bootloader grub2 --tmpfs true --tmpfs-options size=14G --apt-http-proxy "http://127.0.0.1:3142" --cache-packages false --gfxoverlays false -a i386 --initsystem systemd
 echo Kanotix silverfire-nightly Silverfire32 $d$v KDE > config/chroot_local-includes/etc/kanotix-version
-lb build; cd tmpfs; ./isohybrid-acritox kanotix32.iso; mv kanotix32.iso $target/kanotix32-silverfire-nightly-${d}${v}-KDE.iso; cd ..
+lb build; cd tmpfs; ./isohybrid-acritox kanotix32.iso
+check_iso
+mv kanotix32.iso $target/kanotix32-silverfire-nightly-${d}${v}-KDE.iso; cd ..
 cp tmpfs/binary.packages $target/kanotix32-silverfire-nightly-${d}${v}-KDE.packages
 cp tmpfs/binary.log $target/kanotix32-silverfire-nightly-${d}${v}-KDE.log
 cd $target
@@ -217,7 +229,9 @@ fi
 lb clean
 lb config -d $DISTRO -p "kanotix-eeepc4G midori ndiswrapper" --bootloader grub2 --tmpfs true --tmpfs-options size=14G --apt-http-proxy "http://127.0.0.1:3142" --cache-packages false --gfxoverlays false -a i386 --initsystem systemd
 echo Kanotix silverfire-nightly Silverfire32 $d$v eeepc4G > config/chroot_local-includes/etc/kanotix-version
-lb build; cd tmpfs; ./isohybrid-acritox kanotix32.iso; mv kanotix32.iso $target/kanotix32-silverfire-nightly-${d}${v}-eeepc4G.iso; cd ..
+lb build; cd tmpfs; ./isohybrid-acritox kanotix32.iso
+check_iso
+mv kanotix32.iso $target/kanotix32-silverfire-nightly-${d}${v}-eeepc4G.iso; cd ..
 cp tmpfs/binary.packages $target/kanotix32-silverfire-nightly-${d}${v}-eeepc4G.packages
 cp tmpfs/binary.log $target/kanotix32-silverfire-nightly-${d}${v}-eeepc4G.log
 cd $target
@@ -248,7 +262,9 @@ sed -i 's/\(export LB_DISTRIBUTION=\).*/\1"'$DISTRO'"/' auto/config
 lb clean
 lb config -d $DISTRO -p "kanotix-lxde-master firefox wine-staging skypeforlinux" --bootloader grub2 --tmpfs true --tmpfs-options size=14G --apt-http-proxy "http://127.0.0.1:3142" --cache-packages false --gfxoverlays false -a amd64 --initsystem systemd
 echo Kanotix steelfire-nightly Steelfire64 $d$v LXDE > config/chroot_local-includes/etc/kanotix-version
-lb build; cd tmpfs; ./isohybrid-acritox kanotix64.iso; mv kanotix64.iso $target/kanotix64-steelfire-nightly-${d}${v}-LXDE.iso; cd ..
+lb build; cd tmpfs; ./isohybrid-acritox kanotix64.iso
+check_iso
+mv kanotix64.iso $target/kanotix64-steelfire-nightly-${d}${v}-LXDE.iso; cd ..
 cp tmpfs/binary.packages $target/kanotix64-steelfire-nightly-${d}${v}-LXDE.packages
 cp tmpfs/binary.log $target/kanotix64-steelfire-nightly-${d}${v}-LXDE.log
 cd $target
@@ -270,7 +286,9 @@ fi
 lb clean
 lb config -d $DISTRO -p "kanotix-lxde-master firefox wine-staging" --bootloader grub2 --tmpfs true --tmpfs-options size=14G --apt-http-proxy "http://127.0.0.1:3142" --cache-packages false --gfxoverlays false -a i386 --initsystem systemd
 echo Kanotix steelfire-nightly Steelfire32 $d$v LXDE > config/chroot_local-includes/etc/kanotix-version
-lb build; cd tmpfs; ./isohybrid-acritox kanotix32.iso; mv kanotix32.iso $target/kanotix32-steelfire-nightly-${d}${v}-LXDE.iso; cd ..
+lb build; cd tmpfs; ./isohybrid-acritox kanotix32.iso
+check_iso
+mv kanotix32.iso $target/kanotix32-steelfire-nightly-${d}${v}-LXDE.iso; cd ..
 cp tmpfs/binary.packages $target/kanotix32-steelfire-nightly-${d}${v}-LXDE.packages
 cp tmpfs/binary.log $target/kanotix32-steelfire-nightly-${d}${v}-LXDE.log
 cd $target
@@ -292,7 +310,9 @@ fi
 lb clean
 lb config -d $DISTRO -p "kanotix-kde-master firefox wine-staging skypeforlinux" --bootloader grub2 --tmpfs true --tmpfs-options size=14G --apt-http-proxy "http://127.0.0.1:3142" --cache-packages false --gfxoverlays false -a amd64 --initsystem systemd
 echo Kanotix steelfire-nightly Steelfire64 $d$v KDE > config/chroot_local-includes/etc/kanotix-version
-lb build; cd tmpfs; ./isohybrid-acritox kanotix64.iso; mv kanotix64.iso $target/kanotix64-steelfire-nightly-${d}${v}-KDE.iso; cd ..
+lb build; cd tmpfs; ./isohybrid-acritox kanotix64.iso
+check_iso
+mv kanotix64.iso $target/kanotix64-steelfire-nightly-${d}${v}-KDE.iso; cd ..
 cp tmpfs/binary.packages $target/kanotix64-steelfire-nightly-${d}${v}-KDE.packages
 cp tmpfs/binary.log $target/kanotix64-steelfire-nightly-${d}${v}-KDE.log
 cd $target
@@ -314,7 +334,9 @@ fi
 lb clean
 lb config -d $DISTRO -p "kanotix-kde-master firefox wine-staging" --bootloader grub2 --tmpfs true --tmpfs-options size=14G --apt-http-proxy "http://127.0.0.1:3142" --cache-packages false --gfxoverlays false -a i386 --initsystem systemd
 echo Kanotix steelfire-nightly Steelfire32 $d$v KDE > config/chroot_local-includes/etc/kanotix-version
-lb build; cd tmpfs; ./isohybrid-acritox kanotix32.iso; mv kanotix32.iso $target/kanotix32-steelfire-nightly-${d}${v}-KDE.iso; cd ..
+lb build; cd tmpfs; ./isohybrid-acritox kanotix32.iso
+check_iso
+mv kanotix32.iso $target/kanotix32-steelfire-nightly-${d}${v}-KDE.iso; cd ..
 cp tmpfs/binary.packages $target/kanotix32-steelfire-nightly-${d}${v}-KDE.packages
 cp tmpfs/binary.log $target/kanotix32-steelfire-nightly-${d}${v}-KDE.log
 cd $target
@@ -336,7 +358,9 @@ fi
 lb clean
 lb config -d $DISTRO -p "kanotix-eeepc4G midori" --bootloader grub2 --tmpfs true --tmpfs-options size=14G --apt-http-proxy "http://127.0.0.1:3142" --cache-packages false --gfxoverlays false -a i386 --initsystem systemd
 echo Kanotix steelfire-nightly Steelfire32 $d$v eeepc4G > config/chroot_local-includes/etc/kanotix-version
-lb build; cd tmpfs; ./isohybrid-acritox kanotix32.iso; mv kanotix32.iso $target/kanotix32-steelfire-nightly-${d}${v}-eeepc4G.iso; cd ..
+lb build; cd tmpfs; ./isohybrid-acritox kanotix32.iso
+check_iso
+mv kanotix32.iso $target/kanotix32-steelfire-nightly-${d}${v}-eeepc4G.iso; cd ..
 cp tmpfs/binary.packages $target/kanotix32-steelfire-nightly-${d}${v}-eeepc4G.packages
 cp tmpfs/binary.log $target/kanotix32-steelfire-nightly-${d}${v}-eeepc4G.log
 cd $target
@@ -366,7 +390,9 @@ sed -i 's/\(export LB_DISTRIBUTION=\).*/\1"'$DISTRO'"/' auto/config
 lb clean
 lb config -d $DISTRO -p "kanotix-kde-master firefox wine-staging skypeforlinux" --bootloader grub2 --tmpfs true --tmpfs-options size=14G --apt-http-proxy "http://127.0.0.1:3142" --cache-packages false --gfxoverlays false -a amd64 --initsystem systemd
 echo Kanotix spitfire-nightly Spitfire64 $d$v KDE > config/chroot_local-includes/etc/kanotix-version 
-lb build; cd tmpfs; ./isohybrid-acritox kanotix64.iso; mv kanotix64.iso $target/kanotix64-spitfire-nightly-${d}${v}-KDE.iso; cd ..
+lb build; cd tmpfs; ./isohybrid-acritox kanotix64.iso
+check_iso
+mv kanotix64.iso $target/kanotix64-spitfire-nightly-${d}${v}-KDE.iso; cd ..
 cp tmpfs/binary.packages $target/kanotix64-spitfire-nightly-${d}${v}-KDE.packages
 cp tmpfs/binary.log $target/kanotix64-spitfire-nightly-${d}${v}-KDE.log
 cd $target
@@ -387,7 +413,9 @@ fi
 lb clean
 lb config -d $DISTRO -p "kanotix-kde-master firefox wine-staging" --bootloader grub2 --tmpfs true --tmpfs-options size=14G --apt-http-proxy "http://127.0.0.1:3142" --cache-packages false --gfxoverlays false -a i386 --initsystem systemd
 echo Kanotix spitfire-nightly Spitfire32 $d$v KDE > config/chroot_local-includes/etc/kanotix-version 
-lb build; cd tmpfs; ./isohybrid-acritox kanotix32.iso; mv kanotix32.iso $target/kanotix32-spitfire-nightly-${d}${v}-KDE.iso; cd ..
+lb build; cd tmpfs; ./isohybrid-acritox kanotix32.iso
+check_iso
+mv kanotix32.iso $target/kanotix32-spitfire-nightly-${d}${v}-KDE.iso; cd ..
 cp tmpfs/binary.packages $target/kanotix32-spitfire-nightly-${d}${v}-KDE.packages
 cp tmpfs/binary.log $target/kanotix32-spitfire-nightly-${d}${v}-KDE.log
 cd $target
@@ -408,7 +436,9 @@ fi
 lb clean
 lb config -d $DISTRO -p "kanotix-lxde-master firefox wine-staging skypeforlinux" --bootloader grub2 --tmpfs true --tmpfs-options size=14G --apt-http-proxy "http://127.0.0.1:3142" --cache-packages false --gfxoverlays false -a amd64 --initsystem systemd
 echo Kanotix spitfire-nightly Spitfire64 $d$v LXDE > config/chroot_local-includes/etc/kanotix-version 
-lb build; cd tmpfs; ./isohybrid-acritox kanotix64.iso; mv kanotix64.iso $target/kanotix64-spitfire-nightly-${d}${v}-LXDE.iso; cd ..
+lb build; cd tmpfs; ./isohybrid-acritox kanotix64.iso
+check_iso
+mv kanotix64.iso $target/kanotix64-spitfire-nightly-${d}${v}-LXDE.iso; cd ..
 cp tmpfs/binary.packages $target/kanotix64-spitfire-nightly-${d}${v}-LXDE.packages
 cp tmpfs/binary.log $target/kanotix64-spitfire-nightly-${d}${v}-LXDE.log
 cd $target
@@ -429,7 +459,9 @@ fi
 lb clean
 lb config -d $DISTRO -p "kanotix-lxde-master firefox wine-staging" --bootloader grub2 --tmpfs true --tmpfs-options size=14G --apt-http-proxy "http://127.0.0.1:3142" --cache-packages false --gfxoverlays false -a i386 --initsystem systemd
 echo Kanotix spitfire-nightly Spitfire32 $d$v LXDE > config/chroot_local-includes/etc/kanotix-version 
-lb build; cd tmpfs; ./isohybrid-acritox kanotix32.iso; mv kanotix32.iso $target/kanotix32-spitfire-nightly-${d}${v}-LXDE.iso; cd ..
+lb build; cd tmpfs; ./isohybrid-acritox kanotix32.iso
+check_iso
+mv kanotix32.iso $target/kanotix32-spitfire-nightly-${d}${v}-LXDE.iso; cd ..
 cp tmpfs/binary.packages $target/kanotix32-spitfire-nightly-${d}${v}-LXDE.packages
 cp tmpfs/binary.log $target/kanotix32-spitfire-nightly-${d}${v}-LXDE.log
 cd $target
@@ -455,7 +487,9 @@ if $BUILD_JESSIE_SPECIAL; then
 lb clean
 lb config -d $DISTRO -p "kanotix-master firefox wine-staging google-chrome skypeforlinux virtualbox android steam xbmc gfxdetect" --bootloader grub2 --tmpfs true --tmpfs-options size=14G --apt-http-proxy "http://127.0.0.1:3142" --cache-packages false --gfxoverlays false -a amd64 --initsystem systemd
 echo Kanotix spitfire-nightly Spitfire64 $d$v KDE-special > config/chroot_local-includes/etc/kanotix-version 
-lb build; cd tmpfs; ./isohybrid-acritox kanotix64.iso; mv kanotix64.iso $target/kanotix64-spitfire-nightly-${d}${v}-KDE-special.iso; cd ..
+lb build; cd tmpfs; ./isohybrid-acritox kanotix64.iso
+check_iso
+mv kanotix64.iso $target/kanotix64-spitfire-nightly-${d}${v}-KDE-special.iso; cd ..
 cp tmpfs/binary.packages $target/kanotix64-spitfire-nightly-${d}${v}-KDE-special.packages
 cp tmpfs/binary.log $target/kanotix64-spitfire-nightly-${d}${v}-KDE-special.log
 cd $target
@@ -476,7 +510,9 @@ fi
 lb clean
 lb config -d $DISTRO -p "kanotix-master firefox wine-staging google-chrome virtualbox android steam xbmc gfxdetect" --bootloader grub2 --tmpfs true --tmpfs-options size=14G --apt-http-proxy "http://127.0.0.1:3142" --cache-packages false --gfxoverlays false -a i386 --initsystem systemd
 echo Kanotix spitfire-nightly Spitfire32 $d$v KDE-special > config/chroot_local-includes/etc/kanotix-version 
-lb build; cd tmpfs; ./isohybrid-acritox kanotix32.iso; mv kanotix32.iso $target/kanotix32-spitfire-nightly-${d}${v}-KDE-special.iso; cd ..
+lb build; cd tmpfs; ./isohybrid-acritox kanotix32.iso
+check_iso
+mv kanotix32.iso $target/kanotix32-spitfire-nightly-${d}${v}-KDE-special.iso; cd ..
 cp tmpfs/binary.packages $target/kanotix32-spitfire-nightly-${d}${v}-KDE-special.packages
 cp tmpfs/binary.log $target/kanotix32-spitfire-nightly-${d}${v}-KDE-special.log
 cd $target
@@ -507,7 +543,9 @@ sed -i 's/\(export LB_DISTRIBUTION=\).*/\1"'$DISTRO'"/' auto/config
 lb clean
 lb config -d wheezy -p "kanotix-kde-master firefox" --bootloader grub2 --tmpfs true --tmpfs-options size=14G --apt-http-proxy "http://127.0.0.1:3142" --cache-packages false --gfxoverlays false -a amd64
 echo Kanotix dragonfire-nightly Dragonfire64 $d$v KDE > config/chroot_local-includes/etc/kanotix-version 
-lb build; cd tmpfs; ./isohybrid-acritox kanotix64.iso; mv kanotix64.iso $target/kanotix64-dragonfire-nightly-${d}${v}-KDE.iso; cd ..
+lb build; cd tmpfs; ./isohybrid-acritox kanotix64.iso
+check_iso
+mv kanotix64.iso $target/kanotix64-dragonfire-nightly-${d}${v}-KDE.iso; cd ..
 cp tmpfs/binary.packages $target/kanotix64-dragonfire-nightly-${d}${v}-KDE.packages
 cp tmpfs/binary.log $target/kanotix64-dragonfire-nightly-${d}${v}-KDE.log
 cd $target
@@ -528,7 +566,9 @@ fi
 lb clean
 lb config -d wheezy -p "kanotix-kde-master firefox" --bootloader grub2 --tmpfs true --tmpfs-options size=14G --apt-http-proxy "http://127.0.0.1:3142" --cache-packages false --gfxoverlays false -a i386
 echo Kanotix dragonfire-nightly Dragonfire32 $d$v KDE > config/chroot_local-includes/etc/kanotix-version 
-lb build; cd tmpfs; ./isohybrid-acritox kanotix32.iso; mv kanotix32.iso $target/kanotix32-dragonfire-nightly-${d}${v}-KDE.iso; cd ..
+lb build; cd tmpfs; ./isohybrid-acritox kanotix32.iso
+check_iso
+mv kanotix32.iso $target/kanotix32-dragonfire-nightly-${d}${v}-KDE.iso; cd ..
 cp tmpfs/binary.packages $target/kanotix32-dragonfire-nightly-${d}${v}-KDE.packages
 cp tmpfs/binary.log $target/kanotix32-dragonfire-nightly-${d}${v}-KDE.log
 cd $target
@@ -549,7 +589,9 @@ fi
 lb clean
 lb config -d wheezy -p "kanotix-lxde-master firefox" --bootloader grub2 --tmpfs true --tmpfs-options size=14G --apt-http-proxy "http://127.0.0.1:3142" --cache-packages false --gfxoverlays false -a amd64
 echo Kanotix dragonfire-nightly Dragonfire64 $d$v LXDE > config/chroot_local-includes/etc/kanotix-version 
-lb build; cd tmpfs; ./isohybrid-acritox kanotix64.iso; mv kanotix64.iso $target/kanotix64-dragonfire-nightly-${d}${v}-LXDE.iso; cd ..
+lb build; cd tmpfs; ./isohybrid-acritox kanotix64.iso
+check_iso
+mv kanotix64.iso $target/kanotix64-dragonfire-nightly-${d}${v}-LXDE.iso; cd ..
 cp tmpfs/binary.packages $target/kanotix64-dragonfire-nightly-${d}${v}-LXDE.packages
 cp tmpfs/binary.log $target/kanotix64-dragonfire-nightly-${d}${v}-LXDE.log
 cd $target
@@ -570,7 +612,9 @@ fi
 lb clean
 lb config -d wheezy -p "kanotix-lxde-master firefox" --bootloader grub2 --tmpfs true --tmpfs-options size=14G --apt-http-proxy "http://127.0.0.1:3142" --cache-packages false --gfxoverlays false -a i386
 echo Kanotix dragonfire-nightly Dragonfire32 $d$v LXDE > config/chroot_local-includes/etc/kanotix-version 
-lb build; cd tmpfs; ./isohybrid-acritox kanotix32.iso; mv kanotix32.iso $target/kanotix32-dragonfire-nightly-${d}${v}-LXDE.iso; cd ..
+lb build; cd tmpfs; ./isohybrid-acritox kanotix32.iso
+check_iso
+mv kanotix32.iso $target/kanotix32-dragonfire-nightly-${d}${v}-LXDE.iso; cd ..
 cp tmpfs/binary.packages $target/kanotix32-dragonfire-nightly-${d}${v}-LXDE.packages
 cp tmpfs/binary.log $target/kanotix32-dragonfire-nightly-${d}${v}-LXDE.log
 cd $target
