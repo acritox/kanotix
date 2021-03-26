@@ -1,5 +1,45 @@
 #!/bin/bash
 cd "$(dirname "$0")"
+function check_iso {
+
+# check for possible errors in iso file
+
+echo "K: Kanotix start iso check..." >>binary.log
+    IERR=0
+if grep -F -q "E: " binary.log; then
+    echo "K: ERROR found...1" >>binary.log
+    IERR=1
+fi
+if grep -F -q "Err:" binary.log; then
+    echo "K: ERROR found...2" >>binary.log
+    IERR=2
+fi
+if grep ^parted binary.packages|grep kanotix >/dev/null; then
+    echo
+else
+    echo "K: non kanotix parted version found" >>binary.log
+    echo "K: ERROR found...3" >>binary.log
+    IERR=3
+fi
+if grep -q ^winetricks binary.packages; then
+    if grep ^winetricks binary.packages|grep kanotix >/dev/null; then
+        echo
+    else
+        echo "K: non kanotix winetricks version found" >>binary.log
+        echo "K: ERROR found...4" >>binary.log
+        IERR=4
+    fi
+fi
+if [ $IERR -eq 0 ]; then
+echo "K: Kanotix iso check passed..." >>binary.log
+else
+echo "K: Kanotix iso check errors detected... removing iso" >>binary.log
+rm -f kanotix*.iso
+fi
+
+return $IERR
+}
+
 rm -rf cache tmpfs/cache
 
 # delete iso files older 35 days
