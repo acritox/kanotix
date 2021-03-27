@@ -1,0 +1,67 @@
+#!/bin/sh
+for file in /root/config/*; do [ -r $file ] && . $file; done
+
+if [ "$LB_DISTRIBUTION" = "bullseye" ]; then
+
+# enable tapping
+
+mkdir -p /etc/X11/xorg.conf.d
+
+cat <<"EOF" >/etc/X11/xorg.conf.d/40-libinput.conf
+Section "InputClass"
+        Identifier "libinput touchpad catchall"
+        MatchIsTouchpad "on"
+        MatchDevicePath "/dev/input/event*"
+        Driver "libinput"
+        Option "Tapping" "on"
+        #Option "DisableWhileTyping" "1"
+EndSection
+EOF
+
+# set gtk3 theme
+mkdir -p /etc/skel/.config/gtk-3.0
+cat <<"EOF" >/etc/skel/.config/gtk-3.0/settings.ini
+[Settings]
+gtk-theme-name = Clearlooks-Phenix
+EOF
+
+# set gtk2 theme
+mkdir -p /etc/skel
+cat <<"EOF" >/etc/skel/.gtkrc-2.0
+gtk-theme-name = "Clearlooks-Phenix"
+EOF
+
+# powermanager fix new values since buster
+
+mkdir -p /etc/skel/.config/xfce4/xfconf/xfce-perchannel-xml
+cat <<"EOF" >/etc/skel/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-power-manager.xml
+<?xml version="1.0" encoding="UTF-8"?>
+
+<channel name="xfce4-power-manager" version="1.0">
+  <property name="xfce4-power-manager" type="empty">
+    <property name="power-button-action" type="uint" value="3"/>
+    <property name="show-tray-icon" type="bool" value="true"/>
+    <property name="lid-action-on-battery" type="uint" value="1"/>
+    <property name="critical-power-action" type="uint" value="1"/>
+    <property name="spin-down-on-battery" type="bool" value="false"/>
+    <property name="lock-screen-suspend-hibernate" type="bool" value="false"/>
+    <property name="brightness-switch-restore-on-exit" type="int" value="1"/>
+    <property name="brightness-switch" type="int" value="0"/>
+  </property>
+</channel>
+EOF
+
+# set compiz splash
+    if [ -e /etc/skel/.config/compiz/compizconfig/Default.ini ]; then
+        sed -i 's/splash_background_spitfire.png/splash_background_speedfire.png/' /etc/skel/.config/compiz/compizconfig/Default.ini
+    fi
+
+# hotfix lxde dead flag
+    if [ -e /usr/share/lxpanel/images/xkb-flags/de.png ]; then
+	cd /usr/share/lxpanel/images/xkb-flags
+	ln -s de.png "de(nodeadkeys).png"
+	cd -
+    fi
+
+
+fi
