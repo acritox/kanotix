@@ -4,5 +4,16 @@
 rm -f /usr/local/sbin/update-initramfs
 
 # Create stubs that will be updated by chroot_hacks afterwards
-touch $(ls /boot/vmlinuz-* | sed 's@^.*/vmlinuz-@/var/lib/initramfs-tools/@g')
+
+# not working in bullseye TODO
+
+case "${LB_DISTRIBUTION}" in
+
+       whezzy|jessie|stretch|buster)
+            touch $(ls /boot/vmlinuz-* | sed 's@^.*/vmlinuz-@/var/lib/initramfs-tools/@g')
+            ;;
+       *)
+            echo
+            ;;
+esac
 
