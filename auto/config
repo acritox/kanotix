@@ -40,7 +40,7 @@ buster)
 	;;
 bullseye)
         KDEBOOTSTRAPOPTIONS="--include=apt-transport-https,ca-certificates,gpg,gpg-agent,mime-support --exclude=nano"
-        KSECURITY="false"
+        KSECURITY="true"
 	;;
 *)
         KDEBOOTSTRAPOPTIONS="--include=apt-transport-https,ca-certificates,gpg,gpg-agent,mime-support --exclude=nano"
