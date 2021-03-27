@@ -4,7 +4,12 @@
 # install only needed firmware
 firmware-atheros
 
+# Kanotix
 #include <base.kanotix>
+etcskel-kanotix-lxde
+kmenu-icon-kanotix
+kanotix-lxde-extra
+
 sudo
 
 # bootloader
@@ -27,7 +32,6 @@ gfxoverlay
 sox
 alsa-oss
 alsa-utils
-w-scan
 
 # chat, irc
 weechat
@@ -50,7 +54,6 @@ rsync
 hdparm
 pciutils
 wireless-tools
-sux
 htop
 time
 bash-completion
@@ -89,9 +92,7 @@ sshfs
 cifs-utils
 pppoeconf
 nfs-common
-#if DISTRIBUTION wheezy
-bluez-audio
-#endif
+
 ethtool
 vpnc
 comgt
@@ -170,7 +171,9 @@ kpartx
 dosfstools
 lvm2
 hfsprogs
+#if DISTRIBUTION wheezy jessie stretch buster
 exfat-fuse
+#endif
 exfat-utils
 #nif DISTRIBUTION wheezy
 zram
@@ -195,18 +198,12 @@ btrfs-progs
 #endif
 
 # firmware
-#if DISTRIBUTION wheezy jessie
-ndiswrapper-utils-1.9
-ndiswrapper-dkms
-#endif
-#if DISTRIBUTION stretch
-#include <ndiswrapper>
-#endif
 
 # other hardware
 blueman
 #if DISTRIBUTION wheezy
 bluez-compat
+bluez-audio
 #endif
 pm-utils
 vbetool
@@ -226,7 +223,6 @@ libv4l-0:i386
 #endif
 
 ## base list end
-
 
 #include <compiz-gtk>
 
@@ -258,11 +254,6 @@ joystick
 epdfview
 ca-certificates
 #  desktop finish
-
-# Kanotix
-etcskel-kanotix-lxde
-kmenu-icon-kanotix
-kanotix-lxde-extra
 
 # LXDE
 lxde
@@ -299,8 +290,10 @@ exaile
 #nif DISTRIBUTION squeeze wheezy jessie
 clementine
 #endif
-
-
+# clementine fix
+#nif DISTRIBUTION wheezy jessie stretch buster
+libqt5sql5-sqlite
+#endif
 # network
 network-manager-gnome
 modemmanager
@@ -349,3 +342,6 @@ xchat
 gnome-screenshot
 seahorse
 keepassx
+#nif DISTRIBUTION wheezy jessie stretch buster
+diodon
+#endif
