@@ -265,7 +265,7 @@ gvfs-backends
 menu
 menu-xdg
 lxtask
-zenity
+yad
 xfce4-notifyd
 #if DISTRIBUTION wheezy
 lxpolkit
