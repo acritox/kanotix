@@ -1,6 +1,10 @@
 #!/bin/sh
 for file in /root/config/*; do [ -r $file ] && . $file; done
 
+echo "Info: mirror is ${LB_MIRROR_CHROOT} or ${LB_PARENT_MIRROR_CHROOT}"
+
+sed -i -e "s#@MIRRORDUMMY@#${LB_MIRROR_CHROOT}#"g /etc/apt/sources.list
+
 for x in /etc/apt/sources.list.d/*.list; do
    if grep -q '### THIS FILE IS AUTOMATICALLY CONFIGURED ###' $x; then
       rm -f $x
@@ -24,5 +28,5 @@ esac
 
 # fix for archive
 if [ "$LB_DISTRIBUTION" = "wheezy" ]; then
-   sed -i -e "s|ftp.de.debian.org/debian wheezy|archive.debian.org/debian wheezy|g" /etc/apt/sources.list
+   sed -i -e "s#${LB_MIRROR_CHROOT}#http://archive.debian.org/debian#g" /etc/apt/sources.list
 fi

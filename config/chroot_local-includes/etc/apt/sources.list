@@ -3,8 +3,8 @@
 # CDROMs are managed through the apt-cdrom tool.
 
 # Debian @DISTRIBUTION@
-deb http://ftp.de.debian.org/debian @DISTRIBUTION@ main contrib non-free
-deb-src http://ftp.de.debian.org/debian @DISTRIBUTION@ main contrib non-free
+deb @MIRRORDUMMY@ @DISTRIBUTION@ main contrib non-free
+deb-src @MIRRORDUMMY@ @DISTRIBUTION@ main contrib non-free
 
 # Debian @DISTRIBUTION@ Updates
 deb http://security.debian.org @DISTRIBUTION@-security/updates main contrib non-free

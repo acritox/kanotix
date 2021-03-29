@@ -1,0 +1,12 @@
+#!/bin/sh
+
+for file in /root/config/*; do [ -r $file ] && . $file; done
+
+echo "Info: mirror is ${LB_MIRROR_CHROOT} or ${LB_PARENT_MIRROR_CHROOT}"
+
+# end up with deb.debian.org in final iso since stretch
+case "${LB_DISTRIBUTION}" in
+    wheezy|jessie) exit ;;
+esac
+
+sed -i -e "s#${LB_MIRROR_CHROOT}#http://deb.debian.org/debian#"g /etc/apt/sources.list
