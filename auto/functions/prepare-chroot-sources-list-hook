@@ -1,0 +1,33 @@
+#!/bin/bash
+
+current_script="$(basename "$0"|sed 's/^lb_//')"
+
+if [ "$current_script" = "chroot_includes" ]; then
+
+# Including common functions
+[ -e "${LIVE_BUILD}/scripts/build.sh" ] && . "${LIVE_BUILD}/scripts/build.sh" ||
+
+# Reading configuration files
+Read_conffiles config/all config/common config/bootstrap config/chroot config/binary config/source
+Set_defaults
+
+	echo "HOOK: prepare chroot sources.list"
+
+	if [ "${_KVERBOSE}" = "true" ]; then
+		echo "DEBUG: LB_APT_HTTP_PROXY ${LB_APT_HTTP_PROXY}"
+		echo "DEBUG: LB_APT_FTP_PROXY ${LB_APT_FTP_PROXY}"
+		echo "DEBUG: DEBOOTSTRAP_OPTIONS ${DEBOOTSTRAP_OPTIONS}"
+		echo "DEBUG: LB_PARENT_DISTRIBUTION ${LB_PARENT_DISTRIBUTION}"
+		echo "DEBUG: LB_PARENT_MIRROR_BOOTSTRAP ${LB_PARENT_MIRROR_BOOTSTRAP}"
+		echo "DEBUG: LB_DISTRIBUTION ${LB_DISTRIBUTION}"
+		echo "DEBUG: LB_PARENT_MIRROR_CHROOT ${LB_PARENT_MIRROR_CHROOT}"
+		echo "DEBUG: LB_PARENT_MIRROR ${LB_PARENT_MIRROR}"
+		echo "DEBUG: LB_MIRROR_CHROOT ${LB_MIRROR_CHROOT}"
+		echo "DEBUG: LB_PARENT_MIRROR_BINARY ${LB_PARENT_MIRROR_BINARY}"
+	fi
+
+	if [ -e config/chroot_local-includes/etc/apt/sources.list ]; then
+		echo "Sources.list found"
+		sed -i -e "s#@MIRRORDUMMY@#${LB_MIRROR_CHROOT}#"g config/chroot_local-includes/etc/apt/sources.list
+	fi
+fi
