@@ -7,19 +7,21 @@ function check_iso {
 echo "K: Kanotix start iso check..." >>binary.log
     IERR=0
 if grep -F -q "E: " binary.log; then
-    echo "K: ERROR found...1" >>binary.log
+    echo "K: build ERROR found...1" >>binary.log
     IERR=1
 fi
 if grep -F -q "Err:" binary.log; then
-    echo "K: ERROR found...2" >>binary.log
+    echo "K: apt-cacher-ng ERROR found...2" >>binary.log
     IERR=2
 fi
-if grep ^parted binary.packages|grep kanotix >/dev/null; then
-    echo
-else
-    echo "K: non kanotix parted version found" >>binary.log
-    echo "K: ERROR found...3" >>binary.log
-    IERR=3
+if grep -q ^parted binary.packages; then
+    if grep ^parted binary.packages|grep kanotix >/dev/null; then
+        echo
+    else
+        echo "K: non kanotix parted version found" >>binary.log
+        echo "K: ERROR found...3" >>binary.log
+        IERR=4
+    fi
 fi
 if grep -q ^winetricks binary.packages; then
     if grep ^winetricks binary.packages|grep kanotix >/dev/null; then
