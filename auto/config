@@ -59,7 +59,7 @@ lb config noauto \
 	--bootappend-live 'utc=no timezone=Europe/Berlin locales=de keyboard-layouts=de keyboard-variant=nodeadkeys splash' \
 	--archive-areas "main contrib non-free" \
 	--debootstrap-options "${KDEBOOTSTRAPOPTIONS}" \
-	--repositories "live.debian.net lo" \
+	--repositories "" \
 	--security "${KSECURITY}" \
 	--updates "${KUPDATES}" \
 	--checksums md5 \
@@ -84,48 +84,52 @@ lb config noauto \
 # architecture and distribution depending stuff (e.g. kernel)
 case "$LB_DISTRIBUTION" in
 wheezy)
-	LB_REPOSITORIES+=" dragonfire dragonfire-acritox"
+	LB_REPOSITORIES+="dragonfire dragonfire-acritox"
 	case $LB_ARCHITECTURE in
 	amd64) LB_LINUX_PACKAGES="linux-image linux-headers"; LB_LINUX_FLAVOURS="amd64";;
 	i386)  LB_LINUX_PACKAGES="linux-image linux-headers"; LB_LINUX_FLAVOURS="686-pae";;
 	esac
 	;;
 jessie)
-    LB_REPOSITORIES+=" dragonfire spitfire spitfire-acritox"
+    LB_REPOSITORIES+="dragonfire spitfire spitfire-acritox"
 	case $LB_ARCHITECTURE in
 	amd64) LB_LINUX_PACKAGES="linux-image linux-headers"; LB_LINUX_FLAVOURS="amd64";;
 	i386)  LB_LINUX_PACKAGES="linux-image linux-headers"; LB_LINUX_FLAVOURS="686-pae";;
 	esac
 	;;
 stretch)
-    LB_REPOSITORIES+=" dragonfire spitfire steelfire"
+    LB_REPOSITORIES+="dragonfire spitfire steelfire"
 	case $LB_ARCHITECTURE in
 	amd64) LB_LINUX_PACKAGES="linux-image linux-headers"; LB_LINUX_FLAVOURS="amd64";;
 	i386)  LB_LINUX_PACKAGES="linux-image linux-headers"; LB_LINUX_FLAVOURS="686-pae";;
 	esac
 	;;
 buster)
-    LB_REPOSITORIES+=" dragonfire spitfire steelfire silverfire"
+    LB_REPOSITORIES+="dragonfire spitfire steelfire silverfire"
 	case $LB_ARCHITECTURE in
 	amd64) LB_LINUX_PACKAGES="linux-image linux-headers"; LB_LINUX_FLAVOURS="amd64";;
 	i386)  LB_LINUX_PACKAGES="linux-image linux-headers"; LB_LINUX_FLAVOURS="686-pae";;
 	esac
 	;;
 bullseye)
-    LB_REPOSITORIES+=" spitfire steelfire silverfire speedfire"
+    LB_REPOSITORIES+="spitfire steelfire silverfire speedfire"
 	case $LB_ARCHITECTURE in
 	amd64) LB_LINUX_PACKAGES="linux-image linux-headers"; LB_LINUX_FLAVOURS="amd64";;
 	i386)  LB_LINUX_PACKAGES="linux-image linux-headers"; LB_LINUX_FLAVOURS="686-pae";;
 	esac
 	;;
 *)
-    LB_REPOSITORIES+=" spitfire steelfire silverfire speedfire"
+    LB_REPOSITORIES+="spitfire steelfire silverfire speedfire"
 	case $LB_ARCHITECTURE in
 	amd64) LB_LINUX_PACKAGES="linux-image linux-headers"; LB_LINUX_FLAVOURS="amd64";;
 	i386)  LB_LINUX_PACKAGES="linux-image linux-headers"; LB_LINUX_FLAVOURS="686-pae";;
 	esac
 	;;
 esac
+
+if ! [ "$LB_ARCHITECTURE" = "i386" ]; then
+	LB_REPOSITORIES+=" lo"
+fi
 
 [ "$LB_BOOTLOADER" = "burg" ] && LB_REPOSITORIES+=" burg"
 grep -wq retabell <<<"$LB_PACKAGES_LISTS" && LB_REPOSITORIES+=" retabell"
