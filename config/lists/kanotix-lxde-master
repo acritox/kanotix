@@ -32,6 +32,11 @@ exaile
 #nif DISTRIBUTION wheezy jessie
 clementine
 #endif
+# clementine fix
+#nif DISTRIBUTION wheezy jessie stretch buster
+libqt5sql5-sqlite
+#endif
+
 #if ARCHITECTURE amd64
 #include <vlc>
 #endif

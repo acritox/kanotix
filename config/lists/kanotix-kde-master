@@ -19,6 +19,11 @@ amarok
 #nif DISTRIBUTION wheezy jessie stretch
 clementine
 #endif
+# clementine fix
+#nif DISTRIBUTION wheezy jessie stretch buster
+libqt5sql5-sqlite
+#endif
+
 kaffeine
 
 # graphics
