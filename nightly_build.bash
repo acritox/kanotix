@@ -85,6 +85,7 @@ lb config -d $DISTRO -p "kanotix-lxde-master firefox wine-staging skypeforlinux 
 echo Kanotix speedfire-nightly Speedfire64 $d$v LXDE > config/chroot_local-includes/etc/kanotix-version
 lb build; cd tmpfs; ./isohybrid-acritox kanotix64.iso
 check_iso
+ls -hgo kanotix64.iso >>binary.log; rm -f kanotix64.iso
 mv kanotix64.iso $target/kanotix64-speedfire-nightly-${d}${v}-LXDE.iso; cd ..
 cp tmpfs/binary.packages $target/kanotix64-speedfire-nightly-${d}${v}-LXDE.packages
 cp tmpfs/binary.log $target/kanotix64-speedfire-nightly-${d}${v}-LXDE.log
