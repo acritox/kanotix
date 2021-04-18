@@ -75,7 +75,9 @@ neverputt
 kmahjongg
 
 # benchmark
+#if DISTRIBUTION wheezy jessie stretch buster
 gl2benchmark
+#endif
 
 # fonts
 xfonts-base

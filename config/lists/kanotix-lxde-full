@@ -28,4 +28,6 @@ lightning-l10n-de
 # games
 
 # benchmark
+#if DISTRIBUTION wheezy jessie stretch buster
 gl2benchmark
+#endif
