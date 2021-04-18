@@ -16,6 +16,10 @@ infobash
 kanotix-udev-wlan-hack
 #endif
 
+#nif DISTRIBUTION wheezy jessie stretch buster
+live-ventoy-fix
+#endif
+
 # bootloader
 #if BOOTLOADER burg
 burg-themes
