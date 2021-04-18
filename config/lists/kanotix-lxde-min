@@ -32,7 +32,6 @@ ca-certificates
 #  desktop finish
 
 # Kanotix
-kanotix-power-button
 etcskel-kanotix-lxde
 kmenu-icon-kanotix
 kanotix-lxde-extra
