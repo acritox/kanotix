@@ -34,7 +34,7 @@ mpv
 #if DISTRIBUTION squeeze
 phonon-backend-xine
 #endif
-#nif DISTRIBUTION squeeze
+#if DISTRIBUTION wheezy jessie stretch buster
 phonon-backend-gstreamer
 #endif
 
