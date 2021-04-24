@@ -13,9 +13,13 @@
 #if DISTRIBUTION squeeze
 synaptic
 #endif
-#nif DISTRIBUTION squeeze
+#if DISTRIBUTION wheezy jessie stretch
 apper
 #endif
+#nif DISTRIBUTION wheezy jessie stretch
+plasma-discover
+#endif
+
 apt-xapian-index
 
 # multimedia
