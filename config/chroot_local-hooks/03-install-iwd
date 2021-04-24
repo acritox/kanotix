@@ -1,0 +1,22 @@
+#!/bin/sh
+for file in /root/config/*; do [ -r $file ] && . $file; done
+
+if [ -x /var/lib/dpkg/info/iwd.postinst ]; then
+
+    mkdir -p /etc/NetworkManager/conf.d
+cat <<"EOF" >/etc/NetworkManager/conf.d/nm.conf
+[device]
+wifi.backend=iwd
+EOF
+mkdir -p /etc/iwd
+cat <<"EOF" >/etc/iwd/main.conf
+[General]
+EnableNetworkConfiguration=true
+
+[Network]
+NameResolvingService=systemd
+EOF
+
+    apt install wpasupplicant-dummy --yes
+    apt purge wpasupplicant --yes
+fi
