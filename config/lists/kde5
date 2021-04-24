@@ -121,3 +121,9 @@ inkscape
 
 kdeutils
 kdeconnect
+
+qtqr
+simplescreenrecorder
+#if ARCHITECTURE amd64
+simplescreenrecorder-lib:i386
+#endif
