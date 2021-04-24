@@ -173,8 +173,11 @@ lvm2
 hfsprogs
 #if DISTRIBUTION wheezy jessie stretch buster
 exfat-fuse
-#endif
 exfat-utils
+#endif
+#nif DISTRIBUTION wheezy jessie stretch buster
+exfatprogs
+#endif
 #nif DISTRIBUTION wheezy
 zram
 #endif

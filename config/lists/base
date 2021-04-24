@@ -210,8 +210,13 @@ kpartx
 dosfstools
 lvm2
 hfsprogs
+#if DISTRIBUTION squeeze wheezy jessie stretch buster
 exfat-fuse
 exfat-utils
+#endif
+#nif DISTRIBUTION squeeze wheezy jessie stretch buster
+exfatprogs
+#endif
 #nif DISTRIBUTION wheezy
 zram
 #endif
