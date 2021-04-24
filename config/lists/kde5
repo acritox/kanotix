@@ -8,7 +8,9 @@ etcskel-kanotix-kf5
 # office
 okular
 okular-extra-backends
+#if DISTRIBUTION stretch buster
 okularplugin
+#endif
 
 # plugins
 
@@ -44,7 +46,9 @@ qml-module-org-kde-activities
 
 # kde
 # kde-plasma-desktop is a metapackage bump out konquerror etc
+#if DISTRIBUTION stretch buster
 kde-runtime
+#endif
 plasma-desktop
 phonon4qt5-backend-gstreamer
 plasma-workspace
@@ -68,7 +72,9 @@ onboard
 onboard-kanotix
 systemsettings
 libkf5kdelibs4support5-bin
+#if DISTRIBUTION stretch buster
 kde-l10n-de
+#endif
 kwalletmanager
 polkit-kde-agent-1
 kde-config-screenlocker
@@ -95,7 +101,9 @@ clearlooks-phenix-theme
 plasma-nm
 
 # other hardware
+#if DISTRIBUTION stretch buster
 kde-config-touchpad
+#endif
 
 blueman
 
