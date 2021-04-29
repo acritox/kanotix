@@ -1,0 +1,5 @@
+# list simplescreenrecorder
+simplescreenrecorder
+#if ARCHITECTURE amd64
+simplescreenrecorder-lib:i386
+#endif
