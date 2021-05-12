@@ -346,7 +346,7 @@ sed -i 's/\(export LB_DISTRIBUTION=\).*/\1"'$DISTRO'"/' auto/config
 
 # lxde 64
 lb clean
-lb config -d $DISTRO -p "kanotix-lxde-master firefox wine-staging skypeforlinux" --bootloader grub2 --tmpfs true --tmpfs-options size=14G --apt-http-proxy "http://127.0.0.1:3142" --cache-packages false --gfxoverlays false -a amd64 --initsystem systemd
+lb config -d $DISTRO -p "kanotix-lxde-master firefox wine-staging" --bootloader grub2 --tmpfs true --tmpfs-options size=14G --apt-http-proxy "http://127.0.0.1:3142" --cache-packages false --gfxoverlays false -a amd64 --initsystem systemd
 echo Kanotix steelfire-nightly Steelfire64 $d$v LXDE > config/chroot_local-includes/etc/kanotix-version
 lb build; cd tmpfs; ./isohybrid-acritox kanotix64.iso
 check_iso
@@ -394,7 +394,7 @@ fi
 #
 # kde 64
 lb clean
-lb config -d $DISTRO -p "kanotix-kde-master firefox wine-staging skypeforlinux" --bootloader grub2 --tmpfs true --tmpfs-options size=14G --apt-http-proxy "http://127.0.0.1:3142" --cache-packages false --gfxoverlays false -a amd64 --initsystem systemd
+lb config -d $DISTRO -p "kanotix-kde-master firefox wine-staging" --bootloader grub2 --tmpfs true --tmpfs-options size=14G --apt-http-proxy "http://127.0.0.1:3142" --cache-packages false --gfxoverlays false -a amd64 --initsystem systemd
 echo Kanotix steelfire-nightly Steelfire64 $d$v KDE > config/chroot_local-includes/etc/kanotix-version
 lb build; cd tmpfs; ./isohybrid-acritox kanotix64.iso
 check_iso
