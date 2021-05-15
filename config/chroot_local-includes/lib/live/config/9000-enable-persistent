@@ -20,8 +20,11 @@ then
 	return
 fi
 
-case "$(awk '{if($2=="/live/image"||$2=="/lib/live/mount/medium"){print $1;}}' /proc/mounts)" in
+case "$(awk '{if($2=="/live/image"||$2=="/lib/live/mount/medium"||$2=="/run/live/medium"){print $1;}}' /proc/mounts)" in
 /dev/sd*) 
+	if [ -d "/run/live/persistence" ]; then
+		rm -f /home/${LIVE_USERNAME}/Desktop/enable_persistent.desktop
+	fi
 	case "$( ls /grub.cmdline 2>/dev/null)" in
 	/grub.cmdline)
 		rm -f /home/${LIVE_USERNAME}/Desktop/enable_persistent.desktop
