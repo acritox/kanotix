@@ -3,6 +3,12 @@ for file in /root/config/*; do [ -r $file ] && . $file; done
 
 if [ "$LB_DISTRIBUTION" = "bullseye" ]; then
 
+# Remove 4 plasma icons added by taskmanager
+
+if [ -f /usr/share/plasma/plasmoids/org.kde.plasma.taskmanager/contents/config/main.xml ]; then
+   sed -i 's/applications:systemsettings.desktop,applications:org.kde.discover.desktop,preferred:\/\/filemanager,preferred:\/\/browser//' /usr/share/plasma/plasmoids/org.kde.plasma.taskmanager/contents/config/main.xml
+fi
+
 # enable tapping
 
 mkdir -p /etc/X11/xorg.conf.d
