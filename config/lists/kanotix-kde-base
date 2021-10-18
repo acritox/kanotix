@@ -42,4 +42,6 @@ phonon-backend-gstreamer
 modemmanager
 
 # kde database backend
+#if DISTRIBUTION wheezy jessie
 virtuoso-minimal
+#endif
