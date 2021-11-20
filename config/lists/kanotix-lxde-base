@@ -79,10 +79,12 @@ xchat
 #endif
 
 # other
-gnome-screenshot
+
 #if DISTRIBUTION wheezy jessie stretch buster
 clipit
+gnome-screenshot
 #endif
 #nif DISTRIBUTION wheezy jessie stretch buster
 diodon
+ksnip
 #endif
