@@ -176,6 +176,12 @@ if grep -wq gfxdetect <<<"$LB_PACKAGES_LISTS"; then
     LB_LINUX_FLAVOURS="generic"
 fi
 
+# Build with debpool
+if grep -wq debpool <<<"$LB_PACKAGES_LISTS"; then
+    mkdir -p config/chroot_debpool
+    cp -rf config/prepare_debpool/* config/chroot_debpool/
+fi
+
 lb config noauto --linux-packages "$LB_LINUX_PACKAGES" --linux-flavours "$LB_LINUX_FLAVOURS" --repositories "$LB_REPOSITORIES"
 
 # Fetch kanotix-scripts if necessary
