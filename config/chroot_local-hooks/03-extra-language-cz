@@ -15,7 +15,7 @@ if [ "$LB_DISTRIBUTION" = "buster" ]; then
     fi
 
     if [ -x /var/lib/dpkg/info/thunderbird.postinst ]; then
-        apt install thunderbird-l10n-cs lightning-l10n-cs
+        apt install thunderbird-l10n-cs
     fi
 
     # TODO lo version number
