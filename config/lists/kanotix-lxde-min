@@ -32,7 +32,7 @@ gtk2-engines
 joystick
 
 # some tools or fixes
-epdfview
+mupdf
 ca-certificates
 #  desktop finish
 
