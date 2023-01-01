@@ -160,6 +160,7 @@ menu-l10n
 console-setup
 locales
 lsb-release
+at-spi2-core
 
 # xorg
 xserver-xorg-video-all
