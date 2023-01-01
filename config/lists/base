@@ -5,6 +5,13 @@
 #include <base.kanotix>
 sudo
 
+# handle polkit since bookworm
+#nif DISTRIBUTION wheezy jessie stretch buster bullseye
+polkitd
+pkexec
+polkitd-pkla
+#endif
+
 # bootloader
 #if BOOTLOADER burg
 burg-pc
