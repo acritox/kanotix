@@ -51,6 +51,7 @@ khelpcenter
 #endif
 
 # tools
+keepassx
 #if DISTRIBUTION wheezy jessie stretch
 kuser
 #endif
