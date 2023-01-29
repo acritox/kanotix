@@ -51,6 +51,9 @@ unzip
 p7zip-full
 zip
 unp
+#nif DISTRIBUTION wheezy jessie stretch buster bullseye
+zstd
+#endif
 
 # tools
 bc
