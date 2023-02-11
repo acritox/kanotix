@@ -237,12 +237,17 @@ gparted
 #if DISTRIBUTION squeeze wheezy jessie stretch
 gksu
 #endif
-#if DISTRIBUTION squeeze wheezy jessie
+
+#if DISTRIBUTION wheezy jessie
 #include <gstreamer>
 #endif
 
-#nif DISTRIBUTION squeeze wheezy jessie
+#if DISTRIBUTION stretch buster bullseye
 #include <gstreamer-1.0>
+#endif
+
+#nif DISTRIBUTION wheezy jessie stretch buster bullseye
+#include <gstreamer-1.0-pipewire>
 #endif
 
 # themes
