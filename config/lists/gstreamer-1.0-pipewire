@@ -1,0 +1,25 @@
+# pipewireaudio for bookworm-base (multiarch)
+
+# pipewire-audio is a meta-package
+pipewire-pulse
+pipewire-alsa
+libspa-0.2-bluetooth
+wireplumber
+
+# more
+pipewire-jack
+
+libasound2-plugins
+pavucontrol
+pulseaudio-utils
+
+#if ARCHITECTURE amd64
+libasound2-plugins:i386
+#endif
+
+# gstreamer packages
+
+gstreamer1.0-plugins-good
+gstreamer1.0-plugins-ugly
+gstreamer1.0-pipewire
+gstreamer1.0-libav
