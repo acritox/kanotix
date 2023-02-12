@@ -26,6 +26,11 @@ case "${LB_DISTRIBUTION}" in
     wheezy|jessie|stretch|buster) sed -i -e "s|-security||g" /etc/apt/sources.list ;;
 esac
 
+# since bookworm we have the new component "non-free-firmware" in archive
+case "${LB_DISTRIBUTION}" in
+    wheezy|jessie|stretch|buster|bullseye) sed -i -e "s|non-free-firmware||g" /etc/apt/sources.list ;;
+esac
+
 # fix for archive
 if [ "$LB_DISTRIBUTION" = "wheezy" ]; then
    sed -i -e "s#${LB_MIRROR_CHROOT}#http://archive.debian.org/debian#g" /etc/apt/sources.list
