@@ -126,3 +126,6 @@ qtqr
 #nif DISTRIBUTION stretch
 #include <simplescreenrecorder>
 #endif
+
+featherpad
+featherpad-l10n
