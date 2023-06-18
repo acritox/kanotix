@@ -20,13 +20,17 @@ then
 	return
 fi
 
-case "$(awk '{if($2=="/live/image"||$2=="/lib/live/mount/medium"||$2=="/run/live/medium"){print $1;}}' /proc/mounts)" in
+HAVE_PERS_CMDLINE="$(grep -F persistence /proc/cmdline)"
+if [ -n "$HAVE_PERS_CMDLINE" ]; then
+    HAVE_PERS_CMDLINE="persistence"
+fi
+
+ISO_DEVICE="$(awk '{if($2=="/live/image"||$2=="/lib/live/mount/medium"||$2=="/run/live/medium"){print $1;}}' /proc/mounts)"
+
+case "$ISO_DEVICE" in
 /dev/sd*) 
-	if [ -d "/run/live/persistence" ]; then
-		rm -f /home/${LIVE_USERNAME}/Desktop/enable_persistent.desktop
-	fi
-	case "$( ls /grub.cmdline 2>/dev/null)" in
-	/grub.cmdline)
+	case "$HAVE_PERS_CMDLINE" in
+	persistence)
 		rm -f /home/${LIVE_USERNAME}/Desktop/enable_persistent.desktop
 		;;
 	*)
