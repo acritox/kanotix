@@ -7,8 +7,8 @@ kde-l10n-it
 # libre office packages
 
 #if ARCHITECTURE amd64
-libobasis7.5-it
-libobasis7.5-it-help
-libreoffice7.5-dict-it
-libreoffice7.5-it
+libobasis7.6-it
+libobasis7.6-it-help
+libreoffice7.6-dict-it
+libreoffice7.6-it
 #endif
