@@ -17,7 +17,7 @@ libobasis24.2-gnome-integration
 libobasis24.2-graphicfilter
 libobasis24.2-images
 libobasis24.2-impress
-#nif DISTRIBUTION stretch
+#nif DISTRIBUTION stretch buster
 libobasis24.2-kde-integration
 #endif
 libobasis24.2-librelogo
