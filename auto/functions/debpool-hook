@@ -2,24 +2,37 @@
 
 current_script="$(basename "$0"|sed 's/^lb_//')"
 
-if [ "$current_script" = "chroot_local-hooks" ]; then
-	echo "HOOK: debpool@chroot_local-hooks"
+if [ "$current_script" = "chroot_hooks" ]; then
+	echo "HOOK: debpool@chroot_hooks"
 	if [ -e config/chroot_debpool ]; then
-		mkdir -p chroot/live
-		cp config/chroot_debpool/* chroot/live/
+		mkdir -p chroot/run/live/medium
+		cp -rf config/chroot_debpool/* chroot/run/live/medium/
 	fi
 fi
 
 if [ "$current_script" = "binary_rootfs" ]; then
 	echo "HOOK: debpool@binary-rootfs"
-	for dir in chroot/chroot/live chroot/live
+	for dir in chroot/chroot/run/live/medium chroot/run/live/medium
 	do
 		[ -d $dir ] || continue
 		rm -rf debpool
+		echo "DEBUG: $dir"
 		mv $dir debpool
 		mkdir -p binary
-		mv debpool/image/debian binary/
-		rmdir debpool/image
+		if [ -e debpool/bin ]; then
+		#mkdir -p binary/bin
+		mv debpool/bin binary
+		fi
+
+echo "DEBUG: debpool"
+ls debpool
+#ls debpool/image
+#ls debpool/image/debian
+		if [ -e debpool/debian ]; then
+		mv debpool/debian binary/
+		fi
+
+		#rmdir debpool/image
 		[ -e debpool/keep ] || rm -r debpool
 		break
 	done

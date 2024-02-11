@@ -1,17 +1,19 @@
 #!/bin/bash
-[ ! -e /live/packages ] && exit 0
+[ ! -e /run/live/medium/packages ] && exit 0
 
 for file in /root/config/*; do [ -r $file ] && . $file; done
-[ -z "$LB_ARCHITECTURE" ] && LB_ARCHITECTURE=amd64
-[ -z "$LB_DISTRIBUTION" ] && LB_DISTRIBUTION=wheezy
+echo "$LB_PACKAGE_LISTS" | grep -qw debpool || exit 0
+echo "Starting debpool hook for Architecture $LB_ARCHITECTURE and Distribution $LB_DISTRIBUTION"
 
-binary=/live/image/debian
-packages="$(cut -d'#' -f1 /live/packages | grep .)"
+#binary=/live/image/debian
+binary=/run/live/medium/debian
+packages="$(cut -d'#' -f1 /run/live/medium/packages | grep .)"
 [ -z "$packages" ] && exit 0
 
 rm -rf "$binary"
 mkdir -p "$binary"
 mkdir -p /binary.deb/archives/partial
+mv /run/live/medium/*.deb /binary.deb/archives
 apt-get update
 apt-get --yes -o Dir::Cache=/binary.deb --download-only install $packages
 
@@ -52,8 +54,9 @@ do
 	mv "${FILE}" "$binary"/pool/${SECTION}/"${LETTER}"/"${SOURCE}"
 done
 
-if [ ! -e /live/live-media-keyring.sec -o ! -e /live/live-media-keyring.pub ]; then
-	# Generate signing key for live-media repo
+mkdir -p /tmp
+if [ ! -e /run/live/medium/live-media.asc ]; then
+	echo "Generate signing key for live-media repo"
 	echo "Key-Type: RSA
 	      Key-Length: 1024
 	      Subkey-Type: ELG-E
@@ -61,10 +64,20 @@ if [ ! -e /live/live-media-keyring.sec -o ! -e /live/live-media-keyring.pub ]; t
 	      Name-Real: live-media packages key
 	      Name-Email: live-media-key@invalid
 	      Expire-Date: 0
-	      %secring /live/live-media-keyring.sec
-	      %pubring /live/live-media-keyring.pub
-	      %commit" | gpg --batch --gen-key
+	      %no-protection
+	      %pubring /tmp/pubring.kbx
+	      %commit" | gpg --batch --full-generate-key
+
+    echo "Import generated key"
+    gpg --no-default-keyring --keyring /tmp/pubring.kbx  --export -a | gpg --import
+else
+    echo "Import debpool key"
+    gpg --import /run/live/medium/live-media.asc
+    #for fpr in $(gpg --list-keys --with-colons  | awk -F: '/fpr:/ {print $10}' | sort -u); do  echo -e "5\ny\n" |  gpg --command-fd 0 --expert --edit-key $fpr trust; done
 fi
+echo "Provide public key for use with apt"
+#gpg --output /etc/apt/trusted.gpg.d/live-media.asc --armor --export live-media-key@invalid
+gpg --output /usr/share/keyrings/live-media.gpg --export live-media-key@invalid
 
 cd "$binary"
 
@@ -74,34 +87,41 @@ do
 	SECTION="$(basename ${SECTION})"
 	SECTIONS+="$SECTION "
 	mkdir -p dists/${LB_DISTRIBUTION}/${SECTION}/binary-${LB_ARCHITECTURE}
+	mkdir -p dists/${LB_DISTRIBUTION}/${SECTION}/binary-i386
 	apt-ftparchive packages pool/${SECTION} > dists/${LB_DISTRIBUTION}/${SECTION}/binary-${LB_ARCHITECTURE}/Packages
+	touch dists/${LB_DISTRIBUTION}/${SECTION}/binary-i386/Packages
+	#apt-ftparchive packages pool/${SECTION} > dists/${LB_DISTRIBUTION}/${SECTION}/binary-i386/Packages
 	apt-ftparchive -o APT::FTPArchive::Release::Origin=live-media \
 			-o APT::FTPArchive::Release::Suite=stable \
 			-o APT::FTPArchive::Release::Codename=${LB_DISTRIBUTION} \
 			release dists/${LB_DISTRIBUTION} > dists/${LB_DISTRIBUTION}/Release
 	gzip -9 -c dists/${LB_DISTRIBUTION}/${SECTION}/binary-${LB_ARCHITECTURE}/Packages > dists/${LB_DISTRIBUTION}/${SECTION}/binary-${LB_ARCHITECTURE}/Packages.gz
-	# Sign release
-	gpg --no-default-keyring --secret-keyring /live/live-media-keyring.sec --keyring /live/live-media-keyring.pub -abs -o \
-		dists/${LB_DISTRIBUTION}/Release.gpg dists/${LB_DISTRIBUTION}/Release
+	gzip -9 -c dists/${LB_DISTRIBUTION}/${SECTION}/binary-i386/Packages > dists/${LB_DISTRIBUTION}/${SECTION}/binary-i386/Packages.gz
 done
+
+	# Sign release with default key, we only have one key
+	gpg -abs -o dists/${LB_DISTRIBUTION}/Release.gpg dists/${LB_DISTRIBUTION}/Release
 
 cd -
 
 rm -rf /binary.deb
+rm -rf /root/.gnupg
 
 # Add sources.list entry to the beginning of the file (above the first entry)
 if ! grep -q "^deb file:$binary" /etc/apt/sources.list; then
 line="$(grep -nm1 -B5 '^[[:space:]]*deb' /etc/apt/sources.list | tac | grep -vm1 ... | tr -d -)"
 ((line++))
+# set to new moutnpoint
+#binary=/run/live/medium/debian
 sed -i "$line{i # Live Media
-i deb file:$binary $LB_DISTRIBUTION $SECTIONS
+i deb [signed-by=/usr/share/keyrings/live-media.gpg] file:$binary $LB_DISTRIBUTION $SECTIONS
 x;p;x}" /etc/apt/sources.list
 fi
 
 # Import key
-gpg --no-default-keyring --secret-keyring /live/live-media-keyring.sec \
---keyring /live/live-media-keyring.pub --armor \
---export "live-media-key@invalid" | apt-key add -
+#gpg --no-default-keyring --secret-keyring /live/live-media-keyring.sec \
+#--keyring /live/live-media-keyring.pub --armor \
+#--export "live-media-key@invalid" | apt-key add -
 
-apt-get update
+apt-get update # do we need this?, yes check for proper sources.list
 
