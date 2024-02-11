@@ -1,0 +1,42 @@
+#!/bin/sh
+
+Appimage ()
+{
+	# Checking if configured
+	if [ -e /var/lib/live/config/appimage ]
+	then
+		return
+	fi
+	echo -n " appimage"
+	Configure_appimage
+}
+Configure_appimage ()
+{
+	#
+if [ -e /run/live/medium/appimages ]; then
+# Create desktop icons for each appimage
+	for files in /run/live/medium/appimages/*
+	do
+
+file=$(basename $files)
+
+cat <<EOT >/home/${LIVE_USERNAME}/Desktop/"$file".desktop
+[Desktop Entry]
+Name="$file"
+Comment="$file"
+Exec=/run/live/medium/appimages/"$file"
+Terminal=false
+Type=Application
+Icon=appimage
+Categories=Misc;
+EOT
+	chown 1000:1000 /home/${LIVE_USERNAME}/Desktop/"$file".desktop
+	chmod +x /home/${LIVE_USERNAME}/Desktop/"$file".desktop
+	done
+
+fi
+	# Creating state file
+	touch /var/lib/live/config/appimage
+}
+
+Appimage

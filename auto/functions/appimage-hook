@@ -1,0 +1,29 @@
+#!/bin/sh
+
+current_script="$(basename "$0"|sed 's/^lb_//')"
+
+if [ "$current_script" = "chroot_hooks" ]; then
+	echo "HOOK: appimage@chroot_hooks"
+	if [ -e config/chroot_appimage ]; then
+		mkdir -p chroot/run/live/medium
+		cp -rf config/chroot_appimage/* chroot/run/live/medium/
+	fi
+fi
+
+if [ "$current_script" = "binary_rootfs" ]; then
+	echo "HOOK: appimage@binary-rootfs"
+
+	if [ -e chroot/var/lib/dpkg/info/libc6:amd64.postinst ]; then
+	echo "DEBUG amd64"
+		if [ -e /tmp/chroot_appimage ]; then
+		echo "DEBUG: appimages folder found"
+
+		# figure out arch TODO
+
+				echo "DEBUG: appimage amd64"
+				mkdir -p binary/appimages
+				cp -f /tmp/chroot_appimage/* binary/appimages/
+				chmod ugo+x binary/appimages/*
+		fi
+	fi
+fi
