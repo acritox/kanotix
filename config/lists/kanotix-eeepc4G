@@ -300,6 +300,7 @@ libqt5sql5-sqlite
 #endif
 # network
 network-manager-gnome
+wpasupplicant
 modemmanager
 mobile-broadband-provider-info
 gnome-keyring

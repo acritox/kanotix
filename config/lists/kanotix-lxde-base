@@ -35,6 +35,7 @@ zenity
 
 # network
 network-manager-gnome
+wpasupplicant
 modemmanager
 mobile-broadband-provider-info
 gnome-keyring

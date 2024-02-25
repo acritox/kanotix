@@ -40,6 +40,7 @@ gwenview
 openvpn
 network-manager-openvpn
 network-manager-vpnc
+wpasupplicant
 
 # kde
 #if DISTRIBUTION wheezy jessie

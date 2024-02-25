@@ -76,6 +76,7 @@ libqt5sql5-sqlite
 
 # network
 network-manager-gnome
+wpasupplicant
 modemmanager
 mobile-broadband-provider-info
 gnome-keyring
