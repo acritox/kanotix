@@ -10,16 +10,6 @@ if [ -f /etc/powersave/events ]; then
  pidof powersaved >/dev/null && /etc/init.d/powersaved restart
 fi
 
-# vim tuning
-if [ -d /etc/vim ]; then
- rm -f /etc/vim/vimrc.local
-cat <<EOT > /etc/vim/vimrc.local
-syntax on
-set background=dark
-set showmatch          " Show matching brackets.
-set pastetoggle=<F10>
-EOT
-fi
 
 # fix kdm/gdm/xdm/wdm startup
 for x in kdm gdm xdm wdm lightdm; do
@@ -63,3 +53,13 @@ auto lo
 iface lo inet loopback
 EOT
 
+# vim tuning
+if [ -d /etc/vim ]; then
+ rm -f /etc/vim/vimrc.local
+cat <<EOT > /etc/vim/vimrc.local
+syntax on
+set background=dark
+set showmatch          " Show matching brackets.
+set pastetoggle=<F10>
+EOT
+fi

@@ -63,5 +63,10 @@ EOF
 	cd -
     fi
 
+# annoying workaround for hpaio (disable prompt for root password in installed system)
+# or install avahi-daemon to solve this issue
+    if [ -e /etc/sane.d/dll.d/hplip ]; then
+        sed -i 's/^hpaio/#hpaio/' /etc/sane.d/dll.d/hplip
+    fi
 
 fi
