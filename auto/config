@@ -179,6 +179,9 @@ fi
 # Build with debpool
 if grep -wq debpool <<<"$LB_PACKAGES_LISTS"; then
     mkdir -p config/chroot_debpool
+    if [ -d /tmp/debpool ]; then
+     cp -rf /tmp/debpool/*.deb config/chroot_debpool/
+    fi
     cp -rf config/prepare_debpool/* config/chroot_debpool/
 fi
 
