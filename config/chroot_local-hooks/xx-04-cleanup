@@ -5,9 +5,18 @@ apt-get remove --yes --purge nano vim-tiny libdiscover1 resolvconf
 /usr/sbin/remove-orphans || true
 # Removing unused files
 find . -name *~ | xargs rm -f
-# Cleaning apt lists
+# Cleaning apt lists but keep yml files
+# TODO
+for x in $(ls /var/lib/apt/lists |grep yml)
+do
+ cp -f /var/lib/apt/lists/$x /tmp/
+done
 rm -rf /var/lib/apt/lists
 mkdir -p /var/lib/apt/lists/partial
+for x in $(ls /tmp |grep yml)
+do
+ cp -f /tmp/$x /var/lib/apt/lists/
+done
 # Cleaning apt cache
 rm -rf /var/cache/apt
 mkdir -p /var/cache/apt/archives/partial
