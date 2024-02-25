@@ -104,6 +104,12 @@ if [ -x /usr/sbin/update-apt-xapian-index ]; then
     chmod -x /usr/sbin/update-apt-xapian-index
 fi
 
+# disable mandb in live mode
+if [ -x /usr/bin/mandb ]; then
+    #chmod -x /usr/bin/mandb
+    rm -f /var/lib/man-db/auto-update
+fi
+
 touch /var/lib/live/config/hotfixes
 }
 
