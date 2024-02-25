@@ -1,0 +1,6 @@
+#!/bin/sh
+for file in /root/config/*; do [ -r $file ] && . $file; done
+
+
+# have proper cache
+apt-get update
