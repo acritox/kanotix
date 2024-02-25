@@ -12,6 +12,11 @@ kanotix-irc
 kanotix-paste
 infobash
 
+#nif DISTRIBUTION wheezy jessie stretch buster bullseye
+calamares
+calamares-settings-kanotix
+#endif
+
 #nif DISTRIBUTION wheezy jessie
 kanotix-udev-wlan-hack
 #endif
