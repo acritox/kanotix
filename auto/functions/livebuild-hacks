@@ -136,3 +136,12 @@ if [ "$current_script" = "binary_grub2" ]; then
 	}
 fi
 
+if [ "$current_script" = "binary_checksums" ]; then
+    echo "HOOK: livebuild-hacks@binary_checksums: check for initrd.img"
+    if [ -s binary/live/initrd.img ];then
+        KINITRDSIZE=$(stat -c %s "binary/live/initrd.img")
+        echo "INFO: initrd size=$KINITRDSIZE"
+    else
+        echo "E: no initrd found"
+    fi
+fi
