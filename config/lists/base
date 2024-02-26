@@ -63,7 +63,9 @@ hdparm
 nvidia-detect
 #endif
 wireless-tools
+#if DISTRIBUTION wheezy jessie stretch buster bullseye
 sux
+#endif
 htop
 time
 bash-completion
