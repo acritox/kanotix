@@ -127,5 +127,7 @@ qtqr
 #include <simplescreenrecorder>
 #endif
 
+#nif DISTRIBUTION stretch buster
 featherpad
 featherpad-l10n
+#endif
