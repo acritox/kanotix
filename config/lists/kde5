@@ -26,8 +26,11 @@ k3b-i18n
 #if DISTRIBUTION stretch
 libk3b6-extracodecs
 #endif
-#nif DISTRIBUTION stretch
+#if DISTRIBUTION buster bullseye
 libk3b7-extracodecs
+#endif
+#nif DISTRIBUTION stretch buster bullseye
+libk3b-extracodecs
 #endif
 # chat, irc
 konversation
@@ -79,8 +82,12 @@ kwalletmanager
 polkit-kde-agent-1
 kde-config-screenlocker
 khotkeys
+#if DISTRIBUTION stretch buster bullseye
 ksysguard
-
+#endif
+#nif DISTRIBUTION stretch buster bullseye
+plasma-systemmonitor
+#endif
 # kde now optional depends
 kactivities-bin
 
