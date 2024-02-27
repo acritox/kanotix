@@ -75,7 +75,12 @@ cfv
 #endif
 whois
 screen
+#if DISTRIBUTION wheezy jessie stretch buster bullseye
 ntpdate
+#endif
+#nif DISTRIBUTION wheezy jessie stretch buster bullseye
+ntpsec-ntpdate
+#endif
 usb-modeswitch
 tofrodos
 schedtool
