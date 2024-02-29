@@ -1,0 +1,8 @@
+# Kanotix with KDE (enhanced)
+# enhanced List only for amd64 used
+
+#nif DISTRIBUTION stretch buster bullseye
+git
+dolphin-plugins
+quilt
+#endif

@@ -30,3 +30,7 @@ thunderbird-l10n-de
 #if DISTRIBUTION wheezy jessie stretch buster
 gl2benchmark
 #endif
+
+# tools
+git
+quilt

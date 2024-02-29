@@ -2,6 +2,10 @@
 
 #include <desktop>
 
+#if ARCHITECTURE amd64
+#include <kde5-more>
+#endif
+
 # kanotix stuff
 etcskel-kanotix-kf5
 
