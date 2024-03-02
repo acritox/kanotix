@@ -74,4 +74,10 @@ EOF
         sed -i 's/^hpaio/#hpaio/' /etc/sane.d/dll.d/hplip
     fi
 
+# replacement for hddtemp, load kernelmodul
+mkdir -p /etc/modules-load.d
+cat <<"EOF" >/etc/modules-load.d/drivetemp.conf
+drivetemp
+EOF
+
 fi

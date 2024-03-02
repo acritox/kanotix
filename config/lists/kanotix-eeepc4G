@@ -133,7 +133,9 @@ pbuilder
 
 # system
 cpufrequtils
+#if DISTRIBUTION wheezy jessie stretch buster
 hddtemp
+#endif
 acpi
 acpid
 acpi-support
