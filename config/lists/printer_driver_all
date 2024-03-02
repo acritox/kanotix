@@ -1,0 +1,70 @@
+#optimale pakete (printer-driver-all, xsltproc, hardinfo) und evtl noch system-config-printer
+#needed for some scanner
+xsltproc
+
+#Package: printer-driver-all (0.20210903)
+#printer drivers metapackage
+#This package recommends all printer driver packages
+#which can be individually removed.
+#It does not provide any printer driver itself.
+#recommends follow
+
+printer-driver-brlaser
+#printer driver for (some) Brother laser printers
+
+printer-driver-c2050
+#printer driver for Lexmark 2050 Color Jetprinter
+
+printer-driver-c2esp
+#printer driver for Kodak ESP AiO color inkjet Series
+
+printer-driver-cjet
+#printer driver for Canon LBP laser printers
+
+printer-driver-dymo
+#printer driver for DYMO label printers
+
+printer-driver-escpr
+#printer driver for Epson Inkjet that use ESC/P-R
+
+printer-driver-foo2zjs
+#printer driver for ZjStream-based printers
+
+printer-driver-fujixerox
+#printer driver for Fuji Xerox printers
+
+printer-driver-gutenprint
+#printer drivers for CUPS
+
+printer-driver-hpcups
+#HP Linux Printing and Imaging - CUPS Raster driver (hpcups)
+
+printer-driver-indexbraille
+#CUPS printing to Index Braille printers
+
+printer-driver-m2300w
+#printer driver for Minolta magicolor 2300W/2400W color laser printers
+
+printer-driver-min12xxw
+#printer driver for KonicaMinolta PagePro 1[234]xxW
+
+printer-driver-oki
+#printer driver for OKI Data printers
+
+printer-driver-pnm2ppa
+#printer driver for HP-GDI printers
+
+printer-driver-postscript-hp
+#HP Printers PostScript Descriptions
+
+printer-driver-ptouch
+#printer driver Brother P-touch label printers
+
+printer-driver-pxljr
+#printer driver for HP Color LaserJet 35xx/36xx
+
+printer-driver-sag-gdi
+#printer driver for Ricoh Aficio SP 1000s/SP 1100s
+
+printer-driver-splix
+#Driver for Samsung and Xerox SPL2 and SPLc laser printers

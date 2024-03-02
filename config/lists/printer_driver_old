@@ -1,0 +1,26 @@
+# print
+cups-bsd
+cups-client
+foomatic-db-engine
+foomatic-db
+#if DISTRIBUTION wheezy jessie stretch
+foomatic-db-gutenprint
+#endif
+#if DISTRIBUTION wheezy jessie
+cups-driver-gutenprint
+#endif
+#nif DISTRIBUTION wheezy jessie
+printer-driver-gutenprint
+#endif
+#if DISTRIBUTION squeeze
+foo2zjs
+#endif
+#nif DISTRIBUTION squeeze
+printer-driver-foo2zjs
+#endif
+#printconf
+printer-driver-splix
+#nif DISTRIBUTION squeeze wheezy
+printer-driver-escpr
+printer-driver-min12xxw
+#endif
