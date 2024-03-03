@@ -86,6 +86,9 @@ clipit
 gnome-screenshot
 #endif
 #nif DISTRIBUTION wheezy jessie stretch buster
-diodon
+#diodon
+clipit
+#since bullseye Diodon is a (bad) replacement for ClipIt
+#leave clipit here so we can provide upstream package
 ksnip
 #endif

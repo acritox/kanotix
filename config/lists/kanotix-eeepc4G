@@ -369,6 +369,13 @@ xchat
 gnome-screenshot
 seahorse
 keepassx
+
+#if DISTRIBUTION wheezy jessie stretch buster
+clipit
+#endif
 #nif DISTRIBUTION wheezy jessie stretch buster
-diodon
+#diodon
+clipit
+#since bullseye Diodon is a (bad) replacement for ClipIt
+#leave clipit here so we can provide upstream package
 #endif
