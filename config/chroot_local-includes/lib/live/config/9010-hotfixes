@@ -43,6 +43,41 @@ sudo perl -pi -e 's/tty/xty/g' /var/run/utmp
 EOF
 chmod +x /home/${LIVE_USERNAME}/.kde/shutdown/kdm-force-shutdown-hack
 
+# hack to prevent plasma suspend (bookworm)
+# this file should be removed by installer
+if [ "$(cat /etc/debian_version)" \> "12" ]; then
+sudo -u "${LIVE_USERNAME}" sh -c "mkdir -p /home/${LIVE_USERNAME}/.config; cat > /home/${LIVE_USERNAME}/.config/powermanagementprofilesrc" <<"EOF"
+[AC]
+
+[AC][DPMSControl]
+idleTime=600
+lockBeforeTurnOff=0
+
+[AC][DimDisplay]
+idleTime=300000
+
+
+[Battery]
+
+[Battery][DPMSControl]
+idleTime=720
+lockBeforeTurnOff=0
+
+[Battery][DimDisplay]
+idleTime=300000
+
+
+[LowBattery]
+
+[LowBattery][DPMSControl]
+idleTime=120
+lockBeforeTurnOff=0
+
+[LowBattery][DimDisplay]
+idleTime=60000
+EOF
+fi
+
 # google chrome hack
 if [ -x /var/lib/dpkg/info/google-chrome-stable.postinst ]; then
 cat <<EOT >/etc/apt/sources.list.d/google-chrome.list
