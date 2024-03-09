@@ -1,0 +1,25 @@
+#!/bin/sh
+
+for file in /root/config/*; do [ -r $file ] && . $file; done
+
+case "${LB_DISTRIBUTION}" in
+
+whezzy|jessie|stretch|buster|bullseye)
+    exit 0
+    ;;
+*)
+if [ "$LB_ARCHITECTURE" = "amd64" ]; then
+
+cat << EOF | debconf-set-selections
+refind refind/install_to_esp boolean false
+EOF
+
+DEBIAN_FRONTEND=noninteractive apt-get install -y refind
+
+cat << EOF | debconf-set-selections
+refind refind/install_to_esp boolean true
+EOF
+
+fi
+    ;;
+esac
