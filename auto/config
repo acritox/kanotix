@@ -21,25 +21,30 @@ echo "We build $LB_DISTRIBUTION"
 # live-build default is true
 KSECURITY="true"
 KUPDATES="true"
-
+KARCHIVEAREAS="main contrib non-free non-free-firmware"
 # since buster we need packages in debootstrap not avaible in earlier distributions
 # for stretch also use mime-support (fix build error)
 
 case "$LB_DISTRIBUTION" in
 wheezy)
         KDEBOOTSTRAPOPTIONS="--include=apt-transport-https,ca-certificates --exclude=nano"
+	KARCHIVEAREAS="main contrib non-free"
 	;;
 jessie)
         KDEBOOTSTRAPOPTIONS="--include=apt-transport-https,ca-certificates --exclude=nano"
+	KARCHIVEAREAS="main contrib non-free"
 	;;
 stretch)
         KDEBOOTSTRAPOPTIONS="--include=apt-transport-https,ca-certificates,mime-support --exclude=nano"
+	KARCHIVEAREAS="main contrib non-free"
 	;;
 buster)
         KDEBOOTSTRAPOPTIONS="--include=apt-transport-https,ca-certificates,gpg,gpg-agent,mime-support --exclude=nano"
+	KARCHIVEAREAS="main contrib non-free"
 	;;
 bullseye)
         KDEBOOTSTRAPOPTIONS="--include=apt-transport-https,ca-certificates,gpg,gpg-agent,mime-support --exclude=nano"
+	KARCHIVEAREAS="main contrib non-free"
         KSECURITY="true"
 	;;
 *)
@@ -57,7 +62,7 @@ lb config noauto \
 	--apt apt \
 	--apt-recommends false \
 	--bootappend-live 'utc=no timezone=Europe/Berlin locales=de keyboard-layouts=de keyboard-variant=nodeadkeys splash' \
-	--archive-areas "main contrib non-free" \
+	--archive-areas "${KARCHIVEAREAS}" \
 	--debootstrap-options "${KDEBOOTSTRAPOPTIONS}" \
 	--repositories "" \
 	--security "${KSECURITY}" \
