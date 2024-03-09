@@ -64,7 +64,7 @@ EOF
 
 # set compiz splash
     if [ -e /etc/skel/.config/compiz/compizconfig/Default.ini ]; then
-        sed -i 's/splash_background_spitfire.png/splash_background_speedfire.png/' /etc/skel/.config/compiz/compizconfig/Default.ini
+        sed -i 's/splash_background_spitfire.png/splash_background_slowfire.png/' /etc/skel/.config/compiz/compizconfig/Default.ini
     fi
 
 # hotfix lxde dead flag
