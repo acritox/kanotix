@@ -34,5 +34,6 @@ compizconfig-settings-manager
 #endif
 
 #nif DISTRIBUTION wheezy jessie stretch buster bullseye
+fusion-icon
 xfwm4
 #endif
