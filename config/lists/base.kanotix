@@ -13,6 +13,7 @@ kanotix-paste
 infobash
 
 #nif DISTRIBUTION wheezy jessie stretch buster bullseye
+kanotix-apt-hook
 calamares
 calamares-settings-kanotix
 #endif
