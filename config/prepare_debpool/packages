@@ -1,2 +1,7 @@
 openssh-server
 grub-efi
+refind
+grub-efi-amd64
+cryptsetup
+keyutils
+grub-pc
