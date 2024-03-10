@@ -14,8 +14,6 @@ infobash
 
 #nif DISTRIBUTION wheezy jessie stretch buster bullseye
 kanotix-apt-hook
-calamares
-calamares-settings-kanotix
 #endif
 
 #nif DISTRIBUTION wheezy jessie

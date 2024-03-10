@@ -4,6 +4,11 @@
 # office
 #include <office>
 
+#nif DISTRIBUTION stretch buster bullseye
+calamares
+calamares-settings-kanotix
+#endif
+
 # multimedia
 #if DISTRIBUTION squeeze wheezy jessie
 me-tv
