@@ -48,20 +48,23 @@ return $IERR
 
 rm -rf cache tmpfs/cache
 
+TARGETDIR="/data/kanotix"
+
 # delete iso files older 35 days
 
-find /data/kanotix/nightly -mtime +35 -type f -print -delete
-find /data/kanotix/nightly -type d -empty -print -delete
+find $TARGETDIR/nightly -mtime +35 -type f -print -delete
+find $TARGETDIR/nightly -type d -empty -print -delete
 
 # reset apt-cacher-ng cache
 find /var/cache/apt-cacher-ng \( -type f -name 'Packages*' -o -name 'Sources*' -o -name 'Release*' -o -name 'InRelease*' \) -delete
 
 d="$(date +%y%m%d)"
 v=a
-target=/data/kanotix/nightly/$d
-next=/data/kanotix/nightly/.next
+target=$TARGETDIR/nightly/$d
+next=$TARGETDIR/nightly/.next
 rm -rf $next
 mkdir -p $target $next
+rm -f $target/isos-failed.txt
 
 ## remove gfxdetect entries from grub.cfg (for non-gfxdetect-builds)
 #sed -i '/gfxdetect/,/^}/{d}' config/binary_grub/grub.cfg
