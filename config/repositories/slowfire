@@ -1,0 +1,3 @@
+# Kanotix Slowfire
+deb http://kanotix.com/files/slowfire ./
+deb-src http://kanotix.com/files/slowfire ./
