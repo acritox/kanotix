@@ -1,0 +1,4 @@
+### THIS FILE IS AUTOMATICALLY CONFIGURED ###
+# used to provide qt4 libs for acritoxinstaller
+deb http://kanotix.com/files/acritoxinstaller-qt4 ./
+deb-src http://kanotix.com/files/acritoxinstaller-qt4 ./
