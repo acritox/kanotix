@@ -25,15 +25,14 @@ apt-xapian-index
 gdebi
 
 # multimedia
-#if DISTRIBUTION wheezy jessie
-gecko-mediaplayer
+#if DISTRIBUTION wheezy jessie bookworm
 exaile
 #endif
-#nif DISTRIBUTION wheezy jessie
+#nif DISTRIBUTION wheezy jessie bookworm
 clementine
 #endif
 # clementine fix
-#nif DISTRIBUTION wheezy jessie stretch buster
+#nif DISTRIBUTION wheezy jessie stretch buster bookworm
 libqt5sql5-sqlite
 #endif
 

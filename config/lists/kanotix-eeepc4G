@@ -310,14 +310,14 @@ compton
 
 # multimedia
 #include <smplayer>
-#if DISTRIBUTION squeeze wheezy jessie
+#if DISTRIBUTION squeeze wheezy jessie bookworm
 exaile
 #endif
-#nif DISTRIBUTION squeeze wheezy jessie
+#nif DISTRIBUTION squeeze wheezy jessie bookworm
 clementine
 #endif
 # clementine fix
-#nif DISTRIBUTION wheezy jessie stretch buster
+#nif DISTRIBUTION wheezy jessie stretch buster bookworm
 libqt5sql5-sqlite
 #endif
 # network
