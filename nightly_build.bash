@@ -62,7 +62,7 @@ mkdir -p $target $next
 ## remove gfxdetect entries from grub.cfg (for non-gfxdetect-builds)
 #sed -i '/gfxdetect/,/^}/{d}' config/binary_grub/grub.cfg
 
-BUILD_BOOKWORM=false
+BUILD_BOOKWORM=true
 BUILD_BULLSEYE=true
 BUILD_BUSTER=false
 BUILD_BUSTER_EXTRA_KDE=true
