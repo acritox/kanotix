@@ -81,6 +81,17 @@ KDISTRO=slowfire
 rm -rf cache tmpfs/cache
 sed -i 's/\(export LB_DISTRIBUTION=\).*/\1"'$DISTRO'"/' auto/config
 
+
+cat <<"EOF" >$target/readme-$KDISTRO.txt
+Slowfire Isos are widely untested.
+==================================
+amd64 Iso ship with acritoxinstaller(recommended) and calamares installer(for testing)
+refind is preinstalled using grub in acritoxinstaller is recommended.
+you can enable refind later in installation with # refind-install
+EOF
+
+ln -s $target/readme-$KDISTRO.txt $next/readme-$KDISTRO.txt
+
 # kde 64
 lb clean
 lb config -d $DISTRO -p "debpool kanotix-kde-master firefox wine-staging" --bootloader grub2 --tmpfs true --tmpfs-options size=16G --apt-http-proxy "http://127.0.0.1:3142" --cache-packages false --gfxoverlays false -a amd64 --initsystem systemd
