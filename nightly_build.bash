@@ -218,56 +218,6 @@ DISTRO=bullseye
 rm -rf cache tmpfs/cache
 sed -i 's/\(export LB_DISTRIBUTION=\).*/\1"'$DISTRO'"/' auto/config
 
-# kde 64
-lb clean
-lb config -d $DISTRO -p "kanotix-kde-master firefox wine-staging skypeforlinux" --bootloader grub2 --tmpfs true --tmpfs-options size=16G --apt-http-proxy "http://127.0.0.1:3142" --cache-packages false --gfxoverlays false -a amd64 --initsystem systemd
-echo Kanotix speedfire-nightly Speedfire64 $d$v KDE > config/chroot_local-includes/etc/kanotix-version
-lb build; cd tmpfs; ./isohybrid-acritox kanotix64.iso
-check_iso
-ls -hgo kanotix64.iso >>binary.log; rm -f kanotix64.iso
-mv kanotix64.iso $target/kanotix64-speedfire-nightly-${d}${v}-KDE.iso; cd ..
-cp tmpfs/binary.packages $target/kanotix64-speedfire-nightly-${d}${v}-KDE.packages
-cp tmpfs/binary.log $target/kanotix64-speedfire-nightly-${d}${v}-KDE.log
-cd $target
-if [ ! -f kanotix64-speedfire-nightly-${d}${v}-KDE.iso ]; then
-        cd -
-        ln -s $target/kanotix64-speedfire-nightly-${d}${v}-KDE.log $next/kanotix64-speedfire-nightly-KDE.log
-else
-        md5sum -b kanotix64-speedfire-nightly-${d}${v}-KDE.iso > kanotix64-speedfire-nightly-${d}${v}-KDE.iso.md5
-        zsyncmake kanotix64-speedfire-nightly-${d}${v}-KDE.iso
-        cd -
-        ln -s $target/kanotix64-speedfire-nightly-${d}${v}-KDE.packages $next/kanotix64-speedfire-nightly-KDE.packages
-        ln -s $target/kanotix64-speedfire-nightly-${d}${v}-KDE.log $next/kanotix64-speedfire-nightly-KDE.log
-        ln -s $target/kanotix64-speedfire-nightly-${d}${v}-KDE.iso $next/kanotix64-speedfire-nightly-KDE.iso
-        ln -s $target/kanotix64-speedfire-nightly-${d}${v}-KDE.iso.zsync $next/kanotix64-speedfire-nightly-KDE.iso.zsync
-        sed "s/${d}${v}-//" $target/kanotix64-speedfire-nightly-${d}${v}-KDE.iso.md5 > $next/kanotix64-speedfire-nightly-KDE.iso.md5
-fi
-#
-# lxde 64
-lb clean
-lb config -d $DISTRO -p "kanotix-lxde-master firefox wine-staging skypeforlinux" --bootloader grub2 --tmpfs true --tmpfs-options size=16G --apt-http-proxy "http://127.0.0.1:3142" --cache-packages false --gfxoverlays false -a amd64 --initsystem systemd
-echo Kanotix speedfire-nightly Speedfire64 $d$v LXDE > config/chroot_local-includes/etc/kanotix-version
-lb build; cd tmpfs; ./isohybrid-acritox kanotix64.iso
-check_iso
-ls -hgo kanotix64.iso >>binary.log; rm -f kanotix64.iso
-mv kanotix64.iso $target/kanotix64-speedfire-nightly-${d}${v}-LXDE.iso; cd ..
-cp tmpfs/binary.packages $target/kanotix64-speedfire-nightly-${d}${v}-LXDE.packages
-cp tmpfs/binary.log $target/kanotix64-speedfire-nightly-${d}${v}-LXDE.log
-cd $target
-if [ ! -f kanotix64-speedfire-nightly-${d}${v}-LXDE.iso ]; then
-        cd -
-        ln -s $target/kanotix64-speedfire-nightly-${d}${v}-LXDE.log $next/kanotix64-speedfire-nightly-LXDE.log
-else
-        md5sum -b kanotix64-speedfire-nightly-${d}${v}-LXDE.iso > kanotix64-speedfire-nightly-${d}${v}-LXDE.iso.md5
-        zsyncmake kanotix64-speedfire-nightly-${d}${v}-LXDE.iso
-        cd -
-        ln -s $target/kanotix64-speedfire-nightly-${d}${v}-LXDE.packages $next/kanotix64-speedfire-nightly-LXDE.packages
-        ln -s $target/kanotix64-speedfire-nightly-${d}${v}-LXDE.log $next/kanotix64-speedfire-nightly-LXDE.log
-        ln -s $target/kanotix64-speedfire-nightly-${d}${v}-LXDE.iso $next/kanotix64-speedfire-nightly-LXDE.iso
-        ln -s $target/kanotix64-speedfire-nightly-${d}${v}-LXDE.iso.zsync $next/kanotix64-speedfire-nightly-LXDE.iso.zsync
-        sed "s/${d}${v}-//" $target/kanotix64-speedfire-nightly-${d}${v}-LXDE.iso.md5 > $next/kanotix64-speedfire-nightly-LXDE.iso.md5
-fi
-
 # eeepc4G with LXDE
 lb clean
 lb config -d $DISTRO -p "kanotix-eeepc4G netsurf-gtk" --bootloader grub2 --tmpfs true --tmpfs-options size=16G --apt-http-proxy "http://127.0.0.1:3142" --cache-packages false --gfxoverlays false -a i386 --initsystem systemd
