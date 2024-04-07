@@ -1,0 +1,31 @@
+#!/bin/sh
+
+Kwayland ()
+{
+	# Checking if configured
+	if [ -e /var/lib/live/config/kwayland ]
+	then
+		return
+	fi
+	echo -n " kwayland"
+	Configure_kwayland
+}
+Configure_kwayland ()
+{
+	# Boot parameters can be acted up either this way...
+	if grep -qs "kwayland" /proc/cmdline
+	then
+	    if [ -x /usr/bin/startplasma-wayland ]; then
+		echo "[Desktop]" >/home/${LIVE_USERNAME}/.dmrc
+		echo "Session=plasmawayland" >>/home/${LIVE_USERNAME}/.dmrc
+		chown 1000:1000 /home/${LIVE_USERNAME}/.dmrc
+		echo "[Seat:*]" >> /usr/share/lightdm/lightdm.conf.d/51_kanotix.conf
+		echo "user-session=plasmawayland" >> /usr/share/lightdm/lightdm.conf.d/51_kanotix.conf
+	    fi
+	fi
+	
+	# Creating state file
+	touch /var/lib/live/config/kwayland
+}
+
+Kwayland

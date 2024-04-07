@@ -7,4 +7,5 @@ calamares-settings-kanotix
 git
 dolphin-plugins
 quilt
+plasma-workspace-wayland
 #endif
