@@ -13,6 +13,8 @@ perl -pi -e 's/^(GRUB_DISTRIBUTOR)=.*/\1=`[ "\$\(uname -m\)" = "x86_64" ] && ech
 perl -pi -e 's/.*(GRUB_DISABLE_LINUX_RECOVERY)=.*/\1="true"/' /etc/default/grub
 perl -pi -e 's/.*(GRUB_DISABLE_RECOVERY)=.*/\1="true"/' /etc/default/grub
 perl -pi -e 's/^(GRUB_CMDLINE_LINUX_DEFAULT)=.*/\1="quiet splash"/' /etc/default/grub
+perl -pi -e 's/#GRUB_DISABLE_OS_PROBER=false/GRUB_DISABLE_OS_PROBER=false/g' /etc/default/grub
+
 
 rm -f /etc/skel/Desktop/kanotix-irc.desktop.tmp
 if [ -f /etc/skel/Desktop/kanotix-irc.desktop ]; then
