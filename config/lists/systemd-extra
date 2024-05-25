@@ -1,0 +1,5 @@
+# optional systemd packages
+# some packages are optional, systemd-timesynd (is hardcoded in kanotix-live-build)
+# this list seems easier to handle
+systemd-timesyncd
+systemd-container
