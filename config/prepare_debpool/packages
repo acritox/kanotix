@@ -4,3 +4,4 @@ refind
 grub-efi-amd64
 cryptsetup
 keyutils
+byobu
