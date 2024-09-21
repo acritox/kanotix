@@ -201,7 +201,13 @@ lb config noauto --linux-packages "$LB_LINUX_PACKAGES" --linux-flavours "$LB_LIN
 
 # Fetch kanotix-scripts if necessary
 mkdir -p config/chroot_local-includes/usr/local/bin
+echo "#KLB_config.log" > /tmp/KLB_config.log
 grep -oe '^[^ #]*' scripts.urls | wget -i- -N -q -P config/chroot_local-includes/usr/local/bin
+if [ $? -ne 0 ]; then
+   echo "E: Script download failed..." >>/tmp/KLB_config.log
+else
+   echo "Debug: Script download succes..." >>/tmp/KLB_config.log
+fi
 chmod 755 config/chroot_local-includes/usr/local/bin/*sh || :
 
 case "$LB_DISTRIBUTION" in

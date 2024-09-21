@@ -6,6 +6,10 @@ function check_iso {
 
 echo "K: Kanotix start iso check..." >>binary.log
     IERR=0
+if grep -q "^E: " /tmp/KLB_config.log; then
+    echo "K: Download ERROR found...1" >>binary.log
+    IERR=5
+fi
 if grep -q "^E: " binary.log; then
     echo "K: build ERROR found...1" >>binary.log
     IERR=1
