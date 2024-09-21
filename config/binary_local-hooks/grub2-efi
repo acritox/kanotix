@@ -85,3 +85,9 @@ done
 [ -f binary/efi/boot/shell$efi_name.efi ] || \
 wget -O binary/efi/boot/shell$efi_name.efi "https://github.com/tianocore/edk2-archive/raw/master/EdkShellBinPkg/FullShell/$shell_dir/Shell_Full.efi"
 
+if [ $? -ne 0 ]; then
+   echo "E: EFI shell download failed..."
+else
+   echo "Debug: EFI shell download succes..."
+fi
+# echo goes to binary.log
