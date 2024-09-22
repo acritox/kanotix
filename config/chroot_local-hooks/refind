@@ -14,7 +14,7 @@ cat << EOF | debconf-set-selections
 refind refind/install_to_esp boolean false
 EOF
 
-DEBIAN_FRONTEND=noninteractive apt-get install -y refind
+DEBIAN_FRONTEND=noninteractive apt-get install -y refind refind-icons-kanotix
 
 cat << EOF | debconf-set-selections
 refind refind/install_to_esp boolean true
