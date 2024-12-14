@@ -130,7 +130,12 @@ cups-client
 module-assistant
 build-essential
 fakeroot
+#if DISTRIBUTION wheezy jessie stretch buster bullseye bookworm
 libstdc++5
+#endif
+#nif DISTRIBUTION wheezy jessie stretch buster bullseye bookworm
+libstdc++6
+#endif
 bzip2
 cdbs
 dkms
