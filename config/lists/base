@@ -57,6 +57,7 @@ zstd
 
 # tools
 bc
+clinfo
 mc
 most
 less
