@@ -9,6 +9,8 @@ sudo
 #nif DISTRIBUTION wheezy jessie stretch buster bullseye
 polkitd
 pkexec
+#endif
+#if DISTRIBUTION bookworm
 polkitd-pkla
 #endif
 
