@@ -3,6 +3,10 @@
 # Kanotix base Packages List
 # install only needed firmware
 firmware-atheros
+#if ARCHITECTURE amd64
+eeepc4g-firmware-extra
+git
+#endif
 
 # Kanotix
 #include <base.kanotix>
