@@ -239,7 +239,9 @@ exfatprogs
 #nif DISTRIBUTION wheezy
 zram
 #endif
+#if DISTRIBUTION squeeze wheezy jessie stretch buster bullseye bookworm
 httpfs2
+#endif
 
 # filesystem tools
 parted
