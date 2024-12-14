@@ -48,7 +48,7 @@ bullseye)
         KSECURITY="true"
 	;;
 *)
-        KDEBOOTSTRAPOPTIONS="--include=apt-transport-https,ca-certificates,gpg,gpg-agent,mime-support --exclude=nano"
+        KDEBOOTSTRAPOPTIONS="--include=apt-transport-https,ca-certificates,gpg,gpg-agent,mailcap,media-types --exclude=nano"
 	;;
 esac
 
