@@ -160,7 +160,13 @@ devscripts
 pbuilder
 
 # system
+#if DISTRIBUTION wheezy jessie stretch buster bullseye bookworm
 cpufrequtils
+#endif
+#nif DISTRIBUTION wheezy jessie stretch buster bullseye bookworm
+linux-cpupower
+#endif
+
 #if DISTRIBUTION wheezy jessie stretch buster
 hddtemp
 #endif
