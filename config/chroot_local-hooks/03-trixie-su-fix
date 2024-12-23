@@ -1,0 +1,9 @@
+#!/bin/sh
+for file in /root/config/*; do [ -r $file ] && . $file; done
+
+if [ "$LB_DISTRIBUTION" = "trixie" ]; then
+
+# force old su behaviour
+echo "ALWAYS_SET_PATH yes" >>/etc/default/su
+
+fi
