@@ -27,7 +27,9 @@ kaffeine
 
 # graphics
 gimp
+#if DISTRIBUTION wheezy jessie stretch buster bullseye bookworm
 gimp-gutenprint
+#endif
 xsane
 #if DISTRIBUTION wheezy jessie stretch
 libsane-extras
