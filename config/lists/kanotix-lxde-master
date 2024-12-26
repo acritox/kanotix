@@ -27,14 +27,14 @@ apt-xapian-index
 gdebi
 
 # multimedia
-#if DISTRIBUTION wheezy jessie bookworm
+#if DISTRIBUTION wheezy jessie bookworm trixie
 exaile
 #endif
-#nif DISTRIBUTION wheezy jessie bookworm
+#nif DISTRIBUTION wheezy jessie bookworm trixie
 clementine
 #endif
 # clementine fix
-#nif DISTRIBUTION wheezy jessie stretch buster bookworm
+#nif DISTRIBUTION wheezy jessie stretch buster bookworm trixie
 libqt5sql5-sqlite
 #endif
 
