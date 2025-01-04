@@ -33,7 +33,9 @@ printer-driver-foo2zjs
 printer-driver-fujixerox
 #printer driver for Fuji Xerox printers
 
+#if ARCHITECTURE amd64
 printer-driver-gutenprint
+#endif
 #printer drivers for CUPS
 
 printer-driver-hpcups

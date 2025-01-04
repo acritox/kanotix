@@ -127,12 +127,20 @@ net-tools
 #if DISTRIBUTION wheezy jessie stretch buster bullseye
 #include <printer_driver_old>
 #endif
-#nif DISTRIBUTION wheezy jessie stretch buster bullseye
+#if DISTRIBUTION bookworm
 cups-bsd
 cups-client
 foomatic-db-engine
 foomatic-db
 printer-driver-gutenprint
+#include <printer_driver_all>
+libcups2
+#endif
+#nif DISTRIBUTION wheezy jessie stretch buster bullseye bookworm
+cups-bsd
+cups-client
+foomatic-db-engine
+foomatic-db
 #include <printer_driver_all>
 libcups2
 #endif
