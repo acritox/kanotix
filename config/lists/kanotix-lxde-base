@@ -33,6 +33,10 @@ menu-xdg
 lxtask
 zenity
 
+#themes
+gnome-icon-theme
+# force for xfe4-powermanager
+
 # network
 network-manager-gnome
 wpasupplicant
