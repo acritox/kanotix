@@ -58,7 +58,7 @@ mkdir -p /tmp
 if [ ! -e /run/live/medium/live-media.asc ]; then
 	echo "Generate signing key for live-media repo"
 	echo "Key-Type: RSA
-	      Key-Length: 1024
+	      Key-Length: 4096
 	      Subkey-Type: ELG-E
 	      Subkey-Length: 1024
 	      Name-Real: live-media packages key
