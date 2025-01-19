@@ -209,6 +209,10 @@ zram
 #if DISTRIBUTION wheezy jessie stretch buster bullseye bookworm
 httpfs2
 #endif
+# support for appimages
+#nif DISTRIBUTION wheezy jessie stretch buster bullseye bookworm
+libfuse2t64
+#endif
 
 # filesystem tools
 parted
