@@ -206,9 +206,13 @@ xinit
 #if DISTRIBUTION wheezy jessie stretch
 freerdp-x11
 #endif
-#nif DISTRIBUTION wheezy jessie stretch
+#if DISTRIBUTION buster bullseye bookworm
 freerdp2-x11
 #endif
+#nif DISTRIBUTION wheezy jessie stretch buster bullseye bookworm
+freerdp3-x11
+#endif
+
 # disktools
 gddrescue
 testdisk
