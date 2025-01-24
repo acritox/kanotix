@@ -1,2 +1,2 @@
 # Libre Office
-deb http://kanotix.com/files/fix/lo ./
+deb [signed-by=/usr/share/keyrings/kanotix25.asc] http://kanotix.com/files/fix/lo ./
