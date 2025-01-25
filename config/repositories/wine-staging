@@ -1,2 +1,2 @@
 # Wine Staging
-deb https://dl.winehq.org/wine-builds/debian @DISTRIBUTION@ main
+deb [signed-by=/etc/apt/keyrings/wine-staging.asc] https://dl.winehq.org/wine-builds/debian @DISTRIBUTION@ main
