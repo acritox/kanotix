@@ -372,7 +372,12 @@ xchat
 # other
 gnome-screenshot
 seahorse
-keepassx
+#if DISTRIBUTION bookworm
+keepassxc
+#endif
+#nif DISTRIBUTION bookworm
+keepassxc-minimal
+#endif
 
 #if DISTRIBUTION wheezy jessie stretch buster
 clipit

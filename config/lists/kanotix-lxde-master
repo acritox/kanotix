@@ -102,4 +102,9 @@ gst123
 #include <awesome>
 #endif
 seahorse
-keepassx
+#if DISTRIBUTION bookworm
+keepassxc
+#endif
+#nif DISTRIBUTION bookworm
+keepassxc-minimal
+#endif

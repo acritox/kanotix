@@ -51,7 +51,13 @@ khelpcenter
 #endif
 
 # tools
-keepassx
+#if DISTRIBUTION bookworm
+keepassxc
+#endif
+#nif DISTRIBUTION bookworm
+keepassxc-minimal
+#endif
+
 #if DISTRIBUTION wheezy jessie stretch
 kuser
 #endif
