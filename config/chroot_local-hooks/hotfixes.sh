@@ -26,7 +26,7 @@ sed -i s/id:.:initdefault:/id:5:initdefault:/ /etc/inittab
 sed -i 's/\([1-6]:23\):/\145:/' /etc/inittab
 
 # workarounds to fix old kanotix installs
-rm -f /etc/profile /etc/environment
+rm -f /etc/profile
 cp /usr/share/base-files/profile /etc
 rm -rf /etc/sysconfig
 
