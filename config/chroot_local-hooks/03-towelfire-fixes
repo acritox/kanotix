@@ -48,6 +48,11 @@ echo 'Binary::apt::Pager "false";' > /etc/apt/apt.conf.d/98-nopager
 # add scale factor for qt defaults to 100%
 echo "QT_SCALE_FACTOR=1.0" >>/etc/environment
 
+# fix for sddm layout
+if [ -f /usr/share/sddm/scripts/Xsetup ]; then
+   echo "setxkbmap" >> /usr/share/sddm/scripts/Xsetup
+fi
+
 # powermanager fix new values since buster
 
 mkdir -p /etc/skel/.config/xfce4/xfconf/xfce-perchannel-xml
