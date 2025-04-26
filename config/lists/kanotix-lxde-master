@@ -21,7 +21,9 @@ geany
 
 # package tool
 synaptic
+#if DISTRIBUTION wheezy jessie stretch buster bullseye bookworm
 apt-xapian-index
+#endif
 gdebi
 
 # multimedia

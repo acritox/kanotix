@@ -23,7 +23,9 @@ apper
 plasma-discover
 #endif
 
+#if DISTRIBUTION wheezy jessie stretch buster bullseye bookworm
 apt-xapian-index
+#endif
 
 # multimedia
 #if DISTRIBUTION squeeze wheezy jessie
