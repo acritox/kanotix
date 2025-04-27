@@ -1,0 +1,149 @@
+# Kanotix list for kde6 (up from trixie)
+
+#include <desktop>
+
+#if ARCHITECTURE amd64
+#include <kde6-more>
+#endif
+
+# kanotix stuff
+etcskel-kanotix-kf5
+
+# office
+okular
+okular-extra-backends
+#if DISTRIBUTION stretch buster
+okularplugin
+#endif
+
+# plugins
+
+# multimedia
+libsdl1.2debian
+kio-audiocd
+kamera
+kio-extras
+
+# burn
+k3b
+k3b-i18n
+#if DISTRIBUTION stretch
+libk3b6-extracodecs
+#endif
+#if DISTRIBUTION buster bullseye
+libk3b7-extracodecs
+#endif
+#nif DISTRIBUTION stretch buster bullseye
+libk3b-extracodecs
+#endif
+# chat, irc
+konversation
+
+# editors
+kate
+
+# archive
+ark
+
+# tools
+#if DISTRIBUTION stretch buster bullseye
+kde-spectacle
+#endif
+#nif DISTRIBUTION stretch buster bullseye
+ksnip
+#endif
+kcalc
+kfind
+qml-module-org-kde-activities
+
+# kde
+# kde-plasma-desktop is a metapackage bump out konquerror etc
+#if DISTRIBUTION stretch buster
+kde-runtime
+#endif
+plasma-desktop
+phonon4qt5-backend-gstreamer
+plasma-workspace
+udisks2
+upower
+
+# kdebase-apps is a metapackage
+#if DISTRIBUTION stretch
+kde-baseapps-bin
+#endif
+#nif DISTRIBUTION stretch
+kdialog
+keditbookmarks
+#endif
+dolphin
+konsole
+kwrite
+
+lightdm
+onboard
+onboard-kanotix
+systemsettings
+libkf5kdelibs4support5-bin
+#if DISTRIBUTION stretch buster
+kde-l10n-de
+#endif
+kwalletmanager
+polkit-kde-agent-1
+kde-config-screenlocker
+khotkeys
+#if DISTRIBUTION stretch buster bullseye
+ksysguard
+#endif
+#nif DISTRIBUTION stretch buster bullseye
+plasma-systemmonitor
+#endif
+# kde now optional depends
+kactivities-bin
+
+# kde plasma
+plasma-widgets-addons
+plasma-runners-addons
+qml-module-org-kde-runnermodel
+#nif DISTRIBUTION stretch buster
+qml-module-org-kde-newstuff
+#endif
+
+# themes
+kde-config-gtk-style
+gnome-icon-theme
+clearlooks-phenix-theme
+
+# network
+plasma-nm
+
+# other hardware
+#if DISTRIBUTION stretch buster
+kde-config-touchpad
+#endif
+
+blueman
+
+kwin-x11
+kwin-decoration-oxygen
+#if DISTRIBUTION stretch
+kde-wallpapers-default
+#endif
+powerdevil
+kscreen
+plasma-pa
+print-manager
+# tmp stuff for devel
+inkscape
+
+kdeutils
+kdeconnect
+
+qtqr
+#nif DISTRIBUTION stretch
+#include <simplescreenrecorder>
+#endif
+
+#nif DISTRIBUTION stretch buster
+featherpad
+featherpad-l10n
+#endif

@@ -4,8 +4,11 @@
 #if DISTRIBUTION squeeze wheezy jessie
 #include <kde>
 #endif
-#nif DISTRIBUTION squeeze wheezy jessie
+#if DISTRIBUTION stretch buster bullseye bookworm
 #include <kde5>
+#endif
+#nif DISTRIBUTION squeeze wheezy jessie stretch buster bullseye bookworm
+#include <kde6>
 #endif
 #include <kde.kanotix>
 

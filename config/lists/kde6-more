@@ -1,0 +1,11 @@
+# Kanotix with KDE (enhanced)
+# enhanced List only for amd64 used
+
+#nif DISTRIBUTION stretch buster bullseye
+calamares
+calamares-settings-kanotix
+git
+dolphin-plugins
+quilt
+plasma-workspace-wayland
+#endif
