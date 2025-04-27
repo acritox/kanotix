@@ -83,14 +83,18 @@ lightdm
 onboard
 onboard-kanotix
 systemsettings
+#if DISTRIBUTION stretch buster bullseye bookworm
 libkf5kdelibs4support5-bin
+#endif
 #if DISTRIBUTION stretch buster
 kde-l10n-de
 #endif
 kwalletmanager
 polkit-kde-agent-1
 kde-config-screenlocker
+#if DISTRIBUTION stretch buster bullseye bookworm
 khotkeys
+#endif
 #if DISTRIBUTION stretch buster bullseye
 ksysguard
 #endif
