@@ -7,5 +7,7 @@ calamares-settings-kanotix
 git
 dolphin-plugins
 quilt
+#endif
+#if DISTRIBUTION bookworm
 plasma-workspace-wayland
 #endif
