@@ -7,7 +7,11 @@
 #endif
 
 # kanotix stuff
-etcskel-kanotix-kf5
+etcskel-kanotix-kf6
+
+qt6-svg-plugins
+# for flags
+fonts-noto-color-emoji
 
 # office
 okular
@@ -137,7 +141,12 @@ kscreen
 plasma-pa
 print-manager
 # tmp stuff for devel
+# inkscape with some recommends
 inkscape
+python3-cssselect
+python3-lxml
+python3-numpy
+python3-scour
 
 kdeutils
 kdeconnect
