@@ -1,0 +1,3 @@
+# Kanotix Towelfire
+deb [signed-by=/usr/share/keyrings/kanotix25.asc] http://kanotix.com/files/towelfire ./
+deb-src [signed-by=/usr/share/keyrings/kanotix25.asc] http://kanotix.com/files/towelfire ./
