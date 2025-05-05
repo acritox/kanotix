@@ -124,12 +124,20 @@ bullseye)
 	esac
 	;;
 bookworm)
-    LB_REPOSITORIES+="slowfire acritoxinstaller-qt4"
+    LB_REPOSITORIES+="acritoxinstaller-qt4 slowfire"
 	case $LB_ARCHITECTURE in
 	amd64) LB_LINUX_PACKAGES="linux-image linux-headers"; LB_LINUX_FLAVOURS="amd64";;
 	i386)  LB_LINUX_PACKAGES="linux-image linux-headers"; LB_LINUX_FLAVOURS="686-pae";;
 	esac
 	;;
+trixie)
+    LB_REPOSITORIES+="acritoxinstaller-qt4 towelfire"
+	case $LB_ARCHITECTURE in
+	amd64) LB_LINUX_PACKAGES="linux-image linux-headers"; LB_LINUX_FLAVOURS="amd64";;
+	i386)  LB_LINUX_PACKAGES="linux-image"; LB_LINUX_FLAVOURS="686-pae";;
+	esac
+	;;
+
 *)
     LB_REPOSITORIES+="spitfire steelfire silverfire speedfire"
 	case $LB_ARCHITECTURE in
