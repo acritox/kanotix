@@ -134,7 +134,8 @@ trixie)
     LB_REPOSITORIES+="acritoxinstaller-qt4 towelfire"
 	case $LB_ARCHITECTURE in
 	amd64) LB_LINUX_PACKAGES="linux-image linux-headers"; LB_LINUX_FLAVOURS="amd64";;
-	i386)  LB_LINUX_PACKAGES="linux-image"; LB_LINUX_FLAVOURS="686-pae";;
+	i386)  LB_REPOSITORIES+=" kernel-pae"
+	       LB_LINUX_PACKAGES="linux-image"; LB_LINUX_FLAVOURS="686-pae";;
 	esac
 	;;
 

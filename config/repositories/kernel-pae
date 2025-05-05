@@ -1,0 +1,2 @@
+# Debian bookworm security
+deb [signed-by=/usr/share/keyrings/debian-archive-keyring.gpg] http://security.debian.org bookworm-security/updates main contrib non-free
