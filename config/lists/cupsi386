@@ -1,0 +1,10 @@
+# config list cups
+# eliminate build error
+
+#if DISTRIBUTION bookworm
+libcups2:i386
+#endif
+
+#nif DISTRIBUTION bookworm
+libcups2t64:i386
+#endif

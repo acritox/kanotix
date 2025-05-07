@@ -144,10 +144,10 @@ cups-client
 foomatic-db-engine
 foomatic-db
 #include <printer_driver_all>
-libcups2
+libcups2t64
 #endif
 #if ARCHITECTURE amd64
-libcups2:i386
+#include <cupsi386>
 #endif
 
 # build
