@@ -16,11 +16,16 @@ Configure_kwayland ()
 	if grep -qs "kwayland" /proc/cmdline
 	then
 	    if [ -x /usr/bin/startplasma-wayland ]; then
+		if [ -x /usr/sbin/lightdm ]; then
 		echo "[Desktop]" >/home/${LIVE_USERNAME}/.dmrc
 		echo "Session=plasmawayland" >>/home/${LIVE_USERNAME}/.dmrc
 		chown 1000:1000 /home/${LIVE_USERNAME}/.dmrc
 		echo "[Seat:*]" >> /usr/share/lightdm/lightdm.conf.d/51_kanotix.conf
 		echo "user-session=plasmawayland" >> /usr/share/lightdm/lightdm.conf.d/51_kanotix.conf
+		fi
+		if [ -x /usr/bin/sddm ]; then
+		sed -i 's/Session=plasmax11/Session=plasma/' /etc/sddm.conf.d/kde_settings.conf
+		fi
 	    fi
 	fi
 	
