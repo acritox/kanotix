@@ -104,9 +104,9 @@ gst123
 #include <awesome>
 #endif
 seahorse
-#if DISTRIBUTION bookworm
+#if DISTRIBUTION bullseye bookworm
 keepassxc
 #endif
-#nif DISTRIBUTION bookworm
+#nif DISTRIBUTION bullseye bookworm
 keepassxc-minimal
 #endif
