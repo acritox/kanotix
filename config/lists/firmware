@@ -9,4 +9,10 @@ linux-firmware
 linux-firmware-nonfree
 
 # broadcom
+#if DISTRIBUTION bullseye bookwom
 broadcom-sta-dkms
+#endif
+
+#nif DISTRIBUTION bullseye bookwom
+#include <broadcom-firm>
+#endif

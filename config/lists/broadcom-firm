@@ -1,0 +1,5 @@
+# We do not use dkms on i386
+
+#if ARCHITECTURE amd64
+broadcom-sta-dkms
+#endif
