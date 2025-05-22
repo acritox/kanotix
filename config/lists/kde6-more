@@ -11,3 +11,4 @@ quilt
 #if DISTRIBUTION bookworm
 plasma-workspace-wayland
 #endif
+neochat
