@@ -60,6 +60,9 @@ zstd
 # tools
 bc
 clinfo
+#nif DISTRIBUTION bullseye bookworm
+fastfetch
+#endif
 mc
 most
 less
