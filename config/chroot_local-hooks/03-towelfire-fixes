@@ -45,6 +45,13 @@ EOF
 # disable apt pager
 echo 'Binary::apt::Pager "false";' > /etc/apt/apt.conf.d/98-nopager
 
+# pin bookworm security pin
+cat <<"EOF" >/etc/apt/preferences.d/pae
+Package: *
+Pin: release n=bookworm-security
+Pin-Priority: 100
+EOF
+
 # add scale factor for qt defaults to 100%
 echo "QT_SCALE_FACTOR=1.0" >>/etc/environment
 
