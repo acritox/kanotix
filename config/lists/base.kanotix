@@ -4,6 +4,10 @@ user-profile-kanotix
 kanotix-archive-keyring
 
 kanotix-starrise-base
+#nif DISTRIBUTION bullseye bookworm
+kanotix-spring-base
+#endif
+
 plymouth-theme-kanotix-logo
 
 acritoxinstaller-kanotix
