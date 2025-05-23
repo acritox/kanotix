@@ -62,6 +62,7 @@ bc
 clinfo
 #nif DISTRIBUTION bullseye bookworm
 fastfetch
+hstr
 #endif
 mc
 most
