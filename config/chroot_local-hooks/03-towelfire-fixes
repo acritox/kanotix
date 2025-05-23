@@ -46,12 +46,13 @@ EOF
 echo 'Binary::apt::Pager "false";' > /etc/apt/apt.conf.d/98-nopager
 
 # pin bookworm security pin
+    if [ -x /var/lib/dpkg/info/linux-image-686-pae.preinst ]; then
 cat <<"EOF" >/etc/apt/preferences.d/pae
 Package: *
 Pin: release n=bookworm-security
 Pin-Priority: 100
 EOF
-
+    fi
 # add scale factor for qt defaults to 100%
 echo "QT_SCALE_FACTOR=1.0" >>/etc/environment
 
