@@ -50,12 +50,9 @@ kate
 ark
 
 # tools
-#if DISTRIBUTION stretch buster bullseye
-kde-spectacle
-#endif
-#nif DISTRIBUTION stretch buster bullseye
 ksnip
-#endif
+xdg-desktop-portal-kde
+
 kcalc
 kfind
 qml-module-org-kde-activities
