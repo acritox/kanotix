@@ -105,6 +105,8 @@ zsync
 debconf-utils
 rpm2cpio
 usbutils
+util-linux
+util-linux-extra
 exif
 fsarchiver
 xterm
