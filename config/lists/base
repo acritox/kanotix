@@ -106,7 +106,9 @@ debconf-utils
 rpm2cpio
 usbutils
 util-linux
+#nif DISTRIBUTION bullseye
 util-linux-extra
+#endif
 exif
 fsarchiver
 xterm
