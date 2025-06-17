@@ -25,6 +25,8 @@ libsane-extras
 #endif
 sane-utils
 sane
+#gpicview pcmanfm heif support
+heif-gdk-pixbuf
 
 # network
 
