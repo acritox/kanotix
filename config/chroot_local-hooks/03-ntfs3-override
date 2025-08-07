@@ -1,0 +1,10 @@
+#!/bin/sh
+
+for file in /root/config/*; do [ -r $file ] && . $file; done
+
+case "${LB_DISTRIBUTION}" in
+
+bookworm|trixie)
+    [ -e /sbin/mount.ntfs3 ] || ln -sfv $(readlink /sbin/mount.ntfs-3g) /sbin/mount.ntfs3
+    ;;
+esac
