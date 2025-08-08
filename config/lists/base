@@ -5,6 +5,11 @@
 #include <base.kanotix>
 sudo
 
+# provide android-tools
+#if ARCHITECTURE amd64
+#include <android>
+#endif
+
 # handle polkit since bookworm
 #nif DISTRIBUTION wheezy jessie stretch buster bullseye
 polkitd
