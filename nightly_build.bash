@@ -89,14 +89,16 @@ sed -i 's/\(export LB_DISTRIBUTION=\).*/\1"'$DISTRO'"/' auto/config
 
 
 cat <<"EOF" >$target/readme-$KDISTRO.txt
-Towelfire Isos are pre releases.
-======================================
-based on debian trixie (testing for now)
-bugs are expected
-broken updates may happen
+Towelfire Isos are current release.
+===================================
+Based on Debian13 trixie (stable).
+Isos are nightly builds.
+acritox installer(recommended)
+and calamares installer are provided.
 
-i386 ships with bookworm kernel
-and may break completely
+i386 eeepc4G.iso ships with bookworm kernel
+and reduced firmware
+and may need nomodeset to boot.
 EOF
 
 ln -s $target/readme-$KDISTRO.txt $next/readme-$KDISTRO.txt
