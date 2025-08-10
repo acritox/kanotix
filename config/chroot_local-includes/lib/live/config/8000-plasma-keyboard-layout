@@ -4,13 +4,18 @@ PlasmaKeyboardLayout ()
 {
 	KXKBRC=/home/${LIVE_USERNAME}/.config/kxkbrc
 #	KXKBRC=/home/kanotix/kxkbrc/kxkbrc
-
+	KWRITECONFIG=""
 	# Checking if package is already configured
 	if [ -e /var/lib/live/config/plasmakeyboardlayout ] || \
-           [ ! -e ${KXKBRC} ] || [ ! -x /usr/bin/kwriteconfig5 ]
+           [ ! -e ${KXKBRC} ]
 	then
 		return
 	fi
+
+	[ -x /usr/bin/kwriteconfig5 ] && KWRITECONFIG="/usr/bin/kwriteconfig5"
+	[ -x /usr/bin/kwriteconfig6 ] && KWRITECONFIG="/usr/bin/kwriteconfig6"
+
+	[ -z ${KWRITECONFIG} ] &&  return
 
 	echo -n " plasmakeyboardlayout"
 
@@ -54,16 +59,16 @@ case "$LIVE_KEYBOARD_LAYOUTS" in
 	: # use preconfig
 	;;
 	us)
-	kwriteconfig5 --file "$KXKBRC" --group Layout --key LayoutList --type string "us,fr,cz,de"
-	kwriteconfig5 --file "$KXKBRC" --group Layout --key VariantList --type string ",,,nodeadkeys"
+	${KWRITECONFIG} --file "$KXKBRC" --group Layout --key LayoutList --type string "us,fr,cz,de"
+	${KWRITECONFIG} --file "$KXKBRC" --group Layout --key VariantList --type string ",,,nodeadkeys"
 	;;
 	fr)
-	kwriteconfig5 --file "$KXKBRC" --group Layout --key LayoutList --type string "fr,cz,de,us"
-	kwriteconfig5 --file "$KXKBRC" --group Layout --key VariantList --type string ",,nodeadkeys,"
+	${KWRITECONFIG} --file "$KXKBRC" --group Layout --key LayoutList --type string "fr,cz,de,us"
+	${KWRITECONFIG} --file "$KXKBRC" --group Layout --key VariantList --type string ",,nodeadkeys,"
 	;;
 	cz)
-	kwriteconfig5 --file "$KXKBRC" --group Layout --key LayoutList --type string "cz,de,us,fr"
-	kwriteconfig5 --file "$KXKBRC" --group Layout --key VariantList --type string ",nodeadkeys,,"
+	${KWRITECONFIG} --file "$KXKBRC" --group Layout --key LayoutList --type string "cz,de,us,fr"
+	${KWRITECONFIG} --file "$KXKBRC" --group Layout --key VariantList --type string ",nodeadkeys,,"
 	;;
 	*)
 	: # use preconfig
@@ -71,8 +76,8 @@ case "$LIVE_KEYBOARD_LAYOUTS" in
 esac
 
     [ -r /etc/default/keyboard ] && . /etc/default/keyboard
-    [ "$XKBMODEL" ] && kwriteconfig5 --file "$KXKBRC" --group Layout --key Model --type string "$XKBMODEL"
-	kwriteconfig5 --file "$KXKBRC" --group Layout --key DisplayNames --type string ",,,"
+    [ "$XKBMODEL" ] && ${KWRITECONFIG} --file "$KXKBRC" --group Layout --key Model --type string "$XKBMODEL"
+	${KWRITECONFIG} --file "$KXKBRC" --group Layout --key DisplayNames --type string ",,,"
 
 	# Creating state file
 	touch /var/lib/live/config/plasmakeyboardlayout
