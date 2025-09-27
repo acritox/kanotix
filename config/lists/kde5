@@ -17,6 +17,8 @@ okularplugin
 #endif
 
 # plugins
+qt5-image-formats-plugins
+qt5-image-formats-plugin-pdf
 
 # multimedia
 libsdl1.2debian
