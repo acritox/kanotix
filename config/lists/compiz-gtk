@@ -24,13 +24,15 @@ compizconfig-settings-manager
 #nif DISTRIBUTION wheezy jessie stretch
 #fusion-icon
 etcskel-kanotix-compiz
-compiz
+compiz-core
+libcompizconfig0
 compiz-gnome
 compiz-plugins
 compiz-plugins-main
 compiz-plugins-extra
 compiz-plugins-experimental
 compizconfig-settings-manager
+compiz-bcop
 #endif
 
 #nif DISTRIBUTION wheezy jessie stretch buster bullseye
