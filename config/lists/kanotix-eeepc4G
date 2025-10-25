@@ -337,8 +337,10 @@ xfce4-notifyd
 lxpolkit
 #endif
 clearlooks-phenix-theme
-#nif DISTRIBUTION wheezy jessie
+
 gtk3-nocsd
+#if ARCHITECTURE amd64
+libgtk3-nocsd0:i386
 #endif
 
 # tools
