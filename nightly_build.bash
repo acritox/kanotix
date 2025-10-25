@@ -106,7 +106,7 @@ ln -s $target/readme-$KDISTRO.txt $next/readme-$KDISTRO.txt
 if $BUILD_TRIXIE_EEE_AMD64; then
 # eeepc4G amd64 with LXDE
 lb clean
-lb config -d $DISTRO -p "kanotix-eeepc4G firefox systemd-extra" --bootloader grub2 --tmpfs true --tmpfs-options size=16G --apt-http-proxy "http://127.0.0.1:3142" --cache-packages false --gfxoverlays false -a amd64 --initsystem systemd --initramfs live-boot
+lb config -d $DISTRO -p "kanotix-eeepc4G firefox systemd-extra" --bootloader grub2 --tmpfs true --tmpfs-options size=18G --apt-http-proxy "http://127.0.0.1:3142" --cache-packages false --gfxoverlays false -a amd64 --initsystem systemd --initramfs live-boot
 echo Kanotix towelfire-nightly Towelfire64 $d$v eeepc4G > config/chroot_local-includes/etc/kanotix-version
 lb build; cd tmpfs; ./isohybrid-acritox kanotix64.iso
 check_iso
@@ -133,7 +133,7 @@ fi # end amd64 EEE
 if $BUILD_TRIXIE_AMD64; then
 # kde 64
 lb clean
-lb config -d $DISTRO -p "debpool kanotix-kde-master firefox wine-staging" --bootloader grub2 --tmpfs true --tmpfs-options size=16G --apt-http-proxy "http://127.0.0.1:3142" --cache-packages false --gfxoverlays false -a amd64 --initsystem systemd --initramfs live-boot
+lb config -d $DISTRO -p "debpool kanotix-kde-master firefox wine-staging" --bootloader grub2 --tmpfs true --tmpfs-options size=18G --apt-http-proxy "http://127.0.0.1:3142" --cache-packages false --gfxoverlays false -a amd64 --initsystem systemd --initramfs live-boot
 echo Kanotix towelfire-nightly Towelfire64 $d$v KDE > config/chroot_local-includes/etc/kanotix-version
 lb build; cd tmpfs; ./isohybrid-acritox kanotix64.iso
 check_iso
@@ -159,7 +159,7 @@ fi
 #
 # lxde 64
 lb clean
-lb config -d $DISTRO -p "debpool kanotix-lxde-master firefox wine-staging" --bootloader grub2 --tmpfs true --tmpfs-options size=16G --apt-http-proxy "http://127.0.0.1:3142" --cache-packages false --gfxoverlays false -a amd64 --initsystem systemd --initramfs live-boot
+lb config -d $DISTRO -p "debpool kanotix-lxde-master firefox wine-staging" --bootloader grub2 --tmpfs true --tmpfs-options size=18G --apt-http-proxy "http://127.0.0.1:3142" --cache-packages false --gfxoverlays false -a amd64 --initsystem systemd --initramfs live-boot
 echo Kanotix towelfire-nightly Towelfire64 $d$v LXDE > config/chroot_local-includes/etc/kanotix-version
 lb build; cd tmpfs; ./isohybrid-acritox kanotix64.iso
 check_iso
@@ -186,7 +186,7 @@ fi #end of amd64
 if $BUILD_TRIXIE_I386; then
 # kde 32
 lb clean
-lb config -d $DISTRO -p "kanotix-kde-master firefox wine-staging" --bootloader grub2 --tmpfs true --tmpfs-options size=16G --apt-http-proxy "http://127.0.0.1:3142" --cache-packages false --gfxoverlays false -a i386 --initsystem systemd
+lb config -d $DISTRO -p "kanotix-kde-master firefox wine-staging" --bootloader grub2 --tmpfs true --tmpfs-options size=18G --apt-http-proxy "http://127.0.0.1:3142" --cache-packages false --gfxoverlays false -a i386 --initsystem systemd
 echo Kanotix towelfire-nightly Towelfire32 $d$v KDE > config/chroot_local-includes/etc/kanotix-version
 lb build; cd tmpfs; ./isohybrid-acritox kanotix32.iso
 check_iso
@@ -211,7 +211,7 @@ fi
 
 # lxde 32
 lb clean
-lb config -d $DISTRO -p "kanotix-lxde-master firefox wine-staging" --bootloader grub2 --tmpfs true --tmpfs-options size=16G --apt-http-proxy "http://127.0.0.1:3142" --cache-packages false --gfxoverlays false -a i386 --initsystem systemd
+lb config -d $DISTRO -p "kanotix-lxde-master firefox wine-staging" --bootloader grub2 --tmpfs true --tmpfs-options size=18G --apt-http-proxy "http://127.0.0.1:3142" --cache-packages false --gfxoverlays false -a i386 --initsystem systemd
 echo Kanotix towelfire-nightly Towelfire32 $d$v LXDE > config/chroot_local-includes/etc/kanotix-version
 lb build; cd tmpfs; ./isohybrid-acritox kanotix32.iso
 check_iso
@@ -238,7 +238,7 @@ fi #end of trixie i386 kde lxde
 if $BUILD_TRIXIE_EEE_I386; then
 # eeepc4G with LXDE
 lb clean
-lb config -d $DISTRO -p "kanotix-eeepc4G netsurf-gtk" --bootloader grub2 --tmpfs true --tmpfs-options size=16G --apt-http-proxy "http://127.0.0.1:3142" --cache-packages false --gfxoverlays false -a i386 --initsystem systemd
+lb config -d $DISTRO -p "kanotix-eeepc4G netsurf-gtk" --bootloader grub2 --tmpfs true --tmpfs-options size=18G --apt-http-proxy "http://127.0.0.1:3142" --cache-packages false --gfxoverlays false -a i386 --initsystem systemd
 echo Kanotix towelfire-nightly Towelfire32 $d$v eeepc4G > config/chroot_local-includes/etc/kanotix-version
 lb build; cd tmpfs; ./isohybrid-acritox kanotix32.iso
 check_iso
@@ -285,7 +285,7 @@ ln -s $target/readme-$KDISTRO.txt $next/readme-$KDISTRO.txt
 
 # kde 64
 lb clean
-lb config -d $DISTRO -p "debpool kanotix-kde-master firefox wine-staging" --bootloader grub2 --tmpfs true --tmpfs-options size=16G --apt-http-proxy "http://127.0.0.1:3142" --cache-packages false --gfxoverlays false -a amd64 --initsystem systemd
+lb config -d $DISTRO -p "debpool kanotix-kde-master firefox wine-staging" --bootloader grub2 --tmpfs true --tmpfs-options size=18G --apt-http-proxy "http://127.0.0.1:3142" --cache-packages false --gfxoverlays false -a amd64 --initsystem systemd
 echo Kanotix slowfire-nightly Slowfire64 $d$v KDE > config/chroot_local-includes/etc/kanotix-version
 lb build; cd tmpfs; ./isohybrid-acritox kanotix64.iso
 check_iso
@@ -311,7 +311,7 @@ fi
 #
 # lxde 64
 lb clean
-lb config -d $DISTRO -p "debpool kanotix-lxde-master firefox wine-staging" --bootloader grub2 --tmpfs true --tmpfs-options size=16G --apt-http-proxy "http://127.0.0.1:3142" --cache-packages false --gfxoverlays false -a amd64 --initsystem systemd
+lb config -d $DISTRO -p "debpool kanotix-lxde-master firefox wine-staging" --bootloader grub2 --tmpfs true --tmpfs-options size=18G --apt-http-proxy "http://127.0.0.1:3142" --cache-packages false --gfxoverlays false -a amd64 --initsystem systemd
 echo Kanotix slowfire-nightly Slowfire64 $d$v LXDE > config/chroot_local-includes/etc/kanotix-version
 lb build; cd tmpfs; ./isohybrid-acritox kanotix64.iso
 check_iso
@@ -337,7 +337,7 @@ fi
 
 # kde 32
 lb clean
-lb config -d $DISTRO -p "kanotix-kde-master firefox wine-staging" --bootloader grub2 --tmpfs true --tmpfs-options size=16G --apt-http-proxy "http://127.0.0.1:3142" --cache-packages false --gfxoverlays false -a i386 --initsystem systemd
+lb config -d $DISTRO -p "kanotix-kde-master firefox wine-staging" --bootloader grub2 --tmpfs true --tmpfs-options size=18G --apt-http-proxy "http://127.0.0.1:3142" --cache-packages false --gfxoverlays false -a i386 --initsystem systemd
 echo Kanotix slowfire-nightly Slowfire32 $d$v KDE > config/chroot_local-includes/etc/kanotix-version
 lb build; cd tmpfs; ./isohybrid-acritox kanotix32.iso
 check_iso
@@ -362,7 +362,7 @@ fi
 
 # lxde 32
 lb clean
-lb config -d $DISTRO -p "kanotix-lxde-master firefox wine-staging" --bootloader grub2 --tmpfs true --tmpfs-options size=16G --apt-http-proxy "http://127.0.0.1:3142" --cache-packages false --gfxoverlays false -a i386 --initsystem systemd
+lb config -d $DISTRO -p "kanotix-lxde-master firefox wine-staging" --bootloader grub2 --tmpfs true --tmpfs-options size=18G --apt-http-proxy "http://127.0.0.1:3142" --cache-packages false --gfxoverlays false -a i386 --initsystem systemd
 echo Kanotix slowfire-nightly Slowfire32 $d$v LXDE > config/chroot_local-includes/etc/kanotix-version
 lb build; cd tmpfs; ./isohybrid-acritox kanotix32.iso
 check_iso
@@ -397,7 +397,7 @@ rm -rf cache tmpfs/cache
 sed -i 's/\(export LB_DISTRIBUTION=\).*/\1"'$DISTRO'"/' auto/config
 
 lb clean
-lb config -d $DISTRO -p "kanotix-eeepc4G netsurf-gtk" --bootloader grub2 --tmpfs true --tmpfs-options size=16G --apt-http-proxy "http://127.0.0.1:3142" --cache-packages false --gfxoverlays false -a i386 --initsystem systemd
+lb config -d $DISTRO -p "kanotix-eeepc4G netsurf-gtk" --bootloader grub2 --tmpfs true --tmpfs-options size=18G --apt-http-proxy "http://127.0.0.1:3142" --cache-packages false --gfxoverlays false -a i386 --initsystem systemd
 echo Kanotix slowfire-nightly Slowfire32 $d$v eeepc4G > config/chroot_local-includes/etc/kanotix-version
 lb build; cd tmpfs; ./isohybrid-acritox kanotix32.iso
 check_iso
@@ -432,7 +432,7 @@ sed -i 's/\(export LB_DISTRIBUTION=\).*/\1"'$DISTRO'"/' auto/config
 
 # eeepc4G with LXDE
 lb clean
-lb config -d $DISTRO -p "kanotix-eeepc4G netsurf-gtk" --bootloader grub2 --tmpfs true --tmpfs-options size=16G --apt-http-proxy "http://127.0.0.1:3142" --cache-packages false --gfxoverlays false -a i386 --initsystem systemd
+lb config -d $DISTRO -p "kanotix-eeepc4G netsurf-gtk" --bootloader grub2 --tmpfs true --tmpfs-options size=18G --apt-http-proxy "http://127.0.0.1:3142" --cache-packages false --gfxoverlays false -a i386 --initsystem systemd
 echo Kanotix speedfire-nightly Speedfire32 $d$v eeepc4G > config/chroot_local-includes/etc/kanotix-version
 lb build; cd tmpfs; ./isohybrid-acritox kanotix32.iso
 check_iso
