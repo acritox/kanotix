@@ -12,3 +12,5 @@ quilt
 plasma-workspace-wayland
 #endif
 neochat
+plasma-mobile
+plasma-mobile-tweaks
