@@ -1,0 +1,36 @@
+#!/bin/sh
+
+Kplasmamobile ()
+{
+	# Checking if configured
+	if [ -e /var/lib/live/config/kplasmamobile ]
+	then
+		return
+	fi
+	echo -n " kplasmamobile"
+	Configure_kplasmamobile
+}
+Configure_kplasmamobile ()
+{
+	# Boot parameters can be acted up either this way...
+	if grep -qs "kplasmamobile" /proc/cmdline
+	then
+	    if [ -x /usr/bin/startplasmamobile ]; then
+		if [ -x /usr/sbin/lightdm ]; then
+		echo "[Desktop]" >/home/${LIVE_USERNAME}/.dmrc
+		echo "Session=plasma-mobile" >>/home/${LIVE_USERNAME}/.dmrc
+		chown 1000:1000 /home/${LIVE_USERNAME}/.dmrc
+		echo "[Seat:*]" >> /usr/share/lightdm/lightdm.conf.d/51_kanotix.conf
+		echo "user-session=plasma-mobile" >> /usr/share/lightdm/lightdm.conf.d/51_kanotix.conf
+		fi
+		if [ -x /usr/bin/sddm ]; then
+		sed -i 's/Session=plasmax11/Session=plasma-mobile/' /etc/sddm.conf.d/kde_settings.conf
+		fi
+	    fi
+	fi
+	
+	# Creating state file
+	touch /var/lib/live/config/kplasmamobile
+}
+
+Kplasmamobile
