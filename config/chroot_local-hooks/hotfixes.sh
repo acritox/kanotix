@@ -33,11 +33,6 @@ rm -rf /etc/sysconfig
 # rm/cp/mv aliases and bash completion for login shell
 cat <<EOT >> /etc/profile
 
-# enable bash completion in interactive shells
-if [ -f /etc/bash_completion ]; then
-    . /etc/bash_completion
-fi
-
 # Some more alias to avoid making mistakes:
 alias rm='rm -i'
 alias cp='cp -i'
