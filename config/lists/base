@@ -67,6 +67,7 @@ bc
 clinfo
 #nif DISTRIBUTION bullseye bookworm
 fastfetch
+fastfetch-kanotix-skel
 hstr
 #endif
 mc
