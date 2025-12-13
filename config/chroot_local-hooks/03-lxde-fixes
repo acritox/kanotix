@@ -45,6 +45,20 @@ cat <<"EOF" >/etc/skel/.config/lxsession/LXDE/autostart
 @xfce4-power-manager-wrapper
 EOF
 
+	# hotfix for key PRINT
+	if [ -e /etc/skel/.config/openbox/lxde-rc.xml ]; then
+	    sed -i 's/gnome-screenshot --interactive/ksnip/' /etc/skel/.config/openbox/lxde-rc.xml
+	    if [ -e /var/lib/dpkg/info/xfce4-screenshooter.list ]; then
+	       sed -i 's/ksnip/xfce4-screenshooter/' /etc/skel/.config/openbox/lxde-rc.xml
+	    fi
+	fi
+	if [ -e /etc/skel/.config/compiz/compizconfig/Default.ini ]; then
+	    sed -i 's/gnome-screenshot -i -w/ksnip/' /etc/skel/.config/compiz/compizconfig/Default.ini
+	    sed -i 's/gnome-screenshot -i/ksnip/' /etc/skel/.config/compiz/compizconfig/Default.ini
+	    if [ -e /var/lib/dpkg/info/xfce4-screenshooter.list ]; then
+	       sed -i 's/ksnip/xfce4-screenshooter/' /etc/skel/.config/compiz/compizconfig/Default.ini
+	    fi
+	fi
 	# awesome in lightdm-menu
 	if [ -e /usr/share/xsessions/awesome.desktop ]; then
 	    sed -i '/NoDisplay/d' /usr/share/xsessions/awesome.desktop
