@@ -408,7 +408,7 @@ xchat
 #endif
 
 # other
-gnome-screenshot
+xfce4-screenshooter
 seahorse
 #if DISTRIBUTION bullseye bookworm
 keepassxc
