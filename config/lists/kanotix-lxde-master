@@ -79,6 +79,7 @@ gnome-mahjongg
 #endif
 gnome-sudoku
 xskat
+libsdl2-image-2.0-0
 
 # benchmark
 

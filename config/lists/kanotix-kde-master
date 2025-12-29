@@ -83,6 +83,7 @@ neverball
 neverputt
 kmahjongg
 ksudoku
+libsdl2-image-2.0-0
 
 # benchmark
 #if DISTRIBUTION wheezy jessie stretch buster
