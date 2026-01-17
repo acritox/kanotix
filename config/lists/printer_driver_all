@@ -1,6 +1,14 @@
-#optimale pakete (printer-driver-all, xsltproc, hardinfo) und evtl noch system-config-printer
+#
 #needed for some scanner
 xsltproc
+#sane-airscan
+
+# gtk-gui for printer setup
+system-config-printer
+system-config-printer-udev
+
+# virtuell printer for cups-testing
+printer-driver-cups-pdf
 
 #Package: printer-driver-all (0.20210903)
 #printer drivers metapackage
@@ -41,7 +49,7 @@ printer-driver-gutenprint
 printer-driver-hpcups
 #HP Linux Printing and Imaging - CUPS Raster driver (hpcups)
 
-printer-driver-indexbraille
+#printer-driver-indexbraille
 #CUPS printing to Index Braille printers
 
 printer-driver-m2300w
