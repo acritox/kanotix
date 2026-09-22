@@ -76,7 +76,7 @@ BUILD_TRIXIE_AMD64=true
 BUILD_TRIXIE_I386=false
 BUILD_BOOKWORM=true
 BUILD_BOOKWORM_EEE=true
-BUILD_BULLSEYE=true # only eeepc
+BUILD_BULLSEYE=false # only eeepc
 
 ################### TOWELFIRE  ###################
 
