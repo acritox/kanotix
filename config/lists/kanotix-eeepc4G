@@ -143,7 +143,9 @@ libstdc++5
 libstdc++6
 #endif
 bzip2
+#if DISTRIBUTION bookworm trixie
 cdbs
+#endif
 dkms
 devscripts
 pbuilder
