@@ -219,7 +219,9 @@ ntfs-3g
 #if DISTRIBUTION squeeze
 ntfsprogs
 #endif
+#if DISTRIBUTION bookworm trixie
 reiserfsprogs
+#endif
 #dmraid
 kpartx
 dosfstools
