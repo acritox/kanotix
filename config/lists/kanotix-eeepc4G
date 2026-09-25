@@ -367,7 +367,13 @@ clementine
 libqt5sql5-sqlite
 #endif
 # network
+#if DISTRIBUTION bookworm trixie
 network-manager-gnome
+#endif
+#nif DISTRIBUTION bookworm trixie
+network-manager-applet
+nm-connection-editor
+#endif
 wpasupplicant
 modemmanager
 mobile-broadband-provider-info
