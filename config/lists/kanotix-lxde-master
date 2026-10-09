@@ -10,11 +10,11 @@
 compton
 
 # office
-#if DISTRIBUTION wheezy jessie
-evince-gtk
-#endif
-#nif DISTRIBUTION wheezy jessie
+#if DISTRIBUTION bookworm trixie
 evince
+#endif
+#nif DISTRIBUTION bookworm trixie
+atril
 #endif
 simple-scan
 geany
