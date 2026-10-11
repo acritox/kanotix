@@ -77,12 +77,12 @@ onboard-kanotix
 #endif
 
 # irc
-#nif DISTRIBUTION squeeze
-hexchat
+#nif DISTRIBUTION bookworm trixie
+zoitechat
 #endif
 
-#if DISTRIBUTION squeeze
-xchat
+#if DISTRIBUTION bookworm trixie
+hexchat
 #endif
 
 # other
